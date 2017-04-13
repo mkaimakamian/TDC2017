@@ -1,4 +1,4 @@
-﻿namespace FrmLogin
+﻿namespace ViewLayer
 {
     partial class Form1
     {
