@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "..\DataA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helper", "..\Helper\Helper\Helper.csproj", "{8528B7C4-9E5E-4172-BF97-577289854FCE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsSuit", "..\TestsSuit\TestsSuit\TestsSuit.csproj", "{8DBA8C3C-37FA-4FC4-8FAE-4DFD5E1D9C4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{8528B7C4-9E5E-4172-BF97-577289854FCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8528B7C4-9E5E-4172-BF97-577289854FCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8528B7C4-9E5E-4172-BF97-577289854FCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DBA8C3C-37FA-4FC4-8FAE-4DFD5E1D9C4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DBA8C3C-37FA-4FC4-8FAE-4DFD5E1D9C4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DBA8C3C-37FA-4FC4-8FAE-4DFD5E1D9C4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DBA8C3C-37FA-4FC4-8FAE-4DFD5E1D9C4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
