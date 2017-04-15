@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace DataTransferObject
 {
-    public class UserDTO
+    public class TranslationDTO
     {
-        public int id;
-        public string name;
-        public string password;
-        public bool active;
         public int languageId;
+        public string labelCode;
+        public string translation;
     }
 }

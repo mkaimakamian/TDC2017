@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace DataTransferObject
 {
-    public class UserDTO
+    public class LanguageDTO
     {
         public int id;
         public string name;
-        public string password;
-        public bool active;
-        public int languageId;
     }
 }

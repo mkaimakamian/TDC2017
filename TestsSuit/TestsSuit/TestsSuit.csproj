@@ -58,10 +58,6 @@
       <Project>{ce752d97-addc-4b56-9822-1f3cbe1a24a6}</Project>
       <Name>BusinessLogicLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\DataTransferObject\DataTransferObject\DataTransferObject.csproj">
-      <Project>{f8efbe1e-1f41-422f-a786-4830d7db096e}</Project>
-      <Name>DataTransferObject</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

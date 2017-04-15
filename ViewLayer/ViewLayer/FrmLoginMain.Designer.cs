@@ -91,6 +91,7 @@
             this.Controls.Add(this.TxtPassword);
             this.Controls.Add(this.TxtUser);
             this.Name = "FrmLoginMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
