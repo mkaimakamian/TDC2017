@@ -13,5 +13,6 @@ namespace DataTransferObject
         public string password;
         public bool active;
         public int languageId;
+        public string permissionId;
     }
 }

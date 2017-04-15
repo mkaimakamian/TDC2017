@@ -91,6 +91,10 @@
       <Project>{ce752d97-addc-4b56-9822-1f3cbe1a24a6}</Project>
       <Name>BusinessLogicLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\BusinessModel\BusinessModel\BusinessModel.csproj">
+      <Project>{258c9aed-5a2b-4644-a661-6e03fc1bc298}</Project>
+      <Name>BusinessModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

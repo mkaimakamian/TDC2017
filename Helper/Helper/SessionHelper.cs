@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using BusinessModel;
 
 namespace Helper
 {
     public class SessionHelper
     {
         private static SessionHelper instance;
-        private string user;
+        private UserMDL userMdl;
         private Dictionary<String, String> translations;
         //permisos
 
@@ -23,17 +23,28 @@ namespace Helper
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public static SessionHelper StartSession(string user, Dictionary<String, String> translations) {
+        public static SessionHelper StartSession(UserMDL userMdl, List<TranslationMDL> translations) {
             if (instance == null)
             {
                 instance = new SessionHelper();
-                instance.user = user;
-                instance.translations = translations;
+                instance.userMdl = userMdl;
+                instance.translations = ConvertIntoList(translations);
                 // TODO - falta recibir por parámetro permisos.
             }
 
             //No sé si se necesita porque no opero actualmente con la sesion
             return instance;
+        }
+
+        private static Dictionary<String, String> ConvertIntoList(List<TranslationMDL> translations)
+        {
+            Dictionary<String, String> result = new Dictionary<String, String>();
+            foreach (TranslationMDL translation in translations)
+            {
+                result.Add(translation.labelCode, translation.translation);
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -43,7 +54,7 @@ namespace Helper
         {
             if (instance != null)
             {
-                instance.user = null;
+                instance.userMdl = null;
                 instance.translations = null;
             }
         }
