@@ -11,6 +11,7 @@ namespace Helper
     {
         private static SessionHelper instance;
         private UserMDL userMdl;
+        private ProfileMDL profileMdl;
         private Dictionary<String, String> translations;
         //permisos
 
@@ -23,11 +24,12 @@ namespace Helper
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public static SessionHelper StartSession(UserMDL userMdl, List<TranslationMDL> translations) {
+        public static SessionHelper StartSession(UserMDL userMdl, ProfileMDL profileMdl, List<TranslationMDL> translations) {
             if (instance == null)
             {
                 instance = new SessionHelper();
                 instance.userMdl = userMdl;
+                instance.profileMdl = profileMdl;
                 instance.translations = ConvertIntoList(translations);
                 // TODO - falta recibir por parámetro permisos.
             }
@@ -55,6 +57,7 @@ namespace Helper
             if (instance != null)
             {
                 instance.userMdl = null;
+                instance.profileMdl = null;
                 instance.translations = null;
             }
         }

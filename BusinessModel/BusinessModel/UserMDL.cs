@@ -13,7 +13,8 @@ namespace BusinessModel
         public string name;
         public string password;
         public bool active;
-        public int languageId; //debería ser el objeto
+        public int languageId; //debería ser el objeto?
+        public string permissionId; //debería ser objeto?
 
         public UserMDL(UserDTO userDto)
         {
@@ -21,6 +22,7 @@ namespace BusinessModel
             this.name = userDto.name;
             this.active = userDto.active;
             this.languageId = userDto.languageId;
+            this.permissionId = userDto.permissionId;
             //Adrede no se instancia con el password
         }
     }

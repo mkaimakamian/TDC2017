@@ -18,20 +18,21 @@ namespace BusinessLogicLayer
             List<TranslationMDL> translations;
             UserBLL userBll = new UserBLL();
             TranslationBLL translationBll = new TranslationBLL();
+            ProfileBLL profileBll = new ProfileBLL();
+            ProfileMDL profileMdl;
 
             try
             {
                 ValidateInput(user, password);
                 userMdl = userBll.GetUser(user, password);
-                translations = translationBll.GetTranslations(userMdl.languageId);
-
                 //TODO - 1. Chequeo de consistencia                    
-                //TODO - 2. Levanto permisos                  
-                SessionHelper.StartSession(userMdl, translations);
+                translations = translationBll.GetTranslations(userMdl.languageId);                
+                profileMdl = profileBll.GetProfile(userMdl.permissionId);
+                SessionHelper.StartSession(userMdl, profileMdl, translations);
             }
             catch (Exception exception)
             {
-                throw new Exception("Se ha producido un error crítico.", exception);
+                throw new Exception(exception.Message);
             }
         }
 

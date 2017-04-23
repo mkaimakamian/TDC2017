@@ -34,18 +34,17 @@ namespace DataAccessLayer
             String sql;
             List<List<String>> reader;
 
-            sql = "SELECT * ";
-            sql += "FROM users WHERE name = '" + user + "' AND password = '" + password + "' and ACTIVE = 1";
+            sql = "SELECT * FROM users WHERE name = '" + user + "' AND password = '" + password + "' and ACTIVE = 1";
             reader = dbsql.executeReader(sql);
 
             if (reader.Count > 0) {
-                return resolve(reader.First());
+                return Resolve(reader.First());
             }
         
             return null;
         }
         
-        private UserDTO resolve(List<String> item) 
+        private UserDTO Resolve(List<String> item) 
         {
             UserDTO result = new UserDTO();
             result.id = int.Parse(item[0]);

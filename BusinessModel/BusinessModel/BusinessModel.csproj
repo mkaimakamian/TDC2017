@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProfileMDL.cs" />
     <Compile Include="TranslationMDL.cs" />
     <Compile Include="UserMDL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
