@@ -14,12 +14,12 @@ namespace BusinessLogicLayer
     {
         public void LogIn(string user, string password)
         {
-            UserMDL userMdl;
-            List<TranslationMDL> translations;
+            UserBM userMdl;
+            List<TranslationBM> translations;
             UserBLL userBll = new UserBLL();
             TranslationBLL translationBll = new TranslationBLL();
             ProfileBLL profileBll = new ProfileBLL();
-            ProfileMDL profileMdl;
+            ProfileBM profileMdl;
 
             try
             {

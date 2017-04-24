@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace BusinessModel
 {
-    public abstract class ProfileMDL
+    public abstract class ProfileBM
     {
         public string fatherCode;
         public string code;
         public string description;
 
-        public abstract bool AddPermission(ProfileMDL permission);
+        public abstract bool AddPermission(ProfileBM permission);
         public abstract void DeletePermission(string code);
-        public abstract ProfileMDL GetPermission(string code);
+        public abstract ProfileBM GetPermission(string code);
         public abstract bool HasPermission(string code);
         public abstract bool IsFather();
     }
@@ -22,7 +22,7 @@ namespace BusinessModel
     /// <summary>
     /// Clase "hijo" de los permisos.
     /// </summary>
-    public class PermissionMDL:ProfileMDL
+    public class PermissionMDL:ProfileBM
     {
  
         public PermissionMDL(string fatherCode, string code, string description)
@@ -32,7 +32,7 @@ namespace BusinessModel
             this.description = description;
         }
 
-        public override bool AddPermission(ProfileMDL permission)
+        public override bool AddPermission(ProfileBM permission)
         {
             //Responsabilidad del padre
             throw new NotImplementedException();
@@ -44,7 +44,7 @@ namespace BusinessModel
             throw new NotImplementedException();
         }
 
-        public override ProfileMDL GetPermission(string code)
+        public override ProfileBM GetPermission(string code)
         {
             return this;
         }
@@ -63,16 +63,16 @@ namespace BusinessModel
     /// <summary>
     /// Clase "padre" de los permisos.
     /// </summary>
-    public class PermissionsMDL : ProfileMDL
+    public class PermissionsMDL : ProfileBM
     {
-        List<ProfileMDL> permissions;
+        List<ProfileBM> permissions;
 
         public PermissionsMDL(string fatherCode, string code, string description)
         {
             this.fatherCode = fatherCode;
             this.code = code;
             this.description = description;
-            this.permissions = new List<ProfileMDL>();
+            this.permissions = new List<ProfileBM>();
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace BusinessModel
         /// Considerar el root como punto de partida para agregar un elemento, garantiza que todo el árbol es recorrido.
         /// </summary>
         /// <param name="permission"></param>
-        public override bool AddPermission(ProfileMDL permission)
+        public override bool AddPermission(ProfileBM permission)
         {
             //La estrategia es simple: si el objeto es padre del permiso, se agrega directamente; en caso contrario, se busca recursivamente 
             //un hijo que aplique como padre. Si el hijo que aplica no es padre, se procede a la conversión del mismo.
@@ -91,7 +91,7 @@ namespace BusinessModel
             }
             else
             {
-                foreach (ProfileMDL profile in permissions)
+                foreach (ProfileBM profile in permissions)
                 {
                     if (profile.IsFather())
                     {
@@ -120,7 +120,7 @@ namespace BusinessModel
         /// <param name="code"></param>
         public override void DeletePermission(string code)
         {
-            foreach (ProfileMDL profile in permissions)
+            foreach (ProfileBM profile in permissions)
             {
                 if (profile.code == code)
                 {
@@ -130,7 +130,7 @@ namespace BusinessModel
             }        
         }
 
-        public override ProfileMDL GetPermission(string code)
+        public override ProfileBM GetPermission(string code)
         {
             return this;
         }
@@ -148,7 +148,7 @@ namespace BusinessModel
             }
             else
             {
-                foreach (ProfileMDL profile in permissions)
+                foreach (ProfileBM profile in permissions)
                 {
                     if (profile.HasPermission(profile.code))
                     {

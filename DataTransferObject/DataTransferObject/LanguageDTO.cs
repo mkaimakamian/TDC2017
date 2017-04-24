@@ -10,5 +10,15 @@ namespace DataTransferObject
     {
         public int id;
         public string name;
+
+        public LanguageDTO() 
+        { 
+        }
+        
+        public LanguageDTO(int id, string name)
+        {
+            this.id = id;
+            this.name = name;
+        }
     }
 }

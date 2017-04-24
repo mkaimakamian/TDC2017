@@ -12,7 +12,7 @@ namespace DataAccessLayer
     
         private string connStr = "Data Source=.\\UAI_EXPRESS; Initial Catalog=CAMPOI; Integrated Security=True";
 
-        public int executeNonQuery(string sql)
+        public int ExecuteNonQuery(string sql)
         {
             SqlConnection connection = new SqlConnection(connStr);
             SqlCommand command = new SqlCommand(sql, connection);

@@ -7,7 +7,7 @@ using DataTransferObject;
 
 namespace BusinessModel
 {
-    public class UserMDL
+    public class UserBM
     {
         public int id;
         public string name;
@@ -16,7 +16,7 @@ namespace BusinessModel
         public int languageId; //debería ser el objeto?
         public string permissionId; //debería ser objeto?
 
-        public UserMDL(UserDTO userDto)
+        public UserBM(UserDTO userDto)
         {
             this.id = userDto.id;
             this.name = userDto.name;

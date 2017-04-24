@@ -10,8 +10,8 @@ namespace Helper
     public class SessionHelper
     {
         private static SessionHelper instance;
-        private UserMDL userMdl;
-        private ProfileMDL profileMdl;
+        private UserBM userMdl;
+        private ProfileBM profileMdl;
         private Dictionary<String, String> translations;
         //permisos
 
@@ -24,7 +24,7 @@ namespace Helper
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public static SessionHelper StartSession(UserMDL userMdl, ProfileMDL profileMdl, List<TranslationMDL> translations) {
+        public static SessionHelper StartSession(UserBM userMdl, ProfileBM profileMdl, List<TranslationBM> translations) {
             if (instance == null)
             {
                 instance = new SessionHelper();
@@ -38,10 +38,10 @@ namespace Helper
             return instance;
         }
 
-        private static Dictionary<String, String> ConvertIntoList(List<TranslationMDL> translations)
+        private static Dictionary<String, String> ConvertIntoList(List<TranslationBM> translations)
         {
             Dictionary<String, String> result = new Dictionary<String, String>();
-            foreach (TranslationMDL translation in translations)
+            foreach (TranslationBM translation in translations)
             {
                 result.Add(translation.labelCode, translation.translation);
             }
@@ -49,6 +49,10 @@ namespace Helper
             return result;
         }
 
+        public static UserBM GetLoggedUser()
+        {
+            return instance.userMdl;
+        }
         /// <summary>
         /// Finaliza la sesión.
         /// </summary>
@@ -62,5 +66,28 @@ namespace Helper
             }
         }
 
+        /// <summary>
+        /// Devuelve tru si el usuario en sesión tiene permisos sobre el objeto cuyo código es pasado por parámetro.
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public static bool HasPermission(string code)
+        {
+            return instance.profileMdl.HasPermission(code);
+        }
+
+        public static string GetTranslation(string code)
+        {
+            string value;
+            instance.translations.TryGetValue(code, out value);
+
+            // El valor default debería estar definido en la tabla de traducciones.
+            if (value == null || value.Length == 0)
+            {
+                return "UNDEFINED";
+            } else {
+                return value;
+            }
+        }
     }
 }

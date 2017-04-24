@@ -11,11 +11,11 @@ namespace BusinessLogicLayer
 {
     public class ProfileBLL
     {
-        public ProfileMDL GetProfile(string profileId)
+        public ProfileBM GetProfile(string profileId)
         {
             List<PermissionDTO> permissions;
             ProfileDAL profileDal = new ProfileDAL();
-            ProfileMDL result;
+            ProfileBM result;
 
             string fatherCode;
             string code;

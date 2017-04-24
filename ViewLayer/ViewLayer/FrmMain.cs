@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogicLayer;
+using Helper;
 
 namespace ViewLayer
 {
@@ -19,6 +20,13 @@ namespace ViewLayer
         public FrmMain()
         {
             InitializeComponent();
+
+            //HERRAMIENTAS
+            herramientasToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE001);
+            herramientasToolStripMenuItem.Text = SessionHelper.GetTranslation(Codes.MNU_GE001);
+            //Cambiar idioma
+            idiomaToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.OP001);
+            idiomaToolStripMenuItem.Text = SessionHelper.GetTranslation(Codes.MNU_OP001);
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
@@ -32,6 +40,11 @@ namespace ViewLayer
             LoginBLL loginBll = new LoginBLL();
             loginBll.Logout();
             loginReference.Show();
+        }
+
+        private void idiomaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new FrmLanguage().ShowDialog();
         }
 
 

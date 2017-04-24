@@ -7,13 +7,13 @@ using DataTransferObject;
 
 namespace BusinessModel
 {
-    public class TranslationMDL
+    public class TranslationBM
     {
         public int languageId; //debería ser el objeto
         public string labelCode; //debería ser el objeto
         public string translation;
 
-        public TranslationMDL(TranslationDTO translationDto)
+        public TranslationBM(TranslationDTO translationDto)
         {
             this.languageId = translationDto.languageId;
             this.labelCode = translationDto.labelCode;

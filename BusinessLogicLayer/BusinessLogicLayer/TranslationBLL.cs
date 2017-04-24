@@ -17,17 +17,18 @@ namespace BusinessLogicLayer
         /// </summary>
         /// <param name="languageId"></param>
         /// <returns></returns>
-        public List<TranslationMDL> GetTranslations(int languageId)
+        public List<TranslationBM> GetTranslations(int languageId)
         {
             List<TranslationDTO> translations;
             TranslationDAL translationDal = new TranslationDAL();
-            List<TranslationMDL> result = new List<TranslationMDL>();
+            List<TranslationBM> result = new List<TranslationBM>();
 
             translations = translationDal.GetTranslations(languageId);
 
             foreach (TranslationDTO translation in translations)
             {
-                result.Add(new TranslationMDL(translation));
+                //NO SE DEBE PASAR DTO
+                result.Add(new TranslationBM(translation));
             }
 
             return result;

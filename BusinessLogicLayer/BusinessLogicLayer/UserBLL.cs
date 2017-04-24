@@ -18,7 +18,7 @@ namespace BusinessLogicLayer
         /// </summary>
         /// <param name="user"></param>
         /// <param name="password"></param>
-        public UserMDL GetUser(string user, string password)
+        public UserBM GetUser(string user, string password)
         {
             UserDAL userDal = new UserDAL();
             UserDTO userDto = userDal.LogIn(user, SecurityHelper.Encrypt(password));
@@ -28,7 +28,20 @@ namespace BusinessLogicLayer
                 throw new Exception("Las credenciales ingresadas son inválidas.");
                 
             }
-            return new UserMDL(userDto);
+            return new UserBM(userDto);
+        }
+
+        public bool UpdateUser(UserBM userBm)
+        {
+            UserDAL userDal = new UserDAL();
+            UserDTO userDto = new UserDTO(userBm.id, userBm.name, userBm.active, userBm.languageId, userBm.permissionId);
+            bool result =  userDal.UpdateUser(userDto);
+            
+            //Obtener el idioma a través de lenguagebll
+            //actualizar la sesion
+
+            return result;
+
         }
     }
 }

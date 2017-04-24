@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Codes.cs" />
     <Compile Include="FrmLoginMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,6 +57,12 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmLanguage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmLanguage.Designer.cs">
+      <DependentUpon>FrmLanguage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmLoginMain.resx">
@@ -63,6 +70,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmLanguage.resx">
+      <DependentUpon>FrmLanguage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -94,6 +104,10 @@
     <ProjectReference Include="..\..\BusinessModel\BusinessModel\BusinessModel.csproj">
       <Project>{258c9aed-5a2b-4644-a661-6e03fc1bc298}</Project>
       <Name>BusinessModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Helper\Helper\Helper.csproj">
+      <Project>{8528b7c4-9e5e-4172-bf97-577289854fce}</Project>
+      <Name>Helper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

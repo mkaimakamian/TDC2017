@@ -39,9 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProfileMDL.cs" />
-    <Compile Include="TranslationMDL.cs" />
-    <Compile Include="UserMDL.cs" />
+    <Compile Include="LanguageBM.cs" />
+    <Compile Include="ProfileBM.cs" />
+    <Compile Include="TranslationBM.cs" />
+    <Compile Include="UserBM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

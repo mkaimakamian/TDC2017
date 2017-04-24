@@ -9,25 +9,6 @@ namespace DataAccessLayer
 {
     public class UserDAL
     {
-        //public Boolean Exists(LogInDTO userLogin)
-        //{
-        //    DBSql dbsql = new DBSql();
-        //    String sql;
-        //    List<List<String>> reader;
-
-        //    sql = "SELECT * ";
-        //    sql += "FROM users WHERE name = '" + userLogin.user + "' AND password = '" + userLogin.password + "' and ACTIVE = 1";
-        //    reader = dbsql.executeReader(sql);
-
-        //    if (reader.Count > 0)
-        //    {
-        //        return true;
-        //    }
-
-        //    return false
-        //}
-
-
         public UserDTO LogIn(string user, string password) 
         {            
             DBSql dbsql = new DBSql();
@@ -44,6 +25,18 @@ namespace DataAccessLayer
             return null;
         }
         
+        public bool UpdateUser(UserDTO userDto)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            //ACTUALIZAR TODO MENOS EL PASSWORD QUE DEBERÍA HACERSE POR OTRO LADO POR EL TEMA DE LA ENCRIPTACION
+            sql = "UPDATE users SET languageId = '" + userDto.languageId + "' WHERE id = " + userDto.id;
+            dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
+
+
         private UserDTO Resolve(List<String> item) 
         {
             UserDTO result = new UserDTO();
