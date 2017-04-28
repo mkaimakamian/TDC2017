@@ -42,13 +42,17 @@ namespace ViewLayer
 
         private void cmdAccept_Click(object sender, EventArgs e)
         {
-            UserBM userBm = SessionHelper.GetLoggedUser();
             LanguageBM language = (LanguageBM) cmbLanguage.SelectedValue;
-
-            //User Bm quizá debería contener el objeto Lenguage
-            userBm.languageId = language.Id;
             UserBLL userBll = new UserBLL();
-            userBll.UpdateUser(userBm);
+            if (userBll.ChangeCurrentLanguage(language.Id))
+            {
+               this.Close();
+            }
+        }
+
+        private void lblLanguage_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

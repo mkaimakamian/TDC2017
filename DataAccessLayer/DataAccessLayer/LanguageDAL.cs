@@ -9,6 +9,27 @@ namespace DataAccessLayer
 {
     public class LanguageDAL
     {
+
+        public LanguageDTO GetLanguage(int languageId)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+            List<List<String>> reader;
+            List<LanguageDTO> result = new List<LanguageDTO>();
+
+            sql = "SELECT * FROM language where id = " + languageId;
+
+            reader = dbsql.executeReader(sql);
+
+            if (reader.Count > 0)
+            {
+                return Resolve(reader.First());
+            }
+
+            return null;
+        }
+
+
         /// <summary>
         /// Recupera el listado de idiomas disponibles en el sistema.
         /// </summary>

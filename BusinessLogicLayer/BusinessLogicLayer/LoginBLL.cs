@@ -15,9 +15,11 @@ namespace BusinessLogicLayer
         public void LogIn(string user, string password)
         {
             UserBM userMdl;
-            List<TranslationBM> translations;
+            //List<TranslationBM> translations;
+            LanguageBM languageBm;
             UserBLL userBll = new UserBLL();
-            TranslationBLL translationBll = new TranslationBLL();
+            //TranslationBLL translationBll = new TranslationBLL();
+            LanguageBLL languageBll = new LanguageBLL();
             ProfileBLL profileBll = new ProfileBLL();
             ProfileBM profileMdl;
 
@@ -26,9 +28,10 @@ namespace BusinessLogicLayer
                 ValidateInput(user, password);
                 userMdl = userBll.GetUser(user, password);
                 //TODO - 1. Chequeo de consistencia                    
-                translations = translationBll.GetTranslations(userMdl.languageId);                
+                //translations = translationBll.GetTranslations(userMdl.languageId);      
+                languageBm = languageBll.GetLanguage(userMdl.languageId);
                 profileMdl = profileBll.GetProfile(userMdl.permissionId);
-                SessionHelper.StartSession(userMdl, profileMdl, translations);
+                SessionHelper.StartSession(userMdl, profileMdl, languageBm);
             }
             catch (Exception exception)
             {

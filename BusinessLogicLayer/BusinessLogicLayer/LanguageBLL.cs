@@ -11,8 +11,8 @@ namespace BusinessLogicLayer
 {
     public class LanguageBLL
     {
-        private LanguageDTO languageDto;
-        private List<TranslationBLL> translationBll;
+        //private LanguageDTO languageDto;
+        //private List<TranslationBLL> translationBll;
 
         /// <summary>
         /// Inicializa esta instancia con el idioma.
@@ -37,6 +37,22 @@ namespace BusinessLogicLayer
             {
                 result.Add(new LanguageBM(language.id, language.name));
             }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Devuelve el Business Model del idioma, incluyendo las traducciones asociadas.
+        /// </summary>
+        /// <param name="languageId"></param>
+        /// <returns></returns>
+        public LanguageBM GetLanguage(int languageId)
+        {
+            TranslationBLL translationBll = new TranslationBLL();
+            List<TranslationBM> translations = translationBll.GetTranslations(languageId);
+            LanguageDAL languageDal = new LanguageDAL();            
+            LanguageDTO language = languageDal.GetLanguage(languageId);
+            LanguageBM result = new LanguageBM(language.id, language.name, translations);
 
             return result;
         }

@@ -16,13 +16,16 @@ namespace DataAccessLayer
         {
             SqlConnection connection = new SqlConnection(connStr);
             SqlCommand command = new SqlCommand(sql, connection);
-            int result;
+            int result = -1;
 
             connection.Open();
-            result = int.Parse(command.ExecuteScalar().ToString());
+            object row = command.ExecuteScalar();
+            
+            if (row != null) {
+                result = int.Parse(row.ToString());
+            }
             connection.Close();
             return result;
-
         }
         
         public List<List<String>> executeReader(string sql)

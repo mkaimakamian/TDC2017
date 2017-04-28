@@ -41,6 +41,7 @@
             this.lblLanguage.Size = new System.Drawing.Size(181, 55);
             this.lblLanguage.TabIndex = 0;
             this.lblLanguage.Text = "label1";
+            this.lblLanguage.Click += new System.EventHandler(this.lblLanguage_Click);
             // 
             // cmbLanguage
             // 

@@ -13,6 +13,7 @@ namespace Helper
         private UserBM userMdl;
         private ProfileBM profileMdl;
         private Dictionary<String, String> translations;
+        private LanguageBM languageBm;
         //permisos
 
         private SessionHelper()
@@ -24,31 +25,47 @@ namespace Helper
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public static SessionHelper StartSession(UserBM userMdl, ProfileBM profileMdl, List<TranslationBM> translations) {
+        public static SessionHelper StartSession(UserBM userMdl, ProfileBM profileMdl, LanguageBM languageBm)
+        {
             if (instance == null)
             {
                 instance = new SessionHelper();
                 instance.userMdl = userMdl;
                 instance.profileMdl = profileMdl;
-                instance.translations = ConvertIntoList(translations);
-                // TODO - falta recibir por parámetro permisos.
+                instance.languageBm = languageBm;
+                ConvertIntoList(languageBm);
             }
 
             //No sé si se necesita porque no opero actualmente con la sesion
             return instance;
         }
 
-        private static Dictionary<String, String> ConvertIntoList(List<TranslationBM> translations)
+        private static void ConvertIntoList(LanguageBM languageBm)
         {
-            Dictionary<String, String> result = new Dictionary<String, String>();
-            foreach (TranslationBM translation in translations)
-            {
-                result.Add(translation.labelCode, translation.translation);
-            }
+            List<TranslationBM> trans = languageBm.Translations;
 
-            return result;
+            //Si nestá vacío, se crea el diccionario con las traducciones; en otro caso, para aprovechar el binding, re pisan los valores.
+            if (instance.translations == null)
+            {
+                instance.translations = new Dictionary<String, String>();
+                foreach (TranslationBM translation in trans)
+                {
+                   instance.translations.Add(translation.labelCode, translation.translation);
+                }
+            }
+            else
+            {
+                foreach (TranslationBM translation in trans)
+                {
+                   instance.translations[translation.labelCode] = translation.translation;
+                }
+            }
         }
 
+        /// <summary>
+        /// Devuelve el Business Model perteneciente al usuario loggeado
+        /// </summary>
+        /// <returns></returns>
         public static UserBM GetLoggedUser()
         {
             return instance.userMdl;
@@ -58,12 +75,13 @@ namespace Helper
         /// </summary>
         public static void EndSession()
         {
-            if (instance != null)
-            {
-                instance.userMdl = null;
-                instance.profileMdl = null;
-                instance.translations = null;
-            }
+            //if (instance != null)
+            //{
+            //    instance.userMdl = null;
+            //    instance.profileMdl = null;                
+            //    instance.languageBm = null;
+            //}
+            instance = null;
         }
 
         /// <summary>
@@ -76,6 +94,11 @@ namespace Helper
             return instance.profileMdl.HasPermission(code);
         }
 
+        /// <summary>
+        /// Para un código en particular, devuelve las traducciones.
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         public static string GetTranslation(string code)
         {
             string value;
@@ -88,6 +111,11 @@ namespace Helper
             } else {
                 return value;
             }
+        }
+
+        public static void SetLanguage(LanguageBM languageBm) {
+            instance.languageBm = languageBm;
+            ConvertIntoList(languageBm);
         }
     }
 }

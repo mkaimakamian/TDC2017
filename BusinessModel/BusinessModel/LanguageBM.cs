@@ -10,11 +10,19 @@ namespace BusinessModel
     {
         private int id;
         private string name;
+        private List<TranslationBM> translations;
 
         public LanguageBM(int id, string name)
         {
             this.id = id;
             this.name = name;
+        }
+
+        public LanguageBM(int id, string name, List<TranslationBM> translations)
+        {
+            this.id = id;
+            this.name = name;
+            this.translations = translations;
         }
 
         public int Id
@@ -27,6 +35,12 @@ namespace BusinessModel
         {
             get { return this.name; }
             set {this.name = value;}
+        }
+
+        public List<TranslationBM> Translations
+        {
+            get { return this.translations; }
+            set { this.translations = value; }
         }
     }
 }

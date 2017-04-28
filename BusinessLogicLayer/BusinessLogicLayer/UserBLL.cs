@@ -35,13 +35,37 @@ namespace BusinessLogicLayer
         {
             UserDAL userDal = new UserDAL();
             UserDTO userDto = new UserDTO(userBm.id, userBm.name, userBm.active, userBm.languageId, userBm.permissionId);
-            bool result =  userDal.UpdateUser(userDto);
-            
-            //Obtener el idioma a través de lenguagebll
-            //actualizar la sesion
-
+            bool result = userDal.UpdateUser(userDto);
             return result;
 
+        }
+
+        public bool ChangeCurrentLanguage(int languageId)
+        {
+            // Se recupera el usuario de la sesión para cambiarle el id, y luego utilizar el objeto para actualizar el dato en la base
+            UserBM userBm = SessionHelper.GetLoggedUser();
+            int originalLanguage = userBm.languageId;
+            userBm.languageId = languageId;
+
+            //Actualización
+            bool result = UpdateUser(userBm);
+
+            if (result)
+            {
+                //Quizá debería manejarme con el modelo de lenguage
+                LanguageBLL languageBll = new LanguageBLL();
+                LanguageBM languageBm = languageBll.GetLanguage(languageId);
+
+                //TODO - El idioma y las traducciones deberían ser competencia del business model del usuario
+                SessionHelper.SetLanguage(languageBm);
+            }
+            else
+            {
+                userBm.languageId = originalLanguage;
+                throw new Exception("El idioma no pudo actualizarse.");
+            }
+
+            return result;
         }
     }
 }

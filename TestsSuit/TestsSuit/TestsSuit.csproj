@@ -60,9 +60,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Documentation\201704151720.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Documentation\bakcupcampo.bak" />
     <None Include="Documentation\donaciones 4V.docx" />
     <None Include="Documentation\rhoddion20.eap" />
