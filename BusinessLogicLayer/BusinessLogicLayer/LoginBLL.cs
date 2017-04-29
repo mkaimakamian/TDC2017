@@ -15,22 +15,41 @@ namespace BusinessLogicLayer
         public void LogIn(string user, string password)
         {
             UserBM userMdl;
-            //List<TranslationBM> translations;
             LanguageBM languageBm;
             UserBLL userBll = new UserBLL();
-            //TranslationBLL translationBll = new TranslationBLL();
             LanguageBLL languageBll = new LanguageBLL();
             ProfileBLL profileBll = new ProfileBLL();
             ProfileBM profileMdl;
+            bool consistentOk;
 
             try
             {
+                //1. Validación input
                 ValidateInput(user, password);
+                
+                //2. Validación usuario
                 userMdl = userBll.GetUser(user, password);
-                //TODO - 1. Chequeo de consistencia                    
-                //translations = translationBll.GetTranslations(userMdl.languageId);      
+                
+                //3.1 Chequeo de consistencia horizontal
+                consistentOk = SecurityHelper.IsEquivalent(userMdl.GetSeed(), userMdl.GetDigit());
+
+                if (!consistentOk)
+                {
+                    // Exception dentro de un catch??
+                    throw new Exception("El usuario ha sido alterado.");
+                }
+
+                //3.2 Chequeo de horizontal
+
+                //TODO - armar un bll que me provea de los servicios de checkeo
+
+                //4. Recuperación de idioma
                 languageBm = languageBll.GetLanguage(userMdl.languageId);
+                
+                //5. Recuperación de permisos
                 profileMdl = profileBll.GetProfile(userMdl.permissionId);
+
+                //6. Armado de sesión
                 SessionHelper.StartSession(userMdl, profileMdl, languageBm);
             }
             catch (Exception exception)

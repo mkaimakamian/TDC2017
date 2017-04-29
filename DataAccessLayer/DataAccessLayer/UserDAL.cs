@@ -46,6 +46,7 @@ namespace DataAccessLayer
             result.active = bool.Parse(item[3]);
             result.languageId = int.Parse(item[4]);
             result.permissionId = item[5];
+            result.hdv = item[6];
             return result;
         }
     }

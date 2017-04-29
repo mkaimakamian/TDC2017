@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DigitVeryficator.cs" />
     <Compile Include="LanguageBM.cs" />
     <Compile Include="ProfileBM.cs" />
     <Compile Include="TranslationBM.cs" />

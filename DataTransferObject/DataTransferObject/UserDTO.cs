@@ -14,7 +14,8 @@ namespace DataTransferObject
         public bool active;
         public int languageId;
         public string permissionId;
-
+        public string hdv;
+        
         public UserDTO() 
         { 
         }
