@@ -18,17 +18,18 @@ namespace BusinessLogicLayer
         /// </summary>
         /// <param name="user"></param>
         /// <param name="password"></param>
-        public UserBM GetUser(string user, string password)
+        public ResultBM GetUser(string user, string password)
         {
             UserDAL userDal = new UserDAL();
-            UserDTO userDto = userDal.LogIn(user, SecurityHelper.Encrypt(password));
+            UserDTO userDto = userDal.LogIn(user, SecurityHelper.Encrypt(password));            
 
             if (userDto == null)
             {
-                throw new Exception("Las credenciales ingresadas son inválidas.");
-                
+                //throw new Exception("Las credenciales ingresadas son inválidas.");
+                return new ResultBM(ResultBM.Type.INVALID_CREDENTIAL, "Las credenciales ingresadas son inválidas.");
             }
-            return new UserBM(userDto);
+
+            return new ResultBM(ResultBM.Type.OK, "Usuario encontrado: " + userDto.name, new UserBM(userDto)); 
         }
 
         /// <summary>
@@ -51,11 +52,14 @@ namespace BusinessLogicLayer
 
         public bool UpdateUser(UserBM userBm)
         {
+            //TODO - Devolver resultBM
+            DigitVerificatorBLL dvBll = new DigitVerificatorBLL();
             UserDAL userDal = new UserDAL();
-            UserDTO userDto = new UserDTO(userBm.id, userBm.name, userBm.active, userBm.languageId, userBm.permissionId);
+            
+            string digit = dvBll.CreateDigit(userBm);
+            UserDTO userDto = new UserDTO(userBm.id, userBm.name, userBm.active, userBm.languageId, userBm.permissionId, digit);
             bool result = userDal.UpdateUser(userDto);
             return result;
-
         }
 
         /// <summary>

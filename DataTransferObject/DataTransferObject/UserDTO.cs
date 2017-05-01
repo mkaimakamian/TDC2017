@@ -30,13 +30,14 @@ namespace DataTransferObject
             this.permissionId = permissionid;
         }
 
-        public UserDTO(int id, string name, bool active, int languageId, string permissionid)
+        public UserDTO(int id, string name, bool active, int languageId, string permissionid, string hdv)
         {
             this.id = id;
             this.name = name;
             this.active = active;
             this.languageId = languageId;
             this.permissionId = permissionid;
+            this.hdv = hdv;
         }
     }
 }

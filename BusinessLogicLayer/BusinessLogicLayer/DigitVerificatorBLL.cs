@@ -19,16 +19,25 @@ namespace BusinessLogicLayer
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public bool IsHorizontallyConsistent(DigitVeryficator entity)
+        public ResultBM IsHorizontallyConsistent(DigitVeryficator entity)
         {
-            return  SecurityHelper.IsEquivalent(entity.GetSeed(), entity.GetDigit());
+            bool result = SecurityHelper.IsEquivalent(entity.GetSeed(), entity.GetDigit());
+
+            if (result)
+            {
+                return new ResultBM(ResultBM.Type.OK, "Dígito horizontal correcto.");
+            }
+            else
+            {
+                return new ResultBM(ResultBM.Type.CORRUPTED_DATABASE, "Debido a cambios no autorizados en el sistema, el acceso será restringido momentáneamente. Comuníquese con el administrador.");
+            }
         }
 
         /// <summary>
         /// Controla la consistencia vertical de todas las entidades críticas
         /// </summary>
         /// <returns></returns>
-        public bool IsVerticallyConsistent()
+        public ResultBM IsVerticallyConsistent()
         {
             Dictionary<string, string> entityToCheck = new Dictionary<string, string>();
             DigitVerificatorDAL dvDal = new DigitVerificatorDAL();
@@ -50,12 +59,22 @@ namespace BusinessLogicLayer
             {
                 if (!SecurityHelper.IsEquivalent(entityToCheck[entityVDV.entity], entityVDV.vdv))
                 {
-                    //TODO -  error tipado
-                    return false;
+                    return new ResultBM(ResultBM.Type.CORRUPTED_DATABASE, "Dígito vertical incorrecto para " + entityVDV.entity);
                 }
             }
 
-            return true;
+            return new ResultBM(ResultBM.Type.OK, "Dígito vertical correcto.");
+        }
+
+        /// <summary>
+        /// Devuelve el hash MD5 para el dígito verificador.
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public string CreateDigit(DigitVeryficator entity)
+        {
+            // Encapsula la estrategia para crear el dígito vrificador; en este caso es el mismo algoritmo usado para hashear el password.
+            return SecurityHelper.Encrypt(entity.GetSeed());
         }
 
         /// <summary>

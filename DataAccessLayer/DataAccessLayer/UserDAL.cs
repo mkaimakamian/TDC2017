@@ -56,7 +56,7 @@ namespace DataAccessLayer
             String sql;
 
             //ACTUALIZAR TODO MENOS EL PASSWORD QUE DEBERÍA HACERSE POR OTRO LADO POR EL TEMA DE LA ENCRIPTACION
-            sql = "UPDATE users SET languageId = '" + userDto.languageId + "' WHERE id = " + userDto.id;
+            sql = "UPDATE users SET languageId = '" + userDto.languageId + "',  hvd = '" + userDto.hdv + "' WHERE id = " + userDto.id;
             dbsql.ExecuteNonQuery(sql);
             return true;
         }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogicLayer;
+using BusinessModel;
 
 namespace ViewLayer
 {
@@ -23,11 +24,18 @@ namespace ViewLayer
             try
             {
                 LoginBLL loginBll = new LoginBLL();
-                loginBll.LogIn(TxtUser.Text, TxtPassword.Text);
+                ResultBM result = loginBll.LogIn(TxtUser.Text, TxtPassword.Text);
 
-                FrmMain frmPrincipal = new FrmMain();
-                frmPrincipal.loginReference = this;
-                frmPrincipal.Show();
+                if (result.IsValid())
+                {
+                    FrmMain frmPrincipal = new FrmMain();
+                    frmPrincipal.loginReference = this;
+                    frmPrincipal.Show();
+                }
+                else
+                {
+                    MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             catch (Exception exception)
             {
