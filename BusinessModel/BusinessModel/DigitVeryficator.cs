@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessModel
 {
-    interface DigitVeryficator
+    public interface DigitVeryficator
     {
         /// <summary>
         /// Devuelve la cadena utilizada como semilla para hashear.
@@ -19,5 +19,11 @@ namespace BusinessModel
         /// </summary>
         /// <returns></returns>
         string GetDigit();
+
+        /// <summary>
+        /// Devuelve el nombre de la entidad; empleada para el chequeo vertical.
+        /// </summary>
+        /// <returns></returns>
+        //string GetEntity();
     }
 }

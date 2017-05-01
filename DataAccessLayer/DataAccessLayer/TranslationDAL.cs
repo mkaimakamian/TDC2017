@@ -18,8 +18,7 @@ namespace DataAccessLayer
             List<List<String>> reader;
             List<TranslationDTO> result = new List<TranslationDTO>();
 
-            sql = "SELECT * ";
-            sql += "FROM translation WHERE languageId = '" + languageId + "'";
+            sql = "SELECT * FROM translation WHERE languageId = '" + languageId + "'";
             reader = dbsql.executeReader(sql);
 
             if (reader.Count > 0) {

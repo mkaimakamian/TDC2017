@@ -31,6 +31,24 @@ namespace BusinessLogicLayer
             return new UserBM(userDto);
         }
 
+        /// <summary>
+        /// Devuelve el listado de todos los usuarios.
+        /// </summary>
+        /// <returns></returns>
+        public List<UserBM> GetUsers()
+        {
+            UserDAL userDal = new UserDAL();
+            List<UserDTO> usersDto = userDal.GetUsers();
+            List<UserBM> result = new List<UserBM>();
+
+            foreach (UserDTO user in usersDto)
+            {
+                result.Add(new UserBM(user));
+            }
+
+            return result;
+        }
+
         public bool UpdateUser(UserBM userBm)
         {
             UserDAL userDal = new UserDAL();
@@ -40,6 +58,11 @@ namespace BusinessLogicLayer
 
         }
 
+        /// <summary>
+        /// Actualiza el idioma del usuario en sesión, según el id del idioma pasado por parámetro.
+        /// </summary>
+        /// <param name="languageId"></param>
+        /// <returns></returns>
         public bool ChangeCurrentLanguage(int languageId)
         {
             // Se recupera el usuario de la sesión para cambiarle el id, y luego utilizar el objeto para actualizar el dato en la base

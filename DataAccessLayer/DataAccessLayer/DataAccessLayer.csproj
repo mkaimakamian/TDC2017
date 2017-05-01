@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBSql.cs" />
+    <Compile Include="DigitVerificatorDAL.cs" />
     <Compile Include="LanguageDAL.cs" />
     <Compile Include="ProfileDAL.cs" />
     <Compile Include="UserDAL.cs" />

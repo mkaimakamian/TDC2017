@@ -24,6 +24,31 @@ namespace DataAccessLayer
         
             return null;
         }
+
+        /// <summary>
+        /// Devuelve la lista de todos los usuarios.
+        /// </summary>
+        /// <returns></returns>
+        public List<UserDTO> GetUsers()
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+            List<List<String>> reader;
+            List<UserDTO> result = new List<UserDTO>();
+
+            sql = "SELECT * FROM users";
+            reader = dbsql.executeReader(sql);
+
+            if (reader.Count > 0)
+            {
+                for (int i = 0; i < reader.Count; ++i)
+                {
+                    result.Add(Resolve(reader[i]));
+                }
+            }
+
+            return result;
+        }
         
         public bool UpdateUser(UserDTO userDto)
         {

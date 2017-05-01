@@ -14,13 +14,16 @@ namespace BusinessLogicLayer
     {
         public void LogIn(string user, string password)
         {
-            UserBM userMdl;
-            LanguageBM languageBm;
             UserBLL userBll = new UserBLL();
+            UserBM userBm;
+            
             LanguageBLL languageBll = new LanguageBLL();
+            LanguageBM languageBm;
+
             ProfileBLL profileBll = new ProfileBLL();
             ProfileBM profileMdl;
-            bool consistentOk;
+
+            DigitVerificatorBLL dvBll = new DigitVerificatorBLL();           
 
             try
             {
@@ -28,29 +31,32 @@ namespace BusinessLogicLayer
                 ValidateInput(user, password);
                 
                 //2. Validación usuario
-                userMdl = userBll.GetUser(user, password);
-                
-                //3.1 Chequeo de consistencia horizontal
-                consistentOk = SecurityHelper.IsEquivalent(userMdl.GetSeed(), userMdl.GetDigit());
+                userBm = userBll.GetUser(user, password);
 
-                if (!consistentOk)
+                // userBm.IsLocked()                
+
+                //3.1 Chequeo de consistencia horizontal
+                if (!dvBll.IsHorizontallyConsistent(userBm))
                 {
                     // Exception dentro de un catch??
                     throw new Exception("El usuario ha sido alterado.");
                 }
 
-                //3.2 Chequeo de horizontal
-
-                //TODO - armar un bll que me provea de los servicios de checkeo
+                //3.2 Chequeo de vertical
+                if (!dvBll.IsVerticallyConsistent())
+                {
+                    // Exception dentro de un catch??
+                    throw new Exception("Al menos una de las tablas ha sido manipulada.");
+                }
 
                 //4. Recuperación de idioma
-                languageBm = languageBll.GetLanguage(userMdl.languageId);
+                languageBm = languageBll.GetLanguage(userBm.languageId);
                 
                 //5. Recuperación de permisos
-                profileMdl = profileBll.GetProfile(userMdl.permissionId);
+                profileMdl = profileBll.GetProfile(userBm.permissionId);
 
                 //6. Armado de sesión
-                SessionHelper.StartSession(userMdl, profileMdl, languageBm);
+                SessionHelper.StartSession(userBm, profileMdl, languageBm);
             }
             catch (Exception exception)
             {
