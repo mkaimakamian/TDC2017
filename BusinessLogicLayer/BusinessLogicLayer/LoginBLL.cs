@@ -68,12 +68,15 @@ namespace BusinessLogicLayer
                     }
                 }
 
-                return result;
+            //return result;
             }
             catch (Exception exception)
             {
-                throw new Exception(exception.Message);
+                //throw new Exception(exception.Message);
+                result = new ResultBM(ResultBM.Type.EXCEPTION, exception.Message);
             }
+
+            return result;
         }
 
         /// <summary>

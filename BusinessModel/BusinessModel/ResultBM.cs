@@ -19,7 +19,8 @@ namespace BusinessModel
             CHECKSUM_ERROR,
             INCOMPLETE_FIELDS,
             EXCEPTION,
-            CORRUPTED_DATABASE
+            CORRUPTED_DATABASE,
+            FAIL
         };
 
         private Type type;

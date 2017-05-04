@@ -26,12 +26,11 @@ namespace BusinessModel
             this.permissionId = userDto.permissionId;
             this.password = userDto.password;
             this.hdv = userDto.hdv;
-            //Adrede no se instancia con el password
         }
 
         public string GetSeed()
         {
-            return this.name + this.password + this.active + this.languageId + this.permissionId;
+            return this.name + this.password + this.active + this.languageId + this.permissionId + this.password;
         }
 
         public string GetDigit()
