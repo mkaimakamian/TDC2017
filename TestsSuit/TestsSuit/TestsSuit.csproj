@@ -65,9 +65,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Documentation\bakcupcampo.bak" />
+    <None Include="Documentation\backup.xls" />
+    <None Include="Documentation\datos.bacpac" />
     <None Include="Documentation\donaciones 4V.docx" />
     <None Include="Documentation\rhoddion20.eap" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Documentation\backup.sql" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
