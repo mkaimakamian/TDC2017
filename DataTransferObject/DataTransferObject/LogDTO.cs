@@ -24,6 +24,9 @@ namespace DataTransferObject
     public string entity;
     public DateTime created;
 
+    public LogDTO()
+    {
+    }
     public LogDTO (Level loglevel, string action, string description, string entity) {
         this.logLevel = loglevel;
         this.action = action;

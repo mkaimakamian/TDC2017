@@ -95,8 +95,13 @@ namespace ViewLayer
 
 
         //:::TRADUCCIONES:::
-        public const string BTN_ACCEPT = "BTN_ACCEPT"; //Botçon Aceptar
-        public const string BTN_CANCEL = "BTN_CANCEL"; //Botón Cancelar
+        public const string BTN_ACCEPT = "BTN_ACCEPT"; //Botones comunes
+        public const string BTN_CANCEL = "BTN_CANCEL";
+        public const string BTN_NEW = "BTN_NEW";
+        public const string BTN_CLOSE = "BTN_CLOSE";
+        public const string BTN_EDIT = "BTN_EDIT";
+        public const string BTN_DELETE = "BTN_DELETE";
+
         public const string MNU_GE001 = "MNU_GE001"; //Menú herramientas
         public const string MNU_GE002 = "MNU_GE002"; //Seguridad
         public const string MNU_GE003 = "MNU_GE003"; //Perfiles

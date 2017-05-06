@@ -52,6 +52,12 @@ namespace ViewLayer
 
         }
 
+        private void bitácoraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //new FrmGenericMain(typeof(LogBLL), typeof(FrmLogMain)).ShowDialog();
+            new FrmGenericMain(typeof(LogBLL)).ShowDialog();
+        }
+
 
     }
 }

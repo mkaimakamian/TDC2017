@@ -72,7 +72,6 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                //throw new Exception(exception.Message);
                 result = new ResultBM(ResultBM.Type.EXCEPTION, exception.Message);
             }
 

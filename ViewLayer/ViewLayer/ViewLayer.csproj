@@ -45,6 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Codes.cs" />
+    <Compile Include="FrmGenericMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmGenericMain.Designer.cs">
+      <DependentUpon>FrmGenericMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmLoginMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +71,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmGenericMain.resx">
+      <DependentUpon>FrmGenericMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmLoginMain.resx">
       <DependentUpon>FrmLoginMain.cs</DependentUpon>
     </EmbeddedResource>
