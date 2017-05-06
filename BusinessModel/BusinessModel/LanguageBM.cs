@@ -12,18 +12,18 @@ namespace BusinessModel
         private string name;
         private List<TranslationBM> translations;
 
-        public LanguageBM(int id, string name)
-        {
-            this.id = id;
-            this.name = name;
-        }
+        //public LanguageBM(int id, string name)
+        //{
+        //    this.id = id;
+        //    this.name = name;
+        //}
 
-        public LanguageBM(int id, string name, List<TranslationBM> translations)
-        {
-            this.id = id;
-            this.name = name;
-            this.translations = translations;
-        }
+        //public LanguageBM(int id, string name, List<TranslationBM> translations)
+        //{
+        //    this.id = id;
+        //    this.name = name;
+        //    this.translations = translations;
+        //}
 
         public int Id
         {

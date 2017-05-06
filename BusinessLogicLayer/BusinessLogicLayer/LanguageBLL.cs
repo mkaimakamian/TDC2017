@@ -9,7 +9,7 @@ using BusinessModel;
 
 namespace BusinessLogicLayer
 {
-    public class LanguageBLL
+    public class LanguageBLL: BLEntity
     {
         //private LanguageDTO languageDto;
         //private List<TranslationBLL> translationBll;
@@ -27,17 +27,12 @@ namespace BusinessLogicLayer
         //    //DEBEERÍA DEVOLVER UN BUSINESSMODEL!
         //}
 
-        public List<LanguageBM> GetLanguages()
+        public ResultBM GetLanguages()
         {
             LanguageDAL languageDal = new LanguageDAL();
-            List<LanguageBM> result = new List<LanguageBM>();
             List<LanguageDTO> languages  = languageDal.GetLanguages();
-
-            foreach (LanguageDTO language in languages)
-            {
-                result.Add(new LanguageBM(language.id, language.name));
-            }
-
+            List<LanguageBM> languageBms = ConvertIntoBusinessModel(languages);
+            ResultBM result = new ResultBM(ResultBM.Type.OK, "Recuperación de los idiomas exitoso.", languageBms);
             return result;
         }
 
@@ -52,17 +47,42 @@ namespace BusinessLogicLayer
             List<TranslationBM> translations = translationBll.GetTranslations(languageId);
             LanguageDAL languageDal = new LanguageDAL();            
             LanguageDTO language = languageDal.GetLanguage(languageId);
-            LanguageBM result = new LanguageBM(language.id, language.name, translations);
-
+            LanguageBM result = ConvertIntoBusinessModel(language, translations);
             return result;
         }
 
-        //public bool SaveLanguage(LanguageBM languageBm)
-        //{            
-        //    LanguageDTO languageDto = new LanguageDTO(languageBm.Id, languageBm.Name);
-        //    LanguageDAL languageDal = new LanguageDAL();
-        //    return languageDal.SaveLanguage(languageDto);
-        //}
-        
+        /// <summary>
+        /// Convierte el DTO en BM.
+        /// </summary>
+        /// <param name="log"></param>
+        /// <returns></returns>
+        private LanguageBM ConvertIntoBusinessModel(LanguageDTO entity, List<TranslationBM> translation = null)
+        {
+            LanguageBM result = new LanguageBM();
+            result.Id = entity.id;
+            result.Name = entity.name;
+            result.Translations = translation;
+            return result;
+        }
+
+        /// <summary>
+        /// Convierte un listado de objetos DTO en uno de BM.
+        /// </summary>
+        /// <param name="logs"></param>
+        /// <returns></returns>
+        private List<LanguageBM> ConvertIntoBusinessModel(List<LanguageDTO> entities)
+        {
+            List<LanguageBM> result = new List<LanguageBM>();
+            foreach (LanguageDTO entity in entities)
+            {
+                result.Add(ConvertIntoBusinessModel(entity));
+            }
+            return result;
+        }
+
+        public ResultBM GetCollection()
+        {
+            return this.GetLanguages();
+        }
     }
 }

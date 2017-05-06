@@ -25,14 +25,30 @@ namespace ViewLayer
 
         private void FrmLanguage_Load(object sender, EventArgs e)
         {
-            //Carga los idiomas
-            LanguageBLL languageBll = new LanguageBLL();
-            cmbLanguage.DataSource =  languageBll.GetLanguages();
-            cmbLanguage.DisplayMember = "name";
+            try
+            {
+                //Carga los idiomas
+                LanguageBLL languageBll = new LanguageBLL();
+                ResultBM result = languageBll.GetLanguages();
 
-            //Posicionarse de acuerdo con el idioma del usuario.
-            //UserBM userBm = SessionHelper.GetLoggedUser();
-            //cmbLanguage.SelectedValue = SessionHelper.Get
+                if (result.IsValid())
+                {
+                    cmbLanguage.DataSource = result.GetValue<List<LanguageBM>>();
+                    cmbLanguage.DisplayMember = "Name";
+                }
+                else
+                {
+                    MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                //Posicionarse de acuerdo con el idioma del usuario.
+                //UserBM userBm = SessionHelper.GetLoggedUser();
+                //cmbLanguage.SelectedValue = SessionHelper.Get
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void cmdCancel_Click(object sender, EventArgs e)

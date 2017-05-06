@@ -9,7 +9,7 @@ using BusinessModel;
 
 namespace BusinessLogicLayer
 {
-    public class LogBLL
+    public class LogBLL : BLEntity
     {
         public ResultBM GetLogs()
         {
@@ -84,6 +84,11 @@ namespace BusinessLogicLayer
                 result.Add(ConvertIntoBusinessModel(log));
             }
             return result;
+        }
+
+        public ResultBM GetCollection()
+        {
+            return this.GetLogs();
         }
     }
 }

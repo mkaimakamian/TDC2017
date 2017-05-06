@@ -41,7 +41,7 @@ namespace ViewLayer
             object businessLogic = Activator.CreateInstance(this.entity);
             try
             {
-                ResultBM result = ((LogBLL) businessLogic).GetLogs();
+                ResultBM result = ((BLEntity) businessLogic).GetCollection();
                 if (result.IsValid())
                 {
                     dgView.DataSource = result.GetValue<List<LogBM>>();
