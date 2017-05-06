@@ -42,6 +42,7 @@
     <Compile Include="BackupBLL.cs" />
     <Compile Include="DigitVerificatorBLL.cs" />
     <Compile Include="LanguageBLL.cs" />
+    <Compile Include="LogBLL.cs" />
     <Compile Include="LoginBLL.cs" />
     <Compile Include="ProfileBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

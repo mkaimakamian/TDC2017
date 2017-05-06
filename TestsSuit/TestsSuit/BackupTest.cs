@@ -17,7 +17,7 @@ namespace TestsSuit
         }
 
         [TestMethod]
-        public void CrearBackup()
+        public void CreateBackup()
         {
             BackupBLL bkp = new BackupBLL();
             ResultBM result = bkp.PerformBackup(path);
@@ -25,7 +25,7 @@ namespace TestsSuit
         }
 
         [TestMethod]
-        public void RestaurarBackup()
+        public void RestoreBackup()
         {
             BackupBLL bkp = new BackupBLL();
             ResultBM result = bkp.PerformRestore(path);

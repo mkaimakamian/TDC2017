@@ -41,9 +41,9 @@
   <ItemGroup>
     <Compile Include="DigitVerificatorDTO.cs" />
     <Compile Include="LanguageDTO.cs" />
+    <Compile Include="LogDTO.cs" />
     <Compile Include="PermissionDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResultDTO.cs" />
     <Compile Include="TranslationDTO.cs" />
     <Compile Include="UserDTO.cs" />
   </ItemGroup>

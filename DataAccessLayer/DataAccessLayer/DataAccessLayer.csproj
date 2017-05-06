@@ -43,6 +43,7 @@
     <Compile Include="DBSql.cs" />
     <Compile Include="DigitVerificatorDAL.cs" />
     <Compile Include="LanguageDAL.cs" />
+    <Compile Include="LogDAL.cs" />
     <Compile Include="ProfileDAL.cs" />
     <Compile Include="UserDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
