@@ -23,10 +23,10 @@ namespace ViewLayer
 
             //HERRAMIENTAS
             herramientasToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE001);
-            herramientasToolStripMenuItem.Text = SessionHelper.GetTranslation(Codes.MNU_GE001);
+            SessionHelper.RegisterForTranslation(herramientasToolStripMenuItem, Codes.MNU_GE001);
             //Cambiar idioma
             idiomaToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.OP001);
-            idiomaToolStripMenuItem.Text = SessionHelper.GetTranslation(Codes.MNU_OP001);
+            SessionHelper.RegisterForTranslation(idiomaToolStripMenuItem, Codes.MNU_OP001);
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
@@ -45,6 +45,11 @@ namespace ViewLayer
         private void idiomaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new FrmLanguage().ShowDialog();
+        }
+
+        private void herramientasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
 

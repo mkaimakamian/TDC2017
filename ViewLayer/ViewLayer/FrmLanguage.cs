@@ -18,9 +18,9 @@ namespace ViewLayer
         public FrmLanguage()
         {
             InitializeComponent();
-            lblLanguage.Text = SessionHelper.GetTranslation(Codes.MNU_OP001_LBL_LANGUAGE);
-            cmdAccept.Text = SessionHelper.GetTranslation(Codes.BTN_ACCEPT);
-            cmdCancel.Text = SessionHelper.GetTranslation(Codes.BTN_CANCEL);
+            SessionHelper.RegisterForTranslation(lblLanguage, Codes.MNU_OP001_LBL_LANGUAGE);
+            SessionHelper.RegisterForTranslation(cmdAccept, Codes.BTN_ACCEPT);
+            SessionHelper.RegisterForTranslation(cmdCancel, Codes.BTN_CANCEL);
         }
 
         private void FrmLanguage_Load(object sender, EventArgs e)

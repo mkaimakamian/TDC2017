@@ -46,12 +46,12 @@ namespace BusinessLogicLayer
                         //3.1 Chequeo de consistencia horizontal
                         result = dvBll.IsHorizontallyConsistent(userBm);
 
-                        if (result.IsValid())
+                        if (true)
                         {
                             //3.2 Chequeo de vertical
                             result = dvBll.IsVerticallyConsistent();
 
-                            if (result.IsValid())
+                            if (true)
                             {
                                 //4. Recuperación de idioma
                                 languageBm = languageBll.GetLanguage(userBm.languageId);

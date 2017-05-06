@@ -12,9 +12,9 @@ namespace Helper
         private static SessionHelper instance;
         private UserBM userMdl;
         private ProfileBM profileMdl;
-        private Dictionary<String, String> translations;
         private LanguageBM languageBm;
-        //permisos
+        private Dictionary<String, String> translations;
+        private Dictionary<object, string> suscriptorsToTranslate;
 
         private SessionHelper()
         {
@@ -33,6 +33,7 @@ namespace Helper
                 instance.userMdl = userMdl;
                 instance.profileMdl = profileMdl;
                 instance.languageBm = languageBm;
+                instance.suscriptorsToTranslate = new Dictionary<object, string>();
                 ConvertIntoList(languageBm);
             }
 
@@ -40,25 +41,13 @@ namespace Helper
             return instance;
         }
 
+
         private static void ConvertIntoList(LanguageBM languageBm)
         {
-            List<TranslationBM> trans = languageBm.Translations;
-
-            //Si nestá vacío, se crea el diccionario con las traducciones; en otro caso, para aprovechar el binding, re pisan los valores.
-            if (instance.translations == null)
+            instance.translations = new Dictionary<String, String>();
+            foreach (TranslationBM translation in  languageBm.Translations)
             {
-                instance.translations = new Dictionary<String, String>();
-                foreach (TranslationBM translation in trans)
-                {
-                   instance.translations.Add(translation.labelCode, translation.translation);
-                }
-            }
-            else
-            {
-                foreach (TranslationBM translation in trans)
-                {
-                   instance.translations[translation.labelCode] = translation.translation;
-                }
+                instance.translations.Add(translation.labelCode, translation.translation);
             }
         }
 
@@ -75,23 +64,48 @@ namespace Helper
         /// </summary>
         public static void EndSession()
         {
-            //if (instance != null)
-            //{
-            //    instance.userMdl = null;
-            //    instance.profileMdl = null;                
-            //    instance.languageBm = null;
-            //}
             instance = null;
         }
 
         /// <summary>
-        /// Devuelve tru si el usuario en sesión tiene permisos sobre el objeto cuyo código es pasado por parámetro.
+        /// Devuelve true si el usuario en sesión tiene permisos sobre el objeto cuyo código es pasado por parámetro.
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
         public static bool HasPermission(string code)
         {
             return instance.profileMdl.HasPermission(code);
+        }        
+
+        /// <summary>
+        /// Suscribe al componente de no estar registrado y le asigna la traducción correspondiente.
+        /// Aunque no se define inerfaz, se espera que el objeto tenga propiedad text.
+        /// </summary>
+        /// <param name="suscriptor"></param>
+        /// <param name="code"></param>
+        public static void RegisterForTranslation(object suscriptor, string code)
+        {
+            if (!instance.suscriptorsToTranslate.ContainsKey(suscriptor))
+            {
+                instance.suscriptorsToTranslate.Add(suscriptor, code);
+            }
+            
+            System.Reflection.PropertyInfo propertyText = suscriptor.GetType().GetProperty("Text");
+            propertyText.SetValue(suscriptor, GetTranslation(code));
+        }
+
+        /// <summary>
+        /// Settea el lenguage y actualiza los suscriptores con el nuevo idioma.
+        /// </summary>
+        /// <param name="languageBm"></param>
+        public static void SetLanguage(LanguageBM languageBm) {
+            instance.languageBm = languageBm;
+            ConvertIntoList(languageBm);
+
+            foreach (KeyValuePair<object, string> obj in instance.suscriptorsToTranslate)
+            {
+                RegisterForTranslation(obj.Key, obj.Value);
+            }
         }
 
         /// <summary>
@@ -99,7 +113,7 @@ namespace Helper
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public static string GetTranslation(string code)
+        private static string GetTranslation(string code)
         {
             string value;
             instance.translations.TryGetValue(code, out value);
@@ -108,14 +122,11 @@ namespace Helper
             if (value == null || value.Length == 0)
             {
                 return "UNDEFINED";
-            } else {
+            }
+            else
+            {
                 return value;
             }
-        }
-
-        public static void SetLanguage(LanguageBM languageBm) {
-            instance.languageBm = languageBm;
-            ConvertIntoList(languageBm);
         }
     }
 }
