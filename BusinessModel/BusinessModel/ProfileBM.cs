@@ -10,13 +10,21 @@ namespace BusinessModel
     {
         public string fatherCode;
         public string code;
-        public string description;
+        private string description;
 
         public abstract bool AddPermission(ProfileBM permission);
         public abstract void DeletePermission(string code);
         public abstract ProfileBM GetPermission(string code);
         public abstract bool HasPermission(string code);
         public abstract bool IsFather();
+        public abstract List<ProfileBM> GetChildren();
+
+        public string Description
+        {
+            get { return this.description; }
+            set { this.description = value; }
+        }
+
     }
 
     /// <summary>
@@ -29,7 +37,7 @@ namespace BusinessModel
         {
             this.fatherCode = fatherCode;
             this.code = code;
-            this.description = description;
+            this.Description = description;
         }
 
         public override bool AddPermission(ProfileBM permission)
@@ -58,6 +66,11 @@ namespace BusinessModel
         {
             return false;
         }
+
+        public override List<ProfileBM> GetChildren()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <summary>
@@ -71,7 +84,7 @@ namespace BusinessModel
         {
             this.fatherCode = fatherCode;
             this.code = code;
-            this.description = description;
+            this.Description = description;
             this.permissions = new List<ProfileBM>();
         }
 
@@ -102,7 +115,7 @@ namespace BusinessModel
 
                     } else if (profile.code == permission.fatherCode) {
                         //El hijo que no es padre debe convertirse en padre.
-                        PermissionsMDL newFather = new PermissionsMDL(profile.fatherCode, profile.code, profile.description);
+                        PermissionsMDL newFather = new PermissionsMDL(profile.fatherCode, profile.code, profile.Description);
                         newFather.AddPermission(permission);
                         this.permissions.Remove(profile);
                         this.permissions.Add(newFather);
@@ -162,6 +175,11 @@ namespace BusinessModel
         public override bool IsFather()
         {
             return true;
+        }
+
+        public override List<ProfileBM> GetChildren()
+        {
+            return this.permissions;
         }
     }
 }

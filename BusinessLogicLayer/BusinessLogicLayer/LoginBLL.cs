@@ -57,7 +57,7 @@ namespace BusinessLogicLayer
                                 languageBm = languageBll.GetLanguage(userBm.LanguageId);
 
                                 //5. Recuperación de permisos
-                                profileMdl = profileBll.GetProfile(userBm.PermissionId);
+                                profileMdl = profileBll.GetProfile(userBm.PermissionId).GetValue() as ProfileBM;
 
                                 //6. Armado de sesión
                                 SessionHelper.StartSession(userBm, profileMdl, languageBm);

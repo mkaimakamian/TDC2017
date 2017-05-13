@@ -24,9 +24,20 @@ namespace ViewLayer
             //HERRAMIENTAS
             herramientasToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE001);
             SessionHelper.RegisterForTranslation(herramientasToolStripMenuItem, Codes.MNU_GE001);
+            
             //Cambiar idioma
             idiomaToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.OP001);
             SessionHelper.RegisterForTranslation(idiomaToolStripMenuItem, Codes.MNU_OP001);
+            
+            //Seguridad
+            seguridadToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE002);
+            SessionHelper.RegisterForTranslation(seguridadToolStripMenuItem, Codes.MNU_GE002);
+            
+            //Seguridad > Perfiles
+            perfilesToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE003);
+            SessionHelper.RegisterForTranslation(perfilesToolStripMenuItem, Codes.MNU_GE003);
+
+
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
@@ -54,7 +65,6 @@ namespace ViewLayer
 
         private void bitácoraToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Existe una grilla genérica que provee
             new FrmGenericMain(typeof(LogBLL)).ShowDialog();
         }
 
@@ -63,6 +73,9 @@ namespace ViewLayer
             new FrmGenericMain(typeof(UserBLL)).ShowDialog();
         }
 
-
+        private void perfilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new FrmProfile().ShowDialog();
+        }
     }
 }

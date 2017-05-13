@@ -11,7 +11,7 @@ namespace BusinessLogicLayer
 {
     public class ProfileBLL
     {
-        public ProfileBM GetProfile(string profileId)
+        public ResultBM GetProfile(string profileId)
         {
             List<PermissionDTO> permissions;
             ProfileDAL profileDal = new ProfileDAL();
@@ -66,7 +66,21 @@ namespace BusinessLogicLayer
                 }
             }
             
-            return result;
+            return new ResultBM(ResultBM.Type.OK, "Permiso recuperado.", result);
+        }
+
+        public ResultBM GetProfiles()
+        {
+            ProfileDAL profileDal = new ProfileDAL();
+            List<PermissionDTO> permissionsDto = profileDal.GetProfiles();
+            List<PermissionMDL> permissionBms = new List<PermissionMDL>();
+
+            foreach (PermissionDTO permission in permissionsDto)
+            {
+                permissionBms.Add(new PermissionMDL(permission.fatherCode, permission.code, permission.description));
+            }
+
+            return new ResultBM(ResultBM.Type.OK, "Lista de perfiles recuperada exitosamente", permissionBms);
         }
     }
 }

@@ -44,6 +44,32 @@ namespace DataAccessLayer
             return result;
         }
 
+        /// <summary>
+        /// Devuelve un listado con todos los permisos (no jerarquía)
+        /// </summary>
+        /// <returns></returns>
+        public List<PermissionDTO> GetProfiles()
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+            List<List<String>> reader;
+            List<PermissionDTO> result = new List<PermissionDTO>();
+
+            // Se recupera el árbol de jerarquías utilizando CTE
+            sql = "SELECT null  fatherCode, id, description FROM permission";
+
+            reader = dbsql.executeReader(sql);
+
+            if (reader.Count > 0)
+            {
+                for (int i = 0; i < reader.Count; ++i)
+                {
+                    result.Add(Resolve(reader[i]));
+                }
+            }
+            return result;
+        }
+
         private PermissionDTO Resolve(List<String> item)
         {
             PermissionDTO result = new PermissionDTO();
