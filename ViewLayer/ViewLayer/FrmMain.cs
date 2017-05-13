@@ -54,8 +54,13 @@ namespace ViewLayer
 
         private void bitácoraToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //new FrmGenericMain(typeof(LogBLL), typeof(FrmLogMain)).ShowDialog();
+            //Existe una grilla genérica que provee
             new FrmGenericMain(typeof(LogBLL)).ShowDialog();
+        }
+
+        private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new FrmGenericMain(typeof(UserBLL)).ShowDialog();
         }
 
 

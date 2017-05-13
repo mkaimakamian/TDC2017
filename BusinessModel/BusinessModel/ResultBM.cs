@@ -64,5 +64,14 @@ namespace BusinessModel
         {
             return (T)Convert.ChangeType(this.value, typeof(T));
         }
+
+        /// <summary>
+        /// Devueve el objeto sin obligar el casting.
+        /// </summary>
+        /// <returns></returns>
+        public object GetValue()
+        {
+            return this.value;
+        }
     }
 }

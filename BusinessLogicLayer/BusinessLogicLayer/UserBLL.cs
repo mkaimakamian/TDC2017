@@ -9,8 +9,8 @@ using BusinessModel;
 using Helper;
 
 namespace BusinessLogicLayer
-{    
-    public class UserBLL
+{
+    public class UserBLL : BLEntity
     {
         /// <summary>
         /// Devuelve una instancia del tipo UserMDL con los datos del usuario.
@@ -36,18 +36,18 @@ namespace BusinessLogicLayer
         /// Devuelve el listado de todos los usuarios.
         /// </summary>
         /// <returns></returns>
-        public List<UserBM> GetUsers()
+        public ResultBM GetUsers()
         {
             UserDAL userDal = new UserDAL();
-            List<UserDTO> usersDto = userDal.GetUsers();
-            List<UserBM> result = new List<UserBM>();
+            List<UserDTO> userDtos = userDal.GetUsers();
+            List<UserBM> userBms = new List<UserBM>();
 
-            foreach (UserDTO user in usersDto)
+            foreach (UserDTO user in userDtos)
             {
-                result.Add(new UserBM(user));
+                userBms.Add(new UserBM(user));
             }
 
-            return result;
+            return new ResultBM(ResultBM.Type.OK, "Recuperación de los usuarios exitosa.", userBms);
         }
 
         public bool UpdateUser(UserBM userBm)
@@ -56,7 +56,7 @@ namespace BusinessLogicLayer
             UserDAL userDal = new UserDAL();
             DigitVerificatorBLL dvBll = new DigitVerificatorBLL();
             string digit = dvBll.CreateDigit(userBm);
-            UserDTO userDto = new UserDTO(userBm.id, userBm.name, userBm.active, userBm.languageId, userBm.permissionId, digit);
+            UserDTO userDto = new UserDTO(userBm.Id, userBm.Name, userBm.Active, userBm.LanguageId, userBm.PermissionId, digit);
             bool result = userDal.UpdateUser(userDto);
 
             //Corregir:
@@ -71,9 +71,9 @@ namespace BusinessLogicLayer
         {
             UserDAL userDal = new UserDAL();
             DigitVerificatorBLL dvBll = new DigitVerificatorBLL();
-            userBm.hdv = dvBll.CreateDigit(userBm);
+            userBm.Hdv = dvBll.CreateDigit(userBm);
 
-            UserDTO userDto = new UserDTO(userBm.name, userBm.active, userBm.languageId, userBm.permissionId, userBm.password, userBm.hdv);
+            UserDTO userDto = new UserDTO(userBm.Name, userBm.Active, userBm.LanguageId, userBm.PermissionId, userBm.Password, userBm.Hdv);
             bool updated = userDal.SaveUser(userDto);
 
             if (updated)
@@ -104,8 +104,8 @@ namespace BusinessLogicLayer
         {
             // Se recupera el usuario de la sesión para cambiarle el id, y luego utilizar el objeto para actualizar el dato en la base
             UserBM userBm = SessionHelper.GetLoggedUser();
-            int originalLanguage = userBm.languageId;
-            userBm.languageId = languageId;
+            int originalLanguage = userBm.LanguageId;
+            userBm.LanguageId = languageId;
 
             //Actualización
             bool result = UpdateUser(userBm);
@@ -119,11 +119,16 @@ namespace BusinessLogicLayer
             }
             else
             {
-                userBm.languageId = originalLanguage;
+                userBm.LanguageId = originalLanguage;
                 throw new Exception("El idioma no pudo actualizarse.");
             }
 
             return result;
+        }
+
+        public ResultBM GetCollection()
+        {
+            return this.GetUsers();
         }
     }
 }

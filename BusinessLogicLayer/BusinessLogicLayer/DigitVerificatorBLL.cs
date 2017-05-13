@@ -19,7 +19,10 @@ namespace BusinessLogicLayer
             //TODO - debería soportar varias entidades
             DigitVerificatorDAL dvDal = new DigitVerificatorDAL();
             UserBLL userBll = new UserBLL();
-            List<DigitVeryficator> users = userBll.GetUsers().Cast<DigitVeryficator>().ToList();
+
+            ResultBM usersBms = userBll.GetUsers();
+            List<DigitVeryficator> users = usersBms.GetValue<List<UserBM>>().Cast<DigitVeryficator>().ToList();
+
             string digit = SecurityHelper.Encrypt(GetStringToCheck(users));
 
             DigitVerificatorDTO digitDto = new DigitVerificatorDTO(USER_TABLE, digit);
@@ -66,7 +69,8 @@ namespace BusinessLogicLayer
             List<DigitVerificatorDTO> digits;
 
             UserBLL userBll = new UserBLL();
-            List<DigitVeryficator> users = userBll.GetUsers().Cast<DigitVeryficator>().ToList();
+            ResultBM usersBms = userBll.GetUsers();
+            List<DigitVeryficator> users = usersBms.GetValue<List<UserBM>>().Cast<DigitVeryficator>().ToList();
 
             //TODO - Evaluar la posibilidad de ir a buscar a vdv el listado de entidades, y luego ir  a buscarlas
 

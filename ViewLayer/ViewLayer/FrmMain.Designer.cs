@@ -83,6 +83,7 @@
             this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
             this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.usuariosToolStripMenuItem.Text = "Usuarios";
+            this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
             // 
             // perfilesToolStripMenuItem
             // 
@@ -103,20 +104,20 @@
             // bitácoraToolStripMenuItem
             // 
             this.bitácoraToolStripMenuItem.Name = "bitácoraToolStripMenuItem";
-            this.bitácoraToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.bitácoraToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.bitácoraToolStripMenuItem.Text = "Bitácora";
             this.bitácoraToolStripMenuItem.Click += new System.EventHandler(this.bitácoraToolStripMenuItem_Click);
             // 
             // respaldoToolStripMenuItem
             // 
             this.respaldoToolStripMenuItem.Name = "respaldoToolStripMenuItem";
-            this.respaldoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.respaldoToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.respaldoToolStripMenuItem.Text = "Respaldo";
             // 
             // integridadToolStripMenuItem
             // 
             this.integridadToolStripMenuItem.Name = "integridadToolStripMenuItem";
-            this.integridadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.integridadToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.integridadToolStripMenuItem.Text = "Integridad";
             // 
             // FrmMain

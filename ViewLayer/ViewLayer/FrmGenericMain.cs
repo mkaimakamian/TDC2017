@@ -30,6 +30,10 @@ namespace ViewLayer
             this.viewer = viewer;
         }
 
+        /// <summary>
+        /// Instancia un formulario / grilla y muestra los datos provistos por el tipo de entidad de negocio pasado por parámetro.
+        /// </summary>
+        /// <param name="entity"></param>
         public FrmGenericMain(Type entity)
         {
             InitializeComponent();
@@ -44,7 +48,7 @@ namespace ViewLayer
                 ResultBM result = ((BLEntity) businessLogic).GetCollection();
                 if (result.IsValid())
                 {
-                    dgView.DataSource = result.GetValue<List<LogBM>>();
+                    dgView.DataSource = result.GetValue<List<UserBM>>();
 
                     SessionHelper.RegisterForTranslation(cmdNew, Codes.BTN_NEW);
                     SessionHelper.RegisterForTranslation(cmdEdit, Codes.BTN_EDIT);

@@ -54,10 +54,10 @@ namespace BusinessLogicLayer
                             if (result.IsValid())
                             {
                                 //4. Recuperación de idioma
-                                languageBm = languageBll.GetLanguage(userBm.languageId);
+                                languageBm = languageBll.GetLanguage(userBm.LanguageId);
 
                                 //5. Recuperación de permisos
-                                profileMdl = profileBll.GetProfile(userBm.permissionId);
+                                profileMdl = profileBll.GetProfile(userBm.PermissionId);
 
                                 //6. Armado de sesión
                                 SessionHelper.StartSession(userBm, profileMdl, languageBm);

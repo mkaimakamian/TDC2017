@@ -9,13 +9,13 @@ namespace BusinessModel
 {
     public class UserBM: DigitVeryficator
     {
-        public int id;
-        public string name;
-        public string password;
-        public bool active;
-        public int languageId; //debería ser el objeto?
-        public string permissionId; //debería ser objeto?
-        public string hdv; //dígito verificador
+        private int id;
+        private string name;
+        private string password;
+        private bool active;
+        private int languageId; //debería ser el objeto?
+        private string permissionId; //debería ser objeto?
+        private string hdv; //dígito verificador
 
         public UserBM(UserDTO userDto)
         {
@@ -46,7 +46,50 @@ namespace BusinessModel
 
         public string GetDigit()
         {
-            return this.hdv;
+            return this.Hdv;
+        }
+
+
+        public int Id
+        {
+            get { return this.id; }
+            set { this.id = value; }
+        }
+
+        public string Name
+        {
+            get { return this.name; }
+            set { this.name = value; }
+        }
+
+        public string Password
+        {
+            get { return this.password; }
+            set { this.password = value; }
+        }
+
+        public bool Active
+        {
+            get { return this.active; }
+            set { this.active = value; }
+        }
+
+        public int LanguageId
+        {
+            get { return this.languageId; }
+            set { this.languageId = value; }
+        }
+
+        public string PermissionId
+        {
+            get { return this.permissionId; }
+            set { this.permissionId = value; }
+        }
+
+        public string Hdv
+        {
+            get { return this.hdv; }
+            set { this.hdv = value; }
         }
     }
 }
