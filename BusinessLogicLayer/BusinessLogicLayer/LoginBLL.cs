@@ -46,12 +46,12 @@ namespace BusinessLogicLayer
                         //3.1 Chequeo de consistencia horizontal
                         result = dvBll.IsHorizontallyConsistent(userBm);
 
-                        if (true)
+                        if (result.IsValid())
                         {
                             //3.2 Chequeo de vertical
                             result = dvBll.IsVerticallyConsistent();
 
-                            if (true)
+                            if (result.IsValid())
                             {
                                 //4. Recuperación de idioma
                                 languageBm = languageBll.GetLanguage(userBm.languageId);
@@ -61,7 +61,6 @@ namespace BusinessLogicLayer
 
                                 //6. Armado de sesión
                                 SessionHelper.StartSession(userBm, profileMdl, languageBm);
-
                                 result = new ResultBM(ResultBM.Type.OK, "Inicio de sesión exitoso para el usuario " + user);
                             }
                         }

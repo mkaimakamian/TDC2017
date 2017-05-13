@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer;
 using BusinessModel;
+using Helper;
 
 namespace BusinessLogicLayer
 {
@@ -33,6 +34,8 @@ namespace BusinessLogicLayer
 
             if (success)
             {
+                //TODO - REDIRIGIR AL LOGUEO.
+                SessionHelper.EndSession();
                 return new ResultBM(ResultBM.Type.OK, "Restore de " + fullBackupPath + " exitoso.");
             }
             else

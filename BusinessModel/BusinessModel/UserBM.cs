@@ -11,7 +11,7 @@ namespace BusinessModel
     {
         public int id;
         public string name;
-        private string password;
+        public string password;
         public bool active;
         public int languageId; //debería ser el objeto?
         public string permissionId; //debería ser objeto?
@@ -26,6 +26,17 @@ namespace BusinessModel
             this.permissionId = userDto.permissionId;
             this.password = userDto.password;
             this.hdv = userDto.hdv;
+        }
+
+        public UserBM(string name, bool active, int languageId, string permissionId, string password)
+        {
+            //this.id = id;
+            this.name = name;
+            this.active = active;
+            this.languageId = languageId;
+            this.permissionId = permissionId;
+            this.password = password;
+            //this.hdv = hdv;
         }
 
         public string GetSeed()

@@ -49,6 +49,23 @@ namespace DataAccessLayer
 
             return result;
         }
+
+        public bool SaveUser(UserDTO userDto)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "INSERT INTO users (name, password, active, languageId, permissionId, hvd) VALUES (";
+            sql += "'" + userDto.name + "', " ;
+            sql += "'" + userDto.password + "', ";
+            sql += "'" +userDto.active + "', ";
+            sql += userDto.languageId + ", ";
+            sql += "'" + userDto.permissionId + "', ";
+            sql += "'" + userDto.hdv + "'";
+            sql += ")";
+            userDto.id = dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
         
         public bool UpdateUser(UserDTO userDto)
         {

@@ -10,7 +10,7 @@ namespace DataAccessLayer
     public class DBSql
     {
     
-        private string connStr = "Data Source=.\\UAI_EXPRESS; Initial Catalog=CAMPOI; Integrated Security=True";
+        private string connStr = "Data Source=.\\SQL_UAI; Initial Catalog=CAMPOI; Integrated Security=True";
 
         public int ExecuteNonQuery(string sql)
         {

@@ -14,6 +14,14 @@ namespace BusinessLogicLayer
     {
         const string USER_TABLE = "users";
 
+        public ResultBM UpdateVerticallDigit()
+        {
+            UserBLL userBll = new UserBLL();
+            List<DigitVeryficator> users = userBll.GetUsers().Cast<DigitVeryficator>().ToList();
+            string digit = GetStringToCheck(users);
+        }
+
+
         /// <summary>
         /// Devuelve true si la consistencia de los datos propios de la entidad, se mantienen (horizontal)
         /// </summary>

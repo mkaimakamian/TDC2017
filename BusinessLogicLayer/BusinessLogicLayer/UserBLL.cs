@@ -62,6 +62,25 @@ namespace BusinessLogicLayer
             return result;
         }
 
+        public ResultBM CreateUser(UserBM userBm)
+        {
+            UserDAL userDal = new UserDAL();
+            DigitVerificatorBLL dvBll = new DigitVerificatorBLL();
+            userBm.hdv = dvBll.CreateDigit(userBm);
+
+            UserDTO userDto = new UserDTO(userBm.name, userBm.active, userBm.languageId, userBm.permissionId, userBm.password, userBm.hdv);
+            bool operation = userDal.SaveUser(userDto);
+
+            if (operation)
+            {
+                return new ResultBM(ResultBM.Type.OK, "Usuario creado: " + userDto.name, userBm); 
+            }
+            else
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "El usuario no pudo crearse.");
+            }
+        }
+
         /// <summary>
         /// Actualiza el idioma del usuario en sesión, según el id del idioma pasado por parámetro.
         /// </summary>
@@ -83,8 +102,6 @@ namespace BusinessLogicLayer
                 LanguageBLL languageBll = new LanguageBLL();
                 LanguageBM languageBm = languageBll.GetLanguage(languageId);
 
-                //TODO - El idioma y las traducciones deberían ser competencia del business model del usuario
-                SessionHelper.SetLanguage(languageBm);
             }
             else
             {

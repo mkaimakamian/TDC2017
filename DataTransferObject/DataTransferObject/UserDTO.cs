@@ -39,5 +39,16 @@ namespace DataTransferObject
             this.permissionId = permissionid;
             this.hdv = hdv;
         }
+
+        // Usada por el crear usuario
+        public UserDTO(string name, bool active, int languageId, string permissionid, string password, string hdv)
+        {
+            this.name = name;
+            this.active = active;
+            this.languageId = languageId;
+            this.permissionId = permissionid;
+            this.password = password;
+            this.hdv = hdv;
+        }
     }
 }
