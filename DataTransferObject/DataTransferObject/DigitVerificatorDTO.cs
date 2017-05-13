@@ -10,5 +10,15 @@ namespace DataTransferObject
     {
         public string entity;
         public string vdv;
+
+        public DigitVerificatorDTO()
+        {
+        }
+
+        public DigitVerificatorDTO(string entity, string vdv)
+        {
+            this.entity = entity;
+            this.vdv = vdv;
+        }
     }
 }

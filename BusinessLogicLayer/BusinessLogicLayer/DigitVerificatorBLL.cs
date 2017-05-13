@@ -16,9 +16,23 @@ namespace BusinessLogicLayer
 
         public ResultBM UpdateVerticallDigit()
         {
+            //TODO - debería soportar varias entidades
+            DigitVerificatorDAL dvDal = new DigitVerificatorDAL();
             UserBLL userBll = new UserBLL();
             List<DigitVeryficator> users = userBll.GetUsers().Cast<DigitVeryficator>().ToList();
-            string digit = GetStringToCheck(users);
+            string digit = SecurityHelper.Encrypt(GetStringToCheck(users));
+
+            DigitVerificatorDTO digitDto = new DigitVerificatorDTO(USER_TABLE, digit);
+            bool result = dvDal.UpdateEntityDigit(digitDto);
+
+            if (result)
+            {
+                return new ResultBM(ResultBM.Type.OK, "Dígito verificador vertical actualizado."); 
+            }
+            else
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "No se pudo actualizar el dígito verificador vertical.");
+            }
         }
 
 

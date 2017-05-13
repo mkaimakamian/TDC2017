@@ -31,6 +31,17 @@ namespace DataAccessLayer
             return result;
         }
 
+        public bool UpdateEntityDigit(DigitVerificatorDTO digitDto)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "UPDATE vdv SET vdv = '" + digitDto.vdv + "' WHERE entity = '" + digitDto.entity +"'";
+            dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
+
+
         private DigitVerificatorDTO Resolve(List<String> item)
         {
             DigitVerificatorDTO result = new DigitVerificatorDTO();

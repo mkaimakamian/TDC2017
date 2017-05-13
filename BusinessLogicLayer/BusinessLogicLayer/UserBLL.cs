@@ -53,12 +53,17 @@ namespace BusinessLogicLayer
         public bool UpdateUser(UserBM userBm)
         {
             //TODO - Devolver resultBM
-            DigitVerificatorBLL dvBll = new DigitVerificatorBLL();
             UserDAL userDal = new UserDAL();
-            
+            DigitVerificatorBLL dvBll = new DigitVerificatorBLL();
             string digit = dvBll.CreateDigit(userBm);
             UserDTO userDto = new UserDTO(userBm.id, userBm.name, userBm.active, userBm.languageId, userBm.permissionId, digit);
             bool result = userDal.UpdateUser(userDto);
+
+            //Corregir:
+            dvBll.UpdateVerticallDigit();
+
+
+
             return result;
         }
 
@@ -69,11 +74,20 @@ namespace BusinessLogicLayer
             userBm.hdv = dvBll.CreateDigit(userBm);
 
             UserDTO userDto = new UserDTO(userBm.name, userBm.active, userBm.languageId, userBm.permissionId, userBm.password, userBm.hdv);
-            bool operation = userDal.SaveUser(userDto);
+            bool updated = userDal.SaveUser(userDto);
 
-            if (operation)
+            if (updated)
             {
-                return new ResultBM(ResultBM.Type.OK, "Usuario creado: " + userDto.name, userBm); 
+                ResultBM result = dvBll.UpdateVerticallDigit();
+                if (result.IsValid())
+                {
+                    return new ResultBM(ResultBM.Type.OK, "Usuario creado: " + userDto.name, userBm);
+                }
+                else
+                {
+                    return new ResultBM(ResultBM.Type.EXCEPTION, "El usuario se creó pero el dígito verificador vertical, no.");
+                }
+                
             }
             else
             {
@@ -101,7 +115,7 @@ namespace BusinessLogicLayer
                 //Quizá debería manejarme con el modelo de lenguage
                 LanguageBLL languageBll = new LanguageBLL();
                 LanguageBM languageBm = languageBll.GetLanguage(languageId);
-
+                SessionHelper.SetLanguage(languageBm);
             }
             else
             {
