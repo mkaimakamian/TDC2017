@@ -54,7 +54,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(597, 269);
+            this.button1.Location = new System.Drawing.Point(225, 416);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
@@ -64,9 +64,9 @@
             // treeProfile
             // 
             this.treeProfile.CheckBoxes = true;
-            this.treeProfile.Location = new System.Drawing.Point(225, 298);
+            this.treeProfile.Location = new System.Drawing.Point(544, 77);
             this.treeProfile.Name = "treeProfile";
-            this.treeProfile.Size = new System.Drawing.Size(313, 96);
+            this.treeProfile.Size = new System.Drawing.Size(313, 215);
             this.treeProfile.TabIndex = 4;
             // 
             // txtDescription
@@ -80,7 +80,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(711, 498);
+            this.ClientSize = new System.Drawing.Size(925, 593);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.treeProfile);
             this.Controls.Add(this.button1);

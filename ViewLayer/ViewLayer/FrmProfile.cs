@@ -25,12 +25,12 @@ namespace ViewLayer
         {
             try
             {
-                // Se recuperan los permisos y se llena la lista de prmisos
+                // Se recuperan los permisos y se llena la lista
                 ProfileBLL profileBll = new ProfileBLL();
                 ResultBM result = profileBll.GetProfiles();
+                
                 if (result.IsValid())
                 {
-                    
                     chkListProfile.DataSource = result.GetValue<List<PermissionMDL>>();
                     chkListProfile.DisplayMember = "description";
                 }
@@ -38,7 +38,7 @@ namespace ViewLayer
                     MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
-                //Se crea un nodo padre para mantener ordenado el árbol de permisos a agregar
+                //Se crea un nodo padre para mantener ordenado el árbol de permisos que el usuario dará de alta
                 root_profile = new PermissionsMDL(null, "CODE", "descripcion");
             }
             catch (Exception exception)
@@ -49,12 +49,13 @@ namespace ViewLayer
 
         private void chkListProfile_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Al clickear, muestra en el tree de descripción todos los permisos dependientes del seleccionado
+            //Muestra la composición jerárquica del permiso seleccionado
             try
             {
                 ProfileBM result = GetPermissionHierarchy(sender);
                 treeDescription.Nodes.Clear();
-                PopulateTree(treeDescription, result); 
+                PopulateTree(treeDescription, result);
+                treeDescription.ExpandAll();
             }
             catch (Exception exception)
             {
@@ -71,18 +72,19 @@ namespace ViewLayer
 
                 if (e.NewValue == CheckState.Checked)
                 {
-                    //Agrega a la lista de elegidos, los permisos seleccionados del listado
+                    //Agrega a la lista de elegidos, los permisos seleccionados del listado de permisos disponibles
                     ProfileBM result = GetPermissionHierarchy(sender);
                     root_profile.AddPermission(result);                                        
                 }
                 else
                 {
-                    //Elimina del listado de permisos elegidos
+                    //Elimina del listado de permisos a agregar, aquel que coincida con el código
                     ProfileBM selection = (ProfileBM)((CheckedListBox)sender).SelectedItem;
                     root_profile.DeletePermission(selection.code);
                 }
 
                 PopulateTree(treeProfile, root_profile);
+                treeProfile.ExpandAll();
 
             }
             catch (Exception exception)
