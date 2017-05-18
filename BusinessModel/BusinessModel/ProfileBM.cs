@@ -12,6 +12,7 @@ namespace BusinessModel
         public string code;
         private string description;
 
+        public abstract bool AddPermissionSorted(ProfileBM permission);
         public abstract bool AddPermission(ProfileBM permission);
         public abstract void DeletePermission(string code);
         public abstract ProfileBM GetPermission(string code);
@@ -40,7 +41,7 @@ namespace BusinessModel
             this.Description = description;
         }
 
-        public override bool AddPermission(ProfileBM permission)
+        public override bool AddPermissionSorted(ProfileBM permission)
         {
             //Responsabilidad del padre
             throw new NotImplementedException();
@@ -71,6 +72,11 @@ namespace BusinessModel
         {
             throw new NotImplementedException();
         }
+
+        public override bool AddPermission(ProfileBM permission)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <summary>
@@ -93,7 +99,7 @@ namespace BusinessModel
         /// Considerar el root como punto de partida para agregar un elemento, garantiza que todo el árbol es recorrido.
         /// </summary>
         /// <param name="permission"></param>
-        public override bool AddPermission(ProfileBM permission)
+        public override bool AddPermissionSorted(ProfileBM permission)
         {
             //La estrategia es simple: si el objeto es padre del permiso, se agrega directamente; en caso contrario, se busca recursivamente 
             //un hijo que aplique como padre. Si el hijo que aplica no es padre, se procede a la conversión del mismo.
@@ -108,7 +114,7 @@ namespace BusinessModel
                 {
                     if (profile.IsFather())
                     {
-                        if (profile.AddPermission(permission))
+                        if (profile.AddPermissionSorted(permission))
                         {
                             return true;
                         }
@@ -116,7 +122,7 @@ namespace BusinessModel
                     } else if (profile.code == permission.fatherCode) {
                         //El hijo que no es padre debe convertirse en padre.
                         PermissionsMDL newFather = new PermissionsMDL(profile.fatherCode, profile.code, profile.Description);
-                        newFather.AddPermission(permission);
+                        newFather.AddPermissionSorted(permission);
                         this.permissions.Remove(profile);
                         this.permissions.Add(newFather);
                         return true;
@@ -125,6 +131,12 @@ namespace BusinessModel
             }
 
             return false;
+        }
+
+        public override bool AddPermission(ProfileBM permission)
+        {
+            permission.fatherCode = this.code;
+            return this.AddPermissionSorted(permission);
         }
 
         /// <summary>
@@ -181,5 +193,6 @@ namespace BusinessModel
         {
             return this.permissions;
         }
+       
     }
 }

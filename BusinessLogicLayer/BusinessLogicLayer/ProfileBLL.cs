@@ -55,7 +55,7 @@ namespace BusinessLogicLayer
                         code = permissions[i].code;
                         description = permissions[i].description;
 
-                        if (result.AddPermission(new PermissionMDL(fatherCode, code, description)))
+                        if (result.AddPermissionSorted(new PermissionMDL(fatherCode, code, description)))
                         {
                             permissions.RemoveAt(i);
                         }
