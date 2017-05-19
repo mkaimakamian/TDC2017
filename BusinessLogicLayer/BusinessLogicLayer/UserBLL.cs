@@ -128,9 +128,46 @@ namespace BusinessLogicLayer
             return result;
         }
 
+        public ResultBM DeleteUser(int userId)
+        {
+            try
+            {
+                DigitVerificatorBLL dvBll = new DigitVerificatorBLL();
+                UserDAL userDal = new UserDAL();
+                bool isDeleted = userDal.DeleteUser(userId);
+
+                if (isDeleted)
+                {
+                    ResultBM result = dvBll.UpdateVerticallDigit();
+                    if (result.IsValid())
+                    {
+                        return new ResultBM(ResultBM.Type.OK, "Usuario con id " + userId + " ha sido eliminado satisfactoriamente.");
+                    }
+                    else
+                    {
+                        return new ResultBM(ResultBM.Type.FAIL, "Error al generar el registro de integridad para la entidad users.");
+                    }
+                }
+                else
+                {
+                    return new ResultBM(ResultBM.Type.FAIL, "Error al borrar al usuario con id " + userId);
+                }                
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido una excepción al intentar borrar al usuario con id " + userId + ". " + exception.Message);
+            }
+        }
+
         public ResultBM GetCollection()
         {
-            return this.GetUsers();
+            return GetUsers();
+        }
+
+
+        public ResultBM Delete(object entity)
+        {
+            return DeleteUser(((UserBM)entity).Id);
         }
     }
 }

@@ -84,5 +84,11 @@ namespace BusinessLogicLayer
         {
             return this.GetLanguages();
         }
+
+
+        public ResultBM Delete(object entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

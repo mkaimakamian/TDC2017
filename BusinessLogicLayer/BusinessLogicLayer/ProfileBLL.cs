@@ -115,5 +115,11 @@ namespace BusinessLogicLayer
         {
             return this.GetProfiles();
         }
+
+
+        public ResultBM Delete(object entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

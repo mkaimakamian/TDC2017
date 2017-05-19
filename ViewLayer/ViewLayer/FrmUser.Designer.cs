@@ -37,7 +37,8 @@
             this.lblPasswordConfirm = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
-            this.acceptCancel1 = new ViewLayer.AcceptCancel();
+            this.cmdClose = new System.Windows.Forms.Button();
+            this.cmdAccept = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblLanguage
@@ -81,7 +82,7 @@
             // chkIsActive
             // 
             this.chkIsActive.AutoSize = true;
-            this.chkIsActive.Location = new System.Drawing.Point(219, 149);
+            this.chkIsActive.Location = new System.Drawing.Point(142, 152);
             this.chkIsActive.Name = "chkIsActive";
             this.chkIsActive.Size = new System.Drawing.Size(62, 17);
             this.chkIsActive.TabIndex = 12;
@@ -115,20 +116,33 @@
             this.lblName.TabIndex = 9;
             this.lblName.Text = "name";
             // 
-            // acceptCancel1
+            // cmdClose
             // 
-            this.acceptCancel1.Location = new System.Drawing.Point(64, 350);
-            this.acceptCancel1.Name = "acceptCancel1";
-            this.acceptCancel1.Size = new System.Drawing.Size(157, 24);
-            this.acceptCancel1.TabIndex = 18;
-            this.acceptCancel1.ClickAccept += new System.EventHandler(this.acceptCancel1_ClickAccept);
+            this.cmdClose.Location = new System.Drawing.Point(12, 233);
+            this.cmdClose.Name = "cmdClose";
+            this.cmdClose.Size = new System.Drawing.Size(75, 23);
+            this.cmdClose.TabIndex = 18;
+            this.cmdClose.Text = "button1";
+            this.cmdClose.UseVisualStyleBackColor = true;
+            this.cmdClose.Click += new System.EventHandler(this.cmdClose_Click);
+            // 
+            // cmdAccept
+            // 
+            this.cmdAccept.Location = new System.Drawing.Point(203, 233);
+            this.cmdAccept.Name = "cmdAccept";
+            this.cmdAccept.Size = new System.Drawing.Size(75, 23);
+            this.cmdAccept.TabIndex = 19;
+            this.cmdAccept.Text = "button2";
+            this.cmdAccept.UseVisualStyleBackColor = true;
+            this.cmdAccept.Click += new System.EventHandler(this.cmdAccept_Click);
             // 
             // FrmUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(854, 445);
-            this.Controls.Add(this.acceptCancel1);
+            this.ClientSize = new System.Drawing.Size(290, 263);
+            this.Controls.Add(this.cmdAccept);
+            this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.lblLanguage);
             this.Controls.Add(this.txtPasswordCheck);
             this.Controls.Add(this.txtPassword);
@@ -138,7 +152,9 @@
             this.Controls.Add(this.lblPasswordConfirm);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblName);
+            this.MaximizeBox = false;
             this.Name = "FrmUser";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmUsers";
             this.Load += new System.EventHandler(this.FrmUser_Load);
             this.ResumeLayout(false);
@@ -157,6 +173,7 @@
         private System.Windows.Forms.Label lblPasswordConfirm;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Label lblName;
-        private AcceptCancel acceptCancel1;
+        private System.Windows.Forms.Button cmdClose;
+        private System.Windows.Forms.Button cmdAccept;
     }
 }

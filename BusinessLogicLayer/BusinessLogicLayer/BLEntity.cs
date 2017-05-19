@@ -10,5 +10,6 @@ namespace BusinessLogicLayer
     public interface BLEntity
     {
         ResultBM GetCollection();
+        ResultBM Delete(object entity);
     }
 }

@@ -26,7 +26,10 @@ namespace ViewLayer
         public FrmGenericMain(Type entity, Type viewer)
         {
             InitializeComponent();
+            // Entidad sobre la que se opera
             this.entity = entity;
+
+            // Formulario a llamar en caso de creación o edición
             this.viewer = viewer;
         }
 
@@ -42,18 +45,29 @@ namespace ViewLayer
 
         private void FrmGenericMain_Load(object sender, EventArgs e)
         {
+            SessionHelper.RegisterForTranslation(cmdNew, Codes.BTN_NEW);
+            SessionHelper.RegisterForTranslation(cmdEdit, Codes.BTN_EDIT);
+            SessionHelper.RegisterForTranslation(cmdDelete, Codes.BTN_DELETE);
+            SessionHelper.RegisterForTranslation(cmdClose, Codes.BTN_CLOSE);
+            LoadDatagrid();
+            AdjustSizes();
+        }
+
+        private void cmdNew_Click(object sender, EventArgs e)
+        {
+            ((Form)Activator.CreateInstance(this.viewer)).ShowDialog();
+            LoadDatagrid();
+        }
+
+        private void LoadDatagrid()
+        {            
             object businessLogic = Activator.CreateInstance(this.entity);
             try
             {
-                ResultBM result = ((BLEntity) businessLogic).GetCollection();
+                ResultBM result = ((BLEntity)businessLogic).GetCollection();
                 if (result.IsValid())
                 {
                     dgView.DataSource = result.GetValue();
-
-                    SessionHelper.RegisterForTranslation(cmdNew, Codes.BTN_NEW);
-                    SessionHelper.RegisterForTranslation(cmdEdit, Codes.BTN_EDIT);
-                    SessionHelper.RegisterForTranslation(cmdDelete, Codes.BTN_DELETE);
-                    SessionHelper.RegisterForTranslation(cmdClose, Codes.BTN_CLOSE);
                 }
                 else
                 {
@@ -63,17 +77,76 @@ namespace ViewLayer
             catch (Exception exception)
             {
                 MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }           
+            }  
         }
 
-        private void cmdNew_Click(object sender, EventArgs e)
-        {
-            ((Form)Activator.CreateInstance(this.viewer)).ShowDialog();
-        }
 
         private void cmdClose_Click(object sender, EventArgs e)
         {
             Close();
         }
+
+        private void cmdEdit_Click(object sender, EventArgs e)
+        {
+            Form viewForm = (Form)Activator.CreateInstance(this.viewer);
+            System.Reflection.PropertyInfo currentElement = viewForm.GetType().GetProperty("CurrentElement");
+            currentElement.SetValue(viewForm, dgView.SelectedRows[0].DataBoundItem);
+            viewForm.ShowDialog();
+            LoadDatagrid();
+        }
+
+        private void cmdDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult answer = MessageBox.Show(
+                    "¿Está seguro de querer eliminar el registro seleccionado?", "Eliminar", 
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question
+                    );
+
+                if (answer == DialogResult.Yes)
+                {
+                    object businessLogic = Activator.CreateInstance(this.entity);
+                    ResultBM result = ((BLEntity)businessLogic).Delete(dgView.SelectedRows[0].DataBoundItem);
+                    if (result.IsValid())
+                    {
+                        LoadDatagrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show(result.description, "Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void FrmGenericMain_Resize(object sender, EventArgs e)
+        {
+            this.AdjustSizes();
+        }
+
+        private void AdjustSizes()
+        {
+            dgView.Height = this.Height - 45;
+            dgView.Width = this.Width - 115;
+
+            cmdClose.Left = this.Width - cmdClose.Width - 30;
+            cmdClose.Top = this.Height - cmdClose.Height - 45;
+
+            cmdDelete.Left = this.Width - cmdDelete.Width - 30;
+            cmdDelete.Top = cmdClose.Top - cmdDelete.Height - 5;
+
+            cmdEdit.Left = this.Width - cmdEdit.Width - 30;
+            cmdEdit.Top = cmdDelete.Top - cmdEdit.Height - 5;
+
+            cmdNew.Left = this.Width - cmdNew.Width - 30;
+            cmdNew.Top = cmdEdit.Top - cmdNew.Height - 5;
+        }
+
     }
 }

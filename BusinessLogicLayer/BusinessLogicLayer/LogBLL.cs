@@ -90,5 +90,11 @@ namespace BusinessLogicLayer
         {
             return this.GetLogs();
         }
+
+
+        public ResultBM Delete(object entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

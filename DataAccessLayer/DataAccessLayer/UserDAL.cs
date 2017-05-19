@@ -102,6 +102,15 @@ namespace DataAccessLayer
             return true;
         }
 
+        public bool DeleteUser(int userId)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+            sql = "DELETE FROM users WHERE id = " + userId;
+            dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
+
 
         private UserDTO Resolve(List<String> item) 
         {
