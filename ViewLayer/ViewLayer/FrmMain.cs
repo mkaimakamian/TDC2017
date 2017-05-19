@@ -32,15 +32,31 @@ namespace ViewLayer
             //Seguridad
             seguridadToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE002);
             SessionHelper.RegisterForTranslation(seguridadToolStripMenuItem, Codes.MNU_GE002);
-            
+
+            //Seguridad > Usuarios
+            usuariosToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE003);
+            SessionHelper.RegisterForTranslation(usuariosToolStripMenuItem, Codes.MNU_GE003);
+
+
             //Seguridad > Perfiles
-            perfilesToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE003);
-            SessionHelper.RegisterForTranslation(perfilesToolStripMenuItem, Codes.MNU_GE003);
+            perfilesToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE004);
+            SessionHelper.RegisterForTranslation(perfilesToolStripMenuItem, Codes.MNU_GE004);
 
             //Mantenimiento
-            mantenimientoToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE017);
-            SessionHelper.RegisterForTranslation(mantenimientoToolStripMenuItem, Codes.MNU_GE017);
+            mantenimientoToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE005);
+            SessionHelper.RegisterForTranslation(mantenimientoToolStripMenuItem, Codes.MNU_GE005);
 
+            //Mantenimiento > Bitácora
+            bitácoraToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.OP010);
+            SessionHelper.RegisterForTranslation(bitácoraToolStripMenuItem, Codes.MNU_OP010);
+
+            //Mantenimiento > Respaldo
+            respaldoToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE006);
+            SessionHelper.RegisterForTranslation(respaldoToolStripMenuItem, Codes.MNU_GE006);
+
+            //Mantenimiento > Integridad
+            integridadToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE007);
+            SessionHelper.RegisterForTranslation(integridadToolStripMenuItem, Codes.MNU_GE007);
 
         }
 
@@ -74,7 +90,7 @@ namespace ViewLayer
 
         private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new FrmGenericMain(typeof(UserBLL)).ShowDialog();
+            new FrmGenericMain(typeof(UserBLL), typeof(FrmUser)).ShowDialog();
         }
 
         private void perfilesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -83,6 +99,16 @@ namespace ViewLayer
         }
 
         private void mantenimientoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void respaldoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void integridadToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

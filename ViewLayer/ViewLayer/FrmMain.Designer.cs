@@ -115,12 +115,14 @@
             this.respaldoToolStripMenuItem.Name = "respaldoToolStripMenuItem";
             this.respaldoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.respaldoToolStripMenuItem.Text = "Respaldo";
+            this.respaldoToolStripMenuItem.Click += new System.EventHandler(this.respaldoToolStripMenuItem_Click);
             // 
             // integridadToolStripMenuItem
             // 
             this.integridadToolStripMenuItem.Name = "integridadToolStripMenuItem";
             this.integridadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.integridadToolStripMenuItem.Text = "Integridad";
+            this.integridadToolStripMenuItem.Click += new System.EventHandler(this.integridadToolStripMenuItem_Click);
             // 
             // FrmMain
             // 

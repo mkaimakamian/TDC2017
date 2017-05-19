@@ -10,11 +10,12 @@ namespace ViewLayer
     {
         public const string GE001 = "GE001"; //Herramientas
         public const string GE002 = "GE002"; //Seguridad
-        public const string GE003 = "GE003"; //Perfiles
-        public const string GE004 = "GE004"; //Depósito
-        public const string GE005 = "GE005"; //Centro de recepción
-        public const string GE006 = "GE006"; //Colaborador
-        public const string GE007 = "GE007"; //Grupos de trabajo
+        public const string GE003 = "GE003"; //Mantenimiento
+        public const string GE004 = "GE004"; //Perfiles
+        public const string GE005 = "GE005"; //Mantenimiento
+        public const string GE006 = "GE006"; //Respaldo
+        public const string GE007 = "GE007"; //Integridad
+
         public const string GE008 = "GE008"; //Vehículo
         public const string GE009 = "GE009"; //Destinatarios
         public const string GE010 = "GE010"; //Tipo de ítem
@@ -24,9 +25,18 @@ namespace ViewLayer
         public const string GE014 = "GE014"; //Hojas de ruta
         public const string GE015 = "GE015"; //Retiros
         public const string GE016 = "GE016"; //Órdenes de salida
-        public const string GE017 = "GE017"; //Mantenimiento
+        
 
         public const string OP001 = "OP001"; //Cambiar idioma
+
+        public const string OP010 = "OP010"; // Listar bitácora
+        public const string OP011 = "OP011"; // Copia de respaldo
+        public const string OP012 = "OP012"; // Cargar copia de respaldo
+        public const string OP013 = "OP013"; // Check horizontal
+        public const string OP014 = "OP014"; // Check vertical
+        
+        
+        
         public const string OP002 = "OP002";
         public const string OP003 = "OP003";
         public const string OP004 = "OP004";
@@ -35,11 +45,8 @@ namespace ViewLayer
         public const string OP007 = "OP007";
         public const string OP008 = "OP008";
         public const string OP009 = "OP009";
-        public const string OP0010 = "OP0010";
-        public const string OP011 = "OP011";
-        public const string OP012 = "OP012";
-        public const string OP013 = "OP013";
-        public const string OP014 = "OP014";
+        
+        
         public const string OP015 = "OP015";
         public const string OP016 = "OP016";
         public const string OP017 = "OP017";
@@ -105,11 +112,22 @@ namespace ViewLayer
 
         public const string MNU_GE001 = "MNU_GE001"; //Menú herramientas
         public const string MNU_GE002 = "MNU_GE002"; //Seguridad
-        public const string MNU_GE003 = "MNU_GE003"; //Perfiles
-        public const string MNU_GE004 = "MNU_GE004"; //Depósito
-        public const string MNU_GE005 = "MNU_GE005"; //Centro de recepción
-        public const string MNU_GE006 = "MNU_GE006"; //Colaborador
-        public const string MNU_GE007 = "MNU_GE007"; //Grupos de trabajo
+        public const string MNU_GE003 = "MNU_GE003"; //Usuario
+        public const string MNU_GE004 = "MNU_GE004"; //Perfiles
+        
+        public const string MNU_GE005 = "MNU_GE005"; //Mantenimiento
+        public const string MNU_OP010 = "MNU_OP010"; //Bitacora
+        public const string MNU_OP011 = "MNU_OP011"; //Crear respaldo
+        public const string MNU_OP012 = "MNU_OP012"; //Cargar respaldo
+        public const string MNU_OP013 = "MNU_OP013"; //Verificar horizontal
+        public const string MNU_OP014 = "MNU_OP014"; //Verificar vertical
+
+
+        public const string MNU_GE006 = "MNU_GE006"; //Respaldo
+
+        public const string MNU_GE007 = "MNU_GE007"; //Integridad
+        
+        
         public const string MNU_GE008 = "MNU_GE008"; //Vehículo
         public const string MNU_GE009 = "MNU_GE009"; //Destinatarios
         public const string MNU_GE010 = "MNU_GE010"; //Tipo de ítem
@@ -118,8 +136,7 @@ namespace ViewLayer
         public const string MNU_GE013 = "MNU_GE013"; //Donaciones
         public const string MNU_GE014 = "MNU_GE014"; //Hojas de ruta
         public const string MNU_GE015 = "MNU_GE015"; //Retiros
-        public const string MNU_GE016 = "MNU_GE016"; //Órdenes de salida
-        public const string MNU_GE017 = "MNU_GE017"; //Mantenimiento
+        public const string MNU_GE016 = "MNU_GE016"; //Órdenes de salida        
         
                 
         public const string MNU_OP001 = "MNU_OP001"; //Cambiar idioma
