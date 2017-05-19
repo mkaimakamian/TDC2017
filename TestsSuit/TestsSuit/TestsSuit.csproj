@@ -54,6 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BackupTest.cs" />
     <Compile Include="LogTest.cs" />
+    <Compile Include="ProfileTest.cs" />
     <Compile Include="UserTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,7 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Documentation\backup.xls" />
-    <None Include="Documentation\datos.bacpac" />
     <None Include="Documentation\donaciones 4V.docx" />
     <None Include="Documentation\rhoddion20.eap" />
   </ItemGroup>

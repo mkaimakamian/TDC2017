@@ -11,5 +11,16 @@ namespace DataTransferObject
         public string fatherCode;
         public string code;
         public string description;
+
+        public PermissionDTO()
+        {
+        }
+
+        public PermissionDTO(string fatherCode, string code, string description)
+        {
+            this.fatherCode = fatherCode;
+            this.code = code;
+            this.description = description;
+        }
     }
 }

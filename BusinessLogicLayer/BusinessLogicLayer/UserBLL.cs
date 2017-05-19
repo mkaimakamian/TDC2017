@@ -56,14 +56,11 @@ namespace BusinessLogicLayer
             UserDAL userDal = new UserDAL();
             DigitVerificatorBLL dvBll = new DigitVerificatorBLL();
             string digit = dvBll.CreateDigit(userBm);
-            UserDTO userDto = new UserDTO(userBm.Id, userBm.Name, userBm.Active, userBm.LanguageId, userBm.PermissionId, digit);
+            UserDTO userDto = new UserDTO(userBm.Id, userBm.Name, userBm.Active, userBm.LanguageId, userBm.PermissionId, userBm.Password, digit);
             bool result = userDal.UpdateUser(userDto);
 
-            //Corregir:
+            //Corregir: se asume que es solo para el usuario
             dvBll.UpdateVerticallDigit();
-
-
-
             return result;
         }
 
@@ -72,7 +69,7 @@ namespace BusinessLogicLayer
             UserDAL userDal = new UserDAL();
             DigitVerificatorBLL dvBll = new DigitVerificatorBLL();
             userBm.Hdv = dvBll.CreateDigit(userBm);
-
+            userBm.Password = SecurityHelper.Encrypt(userBm.Password);
             UserDTO userDto = new UserDTO(userBm.Name, userBm.Active, userBm.LanguageId, userBm.PermissionId, userBm.Password, userBm.Hdv);
             bool updated = userDal.SaveUser(userDto);
 
@@ -81,7 +78,7 @@ namespace BusinessLogicLayer
                 ResultBM result = dvBll.UpdateVerticallDigit();
                 if (result.IsValid())
                 {
-                    return new ResultBM(ResultBM.Type.OK, "Usuario creado: " + userDto.name, userBm);
+                    return new ResultBM(ResultBM.Type.OK, "Usuario creado: " + userDto.name, new UserBM(userDto));
                 }
                 else
                 {
@@ -103,7 +100,12 @@ namespace BusinessLogicLayer
         public bool ChangeCurrentLanguage(int languageId)
         {
             // Se recupera el usuario de la sesión para cambiarle el id, y luego utilizar el objeto para actualizar el dato en la base
-            UserBM userBm = SessionHelper.GetLoggedUser();
+            UserDAL userDal = new UserDAL();
+            int userId = SessionHelper.GetLoggedUser().Id;            
+            UserDTO userDto = userDal.GetUser(userId);
+
+            UserBM userBm = new UserBM(userDto);
+
             int originalLanguage = userBm.LanguageId;
             userBm.LanguageId = languageId;
 

@@ -37,6 +37,10 @@ namespace ViewLayer
             perfilesToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE003);
             SessionHelper.RegisterForTranslation(perfilesToolStripMenuItem, Codes.MNU_GE003);
 
+            //Mantenimiento
+            mantenimientoToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE017);
+            SessionHelper.RegisterForTranslation(mantenimientoToolStripMenuItem, Codes.MNU_GE017);
+
 
         }
 
@@ -75,7 +79,12 @@ namespace ViewLayer
 
         private void perfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new FrmProfile().ShowDialog();
+            new FrmGenericMain(typeof(ProfileBLL), typeof(FrmProfile)).ShowDialog();
+        }
+
+        private void mantenimientoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

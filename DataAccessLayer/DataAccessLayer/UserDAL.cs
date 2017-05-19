@@ -25,6 +25,23 @@ namespace DataAccessLayer
             return null;
         }
 
+        public UserDTO GetUser(int userId)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+            List<List<String>> reader;
+
+            sql = "SELECT * FROM users WHERE id = " + userId;
+            reader = dbsql.executeReader(sql);
+
+            if (reader.Count > 0)
+            {
+                return Resolve(reader.First());
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// Devuelve la lista de todos los usuarios.
         /// </summary>
@@ -62,7 +79,7 @@ namespace DataAccessLayer
             sql += userDto.languageId + ", ";
             sql += "'" + userDto.permissionId + "', ";
             sql += "'" + userDto.hdv + "'";
-            sql += ")";
+            sql += ");SELECT @@IDENTITY";
             userDto.id = dbsql.ExecuteNonQuery(sql);
             return true;
         }
@@ -73,7 +90,14 @@ namespace DataAccessLayer
             String sql;
 
             //ACTUALIZAR TODO MENOS EL PASSWORD QUE DEBERÍA HACERSE POR OTRO LADO POR EL TEMA DE LA ENCRIPTACION
-            sql = "UPDATE users SET languageId = '" + userDto.languageId + "',  hvd = '" + userDto.hdv + "' WHERE id = " + userDto.id;
+            //sql = "UPDATE users SET languageId = '" + userDto.languageId + "',  hvd = '" + userDto.hdv + "' WHERE id = " + userDto.id;
+            sql = "UPDATE users SET ";
+            sql += "name = '" + userDto.name + "',  ";
+            sql += "password = '" + userDto.password + "',  ";
+            sql += "active = '" + userDto.active + "',  ";
+            sql+= "languageId = '" + userDto.languageId + "',  ";
+            sql+= "hvd = '" + userDto.hdv + "' ";
+            sql += "WHERE id = " + userDto.id;
             dbsql.ExecuteNonQuery(sql);
             return true;
         }

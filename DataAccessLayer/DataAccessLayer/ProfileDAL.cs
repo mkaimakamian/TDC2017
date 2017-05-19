@@ -70,6 +70,34 @@ namespace DataAccessLayer
             return result;
         }
 
+        public bool SaveProfile(PermissionDTO permissionDto) {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "INSERT INTO permission (id, description, system) VALUES (";
+            sql += "'" + permissionDto.code + "', ";
+            sql += "'" + permissionDto.description + "', ";
+            sql += "'false'";
+            sql += ")";
+            dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
+
+        public bool SaveProfileRelation(List<PermissionDTO> permissionsDto)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "INSERT INTO permission_hierarchy (permissionIdBranch, permissionIdLeaf) VALUES ";
+            foreach (PermissionDTO permission in permissionsDto) {
+
+                sql += "('" + permission.fatherCode + "', '" + permission.code+"'), ";
+            }
+            //se remueve la coma del final
+            dbsql.ExecuteNonQuery(sql.Remove(sql.Length -2));
+            return true;
+        }
+
         private PermissionDTO Resolve(List<String> item)
         {
             PermissionDTO result = new PermissionDTO();

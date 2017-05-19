@@ -48,7 +48,7 @@ namespace ViewLayer
                 ResultBM result = ((BLEntity) businessLogic).GetCollection();
                 if (result.IsValid())
                 {
-                    dgView.DataSource = result.GetValue<List<UserBM>>();
+                    dgView.DataSource = result.GetValue();
 
                     SessionHelper.RegisterForTranslation(cmdNew, Codes.BTN_NEW);
                     SessionHelper.RegisterForTranslation(cmdEdit, Codes.BTN_EDIT);

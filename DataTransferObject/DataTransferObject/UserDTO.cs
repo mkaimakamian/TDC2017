@@ -20,23 +20,25 @@ namespace DataTransferObject
         { 
         }
 
-        public UserDTO(int id, string name, string password, bool active, int languageId, string permissionid)
-        {
-            this.id = id;
-            this.name = name;
-            this.password = password;
-            this.active = active;
-            this.languageId = languageId;
-            this.permissionId = permissionid;
-        }
+        //public UserDTO(int id, string name, string password, bool active, int languageId, string permissionid)
+        //{
+        //    this.id = id;
+        //    this.name = name;
+        //    this.password = password;
+        //    this.active = active;
+        //    this.languageId = languageId;
+        //    this.permissionId = permissionid;
+        //}
 
-        public UserDTO(int id, string name, bool active, int languageId, string permissionid, string hdv)
+        //usada para el update
+        public UserDTO(int id, string name, bool active, int languageId, string permissionid, string password, string hdv)
         {
             this.id = id;
             this.name = name;
             this.active = active;
             this.languageId = languageId;
             this.permissionId = permissionid;
+            this.password = password;
             this.hdv = hdv;
         }
 

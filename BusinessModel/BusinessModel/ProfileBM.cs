@@ -12,18 +12,25 @@ namespace BusinessModel
         public string code;
         private string description;
 
-        public abstract bool AddPermissionSorted(ProfileBM permission);
-        public abstract bool AddPermission(ProfileBM permission);
-        public abstract void DeletePermission(string code);
-        public abstract ProfileBM GetPermission(string code);
-        public abstract bool HasPermission(string code);
-        public abstract bool IsFather();
-        public abstract List<ProfileBM> GetChildren();
+        public abstract bool AddPermissionSorted(ProfileBM permission); //agrega el permiso ordenadamente
+        public abstract bool AddPermission(ProfileBM permission); //agrega el permiso como hijo de este objeto
+        public abstract void DeletePermission(string code); //elimina el permiso
+        public abstract ProfileBM GetPermission(string code); //devuelve el permiso según el código
+        public abstract bool HasPermission(string code); //evalúa si existe el permiso
+        public abstract bool IsFather(); //evalúa si el objeto es del tipo padre
+        public abstract List<ProfileBM> GetChildren(); //devuelve la lista de hijos inmediatos
+        //public abstract List<ProfileBM> GetHierarchyAsList();
 
         public string Description
         {
             get { return this.description; }
             set { this.description = value; }
+        }
+
+        public string Code
+        {
+            get { return this.code; }
+            set { this.code = value; }
         }
 
     }
@@ -77,6 +84,11 @@ namespace BusinessModel
         {
             throw new NotImplementedException();
         }
+
+        //public override List<ProfileBM> GetHierarchyAsList()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 
     /// <summary>
@@ -193,6 +205,54 @@ namespace BusinessModel
         {
             return this.permissions;
         }
-       
+
+
+        /// <summary>
+        /// Devuelve los elementos de la jerarquía en formato lista, sin duplicar
+        /// </summary>
+        /// <returns></returns>
+        //public override List<ProfileBM> GetHierarchyAsList()
+        //{
+        //    List<ProfileBM> grandChildren = new List<ProfileBM>();
+        //    List<ProfileBM> children = new List<ProfileBM>();
+        //    List<ProfileBM> aux;
+
+
+        //    foreach (ProfileBM profile in this.permissions)
+        //    {
+        //        aux = new List<ProfileBM>();
+
+        //        //Si el elemento existe, no se debe agregar
+        //        if (!Exist(children, profile))
+        //        {
+        //            children.Add(profile);
+        //        }
+                
+        //        if (profile.IsFather()) {
+        //            grandChildren = profile.GetHierarchyAsList();
+        //        }
+
+        //        //Una vez que se recuperaron los hijos de las descendencias, debe controlarse que se puedan agregar
+        //        for (int i = 0; i < grandChildren.Count; ++i)
+        //        {
+        //            if (!Exist(children, grandChildren[i]))
+        //            {
+        //                aux.Add(grandChildren[i]);
+        //            }
+        //        }
+        //        children.AddRange(aux); 
+        //    }
+        //    return children;
+        //}
+
+        //private bool Exist( List<ProfileBM> list, ProfileBM element)
+        //{
+        //    bool found = false;
+        //    for (int c = 0; c < list.Count && !found; ++c)
+        //    {
+        //        found = list[c].code == element.code;
+        //    }
+        //    return found;
+        //}
     }
 }

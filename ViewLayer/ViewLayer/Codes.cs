@@ -24,6 +24,7 @@ namespace ViewLayer
         public const string GE014 = "GE014"; //Hojas de ruta
         public const string GE015 = "GE015"; //Retiros
         public const string GE016 = "GE016"; //Órdenes de salida
+        public const string GE017 = "GE017"; //Mantenimiento
 
         public const string OP001 = "OP001"; //Cambiar idioma
         public const string OP002 = "OP002";
@@ -118,6 +119,7 @@ namespace ViewLayer
         public const string MNU_GE014 = "MNU_GE014"; //Hojas de ruta
         public const string MNU_GE015 = "MNU_GE015"; //Retiros
         public const string MNU_GE016 = "MNU_GE016"; //Órdenes de salida
+        public const string MNU_GE017 = "MNU_GE017"; //Mantenimiento
         
                 
         public const string MNU_OP001 = "MNU_OP001"; //Cambiar idioma

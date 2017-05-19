@@ -9,7 +9,7 @@ using BusinessModel;
 
 namespace BusinessLogicLayer
 {
-    public class ProfileBLL
+    public class ProfileBLL : BLEntity
     {
         public ResultBM GetProfile(string profileId)
         {
@@ -81,6 +81,39 @@ namespace BusinessLogicLayer
             }
 
             return new ResultBM(ResultBM.Type.OK, "Lista de perfiles recuperada exitosamente", permissionBms);
+        }
+
+        public ResultBM CreateProfile(ProfileBM profile)
+        {
+            ProfileDAL profileDal = new ProfileDAL();
+            List<PermissionDTO> permissions = new List<PermissionDTO>();
+
+            //Se agrega el root
+            PermissionDTO root = new PermissionDTO(profile.fatherCode, profile.code, profile.Description);
+            profileDal.SaveProfile(root);
+
+            //Se crea la lista con las dependencias
+            foreach (ProfileBM permission in profile.GetChildren())
+            {
+                permissions.Add(new PermissionDTO(permission.fatherCode, permission.code, permission.Description));
+            }
+
+            bool result = profileDal.SaveProfileRelation(permissions);
+
+            if (result)
+            {
+                return new ResultBM(ResultBM.Type.OK, "Perfil creado: " + profile.Description);
+            }
+            else
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "El perfil no pudo crearse.");
+            }
+
+        }
+
+        public ResultBM GetCollection()
+        {
+            return this.GetProfiles();
         }
     }
 }
