@@ -18,12 +18,16 @@ namespace ViewLayer
         private Type viewer;
         private Type entity;
 
+        private bool canCreate;
+        private bool canEdit;
+        private bool canDelete;
+
         public FrmGenericMain()
         {
             InitializeComponent();
         }
 
-        public FrmGenericMain(Type entity, Type viewer)
+        public FrmGenericMain(Type entity, Type viewer, bool canCreate=false, bool canEdit=false, bool canDelete=false)
         {
             InitializeComponent();
             // Entidad sobre la que se opera
@@ -31,6 +35,10 @@ namespace ViewLayer
 
             // Formulario a llamar en caso de creación o edición
             this.viewer = viewer;
+
+            this.canCreate = canCreate;
+            this.canEdit = canEdit;
+            this.canDelete = canDelete;
         }
 
         /// <summary>
@@ -47,10 +55,19 @@ namespace ViewLayer
         {
             SessionHelper.RegisterForTranslation(cmdNew, Codes.BTN_NEW);
             SessionHelper.RegisterForTranslation(cmdEdit, Codes.BTN_EDIT);
-            SessionHelper.RegisterForTranslation(cmdDelete, Codes.BTN_DELETE);
+            SessionHelper.RegisterForTranslation(cmdDelete, Codes.BTN_DELETE);            
             SessionHelper.RegisterForTranslation(cmdClose, Codes.BTN_CLOSE);
+
+            cmdNew.Enabled = canCreate;
+            cmdEdit.Enabled = canEdit;
+            cmdDelete.Enabled = canDelete;
+
             LoadDatagrid();
             AdjustSizes();
+
+            // Ajusta un poco el tamaño del formulario en base a la cantidad de columnas que posee la grilla
+            // para que se pueda ver todo el contenido (o la mayor cantidad posible)
+            this.Width = dgView.ColumnCount * 100 + 200;
         }
 
         private void cmdNew_Click(object sender, EventArgs e)
@@ -89,8 +106,8 @@ namespace ViewLayer
         private void cmdEdit_Click(object sender, EventArgs e)
         {
             Form viewForm = (Form)Activator.CreateInstance(this.viewer);
-            System.Reflection.PropertyInfo currentElement = viewForm.GetType().GetProperty("CurrentElement");
-            currentElement.SetValue(viewForm, dgView.SelectedRows[0].DataBoundItem);
+            System.Reflection.PropertyInfo Entity = viewForm.GetType().GetProperty("Entity");
+            Entity.SetValue(viewForm, dgView.SelectedRows[0].DataBoundItem);
             viewForm.ShowDialog();
             LoadDatagrid();
         }

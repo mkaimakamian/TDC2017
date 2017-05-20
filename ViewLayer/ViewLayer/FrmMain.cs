@@ -90,7 +90,13 @@ namespace ViewLayer
 
         private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new FrmGenericMain(typeof(UserBLL), typeof(FrmUser)).ShowDialog();
+            new FrmGenericMain(
+                typeof(UserBLL), 
+                typeof(FrmUser),
+                SessionHelper.HasPermission(Codes.OP003),
+                SessionHelper.HasPermission(Codes.OP004),
+                SessionHelper.HasPermission(Codes.OP005)
+                ).ShowDialog();
         }
 
         private void perfilesToolStripMenuItem_Click(object sender, EventArgs e)

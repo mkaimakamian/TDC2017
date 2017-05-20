@@ -50,45 +50,94 @@ namespace BusinessLogicLayer
             return new ResultBM(ResultBM.Type.OK, "Recuperación de los usuarios exitosa.", userBms);
         }
 
-        public bool UpdateUser(UserBM userBm)
+        public ResultBM UpdateUser(UserBM userBm, bool updatePassword=false)
         {
-            //TODO - Devolver resultBM
             UserDAL userDal = new UserDAL();
             DigitVerificatorBLL dvBll = new DigitVerificatorBLL();
-            string digit = dvBll.CreateDigit(userBm);
-            UserDTO userDto = new UserDTO(userBm.Id, userBm.Name, userBm.Active, userBm.LanguageId, userBm.PermissionId, userBm.Password, digit);
-            bool result = userDal.UpdateUser(userDto);
+            ResultBM digitUpdated;
+            ResultBM validation;
+            UserDTO userDto;
 
-            //Corregir: se asume que es solo para el usuario
-            dvBll.UpdateVerticallDigit();
-            return result;
+            try
+            {
+                validation = IsValid(userBm);
+                if (validation.IsValid())
+                {
+                    if (updatePassword)
+                    {
+                        userBm.Password = SecurityHelper.Encrypt(userBm.Password);
+                    }
+                    string digit = dvBll.CreateDigit(userBm);
+                    userDto = new UserDTO(userBm.Id, userBm.Name, userBm.Active, userBm.LanguageId, userBm.PermissionId, userBm.Password, digit);
+                    userDal.UpdateUser(userDto);
+
+                    //Corregir: se asume que es solo para el usuario
+                    //Ver qué ocurre ante fallo
+                    digitUpdated = dvBll.UpdateVerticallDigit();
+
+                    if (digitUpdated.IsValid())
+                    {
+                        return new ResultBM(ResultBM.Type.OK, "Usuario con id " + userBm.Id + " actualizado correctamente.");
+                    }
+                    else
+                    {
+                        return digitUpdated;
+                    }
+                }
+                else
+                {
+                    return validation;
+                }
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al actualizar los datos del usuario con id " + userBm.Id + ".", exception);
+            }
         }
 
+        /// <summary>
+        /// Crea un usuario.
+        /// </summary>
+        /// <param name="userBm"></param>
+        /// <returns></returns>
         public ResultBM CreateUser(UserBM userBm)
         {
             UserDAL userDal = new UserDAL();
             DigitVerificatorBLL dvBll = new DigitVerificatorBLL();
-            userBm.Hdv = dvBll.CreateDigit(userBm);
-            userBm.Password = SecurityHelper.Encrypt(userBm.Password);
-            UserDTO userDto = new UserDTO(userBm.Name, userBm.Active, userBm.LanguageId, userBm.PermissionId, userBm.Password, userBm.Hdv);
-            bool updated = userDal.SaveUser(userDto);
+            UserDTO userDto;
+            ResultBM digitUpdated;
+            ResultBM validation;
 
-            if (updated)
+            try
             {
-                ResultBM result = dvBll.UpdateVerticallDigit();
-                if (result.IsValid())
+                validation = IsValid(userBm);
+                if (validation.IsValid())
                 {
-                    return new ResultBM(ResultBM.Type.OK, "Usuario creado: " + userDto.name, new UserBM(userDto));
+                    userBm.Hdv = dvBll.CreateDigit(userBm);
+                    userBm.Password = SecurityHelper.Encrypt(userBm.Password);
+                    userDto = new UserDTO(userBm.Name, userBm.Active, userBm.LanguageId, userBm.PermissionId, userBm.Password, userBm.Hdv);
+                    userDal.SaveUser(userDto);
+
+                    digitUpdated = dvBll.UpdateVerticallDigit();
+
+                    if (digitUpdated.IsValid())
+                    {
+                        return new ResultBM(ResultBM.Type.OK, "Usuario creado: " + userDto.name, new UserBM(userDto));
+                    }
+                    else
+                    {
+                        return digitUpdated;
+                    }
+
                 }
                 else
                 {
-                    return new ResultBM(ResultBM.Type.EXCEPTION, "El usuario se creó pero el dígito verificador vertical, no.");
+                    return validation;
                 }
-                
             }
-            else
+            catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "El usuario no pudo crearse.");
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear el usuario con " + userBm.Name + ".", exception);
             }
         }
 
@@ -97,35 +146,40 @@ namespace BusinessLogicLayer
         /// </summary>
         /// <param name="languageId"></param>
         /// <returns></returns>
-        public bool ChangeCurrentLanguage(int languageId)
+        public ResultBM ChangeCurrentLanguage(int languageId)
         {
-            // Se recupera el usuario de la sesión para cambiarle el id, y luego utilizar el objeto para actualizar el dato en la base
+            // Se recupera el usuario de la sesión para cambiarle el id del idioma
             UserDAL userDal = new UserDAL();
-            int userId = SessionHelper.GetLoggedUser().Id;            
-            UserDTO userDto = userDal.GetUser(userId);
-
+            UserDTO userDto = userDal.GetUser(SessionHelper.GetLoggedUser().Id);
             UserBM userBm = new UserBM(userDto);
+            ResultBM updateResult;
 
-            int originalLanguage = userBm.LanguageId;
-            userBm.LanguageId = languageId;
-
-            //Actualización
-            bool result = UpdateUser(userBm);
-
-            if (result)
+            try
             {
-                //Quizá debería manejarme con el modelo de lenguage
-                LanguageBLL languageBll = new LanguageBLL();
-                LanguageBM languageBm = languageBll.GetLanguage(languageId);
-                SessionHelper.SetLanguage(languageBm);
-            }
-            else
-            {
-                userBm.LanguageId = originalLanguage;
-                throw new Exception("El idioma no pudo actualizarse.");
-            }
+                int originalLanguage = userBm.LanguageId;
+                userBm.LanguageId = languageId;
 
-            return result;
+                updateResult = UpdateUser(userBm);
+
+                if (updateResult.IsValid())
+                {
+                    //Quizá debería manejarme con el modelo de lenguage
+                    LanguageBLL languageBll = new LanguageBLL();
+                    LanguageBM languageBm = languageBll.GetLanguage(languageId);
+                    SessionHelper.SetLanguage(languageBm);
+                    SessionHelper.GetLoggedUser().LanguageId = languageId;
+                }
+                else
+                {
+                    userBm.LanguageId = originalLanguage;
+                }
+
+                return updateResult;
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al actualizar el idioma.", exception);
+            }
         }
 
         public ResultBM DeleteUser(int userId)
@@ -157,6 +211,17 @@ namespace BusinessLogicLayer
             {
                 return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido una excepción al intentar borrar al usuario con id " + userId + ". " + exception.Message);
             }
+        }
+
+        /// <summary>
+        /// Controla que se cumplan las condiciones para poder operar.
+        /// </summary>
+        /// <param name="userBM"></param>
+        private ResultBM IsValid(UserBM userBM) {
+            if (userBM.Name.Length == 0 || userBM.Password.Length == 0) {
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Todos los campos deben ser completados.");
+            }
+            return new ResultBM(ResultBM.Type.OK);
         }
 
         public ResultBM GetCollection()

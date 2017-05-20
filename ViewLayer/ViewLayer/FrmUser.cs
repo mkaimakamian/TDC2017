@@ -15,13 +15,13 @@ namespace ViewLayer
 {
     public partial class FrmUser : Form
     {
-        private UserBM currentElement;
-        private bool isUpdate;
+        private UserBM entity;
+        private bool isUpdate = false;
 
-        public UserBM CurrentElement
+        public UserBM Entity
         {
-            get { return this.currentElement; }
-            set { this.currentElement = value; isUpdate = true; }
+            get { return this.entity; }
+            set { this.entity = value; isUpdate = true; }
         }
 
         public FrmUser()
@@ -33,34 +33,73 @@ namespace ViewLayer
         {
             try
             {
-                //cmdAccept.Visible = SessionHelper.HasPermission(Codes.GE001);
+                //Traducciones
                 SessionHelper.RegisterForTranslation(cmdAccept, Codes.BTN_ACCEPT);
                 SessionHelper.RegisterForTranslation(cmdClose, Codes.BTN_CLOSE);
 
-
-                //Carga los idiomas
+                SessionHelper.RegisterForTranslation(lblName, Codes.LBL_NAME);
+                SessionHelper.RegisterForTranslation(lblPassword, Codes.LBL_PASSWORD);
+                SessionHelper.RegisterForTranslation(lblPasswordConfirm, Codes.LBL_PASSWORD_CHECK);
+                SessionHelper.RegisterForTranslation(lblLanguage, Codes.LBL_LANGUAGE);
+                SessionHelper.RegisterForTranslation(lblProfile, Codes.LBL_PROFILE);
+                SessionHelper.RegisterForTranslation(chkIsActive, Codes.LBL_ACTIVE);
+                
+                //Idioma
                 LanguageBLL languageBll = new LanguageBLL();
-                ResultBM result = languageBll.GetLanguages();
+                ResultBM language = languageBll.GetLanguages();
 
-                if (result.IsValid())
+                //Permisos
+                ProfileBLL profileBll = new ProfileBLL();
+                ResultBM profile = profileBll.GetProfiles();
+
+                if (language.IsValid())
                 {
-                    cmbLanguage.DataSource = result.GetValue<List<LanguageBM>>();
+                    cmbLanguage.DataSource = language.GetValue<List<LanguageBM>>();
                     cmbLanguage.DisplayMember = "Name";
                 }
                 else
                 {
-                    MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(language.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
-                //Posicionarse de acuerdo con el idioma del usuario.
-                //UserBM userBm = SessionHelper.GetLoggedUser();
-                //cmbLanguage.SelectedValue = SessionHelper.Get
 
-                if (this.CurrentElement != null) {
-                    txtName.Text = this.CurrentElement.Name;
-                    chkIsActive.Checked = this.CurrentElement.Active;
-                    //el password no se debe mostrar
-                    //idioma
+                if (profile.IsValid())
+                {
+                    cmbProfile.DataSource = profile.GetValue<List<PermissionMDL>>();
+                    cmbProfile.DisplayMember = "Description";
+                }
+                else
+                {
+                    MessageBox.Show(language.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                //Si se está actualizando, entonces se completan los campos
+                if (isUpdate)
+                {
+                    txtName.Text = this.Entity.Name;
+                    chkIsActive.Checked = this.Entity.Active;
+
+                    //Desprolijo - mejorar (BAJA PRIORIDAD)
+                    bool found = false;
+
+                    for (int i = 0; i < language.GetValue<List<LanguageBM>>().Count && !found; ++i)
+                    {
+                        found = language.GetValue<List<LanguageBM>>()[i].Id == entity.LanguageId;
+                        if (found)
+                        {
+                            cmbLanguage.SelectedIndex = i;
+                        }
+                    }
+
+                    found = false;
+                    for (int i = 0; i < profile.GetValue<List<PermissionMDL>>().Count && !found; ++i)
+                    {
+                        found = profile.GetValue<List<PermissionMDL>>()[i].Code == entity.PermissionId;
+                        if (found)
+                        {
+                            cmbProfile.SelectedIndex = i;
+                        }
+                    }
                 }
             }
             catch (Exception exception)
@@ -73,40 +112,68 @@ namespace ViewLayer
         {
             UserBLL userBll = new UserBLL();
             LanguageBM language = (LanguageBM)cmbLanguage.SelectedValue;
+            PermissionMDL profile = (PermissionMDL)cmbProfile.SelectedValue;
+            ResultBM saveResult;
+            UserBM userBm;
+
             try
             {
                 if (isUpdate)
                 {
-                    // validar que esté todo en orden
+                    // Si el usuario modificó el campo password, entonces se chequea que coincidan
                     if (txtPassword.Text == txtPasswordCheck.Text)
                     {
-                        this.CurrentElement.Name = txtName.Text;
-                        this.CurrentElement.Active = chkIsActive.Checked;
-                        this.CurrentElement.LanguageId = language.Id;
-                        //this.CurrentElement.PermissionId = txtPassword.Text;
-                        this.CurrentElement.Password = txtPassword.Text;
+                        this.Entity.Name = txtName.Text;
+                        this.Entity.Active = chkIsActive.Checked;
+                        this.Entity.LanguageId = language.Id;
+                        this.Entity.PermissionId = profile.Code;
 
+                        //Hubo cambio de password
+                        bool updatePassword = txtPassword.Text.Length > 0;
+                        if (updatePassword)
+                        {
+                            this.Entity.Password = txtPassword.Text;
+                        }
 
-                        userBll.UpdateUser(this.CurrentElement);
+                        saveResult = userBll.UpdateUser(this.Entity, updatePassword);
+
+                        if (saveResult.IsValid())
+                        {
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Los cambios no fueron guardados: " + saveResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        
                     }
                     else
                     {
-                        MessageBox.Show("El password asignado no coincide con el de verificación.");
+                        MessageBox.Show("El password asignado no coincide con el de verificación.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
                 }
                 else
                 {
-                    UserBM userBm = new UserBM(txtName.Text, chkIsActive.Checked, language.Id, "GE999", txtPassword.Text);
-                    userBll.CreateUser(userBm);
+                    userBm = new UserBM(txtName.Text, chkIsActive.Checked, language.Id, profile.code, txtPassword.Text);
+                    saveResult = userBll.CreateUser(userBm);
+
+                    if (saveResult.IsValid())
+                    {
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Los cambios no fueron guardados: " + saveResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+
                 }
             }
             catch (Exception exception)
             {
                 MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-            this.Close();
+            }            
         }
 
         private void cmdClose_Click(object sender, EventArgs e)

@@ -30,7 +30,7 @@ namespace BusinessLogicLayer
             try
             {
                 //1. Validación input
-                result = ValidateInput(user, password);
+                result = IsValid(user, password);
 
                 if (result.IsValid())
                 {
@@ -67,7 +67,6 @@ namespace BusinessLogicLayer
                     }
                 }
 
-            //return result;
             }
             catch (Exception exception)
             {
@@ -83,7 +82,7 @@ namespace BusinessLogicLayer
         /// </summary>
         /// <param name="user"></param>
         /// <param name="password"></param>
-        private ResultBM ValidateInput(String user, String password)
+        private ResultBM IsValid(String user, String password)
         {
             if (user.Length == 0 || password.Length == 0)
             {

@@ -29,25 +29,33 @@ namespace ViewLayer
             {
                 //Carga los idiomas
                 LanguageBLL languageBll = new LanguageBLL();
-                ResultBM result = languageBll.GetLanguages();
+                ResultBM language = languageBll.GetLanguages();
 
-                if (result.IsValid())
+                if (language.IsValid())
                 {
-                    cmbLanguage.DataSource = result.GetValue<List<LanguageBM>>();
+                    cmbLanguage.DataSource = language.GetValue<List<LanguageBM>>();
                     cmbLanguage.DisplayMember = "Name";
+
+                    //Desprolijo - mejorar (BAJA PRIORIDAD)
+                    bool found = false;
+
+                    for (int i = 0; i < language.GetValue<List<LanguageBM>>().Count && !found; ++i)
+                    {
+                        found = language.GetValue<List<LanguageBM>>()[i].Id == SessionHelper.GetLoggedUser().LanguageId;
+                        if (found)
+                        {
+                            cmbLanguage.SelectedIndex = i;
+                        }
+                    }
                 }
                 else
                 {
-                    MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(language.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-
-                //Posicionarse de acuerdo con el idioma del usuario.
-                //UserBM userBm = SessionHelper.GetLoggedUser();
-                //cmbLanguage.SelectedValue = SessionHelper.Get
             }
             catch (Exception exception)
             {
-                MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -60,10 +68,21 @@ namespace ViewLayer
         {
             LanguageBM language = (LanguageBM) cmbLanguage.SelectedValue;
             UserBLL userBll = new UserBLL();
-            if (userBll.ChangeCurrentLanguage(language.Id))
+
+            ResultBM result = userBll.ChangeCurrentLanguage(language.Id);
+            try
             {
-               this.Close();
-            }
+                if (result.IsValid())
+                {
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            } catch (Exception excpetion) {
+                MessageBox.Show("Se ha producido el siguiente error: " + excpetion.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }            
         }
 
         private void lblLanguage_Click(object sender, EventArgs e)

@@ -39,6 +39,8 @@
             this.lblName = new System.Windows.Forms.Label();
             this.cmdClose = new System.Windows.Forms.Button();
             this.cmdAccept = new System.Windows.Forms.Button();
+            this.lblProfile = new System.Windows.Forms.Label();
+            this.cmbProfile = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lblLanguage
@@ -76,13 +78,13 @@
             this.cmbLanguage.FormattingEnabled = true;
             this.cmbLanguage.Location = new System.Drawing.Point(12, 111);
             this.cmbLanguage.Name = "cmbLanguage";
-            this.cmbLanguage.Size = new System.Drawing.Size(121, 21);
+            this.cmbLanguage.Size = new System.Drawing.Size(230, 21);
             this.cmbLanguage.TabIndex = 13;
             // 
             // chkIsActive
             // 
             this.chkIsActive.AutoSize = true;
-            this.chkIsActive.Location = new System.Drawing.Point(142, 152);
+            this.chkIsActive.Location = new System.Drawing.Point(15, 179);
             this.chkIsActive.Name = "chkIsActive";
             this.chkIsActive.Size = new System.Drawing.Size(62, 17);
             this.chkIsActive.TabIndex = 12;
@@ -122,25 +124,44 @@
             this.cmdClose.Name = "cmdClose";
             this.cmdClose.Size = new System.Drawing.Size(75, 23);
             this.cmdClose.TabIndex = 18;
-            this.cmdClose.Text = "button1";
+            this.cmdClose.Text = "close";
             this.cmdClose.UseVisualStyleBackColor = true;
             this.cmdClose.Click += new System.EventHandler(this.cmdClose_Click);
             // 
             // cmdAccept
             // 
-            this.cmdAccept.Location = new System.Drawing.Point(203, 233);
+            this.cmdAccept.Location = new System.Drawing.Point(167, 233);
             this.cmdAccept.Name = "cmdAccept";
             this.cmdAccept.Size = new System.Drawing.Size(75, 23);
             this.cmdAccept.TabIndex = 19;
-            this.cmdAccept.Text = "button2";
+            this.cmdAccept.Text = "accept";
             this.cmdAccept.UseVisualStyleBackColor = true;
             this.cmdAccept.Click += new System.EventHandler(this.cmdAccept_Click);
+            // 
+            // lblProfile
+            // 
+            this.lblProfile.AutoSize = true;
+            this.lblProfile.Location = new System.Drawing.Point(12, 135);
+            this.lblProfile.Name = "lblProfile";
+            this.lblProfile.Size = new System.Drawing.Size(35, 13);
+            this.lblProfile.TabIndex = 20;
+            this.lblProfile.Text = "profile";
+            // 
+            // cmbProfile
+            // 
+            this.cmbProfile.FormattingEnabled = true;
+            this.cmbProfile.Location = new System.Drawing.Point(12, 152);
+            this.cmbProfile.Name = "cmbProfile";
+            this.cmbProfile.Size = new System.Drawing.Size(230, 21);
+            this.cmbProfile.TabIndex = 21;
             // 
             // FrmUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(290, 263);
+            this.ClientSize = new System.Drawing.Size(254, 263);
+            this.Controls.Add(this.cmbProfile);
+            this.Controls.Add(this.lblProfile);
             this.Controls.Add(this.cmdAccept);
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.lblLanguage);
@@ -175,5 +196,7 @@
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Button cmdClose;
         private System.Windows.Forms.Button cmdAccept;
+        private System.Windows.Forms.Label lblProfile;
+        private System.Windows.Forms.ComboBox cmbProfile;
     }
 }

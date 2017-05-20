@@ -95,7 +95,8 @@ namespace DataAccessLayer
             sql += "name = '" + userDto.name + "',  ";
             sql += "password = '" + userDto.password + "',  ";
             sql += "active = '" + userDto.active + "',  ";
-            sql+= "languageId = '" + userDto.languageId + "',  ";
+            sql+= "languageId = " + userDto.languageId + ",  ";
+            sql += "permissionId = '" + userDto.permissionId + "',  ";
             sql+= "hvd = '" + userDto.hdv + "' ";
             sql += "WHERE id = " + userDto.id;
             dbsql.ExecuteNonQuery(sql);
