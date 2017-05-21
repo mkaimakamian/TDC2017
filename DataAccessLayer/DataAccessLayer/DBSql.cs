@@ -9,9 +9,10 @@ namespace DataAccessLayer
 {
     public class DBSql
     {
-    
-        private string connStr = "Data Source=.\\UAI_EXPRESS; Initial Catalog=CAMPOII; Integrated Security=True";
 
+        public string database = "CAMPOII";
+        private string connStr = "Data Source=.\\UAI_EXPRESS; Initial Catalog=CAMPOII; Integrated Security=True";
+        
         public int ExecuteNonQuery(string sql)
         {
             SqlConnection connection = new SqlConnection(connStr);

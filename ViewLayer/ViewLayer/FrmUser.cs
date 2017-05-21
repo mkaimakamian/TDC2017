@@ -116,42 +116,39 @@ namespace ViewLayer
             ResultBM saveResult;
             UserBM userBm;
 
+            if (txtPassword.Text != txtPasswordCheck.Text)
+            {
+                MessageBox.Show("El password asignado no coincide con el de verificación.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             try
             {
                 if (isUpdate)
                 {
-                    // Si el usuario modificó el campo password, entonces se chequea que coincidan
-                    if (txtPassword.Text == txtPasswordCheck.Text)
+                 
+                    this.Entity.Name = txtName.Text;
+                    this.Entity.Active = chkIsActive.Checked;
+                    this.Entity.LanguageId = language.Id;
+                    this.Entity.PermissionId = profile.Code;
+
+                    //Hubo cambio de password
+                    bool updatePassword = txtPassword.Text.Length > 0;
+                    if (updatePassword)
                     {
-                        this.Entity.Name = txtName.Text;
-                        this.Entity.Active = chkIsActive.Checked;
-                        this.Entity.LanguageId = language.Id;
-                        this.Entity.PermissionId = profile.Code;
+                        this.Entity.Password = txtPassword.Text;
+                    }
 
-                        //Hubo cambio de password
-                        bool updatePassword = txtPassword.Text.Length > 0;
-                        if (updatePassword)
-                        {
-                            this.Entity.Password = txtPassword.Text;
-                        }
+                    saveResult = userBll.UpdateUser(this.Entity, updatePassword);
 
-                        saveResult = userBll.UpdateUser(this.Entity, updatePassword);
-
-                        if (saveResult.IsValid())
-                        {
-                            this.Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Los cambios no fueron guardados: " + saveResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        
+                    if (saveResult.IsValid())
+                    {
+                        this.Close();
                     }
                     else
                     {
-                        MessageBox.Show("El password asignado no coincide con el de verificación.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Los cambios no fueron guardados: " + saveResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-
                 }
                 else
                 {

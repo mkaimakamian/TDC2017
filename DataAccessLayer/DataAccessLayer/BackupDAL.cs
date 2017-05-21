@@ -12,8 +12,7 @@ namespace DataAccessLayer
         {
             DBSql dbsql = new DBSql();
             String sql;
-
-            sql = "BACKUP DATABASE CAMPOI TO DISK = '" + fullBackupPath + "'";
+            sql = "BACKUP DATABASE " + dbsql.database + " TO DISK = '" + fullBackupPath + "'";
             dbsql.ExecuteNonQuery(sql);
             return true;
         }
@@ -23,7 +22,7 @@ namespace DataAccessLayer
             DBSql dbsql = new DBSql();
             String sql;
 
-            sql = "USE MASTER ALTER DATABASE CAMPOI SET SINGLE_USER WITH ROLLBACK IMMEDIATE RESTORE DATABASE CAMPOI FROM DISK = '" + fullBackupPath + "' WITH REPLACE";
+            sql = "USE MASTER ALTER DATABASE " + dbsql.database + " SET SINGLE_USER WITH ROLLBACK IMMEDIATE RESTORE DATABASE " + dbsql.database + " FROM DISK = '" + fullBackupPath + "' WITH REPLACE";
             dbsql.ExecuteNonQuery(sql);
             return true;
         }

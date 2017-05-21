@@ -50,7 +50,7 @@ namespace BusinessLogicLayer
                         {
                             //3.2 Chequeo de vertical
                             result = dvBll.IsVerticallyConsistent();
-
+                            
                             if (result.IsValid())
                             {
                                 //4. Recuperación de idioma

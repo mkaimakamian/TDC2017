@@ -21,14 +21,16 @@ namespace ViewLayer
         public const string GE004 = "GE004"; //Perfiles
         public const string GE005 = "GE005"; //Mantenimiento
         public const string GE006 = "GE006"; //Respaldo
+            public const string OP011 = "OP011"; // Copia de respaldo
+            public const string OP012 = "OP012"; // Cargar copia de respaldo
+        
         public const string GE007 = "GE007"; //Integridad
 
         
 
 
         public const string OP010 = "OP010"; // Listar bitácora
-        public const string OP011 = "OP011"; // Copia de respaldo
-        public const string OP012 = "OP012"; // Cargar copia de respaldo
+        
         public const string OP013 = "OP013"; // Check horizontal
         public const string OP014 = "OP014"; // Check vertical
 

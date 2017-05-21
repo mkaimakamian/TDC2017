@@ -111,7 +111,7 @@ namespace ViewLayer
 
         private void respaldoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            new FrmBackup().ShowDialog();
         }
 
         private void integridadToolStripMenuItem_Click(object sender, EventArgs e)

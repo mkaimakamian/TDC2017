@@ -14,34 +14,32 @@ namespace BusinessLogicLayer
 
         public ResultBM PerformBackup(string fullBackupPath)
         {
-            BackupDAL backupDal = new BackupDAL();
-            bool success = backupDal.PerformBackup(fullBackupPath);
-
-            if (success)
+            try
             {
+                BackupDAL backupDal = new BackupDAL();
+                backupDal.PerformBackup(fullBackupPath);
                 return new ResultBM(ResultBM.Type.OK, "Backup en " + fullBackupPath + " exitoso.");
             }
-            else
+            catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.FAIL, "No se ha podido generar el backup en " + fullBackupPath + ".");
+                return new ResultBM(ResultBM.Type.EXCEPTION, exception.Message, exception);
             }
         }
 
         public ResultBM PerformRestore(string fullBackupPath)
         {
-            BackupDAL backupDal = new BackupDAL();
-            bool success = backupDal.PerformRestore(fullBackupPath);
-
-            if (success)
+            try
             {
-                //TODO - REDIRIGIR AL LOGUEO.
+                BackupDAL backupDal = new BackupDAL();
+                backupDal.PerformRestore(fullBackupPath);
+                
                 SessionHelper.EndSession();
                 return new ResultBM(ResultBM.Type.OK, "Restore de " + fullBackupPath + " exitoso.");
-            }
-            else
-            {
-                return new ResultBM(ResultBM.Type.FAIL, "No se ha podido restaurar la base de " + fullBackupPath + ".");
-            }
+
+            } catch (Exception exception) {
+                return new ResultBM(ResultBM.Type.EXCEPTION, exception.Message, exception);
+            }            
+
         }
     }
 }
