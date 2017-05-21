@@ -35,6 +35,8 @@ namespace ViewLayer
                 else
                 {
                     MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (result.IsCurrentError(ResultBM.Type.CORRUPTED_DATABASE) && result.keepGoing)
+                        new FrmBackup().ShowDialog();                    
                 }
             }
             catch (Exception exception)

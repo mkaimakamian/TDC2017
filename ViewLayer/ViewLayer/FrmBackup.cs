@@ -118,9 +118,9 @@ namespace ViewLayer
         private void FrmBackup_Load(object sender, EventArgs e)
         {
             cmdBackup.Enabled = SessionHelper.HasPermission(Codes.OP011);
-            SessionHelper.RegisterForTranslation(cmdBackup, Codes.MNU_OP011);
+            SessionHelper.RegisterForTranslation(cmdBackup, Codes.BTN_BACKUP);
             cmdrestore.Enabled =  SessionHelper.HasPermission(Codes.OP012);
-            SessionHelper.RegisterForTranslation(cmdrestore, Codes.MNU_OP012);
+            SessionHelper.RegisterForTranslation(cmdrestore, Codes.BTN_RESTORE);
 
             SessionHelper.RegisterForTranslation(cmdClose, Codes.BTN_CLOSE);
         }

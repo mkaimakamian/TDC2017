@@ -116,7 +116,7 @@ namespace ViewLayer
 
         private void integridadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            new FrmIntegrity().ShowDialog();
         }
     }
 }

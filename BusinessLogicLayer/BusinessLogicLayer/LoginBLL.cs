@@ -21,7 +21,7 @@ namespace BusinessLogicLayer
             LanguageBM languageBm;
 
             ProfileBLL profileBll = new ProfileBLL();
-            ProfileBM profileMdl;
+            ProfileBM profileBm;
 
             DigitVerificatorBLL dvBll = new DigitVerificatorBLL();
 
@@ -41,26 +41,33 @@ namespace BusinessLogicLayer
                     {
                         userBm = result.GetValue<UserBM>();
 
-                        // userBm.IsLocked()                
+                        //3. Recuperación de permisos
+                        profileBm = profileBll.GetProfile(userBm.PermissionId).GetValue() as ProfileBM;
 
-                        //3.1 Chequeo de consistencia horizontal
+                        //4. Recuperación de idioma
+                        languageBm = languageBll.GetLanguage(userBm.LanguageId);
+
+                        //5. Armado de sesión
+                        SessionHelper.StartSession(userBm, profileBm, languageBm);
+
+                        //6 Chequeo de consistencia horizontal
                         result = dvBll.IsHorizontallyConsistent(userBm);
 
-                        if (result.IsValid())
+                        if (!result.IsValid())
                         {
-                            //3.2 Chequeo de vertical
+                            //Sólo un admin puede continuar no es suficiente con que pueda restaurar
+                            result = new ResultBM(ResultBM.Type.CORRUPTED_DATABASE, result.description, null, profileBm.HasPermission("GE999"));
+                        } else 
+                        {
+                            //4.2 Chequeo de vertical
                             result = dvBll.IsVerticallyConsistent();
-                            
-                            if (result.IsValid())
+
+                            if (!result.IsValid())
                             {
-                                //4. Recuperación de idioma
-                                languageBm = languageBll.GetLanguage(userBm.LanguageId);
-
-                                //5. Recuperación de permisos
-                                profileMdl = profileBll.GetProfile(userBm.PermissionId).GetValue() as ProfileBM;
-
-                                //6. Armado de sesión
-                                SessionHelper.StartSession(userBm, profileMdl, languageBm);
+                                //Sólo un admin puede continuar no es suficiente con que pueda restaurar
+                                result = new ResultBM(ResultBM.Type.CORRUPTED_DATABASE, result.description, null, profileBm.HasPermission("GE999"));
+                            } else 
+                            {
                                 result = new ResultBM(ResultBM.Type.OK, "Inicio de sesión exitoso para el usuario " + user);
                             }
                         }
@@ -70,7 +77,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                result = new ResultBM(ResultBM.Type.EXCEPTION, exception.Message);
+                result = new ResultBM(ResultBM.Type.EXCEPTION, exception.Message, exception, false);
             }
 
             return result;

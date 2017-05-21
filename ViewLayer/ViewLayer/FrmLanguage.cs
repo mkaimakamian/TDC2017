@@ -20,7 +20,7 @@ namespace ViewLayer
             InitializeComponent();
             SessionHelper.RegisterForTranslation(lblLanguage, Codes.MNU_OP001_LBL_LANGUAGE);
             SessionHelper.RegisterForTranslation(cmdAccept, Codes.BTN_ACCEPT);
-            SessionHelper.RegisterForTranslation(cmdCancel, Codes.BTN_CANCEL);
+            SessionHelper.RegisterForTranslation(cmdCancel, Codes.BTN_CLOSE);
         }
 
         private void FrmLanguage_Load(object sender, EventArgs e)
