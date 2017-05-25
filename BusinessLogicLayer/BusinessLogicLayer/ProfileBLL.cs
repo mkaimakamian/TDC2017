@@ -104,6 +104,10 @@ namespace BusinessLogicLayer
 
         }
 
+        /// <summary>
+        /// Recupera los perfiles creados por el usuario.
+        /// </summary>
+        /// <returns></returns>
         public ResultBM GetProfiles()
         {
             ProfileDAL profileDal = new ProfileDAL();
