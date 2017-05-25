@@ -142,11 +142,12 @@ namespace BusinessLogicLayer
             }
         }
 
-        //public ResultBM UpdateProfile(ProfileBM profile)
-        //{
-        //    //Elimino dependencias
-        //    CreateRelation(profile.GetChildren());
-        //}
+        public ResultBM UpdateProfile(ProfileBM profile)
+        {
+            return null;
+            //Elimino dependencias
+            //CreateRelation(profile.GetChildren());
+        }
 
         /// <summary>
         /// Inserta las relaciones en la base de datos
@@ -186,6 +187,26 @@ namespace BusinessLogicLayer
             }            
         }
 
+        private ResultBM DeleteProfile(string code)
+        {
+            try
+            {
+                ProfileDAL profileDal = new ProfileDAL();
+                if (profileDal.CanDeleteProfile(code))
+                {
+                    profileDal.DeleteProfile(code);
+                    return new ResultBM(ResultBM.Type.OK, "Perfil eliminado");
+                }
+                else
+                {
+                    return new ResultBM(ResultBM.Type.FAIL, "No se puede eliminar el permiso porque está asignado a al menos un usuario.");
+                }
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, exception.Message, exception);
+            }
+        }
 
         public ResultBM GetCollection()
         {
@@ -194,7 +215,7 @@ namespace BusinessLogicLayer
 
         public ResultBM Delete(object entity)
         {
-            throw new NotImplementedException();
+            return this.DeleteProfile(((ProfileBM) entity).Code);
         }
     }
 }

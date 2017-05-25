@@ -186,9 +186,9 @@ namespace BusinessModel
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public override bool HasPermission(string code)
+        public override bool HasPermission(string toFind)
         {
-            if (this.code == code && !this.excluded)
+            if (this.code == toFind && !this.excluded)
             {
                 return true;
             }
@@ -196,7 +196,7 @@ namespace BusinessModel
             {
                 foreach (ProfileBM profile in permissions)
                 {
-                    if (profile.HasPermission(profile.code))
+                    if (profile.HasPermission(toFind))
                     {
                         return true;
                     }
@@ -269,7 +269,6 @@ namespace BusinessModel
             List<ProfileBM> profiles = new List<ProfileBM>();
             foreach (ProfileBM profile in GetChildren())
             {
-                //profile.GetAlldescendants();
                 if (profile.IsFather())
                 {
                    profiles.AddRange(profile.GetAlldescendants());

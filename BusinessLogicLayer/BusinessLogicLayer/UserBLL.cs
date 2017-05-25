@@ -113,8 +113,8 @@ namespace BusinessLogicLayer
                 validation = IsValid(userBm);
                 if (validation.IsValid())
                 {
-                    userBm.Hdv = dvBll.CreateDigit(userBm);
                     userBm.Password = SecurityHelper.Encrypt(userBm.Password);
+                    userBm.Hdv = dvBll.CreateDigit(userBm);                    
                     userDto = new UserDTO(userBm.Name, userBm.Active, userBm.LanguageId, userBm.PermissionId, userBm.Password, userBm.Hdv);
                     userDal.SaveUser(userDto);
 
@@ -188,24 +188,17 @@ namespace BusinessLogicLayer
             {
                 DigitVerificatorBLL dvBll = new DigitVerificatorBLL();
                 UserDAL userDal = new UserDAL();
-                bool isDeleted = userDal.DeleteUser(userId);
+                userDal.DeleteUser(userId);
 
-                if (isDeleted)
+                ResultBM result = dvBll.UpdateVerticallDigit();
+                if (result.IsValid())
                 {
-                    ResultBM result = dvBll.UpdateVerticallDigit();
-                    if (result.IsValid())
-                    {
-                        return new ResultBM(ResultBM.Type.OK, "Usuario con id " + userId + " ha sido eliminado satisfactoriamente.");
-                    }
-                    else
-                    {
-                        return new ResultBM(ResultBM.Type.FAIL, "Error al generar el registro de integridad para la entidad users.");
-                    }
+                    return new ResultBM(ResultBM.Type.OK, "Usuario con id " + userId + " ha sido eliminado satisfactoriamente.");
                 }
                 else
                 {
-                    return new ResultBM(ResultBM.Type.FAIL, "Error al borrar al usuario con id " + userId);
-                }                
+                    return new ResultBM(ResultBM.Type.FAIL, "Error al generar el registro de integridad para la entidad users.");
+                }              
             }
             catch (Exception exception)
             {

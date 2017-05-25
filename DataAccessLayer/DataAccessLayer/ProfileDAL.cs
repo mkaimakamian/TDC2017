@@ -143,7 +143,43 @@ namespace DataAccessLayer
             dbsql.ExecuteNonQuery(sql.Remove(sql.Length -2));
             return true;
         }
-        
+
+        /// <summary>
+        /// Elimina el perfil según el código provisto por parámetro.
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public bool DeleteProfile(string code) {
+            DBSql dbsql = new DBSql();
+            String sql;
+            sql = "DELETE FROM permission_exclusion WHERE id = '" + code + "'";
+            dbsql.ExecuteNonQuery(sql);
+
+            sql = "DELETE FROM permission_hierarchy WHERE permissionIdBranch = '" + code + "'";
+            dbsql.ExecuteNonQuery(sql);
+
+            sql = "DELETE FROM permission WHERE id = '" + code + "'";
+            dbsql.ExecuteNonQuery(sql);
+
+            return true;
+        }
+
+        /// <summary>
+        /// Devuelve true si no se está utilizando el perfil y puede ser eliminado.
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public bool CanDeleteProfile(string code)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+            List<List<String>> reader;
+
+            sql = "SELECT 1 FROM users WHERE permissionId = '" + code +"'";
+            reader = dbsql.executeReader(sql);
+
+            return reader.Count == 0;
+        }
 
         private PermissionDTO Resolve(List<String> item)
         {

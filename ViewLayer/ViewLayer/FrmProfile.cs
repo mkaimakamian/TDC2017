@@ -64,7 +64,11 @@ namespace ViewLayer
                 }
                 else
                 {
-                    //result = profileBll.GetUserProfSystemPermissions();
+                    txtDescription.Text = this.entity.Description;
+                    ProfileBM profile =  GetPermissionHierarchy(this.Entity);
+                    PopulateTree(treeProfile, profile);
+                    treeProfile.ExpandAll();
+                    //chkListProfile.SetItemCheckState(0, CheckState.Checked);
                 }
             }
             catch (Exception exception)
@@ -80,7 +84,8 @@ namespace ViewLayer
             try
             {
                 //Se le asigna el valor el entity para tenerlo disponible al momento de guardado
-                ProfileBM result = GetPermissionHierarchy(sender);
+                ProfileBM selection = (ProfileBM)((CheckedListBox)sender).SelectedItem;
+                ProfileBM result = GetPermissionHierarchy(selection);
                 treeDescription.Nodes.Clear();
                 PopulateTree(treeDescription, result);
                 treeDescription.ExpandAll();
@@ -101,7 +106,8 @@ namespace ViewLayer
                 if (e.NewValue == CheckState.Checked)
                 {
                     //Agrega a la lista de elegidos, los permisos seleccionados del listado de permisos disponibles
-                    ProfileBM result = GetPermissionHierarchy(sender);
+                    ProfileBM selection = (ProfileBM)((CheckedListBox)sender).SelectedItem;
+                    ProfileBM result = GetPermissionHierarchy(selection);
                     this.Entity.AddPermission(result);                                        
                 }
                 else
@@ -153,9 +159,8 @@ namespace ViewLayer
         /// </summary>
         /// <param name="sender"></param>
         /// <returns></returns>
-        private ProfileBM GetPermissionHierarchy(object sender)
+        private ProfileBM GetPermissionHierarchy(ProfileBM selection)
         {
-            ProfileBM selection = (ProfileBM)((CheckedListBox)sender).SelectedItem;
             ProfileBLL profileBll = new ProfileBLL();
             ResultBM result = profileBll.GetProfile(selection.code);
 
@@ -173,9 +178,7 @@ namespace ViewLayer
 
                 if (isUpdate)
                 {
-                    //profileBll.UpdateProfile(this.Entity);
-                    int i = 0;
-                    i += 1;
+                    profileBll.UpdateProfile(this.Entity);                    
                 }
                 else
                 {
