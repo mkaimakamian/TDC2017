@@ -104,7 +104,6 @@ namespace BusinessLogicLayer
 
         }
 
-
         public ResultBM GetProfiles()
         {
             ProfileDAL profileDal = new ProfileDAL();
@@ -144,9 +143,20 @@ namespace BusinessLogicLayer
 
         public ResultBM UpdateProfile(ProfileBM profile)
         {
-            return null;
-            //Elimino dependencias
-            //CreateRelation(profile.GetChildren());
+
+            try
+            {
+                ProfileDAL profileDal = new ProfileDAL();
+                profileDal.DeleteRelation(profile.code);
+                CreateRelation(profile);
+
+                return new ResultBM(ResultBM.Type.OK, "Perfil actualizado.");
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, exception.Message, exception);
+            }
+            
         }
 
         /// <summary>
@@ -183,7 +193,8 @@ namespace BusinessLogicLayer
                     if (item.excluded)
                         toExclude.Add(new PermissionDTO(item.fatherCode, item.code, item.Description));
                 }
-                profileDal.SaveProfileExclusionRelation(root.Code, toExclude);
+                if (toExclude.Count > 0) 
+                    profileDal.SaveProfileExclusionRelation(root.Code, toExclude);
             }            
         }
 

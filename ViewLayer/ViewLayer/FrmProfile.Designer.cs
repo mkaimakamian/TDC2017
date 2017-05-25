@@ -88,6 +88,7 @@
             this.cmdClose.TabIndex = 6;
             this.cmdClose.Text = "close";
             this.cmdClose.UseVisualStyleBackColor = true;
+            this.cmdClose.Click += new System.EventHandler(this.cmdClose_Click);
             // 
             // FrmProfile
             // 

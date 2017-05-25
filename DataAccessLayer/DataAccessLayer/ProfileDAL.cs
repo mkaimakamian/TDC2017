@@ -145,11 +145,29 @@ namespace DataAccessLayer
         }
 
         /// <summary>
-        /// Elimina el perfil según el código provisto por parámetro.
+        /// Elimina el perfil según el código provisto por parámetro, incluyendo relaciones
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
         public bool DeleteProfile(string code) {
+            DBSql dbsql = new DBSql();
+            String sql;
+            
+            DeleteRelation(code);
+
+            sql = "DELETE FROM permission WHERE id = '" + code + "'";
+            dbsql.ExecuteNonQuery(sql);
+
+            return true;
+        }
+
+        /// <summary>
+        /// Elimina las relaciones: exclusiones y jerarquía de dependencias asociadas al perfil
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public bool DeleteRelation(string code)
+        {
             DBSql dbsql = new DBSql();
             String sql;
             sql = "DELETE FROM permission_exclusion WHERE id = '" + code + "'";
@@ -157,10 +175,6 @@ namespace DataAccessLayer
 
             sql = "DELETE FROM permission_hierarchy WHERE permissionIdBranch = '" + code + "'";
             dbsql.ExecuteNonQuery(sql);
-
-            sql = "DELETE FROM permission WHERE id = '" + code + "'";
-            dbsql.ExecuteNonQuery(sql);
-
             return true;
         }
 

@@ -65,10 +65,10 @@ namespace ViewLayer
                 else
                 {
                     txtDescription.Text = this.entity.Description;
-                    ProfileBM profile =  GetPermissionHierarchy(this.Entity);
-                    PopulateTree(treeProfile, profile);
+                    //ProfileBM profile =  GetPermissionHierarchy(this.Entity);
+                    this.Entity = GetPermissionHierarchy(this.Entity);
+                    PopulateTree(treeProfile, this.Entity);
                     treeProfile.ExpandAll();
-                    //chkListProfile.SetItemCheckState(0, CheckState.Checked);
                 }
             }
             catch (Exception exception)
@@ -174,18 +174,26 @@ namespace ViewLayer
         {
             try
             {
+                ResultBM result;
                 ProfileBLL profileBll = new ProfileBLL();
 
                 if (isUpdate)
                 {
-                    profileBll.UpdateProfile(this.Entity);                    
+                    result = profileBll.UpdateProfile(this.Entity);
+                    if (result.IsValid()) 
+                        Close();
+                    else
+                        MessageBox.Show("Se ha producido el siguiente error: " + result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    profileBll.CreateProfile(this.Entity);
+                    result = profileBll.CreateProfile(this.Entity);
+                    if (result.IsValid()) 
+                        Close();
+                    else
+                        MessageBox.Show("Se ha producido el siguiente error: " + result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-
-                Close();
+                
             }
             catch (Exception exception)
             {
@@ -214,9 +222,14 @@ namespace ViewLayer
 
         private void treeProfile_AfterCheck(object sender, TreeViewEventArgs e)
         {
-            //Si se chequea, e sporque se quiere
+            //Cuando el check es true, implica que no se quiere excluir
             ProfileBM profile = e.Node.Tag as ProfileBM;
             profile.excluded = !e.Node.Checked;
+        }
+
+        private void cmdClose_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
