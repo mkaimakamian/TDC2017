@@ -12,17 +12,19 @@ namespace DataTransferObject
         public string code;
         public string description;
         public bool system;
+        public bool excluded;
 
         public PermissionDTO()
         {
         }
 
-        public PermissionDTO(string fatherCode, string code, string description, bool system = false)
+        public PermissionDTO(string fatherCode, string code, string description, bool system = false, bool excluded = false)
         {
             this.fatherCode = fatherCode;
             this.code = code;
             this.description = description;
             this.system = system;
+            this.excluded = excluded;
         }
     }
 }

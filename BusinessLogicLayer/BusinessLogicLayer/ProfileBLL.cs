@@ -25,6 +25,7 @@ namespace BusinessLogicLayer
             string fatherCode;
             string code;
             string description;
+            bool excluded;
 
             bool moreItemsToAdd = true;
             int maxIterations = 0; //Condición de corte del while en caso de una eventualidad
@@ -40,7 +41,8 @@ namespace BusinessLogicLayer
                 fatherCode = permissions[0].fatherCode;
                 code = permissions[0].code;
                 description = permissions[0].description;
-                result = new PermissionMDL(fatherCode, code, description);
+                excluded = permissions[0].excluded;
+                result = new PermissionMDL(fatherCode, code, description, excluded);
             }
             else
             {
@@ -50,7 +52,8 @@ namespace BusinessLogicLayer
                 fatherCode = permissions[0].fatherCode;
                 code = permissions[0].code;
                 description = permissions[0].description;
-                result = new PermissionsMDL(fatherCode, code, description);
+                excluded = permissions[0].excluded;
+                result = new PermissionsMDL(fatherCode, code, description, excluded);
 
                 while (moreItemsToAdd)
                 {
@@ -59,8 +62,9 @@ namespace BusinessLogicLayer
                         fatherCode = permissions[i].fatherCode;
                         code = permissions[i].code;
                         description = permissions[i].description;
+                        excluded = permissions[i].excluded;
 
-                        if (result.AddPermissionSorted(new PermissionMDL(fatherCode, code, description)))
+                        if (result.AddPermissionSorted(new PermissionMDL(fatherCode, code, description, excluded)))
                         {
                             permissions.RemoveAt(i);
                         }
@@ -88,7 +92,7 @@ namespace BusinessLogicLayer
 
                 foreach (PermissionDTO permission in permissionsDto)
                 {
-                    permissionBms.Add(new PermissionMDL(permission.fatherCode, permission.code, permission.description));
+                    permissionBms.Add(new PermissionMDL(permission.fatherCode, permission.code, permission.description, permission.excluded));
                 }
 
                 return new ResultBM(ResultBM.Type.OK, "Lista de perfiles recuperada exitosamente", permissionBms);
@@ -109,7 +113,7 @@ namespace BusinessLogicLayer
 
             foreach (PermissionDTO permission in permissionsDto)
             {
-                permissionBms.Add(new PermissionMDL(permission.fatherCode, permission.code, permission.description));
+                permissionBms.Add(new PermissionMDL(permission.fatherCode, permission.code, permission.description, permission.excluded));
             }
 
             return new ResultBM(ResultBM.Type.OK, "Lista de perfiles recuperada exitosamente", permissionBms);
@@ -122,37 +126,71 @@ namespace BusinessLogicLayer
         /// <returns></returns>
         public ResultBM CreateProfile(ProfileBM profile)
         {
-            ProfileDAL profileDal = new ProfileDAL();
-            List<PermissionDTO> permissions = new List<PermissionDTO>();
-
-            //Se agrega el root
-            PermissionDTO root = new PermissionDTO(profile.fatherCode, profile.code, profile.Description);
-            profileDal.SaveProfile(root);
-
-            //Se crea la lista con las dependencias
-            foreach (ProfileBM permission in profile.GetChildren())
+            try
             {
+                ProfileDAL profileDal = new ProfileDAL();                
+                //Se agrega el root
+                PermissionDTO root = new PermissionDTO(profile.fatherCode, profile.code, profile.Description);
+                profileDal.SaveProfile(root);
+                CreateRelation(profile);
+
+                return new ResultBM(ResultBM.Type.OK, "Perfil creado: " + profile.Description);
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, exception.Message, exception);
+            }
+        }
+
+        //public ResultBM UpdateProfile(ProfileBM profile)
+        //{
+        //    //Elimino dependencias
+        //    CreateRelation(profile.GetChildren());
+        //}
+
+        /// <summary>
+        /// Inserta las relaciones en la base de datos
+        /// </summary>
+        /// <param name="relations"></param>
+        private void CreateRelation(ProfileBM root)
+        {
+            List<PermissionDTO> permissions = new List<PermissionDTO>();
+            ProfileDAL profileDal = new ProfileDAL();            
+            List<ProfileBM> toAnalyse = null;
+            List<PermissionDTO> toExclude = new List<PermissionDTO>();
+
+            List<ProfileBM> relations = root.GetChildren();
+
+            //Cada elemento de primer nivel, representan los roots de las distintas jerarquías de los permisos
+            //La relación con los hijos es por exclusion, es decir, se mostrarán todos a menos que se encuentren en la tabla de exclusiones
+            foreach (ProfileBM permission in relations)
+            {
+                //Creo la relación con el padre inmediato
                 permissions.Add(new PermissionDTO(permission.fatherCode, permission.code, permission.Description));
             }
 
-            bool result = profileDal.SaveProfileRelation(permissions);
+            profileDal.SaveProfileRelation(permissions);
 
-            if (result)
+            foreach (ProfileBM permission in relations)
             {
-                return new ResultBM(ResultBM.Type.OK, "Perfil creado: " + profile.Description);
-            }
-            else
-            {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "El perfil no pudo crearse.");
-            }
+                toAnalyse = permission.GetAlldescendants();
+                //Agrego al padre en la lista que debe ser analizada para la exclusión
+                toAnalyse.Add(permission);
 
+                foreach (ProfileBM item in toAnalyse)
+                {
+                    if (item.excluded)
+                        toExclude.Add(new PermissionDTO(item.fatherCode, item.code, item.Description));
+                }
+                profileDal.SaveProfileExclusionRelation(root.Code, toExclude);
+            }            
         }
+
 
         public ResultBM GetCollection()
         {
             return this.GetProfiles();
         }
-
 
         public ResultBM Delete(object entity)
         {

@@ -32,7 +32,7 @@ namespace TestsSuit
             result = profileBll.GetProfile("OP001");
             ProfileBM noChildren = result.GetValue<PermissionMDL>();
 
-            PermissionsMDL newProfile = new PermissionsMDL(null, "XX999", "TestProfile");
+            PermissionsMDL newProfile = new PermissionsMDL(null, "XX999", "TestProfile", false);
             newProfile.AddPermission(withChildren);
             newProfile.AddPermission(noChildren);
 

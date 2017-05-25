@@ -17,7 +17,7 @@ namespace ViewLayer
 
         private ProfileBM entity;
         private bool isUpdate = false;
-
+        
         public ProfileBM Entity
         {
             get { return this.entity; }
@@ -60,7 +60,7 @@ namespace ViewLayer
                 if (!this.isUpdate)
                 {
                     //Si se quiere dar de alta un nuevo permiso, se genera un root para mantener ordenado los permisos que se agreguen
-                    this.Entity = new PermissionsMDL(null, GenCode(5), "descripcion");
+                    this.Entity = new PermissionsMDL(null, GenCode(5), "descripcion", false);
                 }
                 else
                 {
@@ -70,7 +70,8 @@ namespace ViewLayer
             catch (Exception exception)
             {
                 MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            } 
+            }
+
         }
 
         private void chkListProfile_SelectedIndexChanged(object sender, EventArgs e)
@@ -126,7 +127,10 @@ namespace ViewLayer
             {
                 //Si no posee padre, significa que es root
                 fatherNode = new TreeNode(element.Description);
+                //se utiliza el tag para almacenar el permiso
+                fatherNode.Tag = element;
                 component.Nodes.Add(fatherNode);
+                fatherNode.Checked = true;
             }
 
             if (element.IsFather())
@@ -136,11 +140,19 @@ namespace ViewLayer
                     //Creo un nodo y lo vinculo con su padre
                     TreeNode childNode = new TreeNode(permission.Description);
                     fatherNode.Nodes.Add(childNode);
+                    //se utiliza el tag para almacenar el permiso
+                    childNode.Tag = permission;
+                    childNode.Checked = !permission.excluded;
                     PopulateTree(component, permission, childNode);
                 }
             }            
         }
 
+        /// <summary>
+        /// Devuelve la jerarquía de permisos para el elemento seleccionado
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <returns></returns>
         private ProfileBM GetPermissionHierarchy(object sender)
         {
             ProfileBM selection = (ProfileBM)((CheckedListBox)sender).SelectedItem;
@@ -148,23 +160,22 @@ namespace ViewLayer
             ResultBM result = profileBll.GetProfile(selection.code);
 
             if (!result.IsValid())
-            {
                 MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            
             return result.GetValue() as ProfileBM;
         }
-
-      
 
         private void cmdAccept_Click(object sender, EventArgs e)
         {
             try
             {
                 ProfileBLL profileBll = new ProfileBLL();
-                
+
                 if (isUpdate)
                 {
                     //profileBll.UpdateProfile(this.Entity);
+                    int i = 0;
+                    i += 1;
                 }
                 else
                 {
@@ -196,6 +207,13 @@ namespace ViewLayer
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        private void treeProfile_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            //Si se chequea, e sporque se quiere
+            ProfileBM profile = e.Node.Tag as ProfileBM;
+            profile.excluded = !e.Node.Checked;
         }
     }
 }

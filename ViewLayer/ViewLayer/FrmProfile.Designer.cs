@@ -70,6 +70,7 @@
             this.treeProfile.Name = "treeProfile";
             this.treeProfile.Size = new System.Drawing.Size(256, 189);
             this.treeProfile.TabIndex = 4;
+            this.treeProfile.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeProfile_AfterCheck);
             // 
             // txtDescription
             // 

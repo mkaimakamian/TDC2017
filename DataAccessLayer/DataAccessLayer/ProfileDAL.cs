@@ -28,9 +28,17 @@ namespace DataAccessLayer
 
             // Al final queda: id del permiso, descripción, permiso por el que se accedió, padre // autoreferencia
             // El permiso por el que se busca siempre se excluye, razón por la que hay que incluirlo con un union
-            sql += "SELECT v.permissionIdBranch fatherCode, v.permissionIdLeaf code, pe.description, pe.system ";
+            //sql += "SELECT v.permissionIdBranch fatherCode, v.permissionIdLeaf code, pe.description, pe.system ";
+            //sql += "FROM (SELECT  p.* FROM permisos p UNION SELECT NULL,  '" + profileId + "') v ";
+            //sql += "LEFT JOIN permission pe ON  pe.id = v.permissionIdLeaf ORDER BY 1, 2";
+
+            sql += "SELECT v.permissionIdBranch fatherCode, v.permissionIdLeaf code, pe.description, pe.system, CASE WHEN px.excluded IS NULL THEN 'false' ELSE 'true' END excluded ";
             sql += "FROM (SELECT  p.* FROM permisos p UNION SELECT NULL,  '" + profileId + "') v ";
-            sql += "LEFT JOIN permission pe ON  pe.id = v.permissionIdLeaf ORDER BY 1, 2";
+            sql += "LEFT JOIN permission pe ON  pe.id = v.permissionIdLeaf ";
+            sql += "LEFT JOIN permission_exclusion px ON px.id = '" + profileId  + "' AND (px.excluded = v.permissionIdLeaf OR px.excluded = v.permissionIdBranch) ";
+            sql += "group by v.permissionIdBranch, v.permissionIdLeaf, pe.description, pe.system,  CASE WHEN  px.excluded  IS NULL  THEN 'false' ELSE 'true'  END ";
+            sql += "ORDER BY 1, 2";
+
 
             reader = dbsql.executeReader(sql);
 
@@ -52,7 +60,7 @@ namespace DataAccessLayer
             List<PermissionDTO> result = new List<PermissionDTO>();
 
             // Recupera los roots de todos los permisos de sistema
-            sql = "SELECT DISTINCT null  fatherCode, p.id, p.description, p.system FROM permission p INNER JOIN permission_hierarchy ph ON ph.permissionIdBranch = p.id AND p.system = 1 ";
+            sql = "SELECT DISTINCT null  fatherCode, p.id, p.description, p.system, 'false' excluded FROM permission p INNER JOIN permission_hierarchy ph ON ph.permissionIdBranch = p.id AND p.system = 1 ";
             sql += "WHERE p.id NOT IN ";
             sql += "(SELECT DISTINCT ph.permissionIdLeaf FROM permission p INNER JOIN permission_hierarchy ph ON ph.permissionIdBranch = p.id AND p.system = 1)";
 
@@ -79,7 +87,7 @@ namespace DataAccessLayer
             List<List<String>> reader;
             List<PermissionDTO> result = new List<PermissionDTO>();
 
-            sql = "SELECT null  fatherCode, id, description, system FROM permission";
+            sql = "SELECT null  fatherCode, id, description, system, 'false' excluded FROM permission";
 
             reader = dbsql.executeReader(sql);
 
@@ -121,6 +129,22 @@ namespace DataAccessLayer
             return true;
         }
 
+        public bool SaveProfileExclusionRelation(string fatherCode, List<PermissionDTO> permissionsDto)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "INSERT INTO permission_exclusion (id, excluded) VALUES ";
+            foreach (PermissionDTO permission in permissionsDto) {
+
+                sql += "('" + fatherCode + "', '" + permission.code + "'), ";
+            }
+            //se remueve la coma del final
+            dbsql.ExecuteNonQuery(sql.Remove(sql.Length -2));
+            return true;
+        }
+        
+
         private PermissionDTO Resolve(List<String> item)
         {
             PermissionDTO result = new PermissionDTO();
@@ -128,6 +152,7 @@ namespace DataAccessLayer
             result.code = item[1];
             result.description = item[2];
             result.system = bool.Parse(item[3]);
+            result.excluded = bool.Parse(item[4]);
             return result;
         }
     }

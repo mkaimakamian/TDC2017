@@ -11,6 +11,7 @@ namespace BusinessModel
         public string fatherCode;
         public string code;
         private string description;
+        public bool excluded;
 
         public abstract bool AddPermissionSorted(ProfileBM permission); //agrega el permiso ordenadamente
         public abstract bool AddPermission(ProfileBM permission); //agrega el permiso como hijo de este objeto
@@ -20,6 +21,7 @@ namespace BusinessModel
         public abstract bool IsFather(); //evalúa si el objeto es del tipo padre
         public abstract List<ProfileBM> GetChildren(); //devuelve la lista de hijos inmediatos
         //public abstract List<ProfileBM> GetHierarchyAsList();
+        public abstract List<ProfileBM> GetAlldescendants(); //devuelve la lista de todos los descendientes
 
         public string Description
         {
@@ -41,11 +43,12 @@ namespace BusinessModel
     public class PermissionMDL:ProfileBM
     {
  
-        public PermissionMDL(string fatherCode, string code, string description)
+        public PermissionMDL(string fatherCode, string code, string description, bool excluded)
         {
             this.fatherCode = fatherCode;
             this.code = code;
             this.Description = description;
+            this.excluded = excluded;
         }
 
         public override bool AddPermissionSorted(ProfileBM permission)
@@ -67,7 +70,7 @@ namespace BusinessModel
 
         public override bool HasPermission(string code)
         {
-            return this.code == code;
+            return this.code == code && !this.excluded;
         }
 
         public override bool IsFather()
@@ -89,6 +92,11 @@ namespace BusinessModel
         //{
         //    throw new NotImplementedException();
         //}
+
+        public override List<ProfileBM> GetAlldescendants()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <summary>
@@ -98,11 +106,12 @@ namespace BusinessModel
     {
         List<ProfileBM> permissions;
 
-        public PermissionsMDL(string fatherCode, string code, string description)
+        public PermissionsMDL(string fatherCode, string code, string description, bool excluded)
         {
             this.fatherCode = fatherCode;
             this.code = code;
             this.Description = description;
+            this.excluded = excluded;
             this.permissions = new List<ProfileBM>();
         }
 
@@ -133,7 +142,7 @@ namespace BusinessModel
 
                     } else if (profile.code == permission.fatherCode) {
                         //El hijo que no es padre debe convertirse en padre.
-                        PermissionsMDL newFather = new PermissionsMDL(profile.fatherCode, profile.code, profile.Description);
+                        PermissionsMDL newFather = new PermissionsMDL(profile.fatherCode, profile.code, profile.Description, profile.excluded);
                         newFather.AddPermissionSorted(permission);
                         this.permissions.Remove(profile);
                         this.permissions.Add(newFather);
@@ -169,7 +178,7 @@ namespace BusinessModel
 
         public override ProfileBM GetPermission(string code)
         {
-            return this;
+            return this;//debería buscar todos
         }
 
         /// <summary>
@@ -179,7 +188,7 @@ namespace BusinessModel
         /// <returns></returns>
         public override bool HasPermission(string code)
         {
-            if (this.code == code)
+            if (this.code == code && !this.excluded)
             {
                 return true;
             }
@@ -254,5 +263,24 @@ namespace BusinessModel
         //    }
         //    return found;
         //}
+
+        public override List<ProfileBM> GetAlldescendants()
+        {
+            List<ProfileBM> profiles = new List<ProfileBM>();
+            foreach (ProfileBM profile in GetChildren())
+            {
+                //profile.GetAlldescendants();
+                if (profile.IsFather())
+                {
+                   profiles.AddRange(profile.GetAlldescendants());
+                }
+                else
+                {
+                    profiles.Add(profile);
+                }
+            }
+            profiles.Add(this);
+            return profiles;
+        }
     }
 }
