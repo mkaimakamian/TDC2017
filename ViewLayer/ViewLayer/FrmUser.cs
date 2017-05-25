@@ -21,7 +21,13 @@ namespace ViewLayer
         public UserBM Entity
         {
             get { return this.entity; }
-            set { this.entity = value; isUpdate = true; }
+            set { this.entity = value;}
+        }
+
+        public Boolean IsUpdate
+        {
+            get { return this.isUpdate; }
+            set { this.isUpdate = value; }
         }
 
         public FrmUser()

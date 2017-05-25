@@ -17,6 +17,13 @@ namespace ViewLayer
                     public const string OP004 = "OP004"; //Editar usuario
                     public const string OP005 = "OP005"; //Eliminar usuario               
             public const string GE004 = "GE004"; //Perfiles
+                //public const string OP006 = "OP006"; //Crear usuario
+                public const string OP007 = "OP007"; //Crear perfil
+                public const string OP008 = "OP008"; //Editar perfil
+                public const string OP009 = "OP009"; //Eliminar perfil
+
+
+
 
         public const string GE005 = "GE005"; //Mantenimiento
             public const string OP010 = "OP010"; // Listar bitácora

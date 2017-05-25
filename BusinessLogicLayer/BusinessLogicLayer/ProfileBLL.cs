@@ -11,6 +11,11 @@ namespace BusinessLogicLayer
 {
     public class ProfileBLL : BLEntity
     {
+        /// <summary>
+        /// Recupera un perfil en base a su id.
+        /// </summary>
+        /// <param name="profileId"></param>
+        /// <returns></returns>
         public ResultBM GetProfile(string profileId)
         {
             List<PermissionDTO> permissions;
@@ -69,6 +74,33 @@ namespace BusinessLogicLayer
             return new ResultBM(ResultBM.Type.OK, "Permiso recuperado.", result);
         }
 
+        /// <summary>
+        /// Recupera los permisos root de los distintos menúes; no dejan de ser perfiles, pero están marcados como pertenecientes al sistema.
+        /// </summary>
+        /// <returns></returns>
+        public ResultBM GetSystemPermissions()
+        {
+            try
+            {
+                ProfileDAL profileDal = new ProfileDAL();
+                List<PermissionDTO> permissionsDto = profileDal.GetSystemPermissions();
+                List<PermissionMDL> permissionBms = new List<PermissionMDL>();
+
+                foreach (PermissionDTO permission in permissionsDto)
+                {
+                    permissionBms.Add(new PermissionMDL(permission.fatherCode, permission.code, permission.description));
+                }
+
+                return new ResultBM(ResultBM.Type.OK, "Lista de perfiles recuperada exitosamente", permissionBms);
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, exception.Message, exception);
+            }
+
+        }
+
+
         public ResultBM GetProfiles()
         {
             ProfileDAL profileDal = new ProfileDAL();
@@ -83,6 +115,11 @@ namespace BusinessLogicLayer
             return new ResultBM(ResultBM.Type.OK, "Lista de perfiles recuperada exitosamente", permissionBms);
         }
 
+        /// <summary>
+        /// Crea un perfil en base al modelo recibido, considerando únicamente los hijos del primer nivel.
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
         public ResultBM CreateProfile(ProfileBM profile)
         {
             ProfileDAL profileDal = new ProfileDAL();

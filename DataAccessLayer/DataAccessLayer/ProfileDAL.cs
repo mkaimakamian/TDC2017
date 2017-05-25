@@ -28,9 +28,33 @@ namespace DataAccessLayer
 
             // Al final queda: id del permiso, descripción, permiso por el que se accedió, padre // autoreferencia
             // El permiso por el que se busca siempre se excluye, razón por la que hay que incluirlo con un union
-            sql += "SELECT v.permissionIdBranch fatherCode, v.permissionIdLeaf code, pe.description ";
+            sql += "SELECT v.permissionIdBranch fatherCode, v.permissionIdLeaf code, pe.description, pe.system ";
             sql += "FROM (SELECT  p.* FROM permisos p UNION SELECT NULL,  '" + profileId + "') v ";
             sql += "LEFT JOIN permission pe ON  pe.id = v.permissionIdLeaf ORDER BY 1, 2";
+
+            reader = dbsql.executeReader(sql);
+
+            if (reader.Count > 0)
+            {
+                for (int i = 0; i < reader.Count; ++i)
+                {
+                    result.Add(Resolve(reader[i]));
+                }
+            }
+            return result;
+        }
+
+        public List<PermissionDTO> GetSystemPermissions()
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+            List<List<String>> reader;
+            List<PermissionDTO> result = new List<PermissionDTO>();
+
+            // Recupera los roots de todos los permisos de sistema
+            sql = "SELECT DISTINCT null  fatherCode, p.id, p.description, p.system FROM permission p INNER JOIN permission_hierarchy ph ON ph.permissionIdBranch = p.id AND p.system = 1 ";
+            sql += "WHERE p.id NOT IN ";
+            sql += "(SELECT DISTINCT ph.permissionIdLeaf FROM permission p INNER JOIN permission_hierarchy ph ON ph.permissionIdBranch = p.id AND p.system = 1)";
 
             reader = dbsql.executeReader(sql);
 
@@ -55,8 +79,7 @@ namespace DataAccessLayer
             List<List<String>> reader;
             List<PermissionDTO> result = new List<PermissionDTO>();
 
-            // Se recupera el árbol de jerarquías utilizando CTE
-            sql = "SELECT null  fatherCode, id, description FROM permission";
+            sql = "SELECT null  fatherCode, id, description, system FROM permission";
 
             reader = dbsql.executeReader(sql);
 
@@ -77,7 +100,7 @@ namespace DataAccessLayer
             sql = "INSERT INTO permission (id, description, system) VALUES (";
             sql += "'" + permissionDto.code + "', ";
             sql += "'" + permissionDto.description + "', ";
-            sql += "'false'";
+            sql += "'" + permissionDto.system + "'";
             sql += ")";
             dbsql.ExecuteNonQuery(sql);
             return true;
@@ -104,6 +127,7 @@ namespace DataAccessLayer
             result.fatherCode = item[0];
             result.code = item[1];
             result.description = item[2];
+            result.system = bool.Parse(item[3]);
             return result;
         }
     }

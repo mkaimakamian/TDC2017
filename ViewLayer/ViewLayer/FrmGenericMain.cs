@@ -105,9 +105,12 @@ namespace ViewLayer
 
         private void cmdEdit_Click(object sender, EventArgs e)
         {
+            //Se instancia el formulario, setteando la propiedad Entity y IsUpdate
             Form viewForm = (Form)Activator.CreateInstance(this.viewer);
             System.Reflection.PropertyInfo Entity = viewForm.GetType().GetProperty("Entity");
             Entity.SetValue(viewForm, dgView.SelectedRows[0].DataBoundItem);
+            Entity = viewForm.GetType().GetProperty("IsUpdate");
+            Entity.SetValue(viewForm, true);
             viewForm.ShowDialog();
             LoadDatagrid();
         }

@@ -14,7 +14,24 @@ namespace ViewLayer
 {
     public partial class FrmProfile : Form
     {
-        ProfileBM root_profile;
+
+        private ProfileBM entity;
+        private bool isUpdate = false;
+
+        public ProfileBM Entity
+        {
+            get { return this.entity; }
+            set { this.entity = value;}
+        }
+
+        public Boolean IsUpdate
+        {
+            get { return this.isUpdate; }
+            set { this.isUpdate = value;}
+        }
+
+
+        //ProfileBM root_profile;
 
         public FrmProfile()
         {
@@ -25,9 +42,9 @@ namespace ViewLayer
         {
             try
             {
-                // Se recuperan los permisos y se llena la lista
+                // Se recuperan los permisos (root) y se llena la lista
                 ProfileBLL profileBll = new ProfileBLL();
-                ResultBM result = profileBll.GetProfiles();
+                ResultBM result = profileBll.GetSystemPermissions();
                 
                 if (result.IsValid())
                 {
@@ -37,9 +54,18 @@ namespace ViewLayer
                 else {
                     MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-
-                //Se crea un nodo padre para mantener ordenado el árbol de permisos que el usuario dará de alta
-                root_profile = new PermissionsMDL(null, "CODE", "descripcion");
+                
+                //En case de ser nuevo, se requiere contar con un permiso "nodo" que facilita su muestra por pantalla y al momento de guardarlo.
+                //Si se trata de una actualización, se debe recuperar el listado con los permisos y sus exclusiones.
+                if (!this.isUpdate)
+                {
+                    //Si se quiere dar de alta un nuevo permiso, se genera un root para mantener ordenado los permisos que se agreguen
+                    this.Entity = new PermissionsMDL(null, GenCode(5), "descripcion");
+                }
+                else
+                {
+                    //result = profileBll.GetUserProfSystemPermissions();
+                }
             }
             catch (Exception exception)
             {
@@ -52,6 +78,7 @@ namespace ViewLayer
             //Muestra la composición jerárquica del permiso seleccionado
             try
             {
+                //Se le asigna el valor el entity para tenerlo disponible al momento de guardado
                 ProfileBM result = GetPermissionHierarchy(sender);
                 treeDescription.Nodes.Clear();
                 PopulateTree(treeDescription, result);
@@ -68,22 +95,22 @@ namespace ViewLayer
             try
             {
                 treeProfile.Nodes.Clear();
-                root_profile.Description = txtDescription.Text;
+                this.Entity.Description = txtDescription.Text;
 
                 if (e.NewValue == CheckState.Checked)
                 {
                     //Agrega a la lista de elegidos, los permisos seleccionados del listado de permisos disponibles
                     ProfileBM result = GetPermissionHierarchy(sender);
-                    root_profile.AddPermission(result);                                        
+                    this.Entity.AddPermission(result);                                        
                 }
                 else
                 {
                     //Elimina del listado de permisos a agregar, aquel que coincida con el código
                     ProfileBM selection = (ProfileBM)((CheckedListBox)sender).SelectedItem;
-                    root_profile.DeletePermission(selection.code);
+                    this.Entity.DeletePermission(selection.code);
                 }
 
-                PopulateTree(treeProfile, root_profile);
+                PopulateTree(treeProfile, this.Entity);
                 treeProfile.ExpandAll();
 
             }
@@ -125,6 +152,50 @@ namespace ViewLayer
                 MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             return result.GetValue() as ProfileBM;
+        }
+
+      
+
+        private void cmdAccept_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ProfileBLL profileBll = new ProfileBLL();
+                
+                if (isUpdate)
+                {
+                    //profileBll.UpdateProfile(this.Entity);
+                }
+                else
+                {
+                    profileBll.CreateProfile(this.Entity);
+                }
+
+                Close();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+        }
+
+        private void txtDescription_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Crea una cadena alfanumérica para crear los ids de los permisos.
+        /// </summary>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        private string GenCode(int length)
+        {
+            Random random = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }
