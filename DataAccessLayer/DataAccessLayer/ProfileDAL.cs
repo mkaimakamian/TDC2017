@@ -87,7 +87,7 @@ namespace DataAccessLayer
             List<List<String>> reader;
             List<PermissionDTO> result = new List<PermissionDTO>();
 
-            sql = "SELECT null  fatherCode, id, description, system, 'false' excluded FROM permission";
+            sql = "SELECT null  fatherCode, id, description, system, 'false' excluded FROM permission WHERE system = 0";
 
             reader = dbsql.executeReader(sql);
 

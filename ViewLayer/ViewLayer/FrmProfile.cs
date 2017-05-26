@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogicLayer;
 using BusinessModel;
+using Helper;
 
 namespace ViewLayer
 {
@@ -42,6 +43,13 @@ namespace ViewLayer
         {
             try
             {
+                //Traducciones
+                SessionHelper.RegisterForTranslation(cmdAccept, Codes.BTN_ACCEPT);
+                SessionHelper.RegisterForTranslation(cmdClose, Codes.BTN_CLOSE);
+                SessionHelper.RegisterForTranslation(lblPermission, Codes.LBL_PERMISSIONS);
+                SessionHelper.RegisterForTranslation(lblDescription, Codes.LBL_DESCRIPTION);
+                SessionHelper.RegisterForTranslation(lblProfile, Codes.LBL_PROFILE);
+
                 // Se recuperan los permisos (root) y se llena la lista
                 ProfileBLL profileBll = new ProfileBLL();
                 ResultBM result = profileBll.GetSystemPermissions();

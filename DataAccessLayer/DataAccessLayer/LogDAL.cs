@@ -16,7 +16,7 @@ namespace DataAccessLayer
             List<List<String>> reader;
             List<LogDTO> result = new List<LogDTO>();
 
-            sql = "SELECT * FROM logs";
+            sql = "SELECT * FROM logs ORDER BY created desc";
             reader = dbsql.executeReader(sql);
 
             if (reader.Count > 0)

@@ -60,6 +60,9 @@ namespace ViewLayer
         public const string LBL_PASSWORD = "LBL_PASSWORD";
         public const string LBL_PASSWORD_CHECK = "LBL_PASSWORD_CHECK";
         public const string LBL_PROFILE = "LBL_PROFILE";
+        public const string LBL_DESCRIPTION = "LBL_DESCRIPTION";
+        public const string LBL_PERMISSIONS = "LBL_PERMISSIONS";
+
 
         public const string MNU_GE001 = "MNU_GE001"; //Menú herramientas
             public const string MNU_OP001 = "MNU_OP001"; //Cambiar idioma

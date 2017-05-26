@@ -20,7 +20,8 @@ namespace BusinessModel
             INCOMPLETE_FIELDS,
             EXCEPTION,
             CORRUPTED_DATABASE,
-            FAIL
+            FAIL,
+            EMPTY_PROFILE
         };
 
         private Type type;
