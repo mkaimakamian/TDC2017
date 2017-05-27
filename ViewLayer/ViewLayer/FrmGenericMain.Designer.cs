@@ -33,6 +33,7 @@
             this.cmdEdit = new System.Windows.Forms.Button();
             this.cmdDelete = new System.Windows.Forms.Button();
             this.cmdClose = new System.Windows.Forms.Button();
+            this.flowLayout = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dgView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,10 +44,10 @@
             this.dgView.AllowUserToOrderColumns = true;
             this.dgView.AllowUserToResizeRows = false;
             this.dgView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgView.Location = new System.Drawing.Point(2, 2);
+            this.dgView.Location = new System.Drawing.Point(2, 69);
             this.dgView.Name = "dgView";
             this.dgView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgView.Size = new System.Drawing.Size(507, 425);
+            this.dgView.Size = new System.Drawing.Size(507, 358);
             this.dgView.TabIndex = 0;
             // 
             // cmdNew
@@ -89,11 +90,19 @@
             this.cmdClose.UseVisualStyleBackColor = true;
             this.cmdClose.Click += new System.EventHandler(this.cmdClose_Click);
             // 
+            // flowLayout
+            // 
+            this.flowLayout.Location = new System.Drawing.Point(2, 2);
+            this.flowLayout.Name = "flowLayout";
+            this.flowLayout.Size = new System.Drawing.Size(507, 61);
+            this.flowLayout.TabIndex = 5;
+            // 
             // FrmGenericMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(598, 433);
+            this.Controls.Add(this.flowLayout);
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.cmdDelete);
             this.Controls.Add(this.cmdEdit);
@@ -116,6 +125,7 @@
         private System.Windows.Forms.Button cmdEdit;
         private System.Windows.Forms.Button cmdDelete;
         private System.Windows.Forms.Button cmdClose;
+        private System.Windows.Forms.FlowLayoutPanel flowLayout;
 
 
     }

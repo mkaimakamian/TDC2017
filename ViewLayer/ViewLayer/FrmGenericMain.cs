@@ -85,6 +85,7 @@ namespace ViewLayer
                 if (result.IsValid())
                 {
                     dgView.DataSource = result.GetValue();
+                    CreateFilters(dgView);
                 }
                 else
                 {
@@ -152,7 +153,9 @@ namespace ViewLayer
 
         private void AdjustSizes()
         {
-            dgView.Height = this.Height - 45;
+            flowLayout.Width = this.Width - 115;
+
+            dgView.Height = this.Height - flowLayout.Height - 50;
             dgView.Width = this.Width - 115;
 
             cmdClose.Left = this.Width - cmdClose.Width - 30;
@@ -166,6 +169,42 @@ namespace ViewLayer
 
             cmdNew.Left = this.Width - cmdNew.Width - 30;
             cmdNew.Top = cmdEdit.Top - cmdNew.Height - 5;
+        }
+
+        /// <summary>
+        /// Crea los filtros en base a los campos que son del tipo text y del tipo fecha
+        /// </summary>
+        /// <param name="grid"></param>
+        private void CreateFilters(DataGridView grid)
+        {
+            foreach (DataGridViewColumn column in grid.Columns)
+            {
+                if (column.GetType() == typeof(DataGridViewTextBoxColumn)) {
+                    Control control = null;
+                    if (column.ValueType == typeof(String)) {
+                        control = new TextBox();                    
+                    }
+
+                    if (column.ValueType == typeof(DateTime))
+                    {
+                        control = new DateTimePicker();
+                    }
+
+                    if (control != null)
+                    {
+                        //Se crea un grupo para poder etiquetar el componente
+                        GroupBox group = new GroupBox();
+                        group.Controls.Add(control);
+                        group.Text = column.HeaderText;
+                        group.Width = control.Width + 15;
+                        group.Height = control.Height + 20;
+                        control.Top = 15;
+                        control.Left = 5;
+
+                        flowLayout.Controls.Add(group);
+                    }
+                }
+            }
         }
 
     }
