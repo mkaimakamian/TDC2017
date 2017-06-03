@@ -39,7 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressDAL.cs" />
     <Compile Include="BackupDAL.cs" />
+    <Compile Include="CountryDAL.cs" />
     <Compile Include="DBSql.cs" />
     <Compile Include="DigitVerificatorDAL.cs" />
     <Compile Include="LanguageDAL.cs" />
