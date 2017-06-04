@@ -44,8 +44,11 @@
     <Compile Include="CountryDAL.cs" />
     <Compile Include="DBSql.cs" />
     <Compile Include="DigitVerificatorDAL.cs" />
+    <Compile Include="DonorDAL.cs" />
     <Compile Include="LanguageDAL.cs" />
     <Compile Include="LogDAL.cs" />
+    <Compile Include="OrganizationDAL.cs" />
+    <Compile Include="PersonDAL.cs" />
     <Compile Include="ProfileDAL.cs" />
     <Compile Include="UserDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

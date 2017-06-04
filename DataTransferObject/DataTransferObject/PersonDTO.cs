@@ -17,5 +17,18 @@ namespace DataTransferObject
         public bool gender;
         public int dni;
         public int addressId;
+
+        public PersonDTO() { }
+        public PersonDTO(string name, string lastName, DateTime birthdate, string email, string phone, bool gender, int dni, int addressId)
+        {
+            this.name = name;
+            this.lastName = lastName;
+            this.birthdate = birthdate;
+            this.email = email;
+            this.phone = phone;
+            this.gender = gender;
+            this.dni = dni;
+            this.addressId = addressId;
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace DataTransferObject
     public class DonorDTO: PersonDTO
     {
         public int donorId;
-        public string organizationId;
+        public int organizationId;
         public bool canBeContacted;
     }
 }

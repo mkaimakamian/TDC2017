@@ -39,9 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressBM.cs" />
+    <Compile Include="CountryBM.cs" />
     <Compile Include="DigitVeryficator.cs" />
+    <Compile Include="DonorBM.cs" />
     <Compile Include="LanguageBM.cs" />
     <Compile Include="LogBM.cs" />
+    <Compile Include="OrganizationBM.cs" />
+    <Compile Include="PersonBM.cs" />
     <Compile Include="ProfileBM.cs" />
     <Compile Include="ResultBM.cs" />
     <Compile Include="TranslationBM.cs" />

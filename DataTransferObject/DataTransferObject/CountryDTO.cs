@@ -8,7 +8,6 @@ namespace DataTransferObject
 {
     public class CountryDTO
     {
-
         public string iso2;
         public string iso3;
         public string name;

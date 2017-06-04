@@ -55,6 +55,7 @@
     <Compile Include="BackupTest.cs" />
     <Compile Include="LogTest.cs" />
     <Compile Include="ProfileTest.cs" />
+    <Compile Include="PersonTest.cs" />
     <Compile Include="UserTest.cs" />
   </ItemGroup>
   <ItemGroup>

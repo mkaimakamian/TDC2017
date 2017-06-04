@@ -8,7 +8,6 @@ namespace DataTransferObject
 {
     public class VolunteerDTO: PersonDTO
     {
-
         public int volunteerId;
         public int branchId;
         public int userId;

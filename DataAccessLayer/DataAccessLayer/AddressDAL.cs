@@ -10,7 +10,7 @@ namespace DataAccessLayer
     public class AddressDAL
     {
 
-        public AddressDTO GetAddress(string id)
+        public AddressDTO GetAddress(int id)
         {
             DBSql dbsql = new DBSql();
             String sql;
