@@ -67,8 +67,9 @@ namespace BusinessLogicLayer
                     {
                         personDto = new PersonDTO(personBm.name, personBm.lastName, personBm.birthdate, personBm.email, personBm.phone, personBm.gender, personBm.dni, personBm.address.id);
                         personDal.SavePerson(personDto);
+                        personBm.id = personDto.id;
 
-                        return new ResultBM(ResultBM.Type.OK, "Se ha creado la persona con el nombre " + personBm.name + " " + personBm.lastName + ".");
+                        return new ResultBM(ResultBM.Type.OK, "Se ha creado la persona con el nombre " + personBm.name + " " + personBm.lastName + ".", personBm);
                     }
                     else
                     {
@@ -88,7 +89,15 @@ namespace BusinessLogicLayer
 
         private ResultBM IsValid(PersonBM personBm)
         {
-            //TODO perform validation
+            if (personBm.name == null || personBm.name.Length == 0)
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el nombre.");
+
+            if (personBm.lastName == null || personBm.lastName.Length == 0)
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el apellido.");
+
+            if (personBm.dni == null || personBm.dni < 1)
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el dni.");
+
             return new ResultBM(ResultBM.Type.OK);
         }
     }
