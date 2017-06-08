@@ -11,6 +11,11 @@ namespace BusinessLogicLayer
 {
     public class CountryBLL
     {
+        /// <summary>
+        /// Devuelve el país para el iso2 requerido
+        /// </summary>
+        /// <param name="iso2"></param>
+        /// <returns></returns>
         public ResultBM GetCountry(string iso2)
         {
             try {

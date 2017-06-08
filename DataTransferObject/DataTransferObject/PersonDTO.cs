@@ -14,12 +14,12 @@ namespace DataTransferObject
         public DateTime birthdate;
         public string email;
         public string phone;
-        public bool gender;
+        public char gender;
         public int dni;
         public int addressId;
 
         public PersonDTO() { }
-        public PersonDTO(string name, string lastName, DateTime birthdate, string email, string phone, bool gender, int dni, int addressId)
+        public PersonDTO(string name, string lastName, DateTime birthdate, string email, string phone, char gender, int dni, int addressId)
         {
             this.name = name;
             this.lastName = lastName;

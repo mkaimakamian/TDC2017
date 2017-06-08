@@ -11,6 +11,11 @@ namespace BusinessLogicLayer
 {
     public class AddressBLL
     {
+        /// <summary>
+        /// Devuelve la dirección según el id informado por parámetro
+        /// </summary>
+        /// <param name="addressId"></param>
+        /// <returns></returns>
         public ResultBM GetAddress(int addressId)
         {
             try
@@ -45,5 +50,47 @@ namespace BusinessLogicLayer
                 return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar la dirección " + addressId + ".", exception);
             }
         }
+
+        public ResultBM SaveAddress(AddressBM addressBm)
+        {
+            try
+            {
+                AddressDAL addressDal = new AddressDAL();
+                AddressDTO addressDto = null;
+                ResultBM validResult = IsValid(addressBm);
+
+                if (validResult.IsValid())
+                {
+                    addressDto = new AddressDTO(addressBm.id, addressBm.street, addressBm.number, addressBm.apartment, addressBm.neighborhood, addressBm.comment, addressBm.country.iso2);
+                    addressDal.SaveAddress(addressDto);
+                    addressBm.id = addressDto.id;
+
+                    return new ResultBM(ResultBM.Type.OK, "Dirección guardada.", addressBm);
+                }
+                else
+                {
+                    return validResult;
+                }
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al guardar la dirección.", exception);
+            }
+        }
+
+        private ResultBM IsValid(AddressBM addressBm)
+        {
+            if (addressBm.street == null || addressBm.street.Length == 0)
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse la dirección");
+
+            if (addressBm.number == null || addressBm.number < 0)
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el número de calle");
+
+            if (addressBm.country == null)
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el país");
+
+            return new ResultBM(ResultBM.Type.OK);
+        }
+
     }
 }

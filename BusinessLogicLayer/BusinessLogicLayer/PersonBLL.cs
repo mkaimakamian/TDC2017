@@ -46,42 +46,50 @@ namespace BusinessLogicLayer
             }
         }
 
+        public ResultBM SavePerson(PersonBM personBm)
+        {
+            try
+            {
+                AddressBLL addressBll = new AddressBLL();
+                PersonDAL personDal = new PersonDAL();
+                PersonDTO personDto;
+                ResultBM validationResult;
+                ResultBM addressResult;
 
+                validationResult = IsValid(personBm);
 
-        //public ResultBM CreatePerson(PersonBM personBm)
-        //{
-        //    PersonDAL personDal = new PersonDAL();
-        //    PersonDTO personDto;
-        //    ResultBM validationResult;
+                if (validationResult.IsValid())
+                {
+                    //guardar direccion
+                    addressResult = addressBll.SaveAddress(personBm.address);
 
-        //    try
-        //    {
-        //        validationResult = IsValid(personBm);
+                    if (addressResult.IsValid())
+                    {
+                        personDto = new PersonDTO(personBm.name, personBm.lastName, personBm.birthdate, personBm.email, personBm.phone, personBm.gender, personBm.dni, personBm.address.id);
+                        personDal.SavePerson(personDto);
 
-        //        if (validationResult.IsValid())
-        //        {
-        //            //guardar direccion
+                        return new ResultBM(ResultBM.Type.OK, "Se ha creado la persona con el nombre " + personBm.name + " " + personBm.lastName + ".");
+                    }
+                    else
+                    {
+                        return addressResult;
+                    }
+                }
+                else
+                {
+                    return validationResult;
+                }
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear al donador.", exception);
+            }
+        }
 
-        //            personDto = new PersonDTO(personBm.name, personBm.lastName, personBm.birthdate, personBm.email, personBm.phone, personBm.gender, personBm.dni, personBm.addressId);
-        //            personDal.SavePerson(personDto);
-
-        //            return new ResultBM(ResultBM.Type.OK, "Se ha creado la persona con el nombre " + personBm.name + " " + personBm.lastName + ".");
-        //        }
-        //        else
-        //        {
-        //            return validationResult;
-        //        }
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear al donador.", exception);
-        //    }
-        //}
-
-        //private ResultBM IsValid(PersonBM personBm)
-        //{
-        //    //TODO perform validation
-        //    return new ResultBM(ResultBM.Type.OK);
-        //}
+        private ResultBM IsValid(PersonBM personBm)
+        {
+            //TODO perform validation
+            return new ResultBM(ResultBM.Type.OK);
+        }
     }
 }

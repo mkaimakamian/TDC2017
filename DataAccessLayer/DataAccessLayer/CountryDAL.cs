@@ -15,7 +15,7 @@ namespace DataAccessLayer
             String sql;
             List<List<String>> reader;
 
-            sql = "SELECT * FROM country WHERE iso2 = " + iso2;
+            sql = "SELECT * FROM country WHERE iso2 = '" + iso2 +"'";
             reader = dbsql.executeReader(sql);
 
             if (reader.Count > 0)

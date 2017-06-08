@@ -15,5 +15,18 @@ namespace DataTransferObject
         public string neighborhood;
         public string comment;
         public string countryIso;
+
+        public AddressDTO() { }
+
+        public AddressDTO(int id, string street, int number, string apartment, string neighborhood, string comment, string countryIso2)
+        {
+            this.id = id;
+            this.street = street;
+            this.number = number;
+            this.apartment = apartment;
+            this.neighborhood = neighborhood;
+            this.comment = comment;
+            this.countryIso = countryIso2;
+        }
     }
 }

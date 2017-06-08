@@ -27,6 +27,23 @@ namespace DataAccessLayer
             return null;
         }
 
+        public bool SaveAddress(AddressDTO addressDto)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "INSERT INTO address (street, number, apartment, neighborhood, comment, countryIso) VALUES (";
+            sql += "'" + addressDto.street + "', ";
+            sql += addressDto.number + ", ";
+            sql += "'" + addressDto.apartment + "', ";
+            sql += "'"+ addressDto.neighborhood + "', ";
+            sql += "'" + addressDto.comment + "', ";
+            sql += "'" + addressDto.countryIso + "'";
+            sql += ");SELECT @@IDENTITY";
+            addressDto.id = dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
+
         public List<AddressDTO> GetAddresses()
         {
             DBSql dbsql = new DBSql();

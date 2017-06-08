@@ -17,7 +17,7 @@ namespace BusinessModel
         public string comment;
         public CountryBM country;
 
-        public AddressBM(AddressDTO addressDto, CountryBM countrBm)
+        public AddressBM(AddressDTO addressDto, CountryBM countryBm)
         {
             this.id = addressDto.id;
             this.street = addressDto.street;
@@ -25,7 +25,17 @@ namespace BusinessModel
             this.apartment = addressDto.apartment;
             this.neighborhood = addressDto.neighborhood;
             this.comment = addressDto.comment;
-            this.country = countrBm;
+            this.country = countryBm;
+        }
+
+        public AddressBM(string street, int number, string apartment, string neighborhood, string comment, CountryBM countryBm)
+        {
+            this.street = street;
+            this.number = number;
+            this.apartment = apartment;
+            this.neighborhood = neighborhood;
+            this.comment = comment;
+            this.country = countryBm;
         }
     }
 }

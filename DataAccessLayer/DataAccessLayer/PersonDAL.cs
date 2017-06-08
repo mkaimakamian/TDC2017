@@ -109,7 +109,7 @@ namespace DataAccessLayer
             result.birthdate = DateTime.Parse(item[3]);
             result.email = item[4];
             result.phone = item[5];
-            result.gender = Boolean.Parse(item[6]);
+            result.gender = Char.Parse(item[6]);
             result.dni = int.Parse(item[7]);
             result.addressId = int.Parse(item[8]);
             return result;
