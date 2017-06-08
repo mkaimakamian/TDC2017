@@ -84,5 +84,39 @@ namespace TestsSuit
             PersonBLL personBll = new PersonBLL();
             return personBll.SavePerson(personBm);            
         }
+
+
+        [TestMethod]
+        public void CreateDonor()
+        {
+            //Crea un donador
+            create_donor();
+        }
+
+        [TestMethod]
+        public void GetDonor()
+        {
+            //Crea un donador
+            DonorBM donorBm = create_donor();
+            DonorBLL donorBll = new DonorBLL();
+            ResultBM donorResult = donorBll.GetDonor(donorBm.donorId);
+            Assert.IsTrue(donorResult.IsValid(), "El donador debería existir.");
+
+        }
+
+        private DonorBM create_donor()
+        {
+            //Crea un donador
+            OrganizationBLL organizationBll = new OrganizationBLL();
+            ResultBM result = organizationBll.GetOrganization(1);
+            PersonBM personBm = create_person();
+            DonorBM donorBm = new DonorBM(true, personBm, result.GetValue<OrganizationBM>());
+            DonorBLL donorBll = new DonorBLL();
+            ResultBM saveResult = donorBll.SaveDonor(donorBm);
+
+            Assert.IsTrue(saveResult.IsValid(), "El donador debería haberse creado.");
+            return saveResult.GetValue<DonorBM>();
+
+        }
     }
 }

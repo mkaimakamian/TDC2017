@@ -69,6 +69,10 @@
       <Project>{258c9aed-5a2b-4644-a661-6e03fc1bc298}</Project>
       <Name>BusinessModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\DataTransferObject\DataTransferObject\DataTransferObject.csproj">
+      <Project>{f8efbe1e-1f41-422f-a786-4830d7db096e}</Project>
+      <Name>DataTransferObject</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Documentation\donaciones 4V.docx" />

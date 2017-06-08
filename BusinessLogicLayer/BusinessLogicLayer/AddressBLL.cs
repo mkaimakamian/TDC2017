@@ -83,7 +83,7 @@ namespace BusinessLogicLayer
             if (addressBm.street == null || addressBm.street.Length == 0)
                 return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse la dirección");
 
-            if (addressBm.number == null || addressBm.number < 0)
+            if (addressBm.number < 0)
                 return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el número de calle");
 
             if (addressBm.country == null)

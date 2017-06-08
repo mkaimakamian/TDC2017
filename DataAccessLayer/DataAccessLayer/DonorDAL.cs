@@ -26,12 +26,27 @@ namespace DataAccessLayer
             return null;
         }
 
+        public bool SaveDonor(DonorDTO donorDto)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "INSERT INTO donor (personId, organizationId, canBeContacted) VALUES (";
+            sql += donorDto.id + ", ";
+            sql += donorDto.organizationId + ", ";
+            sql += "'" + donorDto.canBeContacted + "'";
+            sql += ");SELECT @@IDENTITY";
+            donorDto.donorId = dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
+
         private DonorDTO Resolve(List<String> item)
         {
             DonorDTO result = new DonorDTO();
             result.donorId = int.Parse(item[0]);
-            result.organizationId = int.Parse(item[1]);
-            result.canBeContacted = bool.Parse(item[2]);
+            result.id = int.Parse(item[1]);
+            result.organizationId = int.Parse(item[2]);
+            result.canBeContacted = bool.Parse(item[3]);
             return result;
         }
     }

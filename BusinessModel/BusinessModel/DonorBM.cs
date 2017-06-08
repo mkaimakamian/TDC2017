@@ -13,6 +13,8 @@ namespace BusinessModel
         public OrganizationBM organization;
         public bool canBeContacted;
 
+        public DonorBM() { }
+
         public DonorBM(DonorDTO donorDto, PersonBM personBm, OrganizationBM organizationBm)
         {
             this.id = personBm.id;
@@ -25,9 +27,25 @@ namespace BusinessModel
             this.dni = personBm.dni;
             this.address = personBm.address;
             
-            this.donorId = donorDto.id;
+            this.donorId = donorDto.donorId;
             this.organization = organizationBm;
             this.canBeContacted = donorDto.canBeContacted;            
+        }
+
+        public DonorBM(bool canBeContacted, PersonBM personBm, OrganizationBM organizationBm)
+        {
+            this.id = personBm.id;
+            this.name = personBm.name;
+            this.lastName = personBm.lastName;
+            this.birthdate = personBm.birthdate;
+            this.email = personBm.email;
+            this.phone = personBm.phone;
+            this.gender = personBm.gender;
+            this.dni = personBm.dni;
+            this.address = personBm.address;
+
+            this.organization = organizationBm;
+            this.canBeContacted = canBeContacted;      
         }
     }
 }

@@ -46,6 +46,11 @@ namespace BusinessLogicLayer
             }
         }
 
+        /// <summary>
+        /// Crea una persona.
+        /// </summary>
+        /// <param name="personBm"></param>
+        /// <returns></returns>
         public ResultBM SavePerson(PersonBM personBm)
         {
             try
@@ -95,7 +100,7 @@ namespace BusinessLogicLayer
             if (personBm.lastName == null || personBm.lastName.Length == 0)
                 return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el apellido.");
 
-            if (personBm.dni == null || personBm.dni < 1)
+            if (personBm.dni < 1)
                 return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el dni.");
 
             return new ResultBM(ResultBM.Type.OK);

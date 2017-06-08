@@ -36,7 +36,7 @@ namespace BusinessLogicLayer
                         {
                             //Ver sies null O_o! que puede dar cero
                             // Podría no pertenecer a una organización, de modo tal que si no posee relación, está bien
-                            if (donorDto.organizationId != null)
+                            if (donorDto.organizationId != 0)
                             {
                                 resultOrganization = organizationBll.GetOrganization(donorDto.organizationId);
 
@@ -47,7 +47,7 @@ namespace BusinessLogicLayer
                                         organizationBm = resultOrganization.GetValue<OrganizationBM>();
                                     }
                                     else
-                                        throw new Exception("La persona " + donorDto.id + " para el donador " + donorId + " no existe.");
+                                        throw new Exception("La persona " + donorDto.donorId + " para el donador " + donorId + " no existe.");
 
                                 }
                                 else
@@ -58,7 +58,7 @@ namespace BusinessLogicLayer
                             donorBm = new DonorBM(donorDto, resultPerson.GetValue<PersonBM>(), organizationBm);
                         }
                         else
-                            throw new Exception("La persona " + donorDto.id + " para el donador " + donorId + " no existe.");
+                            throw new Exception("La persona " + donorDto.donorId + " para el donador " + donorId + " no existe.");
                     }
                     else
                         return resultPerson;
@@ -70,6 +70,53 @@ namespace BusinessLogicLayer
             {
                 return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar el donador " + donorId + ".", exception);
             }
+        }
+
+        public ResultBM SaveDonor(DonorBM donorBm)
+        {
+            try
+            {
+                DonorDAL donorDal = new DonorDAL();
+                PersonBLL personBll = new PersonBLL();
+                ResultBM validationResult;
+                ResultBM personResult;
+                DonorDTO donorDto;
+
+                validationResult = IsValid(donorBm);
+
+                if (validationResult.IsValid())
+                {
+                    //guardar direccion
+                    personResult = personBll.SavePerson(donorBm);
+
+                    if (personResult.IsValid())
+                    {
+                        PersonBM personBm = personResult.GetValue() as PersonBM;
+                        donorDto = new DonorDTO(personBm.id, personBm.address.id, donorBm.organization.id, donorBm.canBeContacted);
+                        donorDal.SaveDonor(donorDto);
+                        donorBm.donorId = donorDto.donorId;
+
+                        return new ResultBM(ResultBM.Type.OK, "Se ha creado el donador " + donorBm.name + " " + donorBm.lastName + ".", donorBm);
+                    }
+                    else
+                    {
+                        return personResult;
+                    }
+                }
+                else
+                {
+                    return validationResult;
+                }
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear al donador.", exception);
+            }
+        }
+
+        public ResultBM IsValid(DonorBM donorBm)
+        {
+            return new ResultBM(ResultBM.Type.OK);
         }
     }
 }
