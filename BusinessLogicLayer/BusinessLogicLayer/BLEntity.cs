@@ -7,6 +7,7 @@ using BusinessModel;
 
 namespace BusinessLogicLayer
 {
+    //Interface para poder ser utilizada por el formulario - grilla genérico.
     public interface BLEntity
     {
         ResultBM GetCollection();

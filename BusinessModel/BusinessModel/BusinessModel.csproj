@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressBM.cs" />
+    <Compile Include="BranchBM.cs" />
     <Compile Include="CountryBM.cs" />
     <Compile Include="DigitVeryficator.cs" />
     <Compile Include="DonationBM.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="TranslationBM.cs" />
     <Compile Include="UserBM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VolunteerBM.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DataTransferObject\DataTransferObject\DataTransferObject.csproj">

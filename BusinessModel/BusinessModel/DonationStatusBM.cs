@@ -13,6 +13,15 @@ namespace BusinessModel
         public string name;
         public string description;
 
+        public enum Status
+        {
+            RECEIVED,
+            STOCKED,
+            DELIVERING,
+            RECOVERING,
+            TO_BE_PICKUP
+        };
+
         public DonationStatusBM(DonationStatusDTO donationStatusDto)
         {
             this.id = donationStatusDto.id;

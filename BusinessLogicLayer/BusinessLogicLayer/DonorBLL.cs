@@ -78,20 +78,21 @@ namespace BusinessLogicLayer
             {
                 DonorDAL donorDal = new DonorDAL();
                 PersonBLL personBll = new PersonBLL();
+                PersonBM personBm = null;
                 ResultBM validationResult;
                 ResultBM personResult;
                 DonorDTO donorDto;
-
+                
                 validationResult = IsValid(donorBm);
 
                 if (validationResult.IsValid())
                 {
-                    //guardar direccion
+
                     personResult = personBll.SavePerson(donorBm);
 
                     if (personResult.IsValid())
                     {
-                        PersonBM personBm = personResult.GetValue() as PersonBM;
+                        personBm = personResult.GetValue() as PersonBM;
                         donorDto = new DonorDTO(personBm.id, personBm.address.id, donorBm.organization.id, donorBm.canBeContacted);
                         donorDal.SaveDonor(donorDto);
                         donorBm.donorId = donorDto.donorId;

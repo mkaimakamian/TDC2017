@@ -83,6 +83,25 @@ namespace TestsSuit
             Assert.AreEqual(donationResult.description, "Debe selecionar un estado válido para el lote.", "El error debería coincidir.");
         }
 
+        [TestMethod]
+        public void CreateDonation()
+        {
+            //Asigna un responsable a la donación
+            DonorBM donor = create_donor();
+            DonationStatusBM statusBm = get_status(1);
+            DonationBLL donationBll = new DonationBLL();
+            DonationBM donationBm = new DonationBM(3, donor.donorId, statusBm, "Esta es una donación creada por un test.");
+            ResultBM donationResult = donationBll.SaveDonation(donationBm);
+
+            BranchBLL branchBll = new BranchBLL();
+            ResultBM branchResult = branchBll.GetBranch(1);
+
+            
+            
+            donationBll.AsignResponsible(donationBm.id, voluntario);
+
+        }
+
         private DonationStatusBM get_status(int id)
         {
             DonationStatusBLL statusBll = new DonationStatusBLL();

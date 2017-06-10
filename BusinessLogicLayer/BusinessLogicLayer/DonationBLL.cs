@@ -73,6 +73,17 @@ namespace BusinessLogicLayer
             }
         }
 
+        public ResultBM AsignResponsible(int id, VolunteerDTO volunteerDto)
+        {
+            try {
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al actualizar  al donador.", exception);
+            }
+        }
+
+
         private ResultBM IsValid(DonationBM donationBm)
         {
             if (donationBm.items < 1)
