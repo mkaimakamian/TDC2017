@@ -159,7 +159,7 @@ namespace ViewLayer
                 else
                 {
                     userBm = new UserBM(txtName.Text, chkIsActive.Checked, language.Id, profile.code, txtPassword.Text);
-                    saveResult = userBll.CreateUser(userBm);
+                    saveResult = userBll.SaveUser(userBm);
 
                     if (saveResult.IsValid())
                     {

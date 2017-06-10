@@ -44,6 +44,8 @@
     <Compile Include="BLEntity.cs" />
     <Compile Include="CountryBLL.cs" />
     <Compile Include="DigitVerificatorBLL.cs" />
+    <Compile Include="DonationBLL.cs" />
+    <Compile Include="DonationStatusBLL.cs" />
     <Compile Include="DonorBLL.cs" />
     <Compile Include="LanguageBLL.cs" />
     <Compile Include="LogBLL.cs" />

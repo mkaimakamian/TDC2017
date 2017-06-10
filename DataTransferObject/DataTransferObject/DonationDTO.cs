@@ -16,5 +16,18 @@ namespace DataTransferObject
         public int donorId;
         public string comment;
         public int volunteerId;
+
+        public DonationDTO() { }
+
+        public DonationDTO(int items, DateTime arrival, string lot, int statusId, int donorId, string comment, int volunteerId)
+        {
+            this.items = items;
+            this.arrival = arrival;
+            this.lot = lot;
+            this.statusId = statusId;
+            this.donorId = donorId;
+            this.comment = comment;
+            this.volunteerId = volunteerId;
+        }
     }
 }

@@ -44,6 +44,8 @@
     <Compile Include="CountryDAL.cs" />
     <Compile Include="DBSql.cs" />
     <Compile Include="DigitVerificatorDAL.cs" />
+    <Compile Include="DonationDAL.cs" />
+    <Compile Include="DonationStatusDAL.cs" />
     <Compile Include="DonorDAL.cs" />
     <Compile Include="LanguageDAL.cs" />
     <Compile Include="LogDAL.cs" />

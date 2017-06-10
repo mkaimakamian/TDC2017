@@ -35,7 +35,7 @@ namespace TestsSuit
             string fecha = DateTime.Now.ToString("yyyymmddHHmm");
             UserBLL userBll = new UserBLL();
             UserBM newUser = new UserBM("Usuario " + fecha, true, 1, "GE999", "123");
-            ResultBM result = userBll.CreateUser(newUser);
+            ResultBM result = userBll.SaveUser(newUser);
             Assert.IsTrue(result.IsValid(), "El usuario debería haberse creado");
             return result.GetValue<UserBM>();
         }

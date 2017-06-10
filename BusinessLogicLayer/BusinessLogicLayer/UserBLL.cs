@@ -100,7 +100,7 @@ namespace BusinessLogicLayer
         /// </summary>
         /// <param name="userBm"></param>
         /// <returns></returns>
-        public ResultBM CreateUser(UserBM userBm)
+        public ResultBM SaveUser(UserBM userBm)
         {
             UserDAL userDal = new UserDAL();
             DigitVerificatorBLL dvBll = new DigitVerificatorBLL();
