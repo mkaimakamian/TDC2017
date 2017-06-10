@@ -58,6 +58,7 @@
     <Compile Include="OrganizationTest.cs" />
     <Compile Include="LocationTest.cs" />
     <Compile Include="PersonTest.cs" />
+    <Compile Include="DonationTest.cs" />
     <Compile Include="UserTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -78,7 +79,7 @@
     <None Include="Documentation\donaciones 4V.docx" />
     <None Include="Documentation\Microsoft.TeamFoundation.Git.Provider.msi" />
     <None Include="Documentation\rhoddion20.eap" />
-    <None Include="Documentation\rhoddion_201723081323.bkp" />
+    <None Include="Documentation\rhoddion_201724101324.bkp" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

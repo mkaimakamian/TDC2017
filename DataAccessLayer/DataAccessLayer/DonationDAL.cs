@@ -32,14 +32,13 @@ namespace DataAccessLayer
             DBSql dbsql = new DBSql();
             String sql;
 
-            sql = "INSERT INTO donation (items, arrival, lot, statusId, donorId, comment, volunteerId) VALUES (";
+            sql = "INSERT INTO donation (items, arrival, statusId, donorId, comment, volunteerId) VALUES (";
             sql += donationDto.items + ", ";
             sql += "GETDATE(), ";
-            sql += "'" + donationDto.lot + "', ";
             sql += donationDto.statusId + ", ";
             sql += donationDto.donorId + ", ";
             sql += "'" + donationDto.comment + "', ";
-            sql += "'" + donationDto.volunteerId + "'";
+            sql += "null";
             sql += ");SELECT @@IDENTITY";
             donationDto.id = dbsql.ExecuteNonQuery(sql);
             return true;
@@ -51,11 +50,10 @@ namespace DataAccessLayer
             result.id = int.Parse(item[0]);
             result.items = int.Parse(item[1]);
             result.arrival = DateTime.Parse(item[2]);
-            result.lot = item[3];
-            result.statusId = int.Parse(item[4]);
-            result.donorId = int.Parse(item[5]);
-            result.comment = item[6];            
-            result.volunteerId = int.Parse(item[7]);            
+            result.statusId = int.Parse(item[3]);
+            result.donorId = int.Parse(item[4]);
+            result.comment = item[5];
+            result.volunteerId = int.Parse(item[6]);
             return result;
         }
     }

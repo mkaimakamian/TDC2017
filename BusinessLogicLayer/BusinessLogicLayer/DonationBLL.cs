@@ -55,7 +55,7 @@ namespace BusinessLogicLayer
 
                 if (validationResult.IsValid())
                 {
-                    donationDto = new DonationDTO(donationBm.items, donationBm.arrival, donationBm.lot, donationBm.donationStatus.id, donationBm.donorId, donationBm.comment, donationBm.volunteerId);
+                    donationDto = new DonationDTO(donationBm.items, donationBm.arrival, donationBm.donationStatus.id, donationBm.donorId, donationBm.comment, donationBm.volunteerId);
                     donationDal.SaveDonor(donationDto);
                     donationBm.id = donationDto.id;
 

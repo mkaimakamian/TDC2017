@@ -13,7 +13,6 @@ namespace BusinessModel
         public int id;
         public int items;
         public DateTime arrival;
-        public string lot;
         public DonationStatusBM donationStatus;
         public int donorId;
         public string comment;
@@ -24,10 +23,19 @@ namespace BusinessModel
             this.id = donationDto.id;
             this.items = donationDto.items;
             this.arrival = donationDto.arrival;
-            this.lot = donationDto.lot;
             this.donationStatus = donationStatusBm;
             this.donorId = donationDto.donorId;
+            this.comment = donationDto.comment;
             this.volunteerId = donationDto.volunteerId;
+        }
+
+        public DonationBM(int items,int donorId, DonationStatusBM donationStatusBm, string comment = null, int volunteerId = 0)
+        {
+            this.items = items;
+            this.donationStatus = donationStatusBm;
+            this.donorId = donorId;
+            this.comment = comment;
+            this.volunteerId = volunteerId;
         }
     }
 }
