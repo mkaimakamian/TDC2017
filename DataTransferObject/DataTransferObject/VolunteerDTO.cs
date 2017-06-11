@@ -6,10 +6,19 @@ using System.Threading.Tasks;
 
 namespace DataTransferObject
 {
-    public class VolunteerDTO: PersonDTO
+    public class VolunteerDTO : PersonDTO
     {
         public int volunteerId;
         public int branchId;
         public int userId;
+
+        public VolunteerDTO() { }
+
+        public VolunteerDTO(int personId, int branchId, int userId) {
+            this.id = personId;
+            this.branchId = branchId;
+            this.userId = userId;
+        }
+
     }
 }

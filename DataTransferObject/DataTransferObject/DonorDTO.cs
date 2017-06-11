@@ -14,10 +14,9 @@ namespace DataTransferObject
 
         public DonorDTO() { }
 
-        public DonorDTO(int personId, int addressId, int organizationId, bool canBeContacted)
+        public DonorDTO(int personId, int organizationId, bool canBeContacted)
         {
             this.id = personId;
-            this.addressId = addressId;
             this.organizationId = organizationId;
             this.canBeContacted = canBeContacted;
         }

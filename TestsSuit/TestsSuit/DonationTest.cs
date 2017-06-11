@@ -22,7 +22,6 @@ namespace TestsSuit
             Assert.IsNotNull(donationResult.GetValue(), "Deería haber devuelto una donación.");
             Assert.IsTrue(donationResult.GetValue<DonationBM>().id > 0, "El id debería ser mayor a cero.");
             Assert.AreEqual(donationResult.GetValue<DonationBM>().comment, "Esta es una donación creada por un test.", "Debería poseer comentario");
-            
         }
 
         [TestMethod]
@@ -36,7 +35,7 @@ namespace TestsSuit
 
             ResultBM donationResult = donationBll.SaveDonation(donationBm);
             Assert.IsTrue(donationResult.IsValid(), "La donación debería ser válida.");
-            Assert.IsNotNull(donationResult.GetValue(), "Deería haber devuelto algo.");
+            Assert.IsNotNull(donationResult.GetValue(), "Debería haber devuelto la donación.");
             Assert.IsNull(donationResult.GetValue<DonationBM>().comment, "No debería poseer comentario");
         }
 
@@ -84,10 +83,14 @@ namespace TestsSuit
         }
 
         [TestMethod]
-        public void CreateDonation()
+        public void UpdateResponsible()
         {
-            //Asigna un responsable a la donación
+            //Prueba la asigna un responsable a la donación
+
+            //Creación del donador, un empleado (persona), la donación y el voluntario
             DonorBM donor = create_donor();
+            PersonBM personBm = create_person();
+
             DonationStatusBM statusBm = get_status(1);
             DonationBLL donationBll = new DonationBLL();
             DonationBM donationBm = new DonationBM(3, donor.donorId, statusBm, "Esta es una donación creada por un test.");
@@ -96,10 +99,19 @@ namespace TestsSuit
             BranchBLL branchBll = new BranchBLL();
             ResultBM branchResult = branchBll.GetBranch(1);
 
-            
-            
-            donationBll.AsignResponsible(donationBm.id, voluntario);
+            VolunteerBLL volunteerBll = new VolunteerBLL();
+            VolunteerBM volunteerBm = new VolunteerBM(personBm, branchResult.GetValue<BranchBM>());
+            ResultBM volunterResult = volunteerBll.SaveVolunteer(volunteerBm);
 
+            donationBm.volunteer = volunterResult.GetValue<VolunteerBM>();
+            ResultBM updateResult = donationBll.UpdateDonation(donationBm);
+            Assert.IsTrue(updateResult.IsValid(), "La operación debería ser válida.");
+
+            donationResult = donationBll.GetDonation(updateResult.GetValue<DonationBM>().id);
+            Assert.IsTrue(donationResult.IsValid(), "La operación debería ser válida.");
+            Assert.IsNotNull(donationResult.GetValue(), "Deería haber devuelto una donación.");
+            Assert.IsNotNull(donationResult.GetValue<DonationBM>().volunteer, "Deería haber devuelto un voluntario.");
+            Assert.AreEqual(donationResult.GetValue<DonationBM>().volunteer.volunteerId, volunterResult.GetValue<VolunteerBM>().volunteerId, "Debería ser el mismo voluntario.");
         }
 
         private DonationStatusBM get_status(int id)

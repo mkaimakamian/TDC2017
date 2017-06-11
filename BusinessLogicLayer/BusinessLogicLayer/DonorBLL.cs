@@ -22,7 +22,8 @@ namespace BusinessLogicLayer
                 OrganizationBM organizationBm = null;
                 ResultBM resultOrganization = null;
                 DonorDAL donorDal = new DonorDAL();
-                DonorBM donorBm = null;                
+                DonorBM donorBm = null;
+
                 DonorDTO donorDto = donorDal.GetDonor(donorId);
 
                 // Si el donador existe, deb existir la persona
@@ -93,7 +94,7 @@ namespace BusinessLogicLayer
                     if (personResult.IsValid())
                     {
                         personBm = personResult.GetValue() as PersonBM;
-                        donorDto = new DonorDTO(personBm.id, personBm.address.id, donorBm.organization.id, donorBm.canBeContacted);
+                        donorDto = new DonorDTO(personBm.id, donorBm.organization.id, donorBm.canBeContacted);
                         donorDal.SaveDonor(donorDto);
                         donorBm.donorId = donorDto.donorId;
 

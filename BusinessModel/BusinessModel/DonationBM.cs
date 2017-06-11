@@ -16,9 +16,9 @@ namespace BusinessModel
         public DonationStatusBM donationStatus;
         public int donorId;
         public string comment;
-        public int volunteerId;
+        public VolunteerBM volunteer;
 
-        public DonationBM(DonationDTO donationDto, DonationStatusBM donationStatusBm)
+        public DonationBM(DonationDTO donationDto, DonationStatusBM donationStatusBm, VolunteerBM volunteerBm)
         {
             this.id = donationDto.id;
             this.items = donationDto.items;
@@ -26,16 +26,16 @@ namespace BusinessModel
             this.donationStatus = donationStatusBm;
             this.donorId = donationDto.donorId;
             this.comment = donationDto.comment;
-            this.volunteerId = donationDto.volunteerId;
+            this.volunteer = volunteerBm;
         }
 
-        public DonationBM(int items,int donorId, DonationStatusBM donationStatusBm, string comment = null, int volunteerId = 0)
+        public DonationBM(int items,int donorId, DonationStatusBM donationStatusBm, string comment = null, VolunteerBM volunteerBm = null)
         {
             this.items = items;
             this.donationStatus = donationStatusBm;
             this.donorId = donorId;
             this.comment = comment;
-            this.volunteerId = volunteerId;
+            this.volunteer = volunteerBm;
         }
     }
 }

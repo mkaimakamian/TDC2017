@@ -32,6 +32,25 @@ namespace BusinessLogicLayer
             return new ResultBM(ResultBM.Type.OK, "Usuario encontrado: " + userDto.name, new UserBM(userDto)); 
         }
 
+        public ResultBM GetUser(int id)
+        {
+            try
+            {
+                UserDAL userDal = new UserDAL();
+                UserDTO userDto = userDal.GetUser(id);
+                UserBM userBm = null;
+
+                if (userDto != null)
+                    userBm = new UserBM(userDto);
+
+                return new ResultBM(ResultBM.Type.OK, "Operación exitosa.", userBm); 
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar el usuario " + id + ".", exception);
+            }
+        }
+
         /// <summary>
         /// Devuelve el listado de todos los usuarios.
         /// </summary>

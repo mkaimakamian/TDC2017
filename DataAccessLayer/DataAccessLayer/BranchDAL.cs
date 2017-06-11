@@ -34,7 +34,7 @@ namespace DataAccessLayer
             result.id = int.Parse(item[0]);
             result.name = item[1];
             result.comment = item[2];
-            result.addressId = int.Parse(item[2]);
+            result.addressId = int.Parse(item[3]);
             return result;
         }
     }

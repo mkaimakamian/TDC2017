@@ -27,7 +27,7 @@ namespace DataAccessLayer
             return null;
         }
 
-        public bool SaveDonor(DonationDTO donationDto)
+        public bool SaveDonation(DonationDTO donationDto)
         {
             DBSql dbsql = new DBSql();
             String sql;
@@ -44,6 +44,21 @@ namespace DataAccessLayer
             return true;
         }
 
+        public bool UpdateDonation(DonationDTO donationDto)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+            
+            sql = "UPDATE donation SET ";
+            sql += "items = " + donationDto.items + ",  ";
+            sql += "statusId = " + donationDto.statusId + ", ";
+            sql += "donorId = " + donationDto.donorId + ",  ";
+            sql += "comment = '" + donationDto.comment + "',  ";
+            sql += "volunteerId = " + donationDto.volunteerId + " ";
+            sql += "WHERE id = " + donationDto.id;
+            dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
         private DonationDTO Resolve(List<String> item)
         {
             DonationDTO result = new DonationDTO();
@@ -53,7 +68,7 @@ namespace DataAccessLayer
             result.statusId = int.Parse(item[3]);
             result.donorId = int.Parse(item[4]);
             result.comment = item[5];
-            result.volunteerId = int.Parse(item[6]);
+            result.volunteerId = int.Parse(item[6].Length == 0 ? "0" : item[6]);
             return result;
         }
     }

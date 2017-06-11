@@ -15,11 +15,14 @@ namespace BusinessLogicLayer
         {
             try
             {
+                VolunteerBLL volunteerBll = new VolunteerBLL();
+                ResultBM volunteerResult = null;
+                VolunteerBM volunteerBm = null;
                 DonationStatusBLL donationStatusBll = new DonationStatusBLL();
                 ResultBM statusResult = null;
                 DonationDAL donationDal = new DonationDAL();                
-                DonationDTO donationDto = donationDal.GetDonation(donationId);
                 DonationBM donationBm = null;
+                DonationDTO donationDto = donationDal.GetDonation(donationId);
 
                 //Si la donación existe, debería existir el estado
                 if (donationDto != null)
@@ -29,7 +32,14 @@ namespace BusinessLogicLayer
                     if (statusResult.IsValid())
                     {
                         if (statusResult.GetValue() != null)
-                            donationBm = new DonationBM(donationDto, statusResult.GetValue<DonationStatusBM>());
+                        {
+                            //Podría no existir voluntario, sobre todo si se consulta una donación recién creada
+                            volunteerResult = volunteerBll.GetVolunteer(donationDto.volunteerId);
+                            if (volunteerResult.GetValue() != null)
+                                volunteerBm = volunteerResult.GetValue<VolunteerBM>();
+
+                            donationBm = new DonationBM(donationDto, statusResult.GetValue<DonationStatusBM>(), volunteerBm);
+                        }
                         else
                             throw new Exception("El estado con id " + donationDto.statusId + "para la donación " + donationId + " no existe.");
                     }
@@ -55,8 +65,8 @@ namespace BusinessLogicLayer
 
                 if (validationResult.IsValid())
                 {
-                    donationDto = new DonationDTO(donationBm.items, donationBm.arrival, donationBm.donationStatus.id, donationBm.donorId, donationBm.comment, donationBm.volunteerId);
-                    donationDal.SaveDonor(donationDto);
+                    donationDto = new DonationDTO(donationBm.items, donationBm.arrival, donationBm.donationStatus.id, donationBm.donorId, donationBm.comment, 0);
+                    donationDal.SaveDonation(donationDto);
                     donationBm.id = donationDto.id;
 
                     return new ResultBM(ResultBM.Type.OK, "Se ha creado la donación.", donationBm);
@@ -69,20 +79,36 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear al donador.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear la donación.", exception);
             }
         }
-
-        public ResultBM AsignResponsible(int id, VolunteerDTO volunteerDto)
+                
+        public ResultBM UpdateDonation(DonationBM donationBm)
         {
-            try {
+            try
+            {
+                DonationDAL donationDal = new DonationDAL();
+                DonationDTO donationDto;
+                ResultBM validationResult = IsValid(donationBm);
+
+                if (validationResult.IsValid())
+                {
+                    donationDto = new DonationDTO(donationBm.items, donationBm.arrival, donationBm.donationStatus.id, donationBm.donorId, donationBm.comment, donationBm.volunteer == null ? 0 : donationBm.volunteer.volunteerId, donationBm.id);
+                    donationDal.UpdateDonation(donationDto);
+
+                    return new ResultBM(ResultBM.Type.OK, "Se ha actualizado la donación.", donationBm);
+
+                }
+                else
+                {
+                    return validationResult;
+                }
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al actualizar  al donador.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al actualizar la donación.", exception);
             }
         }
-
 
         private ResultBM IsValid(DonationBM donationBm)
         {
