@@ -23,7 +23,7 @@ namespace TestsSuit
 
             Assert.IsTrue(personResult.IsValid(), "La persona debería haberse recuperado");
             Assert.AreEqual(personResult.GetValue<PersonBM>().id, personBm.id, "Los ids deberían coincidir.");
-            Assert.AreEqual(personResult.GetValue<PersonBM>().name, personBm.name, "Los nombres deberían coincidir");
+            Assert.AreEqual(personResult.GetValue<PersonBM>().Name, personBm.Name, "Los nombres deberían coincidir");
         }
 
 
@@ -168,6 +168,7 @@ namespace TestsSuit
             OrganizationBLL organizationBll = new OrganizationBLL();
             ResultBM result = organizationBll.GetOrganization(1);
             PersonBM personBm = create_person();
+
             DonorBM donorBm = new DonorBM(true, personBm, result.GetValue<OrganizationBM>());
             DonorBLL donorBll = new DonorBLL();
             ResultBM saveResult = donorBll.SaveDonor(donorBm);

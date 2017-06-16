@@ -16,10 +16,10 @@ namespace BusinessModel
         public VolunteerBM(VolunteerDTO volunteerDto, PersonBM personBm, BranchBM branchBm, UserBM userBm = null)
         {
             this.id = personBm.id;
-            this.name = personBm.name;
-            this.lastName = personBm.lastName;
-            this.birthdate = personBm.birthdate;
-            this.email = personBm.email;
+            this.Name = personBm.Name;
+            this.LastName = personBm.LastName;
+            this.Birthdate = personBm.Birthdate;
+            this.Email = personBm.Email;
             this.phone = personBm.phone;
             this.gender = personBm.gender;
             this.dni = personBm.dni;
@@ -33,10 +33,10 @@ namespace BusinessModel
         public VolunteerBM(PersonBM personBm, BranchBM branchBm, UserBM userBm = null)
         {
             this.id = personBm.id;
-            this.name = personBm.name;
-            this.lastName = personBm.lastName;
-            this.birthdate = personBm.birthdate;
-            this.email = personBm.email;
+            this.Name = personBm.Name;
+            this.LastName = personBm.LastName;
+            this.Birthdate = personBm.Birthdate;
+            this.Email = personBm.Email;
             this.phone = personBm.phone;
             this.gender = personBm.gender;
             this.dni = personBm.dni;

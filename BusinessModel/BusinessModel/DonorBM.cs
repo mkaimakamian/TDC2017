@@ -15,37 +15,53 @@ namespace BusinessModel
 
         public DonorBM() { }
 
-        public DonorBM(DonorDTO donorDto, PersonBM personBm, OrganizationBM organizationBm)
+        public DonorBM(DonorDTO donorDto, AddressBM address, OrganizationBM organizationBm)
         {
-            this.id = personBm.id;
-            this.name = personBm.name;
-            this.lastName = personBm.lastName;
-            this.birthdate = personBm.birthdate;
-            this.email = personBm.email;
-            this.phone = personBm.phone;
-            this.gender = personBm.gender;
-            this.dni = personBm.dni;
-            this.address = personBm.address;
-            
+            this.id = donorDto.id;
+            this.Name = donorDto.name;
+            this.LastName = donorDto.lastName;
+            this.Birthdate = donorDto.birthdate;
+            this.Email = donorDto.email;
+            this.phone = donorDto.phone;
+            this.gender = donorDto.gender;
+            this.dni = donorDto.dni;
+            this.address = address;
             this.donorId = donorDto.donorId;
             this.organization = organizationBm;
-            this.canBeContacted = donorDto.canBeContacted;            
+            this.canBeContacted = donorDto.canBeContacted;
         }
 
         public DonorBM(bool canBeContacted, PersonBM personBm, OrganizationBM organizationBm)
         {
             this.id = personBm.id;
-            this.name = personBm.name;
-            this.lastName = personBm.lastName;
-            this.birthdate = personBm.birthdate;
-            this.email = personBm.email;
+            this.Name = personBm.Name;
+            this.LastName = personBm.LastName;
+            this.Birthdate = personBm.Birthdate;
+            this.Email = personBm.Email;
             this.phone = personBm.phone;
             this.gender = personBm.gender;
             this.dni = personBm.dni;
             this.address = personBm.address;
 
             this.organization = organizationBm;
-            this.canBeContacted = canBeContacted;      
+            this.canBeContacted = canBeContacted;
+        }
+
+        public DonorBM(DonorDTO donorDto)
+        {
+            this.id = donorDto.id;
+            this.Name = donorDto.name;
+            this.LastName = donorDto.lastName;
+            this.Birthdate = donorDto.birthdate;
+            this.Email = donorDto.email;
+            this.phone = donorDto.phone;
+            this.gender = donorDto.gender;
+            this.dni = donorDto.dni;
+            //this.address = donorDto.address;
+
+            this.donorId = donorDto.donorId;
+            //this.organization = organizationBm;
+            this.canBeContacted = donorDto.canBeContacted;
         }
     }
 }

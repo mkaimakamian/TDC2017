@@ -22,20 +22,22 @@ namespace ViewLayer
                 public const string OP008 = "OP008"; //Editar perfil
                 public const string OP009 = "OP009"; //Eliminar perfil
 
-
-
-
-        public const string GE005 = "GE005"; //Mantenimiento
-            public const string OP010 = "OP010"; // Listar bitácora
-            public const string GE006 = "GE006"; //Respaldo
-                public const string OP011 = "OP011"; // Copia de respaldo
-                public const string OP012 = "OP012"; // Cargar copia de respaldo
-        public const string GE007 = "GE007"; //Integridad
-            //public const string OP013 = "OP013"; // Check horizontal --> Sólo existe una opción, por lo que se considera el GE007 nada más
-            //public const string OP014 = "OP014"; // Check vertical
+            public const string GE005 = "GE005"; //Mantenimiento
+                public const string OP010 = "OP010"; // Listar bitácora
+                public const string GE006 = "GE006"; //Respaldo
+                    public const string OP011 = "OP011"; // Copia de respaldo
+                    public const string OP012 = "OP012"; // Cargar copia de respaldo
+            public const string GE007 = "GE007"; //Integridad
+                //public const string OP013 = "OP013"; // Check horizontal --> Sólo existe una opción, por lo que se considera el GE007 nada más
+                //public const string OP014 = "OP014"; // Check vertical
         
-        public const string GE008 = "GE008"; //Vehículo
-        public const string GE009 = "GE009"; //Destinatarios
+        public const string GE008 = "GE008"; //Personas
+            public const string GE009 = "GE009"; //Donadores
+            public const string OP014 = "OP014"; // Crear donador
+            public const string OP015 = "OP015"; // Editar donador
+            public const string OP016 = "OP016"; // Eliminar donador
+
+
         public const string GE010 = "GE010"; //Tipo de ítem
         public const string GE011 = "GE011"; //Stock
         public const string GE012 = "GE012"; //Donadores
@@ -79,11 +81,10 @@ namespace ViewLayer
             public const string MNU_GE007 = "MNU_GE007"; //Integridad
                 public const string MNU_GE007_LBL_INTEGRITY = "MNU_GE007_LBL_INTEGRITY";
                 public const string BTN_CHECK_INTEGRITY = "BTN_CHECK_INTEGRITY";
-                //public const string MNU_OP013 = "MNU_OP013"; //Verificar horizontal
-                //public const string MNU_OP014 = "MNU_OP014"; //Verificar vertical
 
-        public const string MNU_GE008 = "MNU_GE008"; //Vehículo
-        public const string MNU_GE009 = "MNU_GE009"; //Destinatarios
+        public const string MNU_GE008 = "MNU_GE008"; //Personas   
+        public const string MNU_GE009 = "MNU_GE009"; //Donadores
+
         public const string MNU_GE010 = "MNU_GE010"; //Tipo de ítem
         public const string MNU_GE011 = "MNU_GE011"; //Stock
         public const string MNU_GE012 = "MNU_GE012"; //Donadores

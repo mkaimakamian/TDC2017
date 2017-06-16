@@ -57,6 +57,12 @@
     <Compile Include="FrmBackup.Designer.cs">
       <DependentUpon>FrmBackup.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmDonor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDonor.Designer.cs">
+      <DependentUpon>FrmDonor.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmGenericMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +109,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmBackup.resx">
       <DependentUpon>FrmBackup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDonor.resx">
+      <DependentUpon>FrmDonor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmGenericMain.resx">
       <DependentUpon>FrmGenericMain.cs</DependentUpon>

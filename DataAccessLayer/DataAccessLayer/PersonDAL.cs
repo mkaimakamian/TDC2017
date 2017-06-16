@@ -26,31 +26,6 @@ namespace DataAccessLayer
             return null;
         }
 
-        /// <summary>
-        /// Devuelve la lista de todos las personas.
-        /// </summary>
-        /// <returns></returns>
-        //public List<UserDTO> GetUsers()
-        //{
-        //    DBSql dbsql = new DBSql();
-        //    String sql;
-        //    List<List<String>> reader;
-        //    List<UserDTO> result = new List<UserDTO>();
-
-        //    sql = "SELECT * FROM users";
-        //    reader = dbsql.executeReader(sql);
-
-        //    if (reader.Count > 0)
-        //    {
-        //        for (int i = 0; i < reader.Count; ++i)
-        //        {
-        //            result.Add(Resolve(reader[i]));
-        //        }
-        //    }
-
-        //    return result;
-        //}
-
         public bool SavePerson(PersonDTO personDto)
         {
             DBSql dbsql = new DBSql();
@@ -59,7 +34,7 @@ namespace DataAccessLayer
             sql = "INSERT INTO person (name, lastName, birthdate, email, phone, gender, dni, addressId) VALUES (";
             sql += "'" + personDto.name + "', ";
             sql += "'" + personDto.lastName + "', ";
-            sql += "'" + personDto.birthdate + "', ";
+            sql += "CONVERT(datetime, '" + personDto.birthdate + "', 103), ";
             sql += "'" + personDto.email + "', ";
             sql += "'" + personDto.phone+ "', ";
             sql += "'" + personDto.gender + "', ";
@@ -70,36 +45,6 @@ namespace DataAccessLayer
             return true;
         }
         
-
-        //public bool UpdateUser(UserDTO userDto)
-        //{
-        //    DBSql dbsql = new DBSql();
-        //    String sql;
-
-        //    //ACTUALIZAR TODO MENOS EL PASSWORD QUE DEBERÍA HACERSE POR OTRO LADO POR EL TEMA DE LA ENCRIPTACION
-        //    //sql = "UPDATE users SET languageId = '" + userDto.languageId + "',  hvd = '" + userDto.hdv + "' WHERE id = " + userDto.id;
-        //    sql = "UPDATE users SET ";
-        //    sql += "name = '" + userDto.name + "',  ";
-        //    sql += "password = '" + userDto.password + "',  ";
-        //    sql += "active = '" + userDto.active + "',  ";
-        //    sql += "languageId = " + userDto.languageId + ",  ";
-        //    sql += "permissionId = '" + userDto.permissionId + "',  ";
-        //    sql += "hvd = '" + userDto.hdv + "' ";
-        //    sql += "WHERE id = " + userDto.id;
-        //    dbsql.ExecuteNonQuery(sql);
-        //    return true;
-        //}
-
-        //public bool DeleteUser(int userId)
-        //{
-        //    DBSql dbsql = new DBSql();
-        //    String sql;
-        //    sql = "DELETE FROM users WHERE id = " + userId;
-        //    dbsql.ExecuteNonQuery(sql);
-        //    return true;
-        //}
-
-
         private PersonDTO Resolve(List<String> item)
         {
             PersonDTO result = new PersonDTO();

@@ -38,13 +38,16 @@
             this.bitácoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.respaldoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.integridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.personasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.donadoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.herramientasToolStripMenuItem});
+            this.herramientasToolStripMenuItem,
+            this.personasToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(976, 24);
@@ -106,23 +109,38 @@
             // bitácoraToolStripMenuItem
             // 
             this.bitácoraToolStripMenuItem.Name = "bitácoraToolStripMenuItem";
-            this.bitácoraToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.bitácoraToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.bitácoraToolStripMenuItem.Text = "Bitácora";
             this.bitácoraToolStripMenuItem.Click += new System.EventHandler(this.bitácoraToolStripMenuItem_Click);
             // 
             // respaldoToolStripMenuItem
             // 
             this.respaldoToolStripMenuItem.Name = "respaldoToolStripMenuItem";
-            this.respaldoToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.respaldoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.respaldoToolStripMenuItem.Text = "Respaldo";
             this.respaldoToolStripMenuItem.Click += new System.EventHandler(this.respaldoToolStripMenuItem_Click);
             // 
             // integridadToolStripMenuItem
             // 
             this.integridadToolStripMenuItem.Name = "integridadToolStripMenuItem";
-            this.integridadToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.integridadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.integridadToolStripMenuItem.Text = "Integridad";
             this.integridadToolStripMenuItem.Click += new System.EventHandler(this.integridadToolStripMenuItem_Click);
+            // 
+            // personasToolStripMenuItem
+            // 
+            this.personasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.donadoresToolStripMenuItem});
+            this.personasToolStripMenuItem.Name = "personasToolStripMenuItem";
+            this.personasToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.personasToolStripMenuItem.Text = "Personas";
+            // 
+            // donadoresToolStripMenuItem
+            // 
+            this.donadoresToolStripMenuItem.Name = "donadoresToolStripMenuItem";
+            this.donadoresToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.donadoresToolStripMenuItem.Text = "Donadores";
+            this.donadoresToolStripMenuItem.Click += new System.EventHandler(this.donadoresToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
@@ -156,5 +174,7 @@
         private System.Windows.Forms.ToolStripMenuItem bitácoraToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem respaldoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem integridadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem personasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem donadoresToolStripMenuItem;
     }
 }

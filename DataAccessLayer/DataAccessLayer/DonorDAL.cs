@@ -15,7 +15,7 @@ namespace DataAccessLayer
             String sql;
             List<List<String>> reader;
 
-            sql = "SELECT * FROM donor WHERE id = " + id;
+            sql = "SELECT p.*, d.id donorId, d.organizationId, d.CanBeContacted FROM donor d INNER JOIN person p ON p.id = d.personId WHERE d.id = " + id;
             reader = dbsql.executeReader(sql);
 
             if (reader.Count > 0)
@@ -24,6 +24,27 @@ namespace DataAccessLayer
             }
 
             return null;
+        }
+
+        public List<DonorDTO> GetDonors()
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+            List<List<String>> reader;
+            List<DonorDTO> result = new List<DonorDTO>();
+
+            sql = "SELECT p.*, d.id donorId, d.organizationId, d.CanBeContacted FROM donor d INNER JOIN person p ON p.id = d.personId";
+            reader = dbsql.executeReader(sql);
+
+            if (reader.Count > 0)
+            {
+                for (int i = 0; i < reader.Count; ++i)
+                {
+                    result.Add(Resolve(reader[i]));
+                }
+            }
+
+            return result;
         }
 
         public bool SaveDonor(DonorDTO donorDto)
@@ -43,10 +64,18 @@ namespace DataAccessLayer
         private DonorDTO Resolve(List<String> item)
         {
             DonorDTO result = new DonorDTO();
-            result.donorId = int.Parse(item[0]);
-            result.id = int.Parse(item[1]);
-            result.organizationId = int.Parse(item[2]);
-            result.canBeContacted = bool.Parse(item[3]);
+            result.id = int.Parse(item[0]);
+            result.name = item[1];
+            result.lastName = item[2];
+            result.birthdate = DateTime.Parse(item[3]);
+            result.email = item[4];
+            result.phone = item[5];
+            result.gender = Char.Parse(item[6]);
+            result.dni = int.Parse(item[7]);
+            result.addressId = int.Parse(item[8]);
+            result.donorId = int.Parse(item[9]);
+            result.organizationId = int.Parse(item[10]);
+            result.canBeContacted = bool.Parse(item[11]);
             return result;
         }
     }

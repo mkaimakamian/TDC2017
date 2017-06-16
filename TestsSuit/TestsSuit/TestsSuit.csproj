@@ -79,7 +79,7 @@
     <None Include="Documentation\donaciones 4V.docx" />
     <None Include="Documentation\Microsoft.TeamFoundation.Git.Provider.msi" />
     <None Include="Documentation\rhoddion20.eap" />
-    <None Include="Documentation\rhoddion_201706111406.bkp" />
+    <None Include="Documentation\rhoddion_201733152133.bkp" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

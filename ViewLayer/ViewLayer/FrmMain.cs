@@ -58,6 +58,14 @@ namespace ViewLayer
             integridadToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE007);
             SessionHelper.RegisterForTranslation(integridadToolStripMenuItem, Codes.MNU_GE007);
 
+            //PERSONAS
+            personasToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE008);
+            SessionHelper.RegisterForTranslation(personasToolStripMenuItem, Codes.MNU_GE008);
+
+            //Personas > Donadores
+            donadoresToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE009);
+            SessionHelper.RegisterForTranslation(donadoresToolStripMenuItem, Codes.MNU_GE009);
+
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
@@ -123,6 +131,17 @@ namespace ViewLayer
         private void integridadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new FrmIntegrity().ShowDialog();
+        }
+
+        private void donadoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new FrmGenericMain(
+                typeof(DonorBLL),
+                typeof(FrmDonor),
+                SessionHelper.HasPermission(Codes.OP014),
+                SessionHelper.HasPermission(Codes.OP015),
+                SessionHelper.HasPermission(Codes.OP016)
+                ).ShowDialog();
         }
     }
 }
