@@ -100,8 +100,8 @@ namespace BusinessLogicLayer
             if (personBm.LastName == null || personBm.LastName.Length == 0)
                 return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el apellido.");
 
-            if (personBm.dni < 1)
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el dni.");
+            if (personBm.dni < 1 || personBm.dni.ToString().Length < 8)
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el dni con un número válido.");
 
             return new ResultBM(ResultBM.Type.OK);
         }

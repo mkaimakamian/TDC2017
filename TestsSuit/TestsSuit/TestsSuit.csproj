@@ -81,6 +81,9 @@
     <None Include="Documentation\rhoddion20.eap" />
     <None Include="Documentation\rhoddion_201733152133.bkp" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Documentation\TODO.txt" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

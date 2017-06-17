@@ -1,0 +1,12 @@
+::: COSAS QUE SÍ HAY QUE CORREGIR :::
+- IsValid del DonorBll no está haciendo uso de ninguna validación
+- Las eliminaciones deben ser lógicas
+- Terminar filtro del form genérico
+- Agregar confirmaciones antes de gurdar o actualizar
+
+::: FUNCIONALIDADES QUE DEBERÍAN INCLUIRSE :::
+- Completar la actualización del donador
+
+:::DESEABLES :::
+- Template para evitar el trycatch
+- En el form de user, el UserBM sigue manejando id y no objetos

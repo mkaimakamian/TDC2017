@@ -32,5 +32,30 @@ namespace BusinessLogicLayer
                     return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar el país " + iso2 + ".", exception);
             }
         }
+
+        public ResultBM GetCountries()
+        {
+            try
+            {
+                CountryDAL countryDal = new CountryDAL();
+                List<CountryDTO> countriesDto = countryDal.GetCountries();
+                List<CountryBM> countriesBm = ConvertIntoBusinessModel(countriesDto);
+                return new ResultBM(ResultBM.Type.OK, "Recuperación de registros exitosa.", countriesBm);
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar los donadores.", exception);
+            }
+        }
+
+        private List<CountryBM> ConvertIntoBusinessModel(List<CountryDTO> countries)
+        {
+            List<CountryBM> result = new List<CountryBM>();
+            foreach (CountryDTO country in countries)
+            {
+                result.Add(new CountryBM(country));
+            }
+            return result;
+        }
     }
 }

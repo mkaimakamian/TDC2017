@@ -54,7 +54,7 @@ namespace DataAccessLayer
 
             sql = "INSERT INTO donor (personId, organizationId, canBeContacted) VALUES (";
             sql += donorDto.id + ", ";
-            sql += donorDto.organizationId + ", ";
+            sql += donorDto.organizationId == 0 ? "null, " : donorDto.organizationId  + ", ";
             sql += "'" + donorDto.canBeContacted + "'";
             sql += ");SELECT @@IDENTITY";
             donorDto.donorId = dbsql.ExecuteNonQuery(sql);
@@ -74,7 +74,7 @@ namespace DataAccessLayer
             result.dni = int.Parse(item[7]);
             result.addressId = int.Parse(item[8]);
             result.donorId = int.Parse(item[9]);
-            result.organizationId = int.Parse(item[10]);
+            result.organizationId = int.Parse(item[10] == "" ? "0" : item[10]);
             result.canBeContacted = bool.Parse(item[11]);
             return result;
         }

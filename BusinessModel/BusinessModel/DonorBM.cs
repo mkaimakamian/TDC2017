@@ -57,10 +57,7 @@ namespace BusinessModel
             this.phone = donorDto.phone;
             this.gender = donorDto.gender;
             this.dni = donorDto.dni;
-            //this.address = donorDto.address;
-
             this.donorId = donorDto.donorId;
-            //this.organization = organizationBm;
             this.canBeContacted = donorDto.canBeContacted;
         }
     }

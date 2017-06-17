@@ -58,6 +58,10 @@ namespace BusinessLogicLayer
             }
         }
 
+        /// <summary>
+        /// Devuelve la lista de donadores
+        /// </summary>
+        /// <returns></returns>
         public ResultBM GetDonors()
         {
             try {
@@ -72,6 +76,11 @@ namespace BusinessLogicLayer
             }
         }
 
+        /// <summary>
+        /// Crea un nuevo donador.
+        /// </summary>
+        /// <param name="donorBm"></param>
+        /// <returns></returns>
         public ResultBM SaveDonor(DonorBM donorBm)
         {
             try
@@ -115,6 +124,36 @@ namespace BusinessLogicLayer
             }
         }
 
+        public ResultBM UpdateDonor(DonorBM donorBm)
+        {
+            try
+            {
+                DonorDAL donorDal = new DonorDAL();
+                DonorDTO donorDto;
+                ResultBM validationResult = IsValid(donorBm);
+
+                if (validationResult.IsValid())
+                {
+                    //TODO COMPLETAR:
+                    //1. actualizar usuario
+                    //2. actualizar donador
+                    //donorDto = new DonorDTO(donationBm.items, donationBm.arrival, donationBm.donationStatus.id, donationBm.donorId, donationBm.comment, donationBm.volunteer == null ? 0 : donationBm.volunteer.volunteerId, donationBm.id);
+                    //donationDal.UpdateDonation(donationDto);
+
+                    return new ResultBM(ResultBM.Type.OK, "Se ha actualizado la donación.", donorBm);
+
+                }
+                else
+                {
+                    return validationResult;
+                }
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al actualizar la donación.", exception);
+            }
+        }
+
         private List<DonorBM> ConvertIntoBusinessModel(List<DonorDTO> donors)
         {
             List<DonorBM> result = new List<DonorBM>();
@@ -127,6 +166,7 @@ namespace BusinessLogicLayer
 
         public ResultBM IsValid(DonorBM donorBm)
         {
+            //Un donador es una persona con un conjunto de valores cuyas entidades base se encargan de validar lo que haga falta
             return new ResultBM(ResultBM.Type.OK);
         }
 

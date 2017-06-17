@@ -20,7 +20,7 @@ namespace TestsSuit
             CountryBM country = result.GetValue<CountryBM>();
             Assert.IsNotNull(country, "Debería haber recuperado el país argentina");
             Assert.AreEqual(country.iso2, "AR", "Debería existir AR");
-            Assert.AreEqual(country.name, "Argentina", "Debería ser Argentina");
+            Assert.AreEqual(country.Name, "Argentina", "Debería ser Argentina");
         }
 
         [TestMethod]

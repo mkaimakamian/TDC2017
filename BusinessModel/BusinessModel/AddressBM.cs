@@ -17,6 +17,10 @@ namespace BusinessModel
         public string comment;
         public CountryBM country;
 
+        public AddressBM() {
+            this.country = new CountryBM();
+        }
+
         public AddressBM(AddressDTO addressDto, CountryBM countryBm)
         {
             this.id = addressDto.id;

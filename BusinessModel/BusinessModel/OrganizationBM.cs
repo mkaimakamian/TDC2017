@@ -16,6 +16,8 @@ namespace BusinessModel
         public string phone;
         public string email;
 
+        public OrganizationBM() { }
+
         public OrganizationBM(OrganizationDTO organizationDto)
         {
             this.id = organizationDto.id;
