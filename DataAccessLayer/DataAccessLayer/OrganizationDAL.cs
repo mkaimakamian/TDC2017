@@ -27,6 +27,23 @@ namespace DataAccessLayer
             return null;
         }
 
+        public bool SaveOrganization(OrganizationDTO organizationDto)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "INSERT INTO organization (name, category, comment, phone, email) VALUES (";
+            sql += "'" + organizationDto.name + "', ";
+            sql += "'" + organizationDto.category + "', ";
+            sql += "'" + organizationDto.comment + "', ";
+            sql += "'" + organizationDto.phone + "', ";
+            sql += "'" + organizationDto.email + "'";
+            sql += ");SELECT @@IDENTITY";
+            organizationDto.id = dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
+
+
         private OrganizationDTO Resolve(List<String> item)
         {
             OrganizationDTO result = new OrganizationDTO();

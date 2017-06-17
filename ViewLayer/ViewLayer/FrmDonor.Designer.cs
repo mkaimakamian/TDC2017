@@ -65,12 +65,18 @@
             this.cmdClose = new System.Windows.Forms.Button();
             this.cmdAccept = new System.Windows.Forms.Button();
             this.txtDocument = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(12, 9);
+            this.lblName.Location = new System.Drawing.Point(6, 16);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(33, 13);
             this.lblName.TabIndex = 0;
@@ -78,22 +84,22 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(12, 25);
+            this.txtName.Location = new System.Drawing.Point(6, 32);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(100, 20);
+            this.txtName.Size = new System.Drawing.Size(200, 20);
             this.txtName.TabIndex = 1;
             // 
             // txtLastName
             // 
-            this.txtLastName.Location = new System.Drawing.Point(12, 64);
+            this.txtLastName.Location = new System.Drawing.Point(6, 71);
             this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(100, 20);
+            this.txtLastName.Size = new System.Drawing.Size(200, 20);
             this.txtLastName.TabIndex = 3;
             // 
             // lblLastName
             // 
             this.lblLastName.AutoSize = true;
-            this.lblLastName.Location = new System.Drawing.Point(12, 48);
+            this.lblLastName.Location = new System.Drawing.Point(6, 55);
             this.lblLastName.Name = "lblLastName";
             this.lblLastName.Size = new System.Drawing.Size(49, 13);
             this.lblLastName.TabIndex = 2;
@@ -102,7 +108,7 @@
             // lblBirthday
             // 
             this.lblBirthday.AutoSize = true;
-            this.lblBirthday.Location = new System.Drawing.Point(12, 87);
+            this.lblBirthday.Location = new System.Drawing.Point(6, 94);
             this.lblBirthday.Name = "lblBirthday";
             this.lblBirthday.Size = new System.Drawing.Size(44, 13);
             this.lblBirthday.TabIndex = 4;
@@ -110,22 +116,22 @@
             // 
             // dateBirthday
             // 
-            this.dateBirthday.Location = new System.Drawing.Point(12, 103);
+            this.dateBirthday.Location = new System.Drawing.Point(6, 110);
             this.dateBirthday.Name = "dateBirthday";
             this.dateBirthday.Size = new System.Drawing.Size(200, 20);
             this.dateBirthday.TabIndex = 5;
             // 
             // txtMail
             // 
-            this.txtMail.Location = new System.Drawing.Point(12, 142);
+            this.txtMail.Location = new System.Drawing.Point(6, 149);
             this.txtMail.Name = "txtMail";
-            this.txtMail.Size = new System.Drawing.Size(100, 20);
+            this.txtMail.Size = new System.Drawing.Size(200, 20);
             this.txtMail.TabIndex = 7;
             // 
             // lblMail
             // 
             this.lblMail.AutoSize = true;
-            this.lblMail.Location = new System.Drawing.Point(12, 126);
+            this.lblMail.Location = new System.Drawing.Point(6, 133);
             this.lblMail.Name = "lblMail";
             this.lblMail.Size = new System.Drawing.Size(25, 13);
             this.lblMail.TabIndex = 6;
@@ -133,15 +139,15 @@
             // 
             // txtPhone
             // 
-            this.txtPhone.Location = new System.Drawing.Point(12, 181);
+            this.txtPhone.Location = new System.Drawing.Point(6, 188);
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(100, 20);
+            this.txtPhone.Size = new System.Drawing.Size(200, 20);
             this.txtPhone.TabIndex = 9;
             // 
             // lblPhone
             // 
             this.lblPhone.AutoSize = true;
-            this.lblPhone.Location = new System.Drawing.Point(12, 165);
+            this.lblPhone.Location = new System.Drawing.Point(6, 172);
             this.lblPhone.Name = "lblPhone";
             this.lblPhone.Size = new System.Drawing.Size(37, 13);
             this.lblPhone.TabIndex = 8;
@@ -150,7 +156,8 @@
             // rbuttonFemale
             // 
             this.rbuttonFemale.AutoSize = true;
-            this.rbuttonFemale.Location = new System.Drawing.Point(15, 207);
+            this.rbuttonFemale.Checked = true;
+            this.rbuttonFemale.Location = new System.Drawing.Point(9, 251);
             this.rbuttonFemale.Name = "rbuttonFemale";
             this.rbuttonFemale.Size = new System.Drawing.Size(56, 17);
             this.rbuttonFemale.TabIndex = 10;
@@ -161,18 +168,17 @@
             // rButtonMale
             // 
             this.rButtonMale.AutoSize = true;
-            this.rButtonMale.Location = new System.Drawing.Point(106, 207);
+            this.rButtonMale.Location = new System.Drawing.Point(9, 274);
             this.rButtonMale.Name = "rButtonMale";
             this.rButtonMale.Size = new System.Drawing.Size(47, 17);
             this.rButtonMale.TabIndex = 11;
-            this.rButtonMale.TabStop = true;
             this.rButtonMale.Text = "male";
             this.rButtonMale.UseVisualStyleBackColor = true;
             // 
             // lblDocument
             // 
             this.lblDocument.AutoSize = true;
-            this.lblDocument.Location = new System.Drawing.Point(12, 232);
+            this.lblDocument.Location = new System.Drawing.Point(6, 211);
             this.lblDocument.Name = "lblDocument";
             this.lblDocument.Size = new System.Drawing.Size(21, 13);
             this.lblDocument.TabIndex = 12;
@@ -180,15 +186,15 @@
             // 
             // txtStreet
             // 
-            this.txtStreet.Location = new System.Drawing.Point(288, 25);
+            this.txtStreet.Location = new System.Drawing.Point(6, 32);
             this.txtStreet.Name = "txtStreet";
-            this.txtStreet.Size = new System.Drawing.Size(100, 20);
+            this.txtStreet.Size = new System.Drawing.Size(200, 20);
             this.txtStreet.TabIndex = 15;
             // 
             // lblStreet
             // 
             this.lblStreet.AutoSize = true;
-            this.lblStreet.Location = new System.Drawing.Point(288, 9);
+            this.lblStreet.Location = new System.Drawing.Point(6, 16);
             this.lblStreet.Name = "lblStreet";
             this.lblStreet.Size = new System.Drawing.Size(33, 13);
             this.lblStreet.TabIndex = 14;
@@ -196,15 +202,16 @@
             // 
             // txtNumber
             // 
-            this.txtNumber.Location = new System.Drawing.Point(288, 64);
+            this.txtNumber.Location = new System.Drawing.Point(6, 71);
             this.txtNumber.Name = "txtNumber";
-            this.txtNumber.Size = new System.Drawing.Size(100, 20);
+            this.txtNumber.Size = new System.Drawing.Size(200, 20);
             this.txtNumber.TabIndex = 17;
+            this.txtNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumber_KeyPress);
             // 
             // lblNumber
             // 
             this.lblNumber.AutoSize = true;
-            this.lblNumber.Location = new System.Drawing.Point(288, 48);
+            this.lblNumber.Location = new System.Drawing.Point(6, 55);
             this.lblNumber.Name = "lblNumber";
             this.lblNumber.Size = new System.Drawing.Size(42, 13);
             this.lblNumber.TabIndex = 16;
@@ -212,15 +219,15 @@
             // 
             // txtApartment
             // 
-            this.txtApartment.Location = new System.Drawing.Point(288, 103);
+            this.txtApartment.Location = new System.Drawing.Point(6, 110);
             this.txtApartment.Name = "txtApartment";
-            this.txtApartment.Size = new System.Drawing.Size(100, 20);
+            this.txtApartment.Size = new System.Drawing.Size(200, 20);
             this.txtApartment.TabIndex = 19;
             // 
             // lblApartment
             // 
             this.lblApartment.AutoSize = true;
-            this.lblApartment.Location = new System.Drawing.Point(288, 87);
+            this.lblApartment.Location = new System.Drawing.Point(6, 94);
             this.lblApartment.Name = "lblApartment";
             this.lblApartment.Size = new System.Drawing.Size(54, 13);
             this.lblApartment.TabIndex = 18;
@@ -228,15 +235,16 @@
             // 
             // txtComment
             // 
-            this.txtComment.Location = new System.Drawing.Point(288, 142);
+            this.txtComment.Location = new System.Drawing.Point(9, 188);
+            this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(100, 20);
+            this.txtComment.Size = new System.Drawing.Size(197, 100);
             this.txtComment.TabIndex = 21;
             // 
             // lblComment
             // 
             this.lblComment.AutoSize = true;
-            this.lblComment.Location = new System.Drawing.Point(288, 126);
+            this.lblComment.Location = new System.Drawing.Point(9, 172);
             this.lblComment.Name = "lblComment";
             this.lblComment.Size = new System.Drawing.Size(50, 13);
             this.lblComment.TabIndex = 20;
@@ -244,16 +252,17 @@
             // 
             // cmbCountry
             // 
+            this.cmbCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCountry.FormattingEnabled = true;
-            this.cmbCountry.Location = new System.Drawing.Point(451, 25);
+            this.cmbCountry.Location = new System.Drawing.Point(9, 149);
             this.cmbCountry.Name = "cmbCountry";
-            this.cmbCountry.Size = new System.Drawing.Size(121, 21);
+            this.cmbCountry.Size = new System.Drawing.Size(197, 21);
             this.cmbCountry.TabIndex = 22;
             // 
             // lblCountry
             // 
             this.lblCountry.AutoSize = true;
-            this.lblCountry.Location = new System.Drawing.Point(448, 9);
+            this.lblCountry.Location = new System.Drawing.Point(6, 133);
             this.lblCountry.Name = "lblCountry";
             this.lblCountry.Size = new System.Drawing.Size(42, 13);
             this.lblCountry.TabIndex = 23;
@@ -261,15 +270,16 @@
             // 
             // txtCommentCmpny
             // 
-            this.txtCommentCmpny.Location = new System.Drawing.Point(496, 220);
+            this.txtCommentCmpny.Location = new System.Drawing.Point(6, 188);
+            this.txtCommentCmpny.Multiline = true;
             this.txtCommentCmpny.Name = "txtCommentCmpny";
-            this.txtCommentCmpny.Size = new System.Drawing.Size(100, 20);
+            this.txtCommentCmpny.Size = new System.Drawing.Size(200, 100);
             this.txtCommentCmpny.TabIndex = 28;
             // 
             // lblCommentCpny
             // 
             this.lblCommentCpny.AutoSize = true;
-            this.lblCommentCpny.Location = new System.Drawing.Point(496, 204);
+            this.lblCommentCpny.Location = new System.Drawing.Point(6, 172);
             this.lblCommentCpny.Name = "lblCommentCpny";
             this.lblCommentCpny.Size = new System.Drawing.Size(50, 13);
             this.lblCommentCpny.TabIndex = 27;
@@ -277,15 +287,15 @@
             // 
             // txtCategory
             // 
-            this.txtCategory.Location = new System.Drawing.Point(496, 181);
+            this.txtCategory.Location = new System.Drawing.Point(6, 71);
             this.txtCategory.Name = "txtCategory";
-            this.txtCategory.Size = new System.Drawing.Size(100, 20);
+            this.txtCategory.Size = new System.Drawing.Size(200, 20);
             this.txtCategory.TabIndex = 26;
             // 
             // lblCategory
             // 
             this.lblCategory.AutoSize = true;
-            this.lblCategory.Location = new System.Drawing.Point(496, 165);
+            this.lblCategory.Location = new System.Drawing.Point(6, 55);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(48, 13);
             this.lblCategory.TabIndex = 25;
@@ -293,22 +303,22 @@
             // 
             // txtCompany
             // 
-            this.txtCompany.Location = new System.Drawing.Point(496, 142);
+            this.txtCompany.Location = new System.Drawing.Point(6, 32);
             this.txtCompany.Name = "txtCompany";
-            this.txtCompany.Size = new System.Drawing.Size(100, 20);
+            this.txtCompany.Size = new System.Drawing.Size(200, 20);
             this.txtCompany.TabIndex = 24;
             // 
             // txtPhoneCmpny
             // 
-            this.txtPhoneCmpny.Location = new System.Drawing.Point(496, 299);
+            this.txtPhoneCmpny.Location = new System.Drawing.Point(6, 149);
             this.txtPhoneCmpny.Name = "txtPhoneCmpny";
-            this.txtPhoneCmpny.Size = new System.Drawing.Size(100, 20);
+            this.txtPhoneCmpny.Size = new System.Drawing.Size(200, 20);
             this.txtPhoneCmpny.TabIndex = 34;
             // 
             // lblPhoneCmpny
             // 
             this.lblPhoneCmpny.AutoSize = true;
-            this.lblPhoneCmpny.Location = new System.Drawing.Point(496, 283);
+            this.lblPhoneCmpny.Location = new System.Drawing.Point(6, 133);
             this.lblPhoneCmpny.Name = "lblPhoneCmpny";
             this.lblPhoneCmpny.Size = new System.Drawing.Size(37, 13);
             this.lblPhoneCmpny.TabIndex = 33;
@@ -316,15 +326,15 @@
             // 
             // txtMailCmpny
             // 
-            this.txtMailCmpny.Location = new System.Drawing.Point(496, 260);
+            this.txtMailCmpny.Location = new System.Drawing.Point(6, 110);
             this.txtMailCmpny.Name = "txtMailCmpny";
-            this.txtMailCmpny.Size = new System.Drawing.Size(100, 20);
+            this.txtMailCmpny.Size = new System.Drawing.Size(200, 20);
             this.txtMailCmpny.TabIndex = 32;
             // 
             // lblMailCmpny
             // 
             this.lblMailCmpny.AutoSize = true;
-            this.lblMailCmpny.Location = new System.Drawing.Point(496, 244);
+            this.lblMailCmpny.Location = new System.Drawing.Point(6, 94);
             this.lblMailCmpny.Name = "lblMailCmpny";
             this.lblMailCmpny.Size = new System.Drawing.Size(25, 13);
             this.lblMailCmpny.TabIndex = 31;
@@ -333,7 +343,7 @@
             // lblCompany
             // 
             this.lblCompany.AutoSize = true;
-            this.lblCompany.Location = new System.Drawing.Point(496, 126);
+            this.lblCompany.Location = new System.Drawing.Point(6, 16);
             this.lblCompany.Name = "lblCompany";
             this.lblCompany.Size = new System.Drawing.Size(50, 13);
             this.lblCompany.TabIndex = 35;
@@ -342,7 +352,7 @@
             // chkBoxContact
             // 
             this.chkBoxContact.AutoSize = true;
-            this.chkBoxContact.Location = new System.Drawing.Point(108, 299);
+            this.chkBoxContact.Location = new System.Drawing.Point(82, 251);
             this.chkBoxContact.Name = "chkBoxContact";
             this.chkBoxContact.Size = new System.Drawing.Size(104, 17);
             this.chkBoxContact.TabIndex = 36;
@@ -361,7 +371,7 @@
             // 
             // cmdAccept
             // 
-            this.cmdAccept.Location = new System.Drawing.Point(646, 340);
+            this.cmdAccept.Location = new System.Drawing.Point(613, 340);
             this.cmdAccept.Name = "cmdAccept";
             this.cmdAccept.Size = new System.Drawing.Size(75, 23);
             this.cmdAccept.TabIndex = 37;
@@ -371,59 +381,92 @@
             // 
             // txtDocument
             // 
-            this.txtDocument.Location = new System.Drawing.Point(12, 248);
+            this.txtDocument.Location = new System.Drawing.Point(6, 227);
             this.txtDocument.Name = "txtDocument";
-            this.txtDocument.Size = new System.Drawing.Size(100, 20);
+            this.txtDocument.Size = new System.Drawing.Size(200, 20);
             this.txtDocument.TabIndex = 13;
             this.txtDocument.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDocument_KeyPress);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lblName);
+            this.groupBox1.Controls.Add(this.txtName);
+            this.groupBox1.Controls.Add(this.lblLastName);
+            this.groupBox1.Controls.Add(this.chkBoxContact);
+            this.groupBox1.Controls.Add(this.txtLastName);
+            this.groupBox1.Controls.Add(this.lblBirthday);
+            this.groupBox1.Controls.Add(this.dateBirthday);
+            this.groupBox1.Controls.Add(this.lblMail);
+            this.groupBox1.Controls.Add(this.txtMail);
+            this.groupBox1.Controls.Add(this.lblPhone);
+            this.groupBox1.Controls.Add(this.txtPhone);
+            this.groupBox1.Controls.Add(this.rbuttonFemale);
+            this.groupBox1.Controls.Add(this.rButtonMale);
+            this.groupBox1.Controls.Add(this.lblDocument);
+            this.groupBox1.Controls.Add(this.txtDocument);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(221, 304);
+            this.groupBox1.TabIndex = 39;
+            this.groupBox1.TabStop = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtNumber);
+            this.groupBox2.Controls.Add(this.lblStreet);
+            this.groupBox2.Controls.Add(this.txtStreet);
+            this.groupBox2.Controls.Add(this.lblNumber);
+            this.groupBox2.Controls.Add(this.lblApartment);
+            this.groupBox2.Controls.Add(this.txtApartment);
+            this.groupBox2.Controls.Add(this.lblComment);
+            this.groupBox2.Controls.Add(this.txtComment);
+            this.groupBox2.Controls.Add(this.cmbCountry);
+            this.groupBox2.Controls.Add(this.lblCountry);
+            this.groupBox2.Location = new System.Drawing.Point(239, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(223, 304);
+            this.groupBox2.TabIndex = 40;
+            this.groupBox2.TabStop = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.lblCompany);
+            this.groupBox3.Controls.Add(this.txtCompany);
+            this.groupBox3.Controls.Add(this.lblCategory);
+            this.groupBox3.Controls.Add(this.txtCategory);
+            this.groupBox3.Controls.Add(this.lblCommentCpny);
+            this.groupBox3.Controls.Add(this.txtCommentCmpny);
+            this.groupBox3.Controls.Add(this.txtPhoneCmpny);
+            this.groupBox3.Controls.Add(this.lblMailCmpny);
+            this.groupBox3.Controls.Add(this.lblPhoneCmpny);
+            this.groupBox3.Controls.Add(this.txtMailCmpny);
+            this.groupBox3.Location = new System.Drawing.Point(468, 12);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(220, 304);
+            this.groupBox3.TabIndex = 41;
+            this.groupBox3.TabStop = false;
             // 
             // FrmDonor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(734, 375);
+            this.ClientSize = new System.Drawing.Size(701, 373);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.cmdAccept);
-            this.Controls.Add(this.chkBoxContact);
-            this.Controls.Add(this.lblCompany);
-            this.Controls.Add(this.txtPhoneCmpny);
-            this.Controls.Add(this.lblPhoneCmpny);
-            this.Controls.Add(this.txtMailCmpny);
-            this.Controls.Add(this.lblMailCmpny);
-            this.Controls.Add(this.txtCommentCmpny);
-            this.Controls.Add(this.lblCommentCpny);
-            this.Controls.Add(this.txtCategory);
-            this.Controls.Add(this.lblCategory);
-            this.Controls.Add(this.txtCompany);
-            this.Controls.Add(this.lblCountry);
-            this.Controls.Add(this.cmbCountry);
-            this.Controls.Add(this.txtComment);
-            this.Controls.Add(this.lblComment);
-            this.Controls.Add(this.txtApartment);
-            this.Controls.Add(this.lblApartment);
-            this.Controls.Add(this.txtNumber);
-            this.Controls.Add(this.lblNumber);
-            this.Controls.Add(this.txtStreet);
-            this.Controls.Add(this.lblStreet);
-            this.Controls.Add(this.txtDocument);
-            this.Controls.Add(this.lblDocument);
-            this.Controls.Add(this.rButtonMale);
-            this.Controls.Add(this.rbuttonFemale);
-            this.Controls.Add(this.txtPhone);
-            this.Controls.Add(this.lblPhone);
-            this.Controls.Add(this.txtMail);
-            this.Controls.Add(this.lblMail);
-            this.Controls.Add(this.dateBirthday);
-            this.Controls.Add(this.lblBirthday);
-            this.Controls.Add(this.txtLastName);
-            this.Controls.Add(this.lblLastName);
-            this.Controls.Add(this.txtName);
-            this.Controls.Add(this.lblName);
+            this.MaximizeBox = false;
             this.Name = "FrmDonor";
             this.Text = "FrmDonor";
             this.Load += new System.EventHandler(this.FrmDonor_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -466,5 +509,8 @@
         private System.Windows.Forms.Button cmdClose;
         private System.Windows.Forms.Button cmdAccept;
         private System.Windows.Forms.TextBox txtDocument;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }

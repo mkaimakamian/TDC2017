@@ -45,6 +45,7 @@
             // 
             // cmbLanguage
             // 
+            this.cmbLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLanguage.FormattingEnabled = true;
             this.cmbLanguage.Location = new System.Drawing.Point(16, 71);
             this.cmbLanguage.Name = "cmbLanguage";
@@ -80,6 +81,8 @@
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.cmbLanguage);
             this.Controls.Add(this.lblLanguage);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrmLanguage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LanguageFrm";

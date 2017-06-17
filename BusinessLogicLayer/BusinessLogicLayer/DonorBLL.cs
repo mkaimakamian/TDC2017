@@ -85,6 +85,9 @@ namespace BusinessLogicLayer
         {
             try
             {
+                OrganizationBLL organizationBll = new OrganizationBLL();
+                ResultBM resultOrganization = null;
+                OrganizationBM organizationBm = null;
                 DonorDAL donorDal = new DonorDAL();
                 PersonBLL personBll = new PersonBLL();
                 PersonBM personBm = null;
@@ -92,31 +95,29 @@ namespace BusinessLogicLayer
                 ResultBM personResult;
                 DonorDTO donorDto;
                 
+                // El validador no es necesario porque el donador es una combinación de otras entidades que ya poseen validadores.
                 validationResult = IsValid(donorBm);
+                if (!validationResult.IsValid()) return validationResult;
 
-                if (validationResult.IsValid())
+                personResult = personBll.SavePerson(donorBm);
+                if (!personResult.IsValid()) return personResult;
+
+                if (donorBm.organization != null)
                 {
-
-                    personResult = personBll.SavePerson(donorBm);
-
-                    if (personResult.IsValid())
-                    {
-                        personBm = personResult.GetValue() as PersonBM;
-                        donorDto = new DonorDTO(personBm.id, donorBm.organization.id, donorBm.canBeContacted);
-                        donorDal.SaveDonor(donorDto);
-                        donorBm.donorId = donorDto.donorId;
-
-                        return new ResultBM(ResultBM.Type.OK, "Se ha creado el donador " + donorBm.Name + " " + donorBm.LastName + ".", donorBm);
-                    }
-                    else
-                    {
-                        return personResult;
-                    }
+                    resultOrganization = organizationBll.SaveOrganization(donorBm.organization);
+                    if (!resultOrganization.IsValid()) return resultOrganization;
+                    if (resultOrganization.GetValue() == null) return new ResultBM(ResultBM.Type.FAIL, "Se ha producido un error al guardar la organización del donador.", resultOrganization);
+                    organizationBm = resultOrganization.GetValue<OrganizationBM>();
                 }
-                else
-                {
-                    return validationResult;
-                }
+
+                personBm = personResult.GetValue() as PersonBM;
+                donorDto = new DonorDTO(personBm.id, organizationBm == null ? 0 : organizationBm.id, donorBm.canBeContacted);
+                donorDal.SaveDonor(donorDto);
+                donorBm.donorId = donorDto.donorId;
+
+                return new ResultBM(ResultBM.Type.OK, "Se ha creado el donador " + donorBm.Name + " " + donorBm.LastName + ".", donorBm);
+                   
+               
             }
             catch (Exception exception)
             {

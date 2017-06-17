@@ -75,6 +75,7 @@
             // 
             // cmbLanguage
             // 
+            this.cmbLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLanguage.FormattingEnabled = true;
             this.cmbLanguage.Location = new System.Drawing.Point(12, 111);
             this.cmbLanguage.Name = "cmbLanguage";
@@ -149,6 +150,7 @@
             // 
             // cmbProfile
             // 
+            this.cmbProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbProfile.FormattingEnabled = true;
             this.cmbProfile.Location = new System.Drawing.Point(12, 152);
             this.cmbProfile.Name = "cmbProfile";

@@ -90,9 +90,11 @@
             this.Controls.Add(this.BtnAccess);
             this.Controls.Add(this.TxtPassword);
             this.Controls.Add(this.TxtUser);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrmLoginMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Login";
             this.ResumeLayout(false);
             this.PerformLayout();
 

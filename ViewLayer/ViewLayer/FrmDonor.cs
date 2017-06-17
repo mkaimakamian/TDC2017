@@ -195,16 +195,26 @@ namespace ViewLayer
 
         private void FillCompanyData(DonorBM donor)
         {
-            if (donor.organization == null) donor.organization = new OrganizationBM();
-            
-            donor.organization.name = txtCompany.Text;
-            donor.organization.category = txtCategory.Text;
-            donor.organization.email = txtMailCmpny.Text;
-            donor.organization.phone = txtPhoneCmpny.Text;
-            donor.organization.comment = txtCommentCmpny.Text;
+            // Si se imputó algo, entonces se crea el objeto compañía
+            int input = txtCompany.Text.Length + txtCategory.Text.Length + txtMailCmpny.Text.Length + txtPhoneCmpny.Text.Length + txtCommentCmpny.Text.Length;
+            if (input > 0 && donor.organization == null) donor.organization = new OrganizationBM();
+
+            if (donor.organization != null)
+            {
+                donor.organization.name = txtCompany.Text;
+                donor.organization.category = txtCategory.Text;
+                donor.organization.email = txtMailCmpny.Text;
+                donor.organization.phone = txtPhoneCmpny.Text;
+                donor.organization.comment = txtCommentCmpny.Text;
+            }
         }
 
         private void txtDocument_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsNumber(e.KeyChar) && !(e.KeyChar == (char)Keys.Back)) e.Handled = true;
+        }
+
+        private void txtNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsNumber(e.KeyChar) && !(e.KeyChar == (char)Keys.Back)) e.Handled = true;
         }

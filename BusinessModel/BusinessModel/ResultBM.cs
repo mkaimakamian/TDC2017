@@ -21,7 +21,8 @@ namespace BusinessModel
             EXCEPTION,
             CORRUPTED_DATABASE,
             FAIL,
-            EMPTY_PROFILE
+            EMPTY_PROFILE,
+            NULL
         };
 
         private Type type;
