@@ -1,5 +1,5 @@
 ::: COSAS QUE SÍ HAY QUE CORREGIR :::
-- IsValid del DonorBll no está haciendo uso de ninguna validación
+- En la pantalla de donadores, no se guarda la oragnizacion
 - Las eliminaciones deben ser lógicas
 - Terminar filtro del form genérico
 - Agregar confirmaciones antes de gurdar o actualizar

@@ -59,11 +59,32 @@ namespace ViewLayer
         public const string LBL_ACTIVE = "LBL_ACTIVE";
         public const string LBL_LANGUAGE = "LBL_LANGUAGE";
         public const string LBL_NAME = "LBL_NAME";
+        public const string LBL_LAST_NAME = "LBL_LAST_NAME";
+        public const string LBL_BIRTHDAY = "LBL_BIRTHDAY";
+        public const string LBL_EMAIL = "LBL_EMAIL";
+        public const string LBL_PHONE = "LBL_PHONE";
+        public const string LBL_MALE = "LBL_MALE";
+        public const string LBL_FEMALE = "LBL_FEMALE";
+        public const string LBL_UID = "LBL_UID";
+        public const string LBL_OBSERVATION = "LBL_OBSERVATION";
+
+        public const string LBL_STREET = "LBL_STREET";
+        public const string LBL_NUMBER = "LBL_NUMBER";
+        public const string LBL_APARTMENT = "LBL_APARTMENT";
+        public const string LBL_COUNTRY = "LBL_COUNTRY";
+
+        public const string LBL_COMPANY = "LBL_COMPANY";
+        public const string LBL_CATEGORY = "LBL_CATEGORY";
+
+        public const string LBL_CAN_CONTACT = "LBL_CAN_CONTACT";
+
         public const string LBL_PASSWORD = "LBL_PASSWORD";
         public const string LBL_PASSWORD_CHECK = "LBL_PASSWORD_CHECK";
         public const string LBL_PROFILE = "LBL_PROFILE";
         public const string LBL_DESCRIPTION = "LBL_DESCRIPTION";
         public const string LBL_PERMISSIONS = "LBL_PERMISSIONS";
+
+        
 
 
         public const string MNU_GE001 = "MNU_GE001"; //Menú herramientas

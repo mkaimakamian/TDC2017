@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogicLayer;
 using BusinessModel;
+using Helper;
 
 namespace ViewLayer
 {
@@ -38,6 +39,33 @@ namespace ViewLayer
         {
             try
             {
+
+                //Traducciones
+                SessionHelper.RegisterForTranslation(cmdAccept, Codes.BTN_ACCEPT);
+                SessionHelper.RegisterForTranslation(cmdClose, Codes.BTN_CLOSE);
+
+                SessionHelper.RegisterForTranslation(lblName, Codes.LBL_NAME);
+                SessionHelper.RegisterForTranslation(lblLastName, Codes.LBL_LAST_NAME);
+                SessionHelper.RegisterForTranslation(lblBirthday, Codes.LBL_BIRTHDAY);
+                SessionHelper.RegisterForTranslation(lblMail, Codes.LBL_EMAIL);
+                SessionHelper.RegisterForTranslation(lblPhone, Codes.LBL_PHONE);
+                SessionHelper.RegisterForTranslation(rbuttonFemale, Codes.LBL_FEMALE);
+                SessionHelper.RegisterForTranslation(rButtonMale, Codes.LBL_MALE);
+                SessionHelper.RegisterForTranslation(lblDocument, Codes.LBL_UID);
+
+                SessionHelper.RegisterForTranslation(lblStreet, Codes.LBL_STREET);
+                SessionHelper.RegisterForTranslation(lblNumber, Codes.LBL_NUMBER);
+                SessionHelper.RegisterForTranslation(lblApartment, Codes.LBL_APARTMENT);
+                SessionHelper.RegisterForTranslation(lblComment, Codes.LBL_OBSERVATION);
+
+                SessionHelper.RegisterForTranslation(lblCountry, Codes.LBL_COUNTRY);
+                SessionHelper.RegisterForTranslation(lblCompany, Codes.LBL_COMPANY);
+                SessionHelper.RegisterForTranslation(lblCategory, Codes.LBL_CATEGORY);
+                SessionHelper.RegisterForTranslation(lblCommentCpny, Codes.LBL_OBSERVATION);
+                SessionHelper.RegisterForTranslation(lblMailCmpny, Codes.LBL_EMAIL);
+                SessionHelper.RegisterForTranslation(lblPhoneCmpny, Codes.LBL_PHONE);
+                SessionHelper.RegisterForTranslation(chkBoxContact, Codes.LBL_CAN_CONTACT);
+
                 ResultBM countryResult = new CountryBLL().GetCountries();
                 cmbCountry.DataSource = countryResult.GetValue<List<CountryBM>>();
                 cmbCountry.DisplayMember = "Name";
