@@ -34,6 +34,7 @@
             this.cmdDelete = new System.Windows.Forms.Button();
             this.cmdClose = new System.Windows.Forms.Button();
             this.flowLayout = new System.Windows.Forms.FlowLayoutPanel();
+            this.cmdFilter = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -97,11 +98,22 @@
             this.flowLayout.Size = new System.Drawing.Size(507, 61);
             this.flowLayout.TabIndex = 5;
             // 
+            // cmdFilter
+            // 
+            this.cmdFilter.Location = new System.Drawing.Point(515, 174);
+            this.cmdFilter.Name = "cmdFilter";
+            this.cmdFilter.Size = new System.Drawing.Size(75, 23);
+            this.cmdFilter.TabIndex = 6;
+            this.cmdFilter.Text = "filter";
+            this.cmdFilter.UseVisualStyleBackColor = true;
+            this.cmdFilter.Click += new System.EventHandler(this.cmdFilter_Click);
+            // 
             // FrmGenericMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(598, 433);
+            this.Controls.Add(this.cmdFilter);
             this.Controls.Add(this.flowLayout);
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.cmdDelete);
@@ -126,6 +138,7 @@
         private System.Windows.Forms.Button cmdDelete;
         private System.Windows.Forms.Button cmdClose;
         private System.Windows.Forms.FlowLayoutPanel flowLayout;
+        private System.Windows.Forms.Button cmdFilter;
 
 
     }

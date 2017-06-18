@@ -21,7 +21,7 @@ namespace TestsSuit
             Assert.IsTrue(donationResult.IsValid(), "La donación debería ser válida.");
             Assert.IsNotNull(donationResult.GetValue(), "Deería haber devuelto una donación.");
             Assert.IsTrue(donationResult.GetValue<DonationBM>().id > 0, "El id debería ser mayor a cero.");
-            Assert.AreEqual(donationResult.GetValue<DonationBM>().comment, "Esta es una donación creada por un test.", "Debería poseer comentario");
+            Assert.AreEqual(donationResult.GetValue<DonationBM>().Comment, "Esta es una donación creada por un test.", "Debería poseer comentario");
         }
 
         [TestMethod]
@@ -36,7 +36,7 @@ namespace TestsSuit
             ResultBM donationResult = donationBll.SaveDonation(donationBm);
             Assert.IsTrue(donationResult.IsValid(), "La donación debería ser válida.");
             Assert.IsNotNull(donationResult.GetValue(), "Debería haber devuelto la donación.");
-            Assert.IsNull(donationResult.GetValue<DonationBM>().comment, "No debería poseer comentario");
+            Assert.IsNull(donationResult.GetValue<DonationBM>().Comment, "No debería poseer comentario");
         }
 
         [TestMethod]

@@ -9,7 +9,7 @@ using BusinessModel;
 
 namespace BusinessLogicLayer
 {
-    public class DonationBLL
+    public class DonationBLL: BLEntity
     {
         public ResultBM GetDonation(int donationId)
         {
@@ -55,6 +55,19 @@ namespace BusinessLogicLayer
             }
         }
 
+        public ResultBM GetDonations()
+        {
+            try {
+                DonationDAL donationDal = new DonationDAL();
+                List<DonationDTO> donationsDto = donationDal.GetDonations();
+                List<DonationBM> donationsBm = ConvertIntoBusinessModel(donationsDto);
+                return new ResultBM(ResultBM.Type.OK, "Recuperación de registros exitosa.", donationsBm);
+            }
+            catch (Exception exception) {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar las donaciones.", exception);
+            }
+        }
+
         public ResultBM SaveDonation(DonationBM donationBm)
         {
             try
@@ -65,7 +78,7 @@ namespace BusinessLogicLayer
 
                 if (validationResult.IsValid())
                 {
-                    donationDto = new DonationDTO(donationBm.items, donationBm.arrival, donationBm.donationStatus.id, donationBm.donorId, donationBm.comment, 0);
+                    donationDto = new DonationDTO(donationBm.Items, donationBm.Arrival, donationBm.donationStatus.id, donationBm.donorId, donationBm.Comment, 0);
                     donationDal.SaveDonation(donationDto);
                     donationBm.id = donationDto.id;
 
@@ -93,7 +106,7 @@ namespace BusinessLogicLayer
 
                 if (validationResult.IsValid())
                 {
-                    donationDto = new DonationDTO(donationBm.items, donationBm.arrival, donationBm.donationStatus.id, donationBm.donorId, donationBm.comment, donationBm.volunteer == null ? 0 : donationBm.volunteer.volunteerId, donationBm.id);
+                    donationDto = new DonationDTO(donationBm.Items, donationBm.Arrival, donationBm.donationStatus.id, donationBm.donorId, donationBm.Comment, donationBm.volunteer == null ? 0 : donationBm.volunteer.volunteerId, donationBm.id);
                     donationDal.UpdateDonation(donationDto);
 
                     return new ResultBM(ResultBM.Type.OK, "Se ha actualizado la donación.", donationBm);
@@ -110,9 +123,19 @@ namespace BusinessLogicLayer
             }
         }
 
+        private List<DonationBM> ConvertIntoBusinessModel(List<DonationDTO> donations)
+        {
+            List<DonationBM> result = new List<DonationBM>();
+            foreach (DonationDTO donation in donations)
+            {
+                result.Add(new DonationBM(donation));
+            }
+            return result;
+        }
+
         private ResultBM IsValid(DonationBM donationBm)
         {
-            if (donationBm.items < 1)
+            if (donationBm.Items < 1)
                 return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "La cantidad de bultos debe ser de al menos una unidad.");
 
             if (donationBm.donationStatus == null)
@@ -124,5 +147,15 @@ namespace BusinessLogicLayer
             return new ResultBM(ResultBM.Type.OK);
         }
 
+
+        public ResultBM GetCollection()
+        {
+            return GetDonations();
+        }
+
+        public ResultBM Delete(object entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -361,7 +361,7 @@
             // 
             // cmdClose
             // 
-            this.cmdClose.Location = new System.Drawing.Point(12, 340);
+            this.cmdClose.Location = new System.Drawing.Point(12, 338);
             this.cmdClose.Name = "cmdClose";
             this.cmdClose.Size = new System.Drawing.Size(75, 23);
             this.cmdClose.TabIndex = 38;
@@ -371,7 +371,7 @@
             // 
             // cmdAccept
             // 
-            this.cmdAccept.Location = new System.Drawing.Point(613, 340);
+            this.cmdAccept.Location = new System.Drawing.Point(613, 338);
             this.cmdAccept.Name = "cmdAccept";
             this.cmdAccept.Size = new System.Drawing.Size(75, 23);
             this.cmdAccept.TabIndex = 37;

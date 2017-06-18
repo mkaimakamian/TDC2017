@@ -45,6 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Codes.cs" />
+    <Compile Include="FrmDonation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDonation.Designer.cs">
+      <DependentUpon>FrmDonation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dummy.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -107,6 +113,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmDonation.resx">
+      <DependentUpon>FrmDonation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmBackup.resx">
       <DependentUpon>FrmBackup.cs</DependentUpon>
     </EmbeddedResource>

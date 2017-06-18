@@ -33,13 +33,16 @@ namespace ViewLayer
         
         public const string GE008 = "GE008"; //Personas
             public const string GE009 = "GE009"; //Donadores
-            public const string OP014 = "OP014"; // Crear donador
-            public const string OP015 = "OP015"; // Editar donador
-            public const string OP016 = "OP016"; // Eliminar donador
+                public const string OP014 = "OP014"; // Crear donador
+                public const string OP015 = "OP015"; // Editar donador
+                public const string OP016 = "OP016"; // Eliminar donador
 
+            public const string GE010 = "GE010"; //Stock
+                public const string GE011 = "GE011"; //Donaciones
+                    public const string OP018 = "OP018"; // Crear donacion
+                    public const string OP019 = "OP019"; // Editar donacion
+                    public const string OP020 = "OP020"; // Eliminar donacion
 
-        public const string GE010 = "GE010"; //Tipo de ítem
-        public const string GE011 = "GE011"; //Stock
         public const string GE012 = "GE012"; //Donadores
         public const string GE013 = "GE013"; //Donaciones
         public const string GE014 = "GE014"; //Hojas de ruta
@@ -78,6 +81,11 @@ namespace ViewLayer
 
         public const string LBL_CAN_CONTACT = "LBL_CAN_CONTACT";
 
+        public const string LBL_ARRIVAL = "LBL_ARRIVAL";
+        public const string LBL_DONOR = "LBL_DONOR";
+        public const string LBL_ITEMS = "LBL_ITEMS";
+        public const string LBL_LOT = "LBL_LOT";
+
         public const string LBL_PASSWORD = "LBL_PASSWORD";
         public const string LBL_PASSWORD_CHECK = "LBL_PASSWORD_CHECK";
         public const string LBL_PROFILE = "LBL_PROFILE";
@@ -89,7 +97,8 @@ namespace ViewLayer
 
         public const string MNU_GE001 = "MNU_GE001"; //Menú herramientas
             public const string MNU_OP001 = "MNU_OP001"; //Cambiar idioma
-                public const string MNU_OP001_LBL_LANGUAGE = "MNU_OP001_LBL_LANGUAGE"; //Label de cambiar idioma
+                public const string MNU_OP001_LBL_LANGUAGE = "MNU_OP001_LBL_LANGUAGE"; //Frase de cambiar idioma
+        
         public const string MNU_GE002 = "MNU_GE002"; //Seguridad
             public const string MNU_GE003 = "MNU_GE003"; //Usuario
             public const string MNU_GE004 = "MNU_GE004"; //Perfiles
@@ -104,10 +113,12 @@ namespace ViewLayer
                 public const string BTN_CHECK_INTEGRITY = "BTN_CHECK_INTEGRITY";
 
         public const string MNU_GE008 = "MNU_GE008"; //Personas   
-        public const string MNU_GE009 = "MNU_GE009"; //Donadores
+            public const string MNU_GE009 = "MNU_GE009"; //Donadores
 
-        public const string MNU_GE010 = "MNU_GE010"; //Tipo de ítem
-        public const string MNU_GE011 = "MNU_GE011"; //Stock
+        public const string MNU_GE010 = "MNU_GE010"; //Stock
+            public const string MNU_GE011 = "MNU_GE011"; //Donaciones
+
+
         public const string MNU_GE012 = "MNU_GE012"; //Donadores
         public const string MNU_GE013 = "MNU_GE013"; //Donaciones
         public const string MNU_GE014 = "MNU_GE014"; //Hojas de ruta

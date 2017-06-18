@@ -66,6 +66,13 @@ namespace ViewLayer
             donadoresToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE009);
             SessionHelper.RegisterForTranslation(donadoresToolStripMenuItem, Codes.MNU_GE009);
 
+            //STOCK
+            stockToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE010);
+            SessionHelper.RegisterForTranslation(stockToolStripMenuItem, Codes.MNU_GE010);
+
+            //Stock > Donaciones
+            stockToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE010);
+            SessionHelper.RegisterForTranslation(stockToolStripMenuItem, Codes.MNU_GE010);
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
@@ -141,6 +148,22 @@ namespace ViewLayer
                 SessionHelper.HasPermission(Codes.OP014),
                 SessionHelper.HasPermission(Codes.OP015),
                 SessionHelper.HasPermission(Codes.OP016)
+                ).ShowDialog();
+        }
+
+        private void menuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void donacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new FrmGenericMain(
+                typeof(DonationBLL),
+                typeof(FrmDonation),
+                SessionHelper.HasPermission(Codes.OP018),
+                SessionHelper.HasPermission(Codes.OP019),
+                SessionHelper.HasPermission(Codes.OP020)
                 ).ShowDialog();
         }
     }

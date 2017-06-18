@@ -130,7 +130,7 @@ namespace BusinessLogicLayer
             try
             {
                 DonorDAL donorDal = new DonorDAL();
-                DonorDTO donorDto;
+                DonorDTO donorDto = null;
                 ResultBM validationResult = IsValid(donorBm);
 
                 if (validationResult.IsValid())

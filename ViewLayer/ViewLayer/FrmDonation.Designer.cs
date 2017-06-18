@@ -1,0 +1,210 @@
+﻿namespace ViewLayer
+{
+    partial class FrmDonation
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.cmdClose = new System.Windows.Forms.Button();
+            this.cmdAccept = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.numericItems = new System.Windows.Forms.NumericUpDown();
+            this.lblItems = new System.Windows.Forms.Label();
+            this.lblDonor = new System.Windows.Forms.Label();
+            this.cmbDonor = new System.Windows.Forms.ComboBox();
+            this.lblComment = new System.Windows.Forms.Label();
+            this.txtComment = new System.Windows.Forms.TextBox();
+            this.lblLot = new System.Windows.Forms.Label();
+            this.lblLotId = new System.Windows.Forms.Label();
+            this.lblArrival = new System.Windows.Forms.Label();
+            this.dateArrival = new System.Windows.Forms.DateTimePicker();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericItems)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // cmdClose
+            // 
+            this.cmdClose.Location = new System.Drawing.Point(13, 338);
+            this.cmdClose.Name = "cmdClose";
+            this.cmdClose.Size = new System.Drawing.Size(75, 23);
+            this.cmdClose.TabIndex = 40;
+            this.cmdClose.Text = "close";
+            this.cmdClose.UseVisualStyleBackColor = true;
+            this.cmdClose.Click += new System.EventHandler(this.cmdClose_Click);
+            // 
+            // cmdAccept
+            // 
+            this.cmdAccept.Location = new System.Drawing.Point(158, 338);
+            this.cmdAccept.Name = "cmdAccept";
+            this.cmdAccept.Size = new System.Drawing.Size(75, 23);
+            this.cmdAccept.TabIndex = 39;
+            this.cmdAccept.Text = "accept";
+            this.cmdAccept.UseVisualStyleBackColor = true;
+            this.cmdAccept.Click += new System.EventHandler(this.cmdAccept_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.dateArrival);
+            this.groupBox1.Controls.Add(this.lblArrival);
+            this.groupBox1.Controls.Add(this.lblLotId);
+            this.groupBox1.Controls.Add(this.lblLot);
+            this.groupBox1.Controls.Add(this.txtComment);
+            this.groupBox1.Controls.Add(this.lblComment);
+            this.groupBox1.Controls.Add(this.cmbDonor);
+            this.groupBox1.Controls.Add(this.lblDonor);
+            this.groupBox1.Controls.Add(this.lblItems);
+            this.groupBox1.Controls.Add(this.numericItems);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(221, 304);
+            this.groupBox1.TabIndex = 41;
+            this.groupBox1.TabStop = false;
+            // 
+            // numericItems
+            // 
+            this.numericItems.Location = new System.Drawing.Point(9, 155);
+            this.numericItems.Name = "numericItems";
+            this.numericItems.Size = new System.Drawing.Size(200, 20);
+            this.numericItems.TabIndex = 42;
+            // 
+            // lblItems
+            // 
+            this.lblItems.AutoSize = true;
+            this.lblItems.Location = new System.Drawing.Point(6, 139);
+            this.lblItems.Name = "lblItems";
+            this.lblItems.Size = new System.Drawing.Size(31, 13);
+            this.lblItems.TabIndex = 43;
+            this.lblItems.Text = "items";
+            // 
+            // lblDonor
+            // 
+            this.lblDonor.AutoSize = true;
+            this.lblDonor.Location = new System.Drawing.Point(6, 99);
+            this.lblDonor.Name = "lblDonor";
+            this.lblDonor.Size = new System.Drawing.Size(34, 13);
+            this.lblDonor.TabIndex = 44;
+            this.lblDonor.Text = "donor";
+            // 
+            // cmbDonor
+            // 
+            this.cmbDonor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDonor.FormattingEnabled = true;
+            this.cmbDonor.Location = new System.Drawing.Point(9, 115);
+            this.cmbDonor.Name = "cmbDonor";
+            this.cmbDonor.Size = new System.Drawing.Size(200, 21);
+            this.cmbDonor.TabIndex = 45;
+            // 
+            // lblComment
+            // 
+            this.lblComment.AutoSize = true;
+            this.lblComment.Location = new System.Drawing.Point(6, 178);
+            this.lblComment.Name = "lblComment";
+            this.lblComment.Size = new System.Drawing.Size(50, 13);
+            this.lblComment.TabIndex = 46;
+            this.lblComment.Text = "comment";
+            // 
+            // txtComment
+            // 
+            this.txtComment.Location = new System.Drawing.Point(9, 194);
+            this.txtComment.Multiline = true;
+            this.txtComment.Name = "txtComment";
+            this.txtComment.Size = new System.Drawing.Size(200, 104);
+            this.txtComment.TabIndex = 47;
+            // 
+            // lblLot
+            // 
+            this.lblLot.AutoSize = true;
+            this.lblLot.Location = new System.Drawing.Point(6, 16);
+            this.lblLot.Name = "lblLot";
+            this.lblLot.Size = new System.Drawing.Size(18, 13);
+            this.lblLot.TabIndex = 48;
+            this.lblLot.Text = "lot";
+            // 
+            // lblLotId
+            // 
+            this.lblLotId.AutoSize = true;
+            this.lblLotId.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLotId.Location = new System.Drawing.Point(6, 31);
+            this.lblLotId.Name = "lblLotId";
+            this.lblLotId.Size = new System.Drawing.Size(19, 13);
+            this.lblLotId.TabIndex = 49;
+            this.lblLotId.Text = "...";
+            // 
+            // lblArrival
+            // 
+            this.lblArrival.AutoSize = true;
+            this.lblArrival.Location = new System.Drawing.Point(6, 52);
+            this.lblArrival.Name = "lblArrival";
+            this.lblArrival.Size = new System.Drawing.Size(35, 13);
+            this.lblArrival.TabIndex = 50;
+            this.lblArrival.Text = "arrival";
+            // 
+            // dateArrival
+            // 
+            this.dateArrival.Enabled = false;
+            this.dateArrival.Location = new System.Drawing.Point(9, 68);
+            this.dateArrival.Name = "dateArrival";
+            this.dateArrival.Size = new System.Drawing.Size(200, 20);
+            this.dateArrival.TabIndex = 51;
+            // 
+            // FrmDonation
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(248, 373);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.cmdClose);
+            this.Controls.Add(this.cmdAccept);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "FrmDonation";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "DonationFrm";
+            this.Load += new System.EventHandler(this.DonationFrm_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericItems)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button cmdClose;
+        private System.Windows.Forms.Button cmdAccept;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ComboBox cmbDonor;
+        private System.Windows.Forms.Label lblDonor;
+        private System.Windows.Forms.Label lblItems;
+        private System.Windows.Forms.NumericUpDown numericItems;
+        private System.Windows.Forms.TextBox txtComment;
+        private System.Windows.Forms.Label lblComment;
+        private System.Windows.Forms.Label lblLotId;
+        private System.Windows.Forms.Label lblLot;
+        private System.Windows.Forms.DateTimePicker dateArrival;
+        private System.Windows.Forms.Label lblArrival;
+    }
+}

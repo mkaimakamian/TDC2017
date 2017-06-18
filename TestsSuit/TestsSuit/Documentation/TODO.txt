@@ -1,10 +1,13 @@
 ::: COSAS QUE SÍ HAY QUE CORREGIR :::
+- Las donaciones deben contener el estado y el responsable
 - Las eliminaciones deben ser lógicas
 - Terminar filtro del form genérico
 - Agregar confirmaciones antes de gurdar o actualizar
+- Controlar en FrmDonor que al recuperar el país, debería contemplarse el éxito o fallo
 
 ::: FUNCIONALIDADES QUE DEBERÍAN INCLUIRSE :::
 - Completar la actualización del donador
+- Eliminar donador
 
 :::DESEABLES :::
 - Template para evitar el trycatch

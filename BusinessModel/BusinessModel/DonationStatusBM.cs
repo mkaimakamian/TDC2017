@@ -13,13 +13,22 @@ namespace BusinessModel
         public string name;
         public string description;
 
+        //public enum status
+        //{
+        //    received,
+        //    stocked,
+        //    delivering,
+        //    recovering,
+        //    to_be_pickup
+        //};
+
         public enum Status
         {
-            RECEIVED,
-            STOCKED,
-            DELIVERING,
-            RECOVERING,
-            TO_BE_PICKUP
+            RECEIVED = 1,
+            STORED = 2,
+            IN_TRANSIT_DELIVERY = 3,
+            IN_TRANSIT_PICKUP = 4,
+            TO_BE_RETRIEVED = 5
         };
 
         public DonationStatusBM(DonationStatusDTO donationStatusDto)
@@ -27,6 +36,10 @@ namespace BusinessModel
             this.id = donationStatusDto.id;
             this.name = donationStatusDto.name;
             this.description = donationStatusDto.description;
+        }
+
+        public DonationStatusBM()
+        {
         }
     }
 }

@@ -84,6 +84,7 @@ namespace ViewLayer
                 ResultBM result = ((BLEntity)businessLogic).GetCollection();
                 if (result.IsValid())
                 {
+                   
                     dgView.DataSource = result.GetValue();
                     CreateFilters(dgView);
                 }
@@ -106,6 +107,8 @@ namespace ViewLayer
 
         private void cmdEdit_Click(object sender, EventArgs e)
         {
+            if (dgView.SelectedRows.Count == 0) return;
+
             //Se instancia el formulario, setteando la propiedad Entity y IsUpdate
             Form viewForm = (Form)Activator.CreateInstance(this.viewer);
             System.Reflection.PropertyInfo Entity = viewForm.GetType().GetProperty("Entity");
@@ -118,6 +121,7 @@ namespace ViewLayer
 
         private void cmdDelete_Click(object sender, EventArgs e)
         {
+            if (dgView.SelectedRows.Count == 0) return;
             try
             {
                 DialogResult answer = MessageBox.Show(
@@ -205,6 +209,16 @@ namespace ViewLayer
                     }
                 }
             }
+        }
+
+        private void cmdFilter_Click(object sender, EventArgs e)
+        {
+            
+            //bindingsource bs = (bindingsource) dgview.datasource;
+            //datatable table = (datatable) bs.datasource;
+            //datatable filtered = table.defaultview.totable();
+
+            dgView.Refresh();
         }
 
     }

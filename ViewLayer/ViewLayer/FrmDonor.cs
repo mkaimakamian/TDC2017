@@ -74,11 +74,19 @@ namespace ViewLayer
                 {
                     DonorBLL donorBll = new DonorBLL();
                     ResultBM resultDonor = donorBll.GetDonor(entity.donorId);
-                    this.Entity = resultDonor.GetValue<DonorBM>();
 
-                    CompletePersonData(entity);
-                    CompleteAddressData(entity);
-                    CompleteCompanyData(entity);
+                    if (resultDonor.IsValid())
+                    {
+                        this.Entity = resultDonor.GetValue<DonorBM>();
+
+                        CompletePersonData(this.Entity);
+                        CompleteAddressData(this.Entity);
+                        CompleteCompanyData(this.Entity);
+                    }
+                    else
+                    {
+                        MessageBox.Show(resultDonor.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
                 else
                 {
@@ -109,9 +117,7 @@ namespace ViewLayer
             txtNumber.Text = donor.address.number.ToString();
             txtApartment.Text = donor.address.apartment;
             txtComment.Text = donor.address.comment;
-
             
-
             bool found = false;
 
             for (int i = 0; i < cmbCountry.Items.Count && !found; ++i)
