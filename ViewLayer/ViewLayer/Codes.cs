@@ -82,6 +82,7 @@ namespace ViewLayer
         public const string LBL_CAN_CONTACT = "LBL_CAN_CONTACT";
 
         public const string LBL_ARRIVAL = "LBL_ARRIVAL";
+        public const string LBL_RESPONSIBLE = "LBL_RESPONSIBLE";
         public const string LBL_DONOR = "LBL_DONOR";
         public const string LBL_ITEMS = "LBL_ITEMS";
         public const string LBL_LOT = "LBL_LOT";

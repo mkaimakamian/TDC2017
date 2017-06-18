@@ -15,57 +15,40 @@ namespace BusinessLogicLayer
         public ResultBM GetVolunteer(int volunteerId)
         {
             try {
-                PersonBLL personBll = new PersonBLL();
-                ResultBM personResult = null;
+                AddressBLL addressBll = new AddressBLL();
+                ResultBM addressResult = null;
+                AddressBM addressBm = null;
                 BranchBLL branchBll = new BranchBLL();
                 ResultBM branchResult = null;
+                BranchBM branchBm = null;
                 UserBLL userBll = new UserBLL();
                 ResultBM userResult = null;
                 UserBM userBm = null;
                 VolunteerDAL volunteerDal = new VolunteerDAL();                
                 VolunteerBM volunteerBm = null;
-                VolunteerDTO volunteerDto = volunteerDal.GetVolunteer(volunteerId);
-                
+                VolunteerDTO volunteerDto = volunteerDal.GetVolunteer(volunteerId);                
+
                 if (volunteerDto != null)
                 {
+                    //Debería existir
+                    addressResult = addressBll.GetAddress(volunteerDto.addressId);
+                    if (!addressResult.IsValid()) return addressResult;
+                    if (addressResult.GetValue() == null) throw new Exception("La dirección " + volunteerDto.addressId + " para el voluntario " + volunteerId + " no existe.");
+                    addressBm = addressResult.GetValue<AddressBM>();
 
-                    personResult = personBll.GetPerson(volunteerDto.id);
+                    branchResult = branchBll.GetBranch(volunteerDto.branchId);
+                    if (!branchResult.IsValid()) return branchResult;
+                    if (branchResult.GetValue() == null) throw new Exception("La sede " + volunteerDto.branchId + " para el voluntario " + volunteerId + " no existe.");
+                    branchBm = branchResult.GetValue<BranchBM>();
 
-                    if (personResult.IsValid())
-                    {
-                        if (personResult.GetValue() != null)
-                        {
-                            branchResult = branchBll.GetBranch(volunteerDto.branchId);
+                    //El usuario podría no existir porque el voluntario no requiere necesariamente que se lo asocie 
+                    //con un susuario de sistema
+                    userResult = userBll.GetUser(volunteerDto.userId);
+                    if (!userResult.IsValid()) return userResult;
 
-                            if (branchResult.IsValid())
-                            {
-                                if (branchResult.GetValue() != null)
-                                {
-                                    //El usuario podría no existir porque el voluntario no requiere necesariamente que se lo asocie 
-                                    //con un susuario de sistema
-                                    userResult = userBll.GetUser(volunteerDto.userId);
-                                    
-                                    if (userResult.IsValid())
-                                    {
-                                        if (userResult.GetValue() != null) 
-                                            userBm = userResult.GetValue<UserBM>();
-                                    }
-                                    else
-                                        return userResult;
+                    if (userResult.GetValue() != null) userBm = userResult.GetValue<UserBM>();
 
-                                    volunteerBm = new VolunteerBM(volunteerDto, personResult.GetValue<PersonBM>(), branchResult.GetValue<BranchBM>(), userBm);
-                                }
-                                else
-                                    throw new Exception("El brach " + volunteerDto.branchId + " para el voluntario " + volunteerId + " no existe.");
-                            }
-                            else
-                                return branchResult;
-                        }
-                        else
-                            throw new Exception("La persona " + volunteerDto.id + " para el voluntario " + volunteerId + " no existe.");
-                    }
-                    else
-                        return personResult;
+                    volunteerBm = new VolunteerBM(volunteerDto, addressBm, branchBm, userBm);
                 }
 
                 return new ResultBM(ResultBM.Type.OK, "Operación exitosa.", volunteerBm);
@@ -76,6 +59,21 @@ namespace BusinessLogicLayer
             }
         }
 
+
+        public ResultBM GetVolunteers()
+        {
+            try
+            {
+                VolunteerDAL volunteerDal = new VolunteerDAL();
+                List<VolunteerDTO> volunteersDto = volunteerDal.GetVolunteers();
+                List<VolunteerBM> volunteersBm = ConvertIntoBusinessModel(volunteersDto);
+                return new ResultBM(ResultBM.Type.OK, "Recuperación de registros exitosa.", volunteersBm);
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar los donadores.", exception);
+            }
+        }
 
         public ResultBM SaveVolunteer(VolunteerBM volunteerBm)
         {
@@ -123,6 +121,16 @@ namespace BusinessLogicLayer
                 return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe especificar sede.");
 
             return new ResultBM(ResultBM.Type.OK);
+        }
+
+        private List<VolunteerBM> ConvertIntoBusinessModel(List<VolunteerDTO> volunteers)
+        {
+            List<VolunteerBM> result = new List<VolunteerBM>();
+            foreach (VolunteerDTO volunteer in volunteers)
+            {
+                result.Add(new VolunteerBM(volunteer));
+            }
+            return result;
         }
 
     }

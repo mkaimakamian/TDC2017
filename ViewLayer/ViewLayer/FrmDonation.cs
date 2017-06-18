@@ -45,12 +45,15 @@ namespace ViewLayer
 
                 SessionHelper.RegisterForTranslation(lblLot, Codes.LBL_LOT);
                 SessionHelper.RegisterForTranslation(lblArrival, Codes.LBL_ARRIVAL);
+                SessionHelper.RegisterForTranslation(lblResponsible, Codes.LBL_RESPONSIBLE);
                 SessionHelper.RegisterForTranslation(lblDonor, Codes.LBL_DONOR);
                 SessionHelper.RegisterForTranslation(lblItems, Codes.LBL_ITEMS);
                 SessionHelper.RegisterForTranslation(lblComment, Codes.LBL_OBSERVATION);
 
                 DonorBLL donorBll = new DonorBLL();
                 ResultBM donorResult = donorBll.GetDonors();
+                VolunteerBLL volunteerBll = new VolunteerBLL();
+                ResultBM volunteerResult = volunteerBll.GetVolunteers();
 
                 if (donorResult.IsValid())
                 {
@@ -60,6 +63,13 @@ namespace ViewLayer
                 else
                     MessageBox.Show(donorResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
+                if (volunteerResult.IsValid())
+                {
+                    cmbVolunteer.DataSource = volunteerResult.GetValue<List<VolunteerBM>>();
+                    cmbVolunteer.DisplayMember = "Name";
+                }
+                else
+                    MessageBox.Show(volunteerResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 if (this.IsUpdate)
                 {
