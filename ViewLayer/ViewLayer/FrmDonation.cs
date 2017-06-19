@@ -59,13 +59,20 @@ namespace ViewLayer
                 {
                     cmbDonor.DataSource = donorResult.GetValue<List<DonorBM>>();
                     cmbDonor.DisplayMember = "Name";
+                    
                 }
                 else
                     MessageBox.Show(donorResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 if (volunteerResult.IsValid())
                 {
-                    cmbVolunteer.DataSource = volunteerResult.GetValue<List<VolunteerBM>>();
+                    //Se debe agregar un voluntario "Sin voluntario".
+                    List<VolunteerBM> volunteers = new List<VolunteerBM>();
+                    VolunteerBM noVolunteer = new VolunteerBM();
+                    noVolunteer.Name = "-------------";
+                    volunteers.Add(noVolunteer);
+                    volunteers.AddRange(volunteerResult.GetValue<List<VolunteerBM>>());                   
+                    cmbVolunteer.DataSource = volunteers;
                     cmbVolunteer.DisplayMember = "Name";
                 }
                 else
@@ -92,18 +99,21 @@ namespace ViewLayer
                         for (int i = 0; i < cmbDonor.Items.Count && !found; ++i)
                         {
                             found = ((DonorBM)cmbDonor.Items[i]).donorId == this.Entity.donorId;
-                            if (found)
-                            {
-                                cmbDonor.SelectedIndex = i;
-                            }
+                            if (found) cmbDonor.SelectedIndex = i;
+                            
+                        }
+
+                        found = false;
+                        for (int i = 0; i < cmbVolunteer.Items.Count && !found; ++i)
+                        {
+                            int id = this.Entity.volunteer == null ? 0 : this.Entity.volunteer.volunteerId;
+                            found = ((VolunteerBM)cmbVolunteer.Items[i]).volunteerId == id;
+                            if (found) cmbVolunteer.SelectedIndex = i;
                         }
                     }
                     else
-                    {
                         MessageBox.Show(donationResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    
-                }
+                                    }
                 else
                 {
                     this.Entity = new DonationBM();
@@ -132,7 +142,7 @@ namespace ViewLayer
                 this.Entity.Items = int.Parse(numericItems.Value.ToString());
                 this.Entity.Comment = txtComment.Text;
                 this.Entity.donorId = ((DonorBM)cmbDonor.SelectedItem).donorId;
-
+                this.Entity.volunteer = (VolunteerBM) cmbVolunteer.SelectedItem;
                 //Hack para evitar recuperar los estados
                 DonationStatusBM status = new DonationStatusBM();
                 status.id = (int) DonationStatusBM.Status.RECEIVED;

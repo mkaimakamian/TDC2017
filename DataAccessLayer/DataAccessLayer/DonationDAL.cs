@@ -75,7 +75,7 @@ namespace DataAccessLayer
             sql += "statusId = " + donationDto.statusId + ", ";
             sql += "donorId = " + donationDto.donorId + ",  ";
             sql += "comment = '" + donationDto.comment + "',  ";
-            sql += "volunteerId = " + donationDto.volunteerId + " ";
+            sql += "volunteerId = " + (donationDto.volunteerId == 0 ? "null" :  donationDto.volunteerId.ToString()) + " ";
             sql += "WHERE id = " + donationDto.id;
             dbsql.ExecuteNonQuery(sql);
             return true;

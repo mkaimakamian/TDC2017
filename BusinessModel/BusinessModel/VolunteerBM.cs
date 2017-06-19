@@ -13,6 +13,8 @@ namespace BusinessModel
         public BranchBM branch;
         public UserBM user;
 
+        public VolunteerBM() { }
+
         public VolunteerBM(VolunteerDTO volunteerDto)
         {
             this.id = volunteerDto.id;
