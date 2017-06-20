@@ -48,6 +48,7 @@
     <Compile Include="DonationBLL.cs" />
     <Compile Include="DonationStatusBLL.cs" />
     <Compile Include="DonorBLL.cs" />
+    <Compile Include="ItemTypeBLL.cs" />
     <Compile Include="LanguageBLL.cs" />
     <Compile Include="LogBLL.cs" />
     <Compile Include="LoginBLL.cs" />

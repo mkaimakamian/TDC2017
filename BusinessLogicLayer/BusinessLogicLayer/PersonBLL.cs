@@ -26,16 +26,13 @@ namespace BusinessLogicLayer
                 if (personDto != null)
                 {
                     resultAddress = addressBll.GetAddress(personDto.addressId);
+                    if (! resultAddress.IsValid()) return resultAddress;
 
-                    if (resultAddress.IsValid())
-                    {
-                        if (resultAddress.GetValue() != null)
-                            personBm = new PersonBM(personDto, resultAddress.GetValue<AddressBM>());
-                        else
-                            throw new Exception("La dirección " + personDto.addressId + "para la persona " + personId + " no existe.");
-                    }
+                    if (resultAddress.GetValue() != null)
+                        personBm = new PersonBM(personDto, resultAddress.GetValue<AddressBM>());
                     else
-                        return resultAddress;
+                        throw new Exception("La dirección " + personDto.addressId + "para la persona " + personId + " no existe.");
+                        
                 }
 
                 return new ResultBM(ResultBM.Type.OK, "Operación exitosa.", personBm);
@@ -62,29 +59,17 @@ namespace BusinessLogicLayer
                 ResultBM addressResult;
 
                 validationResult = IsValid(personBm);
+                if (!validationResult.IsValid()) return validationResult;
+                
+                addressResult = addressBll.SaveAddress(personBm.address);
+                if (!addressResult.IsValid()) return addressResult;
 
-                if (validationResult.IsValid())
-                {
-                    //guardar direccion
-                    addressResult = addressBll.SaveAddress(personBm.address);
+                personDto = new PersonDTO(personBm.Name, personBm.LastName, personBm.Birthdate, personBm.Email, personBm.phone, personBm.gender, personBm.dni, personBm.address.id);
+                personDal.SavePerson(personDto);
+                personBm.id = personDto.id;
 
-                    if (addressResult.IsValid())
-                    {
-                        personDto = new PersonDTO(personBm.Name, personBm.LastName, personBm.Birthdate, personBm.Email, personBm.phone, personBm.gender, personBm.dni, personBm.address.id);
-                        personDal.SavePerson(personDto);
-                        personBm.id = personDto.id;
-
-                        return new ResultBM(ResultBM.Type.OK, "Se ha creado la persona con el nombre " + personBm.Name + " " + personBm.LastName + ".", personBm);
-                    }
-                    else
-                    {
-                        return addressResult;
-                    }
-                }
-                else
-                {
-                    return validationResult;
-                }
+                return new ResultBM(ResultBM.Type.OK, "Se ha creado la persona con el nombre " + personBm.Name + " " + personBm.LastName + ".", personBm);
+               
             }
             catch (Exception exception)
             {

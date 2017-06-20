@@ -46,6 +46,7 @@
     <Compile Include="DonationDTO.cs" />
     <Compile Include="DonationStatusDTO.cs" />
     <Compile Include="DonorDTO.cs" />
+    <Compile Include="ItemTypeDTO.cs" />
     <Compile Include="LanguageDTO.cs" />
     <Compile Include="LogDTO.cs" />
     <Compile Include="OrganizationDTO.cs" />

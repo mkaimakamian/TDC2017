@@ -45,6 +45,7 @@
             this.dgView.AllowUserToOrderColumns = true;
             this.dgView.AllowUserToResizeRows = false;
             this.dgView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgView.Location = new System.Drawing.Point(2, 69);
             this.dgView.Name = "dgView";
             this.dgView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;

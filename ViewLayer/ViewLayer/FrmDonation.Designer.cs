@@ -31,6 +31,8 @@
             this.cmdClose = new System.Windows.Forms.Button();
             this.cmdAccept = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbVolunteer = new System.Windows.Forms.ComboBox();
+            this.lblResponsible = new System.Windows.Forms.Label();
             this.dateArrival = new System.Windows.Forms.DateTimePicker();
             this.lblArrival = new System.Windows.Forms.Label();
             this.lblLotId = new System.Windows.Forms.Label();
@@ -41,8 +43,6 @@
             this.lblDonor = new System.Windows.Forms.Label();
             this.lblItems = new System.Windows.Forms.Label();
             this.numericItems = new System.Windows.Forms.NumericUpDown();
-            this.lblResponsible = new System.Windows.Forms.Label();
-            this.cmbVolunteer = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericItems)).BeginInit();
             this.SuspendLayout();
@@ -87,6 +87,24 @@
             this.groupBox1.TabIndex = 41;
             this.groupBox1.TabStop = false;
             // 
+            // cmbVolunteer
+            // 
+            this.cmbVolunteer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbVolunteer.FormattingEnabled = true;
+            this.cmbVolunteer.Location = new System.Drawing.Point(6, 101);
+            this.cmbVolunteer.Name = "cmbVolunteer";
+            this.cmbVolunteer.Size = new System.Drawing.Size(200, 21);
+            this.cmbVolunteer.TabIndex = 53;
+            // 
+            // lblResponsible
+            // 
+            this.lblResponsible.AutoSize = true;
+            this.lblResponsible.Location = new System.Drawing.Point(6, 85);
+            this.lblResponsible.Name = "lblResponsible";
+            this.lblResponsible.Size = new System.Drawing.Size(60, 13);
+            this.lblResponsible.TabIndex = 52;
+            this.lblResponsible.Text = "responsible";
+            // 
             // dateArrival
             // 
             this.dateArrival.Enabled = false;
@@ -128,7 +146,7 @@
             this.txtComment.Location = new System.Drawing.Point(6, 220);
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(200, 82);
+            this.txtComment.Size = new System.Drawing.Size(200, 78);
             this.txtComment.TabIndex = 47;
             // 
             // lblComment
@@ -173,24 +191,6 @@
             this.numericItems.Name = "numericItems";
             this.numericItems.Size = new System.Drawing.Size(200, 20);
             this.numericItems.TabIndex = 42;
-            // 
-            // lblResponsible
-            // 
-            this.lblResponsible.AutoSize = true;
-            this.lblResponsible.Location = new System.Drawing.Point(6, 85);
-            this.lblResponsible.Name = "lblResponsible";
-            this.lblResponsible.Size = new System.Drawing.Size(60, 13);
-            this.lblResponsible.TabIndex = 52;
-            this.lblResponsible.Text = "responsible";
-            // 
-            // cmbVolunteer
-            // 
-            this.cmbVolunteer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbVolunteer.FormattingEnabled = true;
-            this.cmbVolunteer.Location = new System.Drawing.Point(6, 101);
-            this.cmbVolunteer.Name = "cmbVolunteer";
-            this.cmbVolunteer.Size = new System.Drawing.Size(200, 21);
-            this.cmbVolunteer.TabIndex = 53;
             // 
             // FrmDonation
             // 

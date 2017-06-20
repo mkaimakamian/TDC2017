@@ -33,26 +33,5 @@ namespace BusinessLogicLayer
 
             return result;
         }
-
-        /// <summary>
-        /// Devuelve un dicionario con las taducciones.
-        /// </summary>
-        /// <param name="languageId"></param>
-        /// <returns></returns>
-        //public Dictionary<String, String> GetPlainTranslations(int languageId)
-        //{
-        //    List<TranslationDTO> translations;
-        //    TranslationDAL translationDal = new TranslationDAL();
-        //    Dictionary<String, String> result = new Dictionary<String, String>();
-
-        //    translations = translationDal.GetTranslations(languageId);
-
-        //    foreach (TranslationDTO translation in translations)
-        //    {
-        //        result.Add(translation.labelCode, translation.translation);
-        //    }
-
-        //    return result;
-        //}
     }
 }

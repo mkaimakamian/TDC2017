@@ -81,6 +81,12 @@
     <Compile Include="FrmIntegrity.Designer.cs">
       <DependentUpon>FrmIntegrity.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmItemType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmItemType.Designer.cs">
+      <DependentUpon>FrmItemType.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmLoginMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmIntegrity.resx">
       <DependentUpon>FrmIntegrity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmItemType.resx">
+      <DependentUpon>FrmItemType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLoginMain.resx">
       <DependentUpon>FrmLoginMain.cs</DependentUpon>

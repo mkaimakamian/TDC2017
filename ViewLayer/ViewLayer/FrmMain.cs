@@ -71,8 +71,12 @@ namespace ViewLayer
             SessionHelper.RegisterForTranslation(stockToolStripMenuItem, Codes.MNU_GE010);
 
             //Stock > Donaciones
-            stockToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE010);
-            SessionHelper.RegisterForTranslation(stockToolStripMenuItem, Codes.MNU_GE010);
+            donacionesToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE011);
+            SessionHelper.RegisterForTranslation(donacionesToolStripMenuItem, Codes.MNU_GE011);
+
+            //Stock > Tipo de artículos
+            articulosToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE012);
+            SessionHelper.RegisterForTranslation(articulosToolStripMenuItem, Codes.MNU_GE012);
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
@@ -164,6 +168,17 @@ namespace ViewLayer
                 SessionHelper.HasPermission(Codes.OP018),
                 SessionHelper.HasPermission(Codes.OP019),
                 SessionHelper.HasPermission(Codes.OP020)
+                ).ShowDialog();
+        }
+
+        private void articulosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new FrmGenericMain(
+                typeof(ItemTypeBLL),
+                typeof(FrmItemType),
+                SessionHelper.HasPermission(Codes.OP022),
+                SessionHelper.HasPermission(Codes.OP023),
+                SessionHelper.HasPermission(Codes.OP024)
                 ).ShowDialog();
         }
     }

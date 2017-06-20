@@ -42,8 +42,11 @@ namespace ViewLayer
                     public const string OP018 = "OP018"; // Crear donacion
                     public const string OP019 = "OP019"; // Editar donacion
                     public const string OP020 = "OP020"; // Eliminar donacion
+                public const string GE012 = "GE012"; //Tipos artículos
+                    public const string OP022 = "OP022"; // Crear Tipos artículos
+                    public const string OP023 = "OP023"; // Editar Tipos artículos
+                    public const string OP024 = "OP024"; // Eliminar Tipos artículos
 
-        public const string GE012 = "GE012"; //Donadores
         public const string GE013 = "GE013"; //Donaciones
         public const string GE014 = "GE014"; //Hojas de ruta
         public const string GE015 = "GE015"; //Retiros
@@ -93,8 +96,12 @@ namespace ViewLayer
         public const string LBL_DESCRIPTION = "LBL_DESCRIPTION";
         public const string LBL_PERMISSIONS = "LBL_PERMISSIONS";
 
-        
-
+        public const string LBL_EDIBLE = "LBL_EDIBLE";
+        public const string LBL_MEDICINE = "LBL_MEDICINE";
+        public const string LBL_INDUMENTARY = "LBL_INDUMENTARY";
+        public const string LBL_CONSTRUCTION = "LBL_CONSTRUCTION";
+        public const string LBL_OTHER = "LBL_OTHER";
+        public const string LBL_PERISHABLE = "LBL_PERISHABLE";
 
         public const string MNU_GE001 = "MNU_GE001"; //Menú herramientas
             public const string MNU_OP001 = "MNU_OP001"; //Cambiar idioma
@@ -118,9 +125,8 @@ namespace ViewLayer
 
         public const string MNU_GE010 = "MNU_GE010"; //Stock
             public const string MNU_GE011 = "MNU_GE011"; //Donaciones
-
-
-        public const string MNU_GE012 = "MNU_GE012"; //Donadores
+            public const string MNU_GE012 = "MNU_GE012"; //tipo de artículos
+                
         public const string MNU_GE013 = "MNU_GE013"; //Donaciones
         public const string MNU_GE014 = "MNU_GE014"; //Hojas de ruta
         public const string MNU_GE015 = "MNU_GE015"; //Retiros

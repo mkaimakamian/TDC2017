@@ -48,6 +48,7 @@
     <Compile Include="DonationDAL.cs" />
     <Compile Include="DonationStatusDAL.cs" />
     <Compile Include="DonorDAL.cs" />
+    <Compile Include="ItemTypeDAL.cs" />
     <Compile Include="LanguageDAL.cs" />
     <Compile Include="LogDAL.cs" />
     <Compile Include="OrganizationDAL.cs" />

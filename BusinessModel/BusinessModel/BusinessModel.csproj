@@ -46,6 +46,7 @@
     <Compile Include="DonationBM.cs" />
     <Compile Include="DonationStatusBM.cs" />
     <Compile Include="DonorBM.cs" />
+    <Compile Include="ItemTypeBM.cs" />
     <Compile Include="LanguageBM.cs" />
     <Compile Include="LogBM.cs" />
     <Compile Include="OrganizationBM.cs" />
