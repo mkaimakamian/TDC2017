@@ -31,16 +31,9 @@ namespace BusinessLogicLayer
                 {
                     resultCountry = countryBll.GetCountry(addressDto.countryIso);
 
-                    if (resultCountry.IsValid())
-                    {
-                        if (resultCountry.GetValue() != null)
-                            addressBm = new AddressBM(addressDto, resultCountry.GetValue<CountryBM>());
-                        else
-                            throw new Exception("El país " + addressDto.countryIso + "para la dirección " + addressId + " no existe.");
-                    }
-                    else
-                        return resultCountry;
-
+                    if (!resultCountry.IsValid()) return resultCountry;
+                    if (resultCountry.GetValue() != null) addressBm = new AddressBM(addressDto, resultCountry.GetValue<CountryBM>());
+                    else throw new Exception("El país " + addressDto.countryIso + "para la dirección " + addressId + " no existe.");
                 }
 
                 return new ResultBM(ResultBM.Type.OK, "Operación exitosa.", addressBm);
@@ -59,18 +52,12 @@ namespace BusinessLogicLayer
                 AddressDTO addressDto = null;
                 ResultBM validResult = IsValid(addressBm);
 
-                if (validResult.IsValid())
-                {
-                    addressDto = new AddressDTO(addressBm.id, addressBm.street, addressBm.number, addressBm.apartment, addressBm.neighborhood, addressBm.comment, addressBm.country.iso2);
-                    addressDal.SaveAddress(addressDto);
-                    addressBm.id = addressDto.id;
+                if (!validResult.IsValid()) return validResult;
+                addressDto = new AddressDTO(addressBm.id, addressBm.street, addressBm.number, addressBm.apartment, addressBm.neighborhood, addressBm.comment, addressBm.country.iso2);
+                addressDal.SaveAddress(addressDto);
+                addressBm.id = addressDto.id;
 
-                    return new ResultBM(ResultBM.Type.OK, "Dirección guardada.", addressBm);
-                }
-                else
-                {
-                    return validResult;
-                }
+                return new ResultBM(ResultBM.Type.OK, "Dirección guardada.", addressBm);
             }
             catch (Exception exception)
             {

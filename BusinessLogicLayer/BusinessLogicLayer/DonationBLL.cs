@@ -29,22 +29,14 @@ namespace BusinessLogicLayer
                 {
                     statusResult = donationStatusBll.GetDonationStatus(donationDto.statusId);
 
-                    if (statusResult.IsValid())
-                    {
-                        if (statusResult.GetValue() != null)
-                        {
-                            //Podría no existir voluntario, sobre todo si se consulta una donación recién creada
-                            volunteerResult = volunteerBll.GetVolunteer(donationDto.volunteerId);
-                            if (volunteerResult.GetValue() != null)
-                                volunteerBm = volunteerResult.GetValue<VolunteerBM>();
+                    if (!statusResult.IsValid()) return statusResult;
+                    if (statusResult.GetValue() == null) throw new Exception("El estado con id " + donationDto.statusId + "para la donación " + donationId + " no existe.");
+                    //Podría no existir voluntario, sobre todo si se consulta una donación recién creada
+                    volunteerResult = volunteerBll.GetVolunteer(donationDto.volunteerId);
+                    if (volunteerResult.GetValue() != null) volunteerBm = volunteerResult.GetValue<VolunteerBM>();
 
-                            donationBm = new DonationBM(donationDto, statusResult.GetValue<DonationStatusBM>(), volunteerBm);
-                        }
-                        else
-                            throw new Exception("El estado con id " + donationDto.statusId + "para la donación " + donationId + " no existe.");
-                    }
-                    else
-                        return statusResult;
+                    donationBm = new DonationBM(donationDto, statusResult.GetValue<DonationStatusBM>(), volunteerBm);
+                    
                 }
 
                 return new ResultBM(ResultBM.Type.OK, "Operación exitosa.", donationBm);
@@ -76,19 +68,12 @@ namespace BusinessLogicLayer
                 DonationDTO donationDto;
                 ResultBM validationResult = IsValid(donationBm);
 
-                if (validationResult.IsValid())
-                {
-                    donationDto = new DonationDTO(donationBm.Items, donationBm.Arrival, donationBm.donationStatus.id, donationBm.donorId, donationBm.Comment, 0);
-                    donationDal.SaveDonation(donationDto);
-                    donationBm.id = donationDto.id;
+                if (validationResult.IsValid()) return validationResult;
+                donationDto = new DonationDTO(donationBm.Items, donationBm.Arrival, donationBm.donationStatus.id, donationBm.donorId, donationBm.Comment, 0);
+                donationDal.SaveDonation(donationDto);
+                donationBm.id = donationDto.id;
 
-                    return new ResultBM(ResultBM.Type.OK, "Se ha creado la donación.", donationBm);
-                    
-                }
-                else
-                {
-                    return validationResult;
-                }
+                return new ResultBM(ResultBM.Type.OK, "Se ha creado la donación.", donationBm);
             }
             catch (Exception exception)
             {
@@ -104,18 +89,12 @@ namespace BusinessLogicLayer
                 DonationDTO donationDto;
                 ResultBM validationResult = IsValid(donationBm);
 
-                if (validationResult.IsValid())
-                {
-                    donationDto = new DonationDTO(donationBm.Items, donationBm.Arrival, donationBm.donationStatus.id, donationBm.donorId, donationBm.Comment, donationBm.volunteer == null ? 0 : donationBm.volunteer.volunteerId, donationBm.id);
-                    donationDal.UpdateDonation(donationDto);
+                if (!validationResult.IsValid()) return validationResult;
+                donationDto = new DonationDTO(donationBm.Items, donationBm.Arrival, donationBm.donationStatus.id, donationBm.donorId, donationBm.Comment, donationBm.volunteer == null ? 0 : donationBm.volunteer.volunteerId, donationBm.id);
+                donationDal.UpdateDonation(donationDto);
 
-                    return new ResultBM(ResultBM.Type.OK, "Se ha actualizado la donación.", donationBm);
-
-                }
-                else
-                {
-                    return validationResult;
-                }
+                return new ResultBM(ResultBM.Type.OK, "Se ha actualizado la donación.", donationBm);
+                
             }
             catch (Exception exception)
             {

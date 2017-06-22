@@ -44,6 +44,7 @@
     <Compile Include="BLEntity.cs" />
     <Compile Include="BranchBLL.cs" />
     <Compile Include="CountryBLL.cs" />
+    <Compile Include="DepotBLL.cs" />
     <Compile Include="DigitVerificatorBLL.cs" />
     <Compile Include="DonationBLL.cs" />
     <Compile Include="DonationStatusBLL.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="PersonBLL.cs" />
     <Compile Include="ProfileBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StockBLL.cs" />
     <Compile Include="TranslationBLL.cs" />
     <Compile Include="UserBLL.cs" />
     <Compile Include="VolunteerBLL.cs" />

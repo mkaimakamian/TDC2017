@@ -42,6 +42,7 @@
     <Compile Include="AddressBM.cs" />
     <Compile Include="BranchBM.cs" />
     <Compile Include="CountryBM.cs" />
+    <Compile Include="DepotBM.cs" />
     <Compile Include="DigitVeryficator.cs" />
     <Compile Include="DonationBM.cs" />
     <Compile Include="DonationStatusBM.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="PersonBM.cs" />
     <Compile Include="ProfileBM.cs" />
     <Compile Include="ResultBM.cs" />
+    <Compile Include="StockBM.cs" />
     <Compile Include="TranslationBM.cs" />
     <Compile Include="UserBM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

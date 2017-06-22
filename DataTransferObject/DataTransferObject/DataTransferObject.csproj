@@ -42,6 +42,7 @@
     <Compile Include="AddressDTO.cs" />
     <Compile Include="BranchDTO.cs" />
     <Compile Include="CountryDTO.cs" />
+    <Compile Include="DepotDTO.cs" />
     <Compile Include="DigitVerificatorDTO.cs" />
     <Compile Include="DonationDTO.cs" />
     <Compile Include="DonationStatusDTO.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="PermissionDTO.cs" />
     <Compile Include="PersonDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StockDTO.cs" />
     <Compile Include="TranslationDTO.cs" />
     <Compile Include="UserDTO.cs" />
     <Compile Include="VolunteerDTO.cs" />
