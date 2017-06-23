@@ -48,6 +48,28 @@ namespace DataAccessLayer
             return result;
         }
 
+
+        //TODO MODIFICAR PARA QUE DEVUELVA LAS DONACIONES DISPONIBLES = NO STOCKEADAS
+        public List<DonationDTO> GetAvaliableDonations()
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+            List<List<String>> reader;
+            List<DonationDTO> result = new List<DonationDTO>();
+
+            sql = "SELECT * FROM donation";
+            reader = dbsql.executeReader(sql);
+
+            if (reader.Count > 0)
+            {
+                for (int i = 0; i < reader.Count; ++i)
+                {
+                    result.Add(Resolve(reader[i]));
+                }
+            }
+
+            return result;
+        }
         public bool SaveDonation(DonationDTO donationDto)
         {
             DBSql dbsql = new DBSql();

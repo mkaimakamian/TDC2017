@@ -143,7 +143,7 @@ namespace ViewLayer
                 this.Entity.Comment = txtComment.Text;
                 this.Entity.donorId = ((DonorBM)cmbDonor.SelectedItem).donorId;
                 this.Entity.volunteer = (VolunteerBM) cmbVolunteer.SelectedItem;
-                //Hack para evitar recuperar los estados
+                //Hack para evitar recuperar los estados de la base
                 DonationStatusBM status = new DonationStatusBM();
                 status.id = (int) DonationStatusBM.Status.RECEIVED;
                 this.Entity.donationStatus = status;
@@ -155,7 +155,6 @@ namespace ViewLayer
                 if (donationResult.IsValid())
                 {
                     if (!this.IsUpdate) MessageBox.Show("Lote creado #" + this.Entity.Lot, "Lote creado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                     Close();
                 }
                 else MessageBox.Show("Se ha producido el siguiente error: " + donationResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);

@@ -15,7 +15,7 @@ namespace DataAccessLayer
             String sql;
             List<List<String>> reader;
 
-            sql = "SELECT * FROM stock WHERE iso2 = " + id;
+            sql = "SELECT * FROM stock WHERE id = " + id;
             reader = dbsql.executeReader(sql);
 
             if (reader.Count > 0)
@@ -58,7 +58,8 @@ namespace DataAccessLayer
             sql += stockDto.itemTypeId + ", ";
             sql += stockDto.donationId + ", ";
             sql += stockDto.depotId + ", ";
-            sql += "'" + stockDto.dueDate + "'";
+            sql += "CONVERT(datetime, '" + stockDto.dueDate + "', 103), ";
+            sql += "'" + stockDto.loaction + "'";
             sql += ");SELECT @@IDENTITY";
             stockDto.id = dbsql.ExecuteNonQuery(sql);
             return true;
@@ -75,6 +76,7 @@ namespace DataAccessLayer
             result.donationId = int.Parse(item[4]);
             result.depotId = int.Parse(item[5]);
             result.dueDate = DateTime.Parse(item[6]);
+            result.loaction = item[7];
             return result;
 
         }

@@ -115,16 +115,6 @@ namespace ViewLayer
                 ItemTypeBLL itemTypeBll = new ItemTypeBLL();
                 ResultBM itemTypeResult = null;
 
-                //this.Entity.Arrival = dateArrival.Value;
-                //this.Entity.Items = int.Parse(numericItems.Value.ToString());
-                //this.Entity.Comment = txtComment.Text;
-                //this.Entity.donorId = ((DonorBM)cmbDonor.SelectedItem).donorId;
-                //this.Entity.volunteer = (VolunteerBM)cmbVolunteer.SelectedItem;
-                ////Hack para evitar recuperar los estados
-                //DonationStatusBM status = new DonationStatusBM();
-                //status.id = (int)DonationStatusBM.Status.RECEIVED;
-                //this.Entity.donationStatus = status;
-
                 this.Entity.Name = txtName.Text;
                 this.Entity.comment = txtComment.Text;
                 this.Entity.Perishable = checkPerishable.Checked;

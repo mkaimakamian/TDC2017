@@ -15,10 +15,11 @@ namespace DataTransferObject
         public int donationId;
         public int depotId;
         public DateTime dueDate;
+        public string loaction;
 
         public StockDTO() { }
 
-        public StockDTO(string name, int quantity, int itemTypeId, int donationId, int depotId, DateTime dueDate)
+        public StockDTO(string name, int quantity, int itemTypeId, int donationId, int depotId, DateTime dueDate, string location)
         {
             this.name = name;
             this.quantity = quantity;
@@ -26,6 +27,7 @@ namespace DataTransferObject
             this.donationId = donationId;
             this.depotId = depotId;
             this.dueDate = dueDate;
+            this.loaction = location;
         }
     }
 }

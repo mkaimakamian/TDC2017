@@ -60,6 +60,19 @@ namespace BusinessLogicLayer
             }
         }
 
+        public ResultBM GetAvaliableDonations()
+        {
+            try {
+                DonationDAL donationDal = new DonationDAL();
+                List<DonationDTO> donationsDto = donationDal.GetAvaliableDonations();
+                List<DonationBM> donationsBm = ConvertIntoBusinessModel(donationsDto);
+                return new ResultBM(ResultBM.Type.OK, "Recuperación de registros exitosa.", donationsBm);
+            }
+            catch (Exception exception) {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar las donaciones.", exception);
+            }
+        }
+
         public ResultBM SaveDonation(DonationBM donationBm)
         {
             try

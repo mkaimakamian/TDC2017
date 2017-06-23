@@ -1,4 +1,5 @@
 ::: COSAS QUE SÍ HAY QUE CORREGIR :::
+- Al momento de agregar stock, se debe computar la cantidad de ítems que pueden darse de alta + cambiar el estado de la donación una vez cubierto el cupo
 - Las donaciones deben contener el estado y el responsable
 - Las eliminaciones deben ser lógicas
 - Edición de los permisos (funciona?... pasa algo raro con el nombre de los permisos).
@@ -11,7 +12,11 @@
 ::: FUNCIONALIDADES QUE DEBERÍAN INCLUIRSE :::
 - Completar la actualización del donador
 - Completar la actualización del tipos de ítems
+- Completar la actualización del stock
 - Eliminar donador
+- Eliminar donaciones
+- eliminar tipos de ítems
+- Eliminar stock
 
 :::DESEABLES :::
 - El estado de la donación podría ser un enumerado (inner class)

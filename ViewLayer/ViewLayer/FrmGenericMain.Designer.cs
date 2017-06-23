@@ -107,6 +107,7 @@
             this.cmdFilter.TabIndex = 6;
             this.cmdFilter.Text = "filter";
             this.cmdFilter.UseVisualStyleBackColor = true;
+            this.cmdFilter.Visible = false;
             this.cmdFilter.Click += new System.EventHandler(this.cmdFilter_Click);
             // 
             // FrmGenericMain

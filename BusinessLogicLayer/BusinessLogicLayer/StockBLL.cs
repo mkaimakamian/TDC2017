@@ -58,8 +58,8 @@ namespace BusinessLogicLayer
                 StockDTO stockDto = null;
                 ResultBM validationResult = IsValid(stockBm);
 
-                if (validationResult.IsValid()) return validationResult;
-                stockDto = new StockDTO(stockBm.Name, stockBm.Quantity, stockBm.itemType.id, stockBm.donation.id, stockBm.depot.id, stockBm.DueDate);
+                if (!validationResult.IsValid()) return validationResult;
+                stockDto = new StockDTO(stockBm.Name, stockBm.Quantity, stockBm.itemType.id, stockBm.donation.id, stockBm.depot.id, stockBm.DueDate, stockBm.Location);
 
                 stockDal.SaveStock(stockDto);
                 stockBm.id = stockDto.id;
@@ -70,6 +70,12 @@ namespace BusinessLogicLayer
             {
                 return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear la donación.", exception);
             }
+        }
+
+        public ResultBM UpdateStock(StockBM stockBm)
+        {
+            //TODO
+            return null;
         }
 
         public ResultBM GetStocks()
@@ -96,14 +102,18 @@ namespace BusinessLogicLayer
 
         private ResultBM IsValid(StockBM stockBm)
         {
-            //if (donationBm.Items < 1)
-            //    return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "La cantidad de bultos debe ser de al menos una unidad.");
+            if (stockBm.Name == null || stockBm.Name.Length == 0)
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el nombre.");
 
-            //if (donationBm.donationStatus == null)
-            //    return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe selecionar un estado válido para el lote.");
+            //Debe consultarse la base de datos? o esa es una consulta que debió haberse hecho antes?
+            //this.quantity = stockDto.quantity;
 
-            //if (donationBm.donorId == 0)
-            //    return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe asignarse donador.");
+            if (stockBm.itemType.Perishable && stockBm.DueDate == null)
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse la fecha.");
+
+            if (stockBm.Location == null || stockBm.Location.Length == 0)
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse la locación.");
+
 
             return new ResultBM(ResultBM.Type.OK);
         }

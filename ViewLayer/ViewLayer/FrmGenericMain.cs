@@ -63,6 +63,7 @@ namespace ViewLayer
             cmdDelete.Enabled = canDelete;
 
             LoadDatagrid();
+            CreateFilters(dgView);
             AdjustSizes();
 
             // Ajusta un poco el tamaño del formulario en base a la cantidad de columnas que posee la grilla
@@ -85,8 +86,7 @@ namespace ViewLayer
                 if (result.IsValid())
                 {
                    
-                    dgView.DataSource = result.GetValue();
-                    CreateFilters(dgView);
+                    dgView.DataSource = result.GetValue();                    
                 }
                 else
                 {

@@ -16,6 +16,7 @@ namespace BusinessModel
         public DonationBM donation;
         public DepotBM depot;
         private DateTime dueDate;
+        private string location;
 
         public StockBM() { }
 
@@ -28,6 +29,7 @@ namespace BusinessModel
             this.donation = donationBm;
             this.depot = depotBm;
             this.dueDate = stockDto.dueDate;
+            this.location = stockDto.loaction;
         }
 
         public string Name
@@ -46,6 +48,12 @@ namespace BusinessModel
         {
             get { return this.dueDate; }
             set { this.dueDate = value; }
+        }
+
+        public string Location
+        {
+            get { return this.location; }
+            set { this.location = value; }
         }
     }
 }

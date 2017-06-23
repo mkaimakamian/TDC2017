@@ -10,7 +10,7 @@ namespace BusinessModel
     public class DepotBM
     {
         public int id;
-        public string name;
+        private  string name;
         public AddressBM address;
 
         public DepotBM(DepotDTO depotDto, AddressBM addressBm=null)
@@ -18,6 +18,12 @@ namespace BusinessModel
             this.id = depotDto.id;
             this.name = depotDto.name;
             this.address = addressBm;
+        }
+
+        public string Name
+        {
+            get { return this.name; }
+            set { this.name = value; }
         }
     }
 }
