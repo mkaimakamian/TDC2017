@@ -64,6 +64,12 @@ namespace BusinessModel
             set { this.birthdate = value; }
         }
 
+        public Char Gender
+        {
+            get { return this.gender; }
+            set { this.gender = value; }
+        }
+
         public string Email
         {
             get { return this.email; }

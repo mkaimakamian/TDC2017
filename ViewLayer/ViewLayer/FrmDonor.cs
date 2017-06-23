@@ -108,7 +108,7 @@ namespace ViewLayer
             rbuttonFemale.Checked = donor.gender == 'F';
             rButtonMale.Checked = donor.gender == 'M';
             txtDocument.Text = donor.dni.ToString();
-            chkBoxContact.Checked = donor.canBeContacted;
+            chkBoxContact.Checked = donor.CanBeContacted;
         }
 
         private void CompleteAddressData(DonorBM donor)
@@ -189,7 +189,7 @@ namespace ViewLayer
             donor.gender = rbuttonFemale.Checked? 'F' : 'M';
             if (txtDocument.Text.Length == 0) txtDocument.Text = "0";
             donor.dni = int.Parse(txtDocument.Text);
-            donor.canBeContacted = chkBoxContact.Checked;
+            donor.CanBeContacted = chkBoxContact.Checked;
         }
 
         private void FillAddressData(DonorBM donor)

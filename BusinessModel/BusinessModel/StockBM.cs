@@ -32,10 +32,10 @@ namespace BusinessModel
             this.location = stockDto.loaction;
         }
 
-        //public string Lot
-        //{
-        //    get { return "#" + this.donation.Lot; }
-        //}
+        public string Lot
+        {
+            get { return this.donation.Lot + " ("+this.donation.Status+")" ; }
+        }
 
         public string Name
         {

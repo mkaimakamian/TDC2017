@@ -39,6 +39,13 @@ namespace ViewLayer
         private void FrmStock_Load(object sender, EventArgs e)
         {
             try {
+                if (this.Entity != null && this.Entity.donation != null && this.Entity.donation.IsStored())
+                {
+                    MessageBox.Show("El ítem que está intentando editar pertenece a una donación ya almacenada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    groupBox1.Enabled = false;
+                    cmdAccept.Enabled = false;
+                }
+
                 //Traducciones
                 SessionHelper.RegisterForTranslation(cmdAccept, Codes.BTN_ACCEPT);
                 SessionHelper.RegisterForTranslation(cmdClose, Codes.BTN_CLOSE);
@@ -102,8 +109,14 @@ namespace ViewLayer
                     }
                                     }
                 else
-                {
+                {                    
                     this.Entity = new StockBM();
+                    //Cuando es nuevo, se toma el valor del elemento seleccionado del combo de donación como valores inicializadores.
+                    //En dicho caso, el máximo disponible es el máximo asignable y el número que se sugiere stockear
+                    DonationBM donationBm = (DonationBM)cmbDonation.SelectedItem;
+                    this.availableStock = donationBm.Items - donationBm.stocked;
+                    numericQuantity.Maximum = this.availableStock;
+                    numericQuantity.Value = this.availableStock;
                 }
                 CalculateMaxStockLeft((DonationBM)cmbDonation.SelectedItem, (int)numericQuantity.Value);
 
@@ -172,11 +185,14 @@ namespace ViewLayer
         private void cmbDonation_SelectedIndexChanged(object sender, EventArgs e)
         {
             //No debería accederse en edición puesto que la edición no admite cambio de lote.
-            DonationBM donation = (DonationBM)((ComboBox)sender).SelectedItem;
-            this.availableStock = donation.Items - donation.stocked;
-            numericQuantity.Maximum = this.availableStock;
-            numericQuantity.Value = this.availableStock;
-            CalculateMaxStockLeft((DonationBM)((ComboBox)sender).SelectedItem, this.availableStock);
+            if (!this.IsUpdate)
+            {
+                DonationBM donation = (DonationBM)((ComboBox)sender).SelectedItem;
+                this.availableStock = donation.Items - donation.stocked;
+                numericQuantity.Maximum = this.availableStock;
+                numericQuantity.Value = this.availableStock;
+                CalculateMaxStockLeft((DonationBM)((ComboBox)sender).SelectedItem, this.availableStock);
+            }
         }
 
         private void numericQuantity_ValueChanged(object sender, EventArgs e)

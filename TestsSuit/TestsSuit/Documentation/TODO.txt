@@ -1,5 +1,5 @@
 ::: COSAS QUE SÍ HAY QUE CORREGIR :::
-- Al momento de agregar stock cambiar el estado de la donación una vez cubierto el cupo
+- Ens tock, para los productos que no vencen, no deben mostrarse las fechas
 - Las eliminaciones deben ser lógicas
 - Edición de los permisos (funciona?... pasa algo raro con el nombre de los permisos).
 - Terminar filtro del form genérico
@@ -18,6 +18,7 @@
 - Eliminar stock
 
 :::DESEABLES :::
+- En el caso de una donación almacenada, podría mostrarse en la grilla en vez de meterse y mostrar un dialog box
 - El estado de la donación podría ser un enumerado (inner class)
 - Template para evitar el trycatch
 - En el form de user, el UserBM sigue manejando id y no objetos

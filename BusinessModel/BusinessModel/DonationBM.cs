@@ -43,20 +43,6 @@ namespace BusinessModel
             this.volunteer = volunteerBm;
         }
 
-
-        //ESTE CONSTRUCTOR DEBE SER REEMPLAZADO POR EL PRIMERO.
-        //SE CREA ESTE PARA PODER AVANZAR CON EL PROYECTO
-        //public DonationBM(DonationDTO donationDto)
-        //{
-        //    this.id = donationDto.id;
-        //    this.items = donationDto.items;
-        //    this.arrival = donationDto.arrival;
-        //    //this.donationStatus = donationStatusBm;
-        //    this.donorId = donationDto.donorId;
-        //    this.comment = donationDto.comment;
-        //    //this.volunteer = volunteerBm;
-        //}
-
         public int Lot
         {
             get { return this.id; }
@@ -98,7 +84,10 @@ namespace BusinessModel
             set { this.comment = value; }
         }
 
-       
+        public bool IsStored()
+        {
+            return donationStatus.id == (int) DonationStatusBM.Status.STORED;
+        }
     
     }
 }

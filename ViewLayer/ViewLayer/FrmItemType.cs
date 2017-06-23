@@ -75,7 +75,7 @@ namespace ViewLayer
                     
                     this.Entity = itemTypeResult.GetValue<ItemTypeBM>();
                     txtName.Text = this.Entity.Name;
-                    txtComment.Text = this.Entity.comment;
+                    txtComment.Text = this.Entity.Comment;
                     checkPerishable.Checked = this.Entity.Perishable;
                     rbEdible.Checked = this.Entity.IsEdible();
                     rbIndumentary.Checked = this.Entity.IsIndumentary();
@@ -116,7 +116,7 @@ namespace ViewLayer
                 ResultBM itemTypeResult = null;
 
                 this.Entity.Name = txtName.Text;
-                this.Entity.comment = txtComment.Text;
+                this.Entity.Comment = txtComment.Text;
                 this.Entity.Perishable = checkPerishable.Checked;
 
                 //Horrible

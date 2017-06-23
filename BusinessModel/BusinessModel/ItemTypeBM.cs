@@ -12,7 +12,7 @@ namespace BusinessModel
         public int id;
         private string name;
         public string category;
-        public string comment;
+        private string comment;
         private bool perishable;
 
         public enum Category
@@ -51,6 +51,12 @@ namespace BusinessModel
         {
             get { return this.perishable; }
             set { this.perishable = value; }
+        }
+
+        public String Comment
+        {
+            get { return this.comment; }
+            set { this.comment = value; }
         }
 
         public bool IsEdible()

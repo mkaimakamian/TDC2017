@@ -56,7 +56,7 @@ namespace BusinessLogicLayer
                 ResultBM validationResult = IsValid(itemTypeBm);
                 if (!validationResult.IsValid()) return validationResult;
 
-                itemTypeDto = new ItemTypeDTO(itemTypeBm.Name, itemTypeBm.category, itemTypeBm.comment, itemTypeBm.Perishable);
+                itemTypeDto = new ItemTypeDTO(itemTypeBm.Name, itemTypeBm.category, itemTypeBm.Comment, itemTypeBm.Perishable);
                 itemTypeDal.SaveItemType(itemTypeDto);
                 itemTypeBm.id = itemTypeDto.id;
 

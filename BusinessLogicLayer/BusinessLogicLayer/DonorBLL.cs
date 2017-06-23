@@ -111,7 +111,7 @@ namespace BusinessLogicLayer
                 }
 
                 personBm = personResult.GetValue() as PersonBM;
-                donorDto = new DonorDTO(personBm.id, organizationBm == null ? 0 : organizationBm.id, donorBm.canBeContacted);
+                donorDto = new DonorDTO(personBm.id, organizationBm == null ? 0 : organizationBm.id, donorBm.CanBeContacted);
                 donorDal.SaveDonor(donorDto);
                 donorBm.donorId = donorDto.donorId;
 

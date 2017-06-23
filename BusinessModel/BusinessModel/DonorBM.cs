@@ -11,7 +11,7 @@ namespace BusinessModel
     {
         public int donorId;
         public OrganizationBM organization;
-        public bool canBeContacted;
+        private bool canBeContacted;
 
         public DonorBM() { }
 
@@ -59,6 +59,12 @@ namespace BusinessModel
             this.dni = donorDto.dni;
             this.donorId = donorDto.donorId;
             this.canBeContacted = donorDto.canBeContacted;
+        }
+
+        public bool CanBeContacted
+        {
+            get { return this.canBeContacted; }
+            set { this.canBeContacted = value; }
         }
     }
 }

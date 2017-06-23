@@ -38,6 +38,13 @@ namespace ViewLayer
         private void DonationFrm_Load(object sender, EventArgs e)
         {
             try {
+               
+                if (this.Entity != null && this.Entity.IsStored())
+                {
+                    MessageBox.Show("Está intentando editar una donación ya almacenada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    groupBox1.Enabled = false;
+                    cmdAccept.Enabled = false;
+                }
                 
                 //Traducciones
                 SessionHelper.RegisterForTranslation(cmdAccept, Codes.BTN_ACCEPT);

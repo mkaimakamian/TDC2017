@@ -64,6 +64,8 @@ namespace BusinessLogicLayer
                 stockDal.SaveStock(stockDto);
                 stockBm.id = stockDto.id;
 
+                new DonationBLL().UpdateToStoredStatusIfApply(stockBm.donation.id);
+
                 return new ResultBM(ResultBM.Type.OK, "Se ha creado el stock.", stockBm);
             }
             catch (Exception exception)
@@ -71,12 +73,13 @@ namespace BusinessLogicLayer
                 return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear la donación.", exception);
             }
         }
-
+        
         public ResultBM UpdateStock(StockBM stockBm)
         {
             //TODO
             return null;
         }
+
 
         public ResultBM GetStocks()
         {
@@ -96,8 +99,15 @@ namespace BusinessLogicLayer
         private List<StockBM> ConvertIntoBusinessModel(List<StockDTO> stocks)
         {
             List<StockBM> result = new List<StockBM>();
-            foreach (StockDTO stock in stocks) result.Add(new StockBM(stock));
+            foreach (StockDTO stock in stocks) result.Add(new StockBM(stock, GetDonation(stock)));
             return result;
+        }
+
+        //No está bueno esto, pero me permite recuperar el voluntario. Poco performante... pero no hay tiempo.
+        private DonationBM GetDonation(StockDTO stock)
+        {
+            ResultBM donationResult = new DonationBLL().GetDonation(stock.donationId);
+            return donationResult.GetValue<DonationBM>();
         }
 
         private ResultBM IsValid(StockBM stockBm)

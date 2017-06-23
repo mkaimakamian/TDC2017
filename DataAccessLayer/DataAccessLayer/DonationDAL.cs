@@ -49,8 +49,7 @@ namespace DataAccessLayer
             return result;
         }
 
-
-        //TODO MODIFICAR PARA QUE DEVUELVA LAS DONACIONES DISPONIBLES = NO STOCKEADAS
+        //Sólo recupera aquellos con estado 1 (Recibido)
         public List<DonationDTO> GetAvaliableDonations()
         {
             DBSql dbsql = new DBSql();
@@ -60,6 +59,7 @@ namespace DataAccessLayer
 
             sql = "SELECT d.*, SUM(CASE WHEN s.quantity IS NULL THEN 0 ELSE s.quantity END) stocked ";
             sql += "FROM donation d LEFT JOIN stock s ON s.donationId = d.id ";
+            sql += "WHERE d.statusId = 1 ";            
             sql += "GROUP BY d.id, d.items, d.arrival, d.statusId, d.donorId, d.comment, d.volunteerId ";
             //sql += "HAVING SUM(CASE WHEN s.quantity IS NULL THEN 0 ELSE s.quantity END) < items";
 
@@ -104,6 +104,20 @@ namespace DataAccessLayer
             sql += "comment = '" + donationDto.comment + "',  ";
             sql += "volunteerId = " + (donationDto.volunteerId == 0 ? "null" :  donationDto.volunteerId.ToString()) + " ";
             sql += "WHERE id = " + donationDto.id;
+            dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
+
+        public bool UpdateStatusToStored(int id, int statusId)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "UPDATE donation set statusId = " + statusId + " WHERE id IN ( ";
+            sql += "SELECT d.id FROM donation d LEFT JOIN stock s ON s.donationId = d.id ";
+            sql += "WHERE d.id = "+ id + " ";
+            sql += "GROUP BY d.id, d.items, d.arrival, d.statusId, d.donorId, d.comment, d.volunteerId ";
+            sql += "HAVING SUM(CASE WHEN s.quantity IS NULL THEN 0 ELSE s.quantity END) = items)";
             dbsql.ExecuteNonQuery(sql);
             return true;
         }
