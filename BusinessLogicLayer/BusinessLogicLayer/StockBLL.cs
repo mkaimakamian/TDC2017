@@ -21,9 +21,9 @@ namespace BusinessLogicLayer
                 ResultBM depotResult = null;
                 ItemTypeBLL itemTypeBll = new ItemTypeBLL();
                 ResultBM itemTypeResult = null;
-                StockDAL stockDal = new StockDAL();
-                StockDTO stockDto = stockDal.GetStock(stockId);
+                StockDAL stockDal = new StockDAL();                
                 StockBM stockBm = null;
+                StockDTO stockDto = stockDal.GetStock(stockId);
 
                 //Si existe el stock, las relaciones deberían existir... TODAS
                 if (stockDto != null)
@@ -105,8 +105,12 @@ namespace BusinessLogicLayer
             if (stockBm.Name == null || stockBm.Name.Length == 0)
                 return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el nombre.");
 
-            //Debe consultarse la base de datos? o esa es una consulta que debió haberse hecho antes?
-            //this.quantity = stockDto.quantity;
+            if (stockBm.Quantity == 0)
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "La cantidad de ítems debe ser mayor a cero.");
+            
+
+            if (stockBm.donation.Items - stockBm.donation.stocked < stockBm.Quantity)
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Se han ingresado más bultos de los que deberían.");
 
             if (stockBm.itemType.Perishable && stockBm.DueDate == null)
                 return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse la fecha.");

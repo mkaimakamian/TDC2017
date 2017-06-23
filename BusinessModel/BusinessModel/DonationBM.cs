@@ -17,10 +17,11 @@ namespace BusinessModel
         public int donorId; //debería ser un objeto
         private string comment;
         public VolunteerBM volunteer;
+        public int stocked;
 
         public DonationBM() { }
 
-        public DonationBM(DonationDTO donationDto, DonationStatusBM donationStatusBm, VolunteerBM volunteerBm)
+        public DonationBM(DonationDTO donationDto, DonationStatusBM donationStatusBm = null, VolunteerBM volunteerBm = null)
         {
             this.id = donationDto.id;
             this.items = donationDto.items;
@@ -29,9 +30,11 @@ namespace BusinessModel
             this.donorId = donationDto.donorId;
             this.comment = donationDto.comment;
             this.volunteer = volunteerBm;
+            this.stocked = donationDto.stocked;
         }
 
-        public DonationBM(int items,int donorId, DonationStatusBM donationStatusBm, string comment = null, VolunteerBM volunteerBm = null)
+        //ver si no conviene eliminar el primero y aceptar este con valores nullo default
+        public DonationBM(int items, int donorId, DonationStatusBM donationStatusBm, string comment = null, VolunteerBM volunteerBm = null)
         {
             this.items = items;
             this.donationStatus = donationStatusBm;
@@ -43,16 +46,16 @@ namespace BusinessModel
 
         //ESTE CONSTRUCTOR DEBE SER REEMPLAZADO POR EL PRIMERO.
         //SE CREA ESTE PARA PODER AVANZAR CON EL PROYECTO
-        public DonationBM(DonationDTO donationDto)
-        {
-            this.id = donationDto.id;
-            this.items = donationDto.items;
-            this.arrival = donationDto.arrival;
-            //this.donationStatus = donationStatusBm;
-            this.donorId = donationDto.donorId;
-            this.comment = donationDto.comment;
-            //this.volunteer = volunteerBm;
-        }
+        //public DonationBM(DonationDTO donationDto)
+        //{
+        //    this.id = donationDto.id;
+        //    this.items = donationDto.items;
+        //    this.arrival = donationDto.arrival;
+        //    //this.donationStatus = donationStatusBm;
+        //    this.donorId = donationDto.donorId;
+        //    this.comment = donationDto.comment;
+        //    //this.volunteer = volunteerBm;
+        //}
 
 
         public int Items

@@ -52,7 +52,7 @@ namespace DataAccessLayer
             DBSql dbsql = new DBSql();
             String sql;
 
-            sql = "INSERT INTO stock (name, quantity, itemTypeId, donationId, depotId, dueDate) VALUES (";
+            sql = "INSERT INTO stock (name, quantity, itemTypeId, donationId, depotId, dueDate, location) VALUES (";
             sql += "'" + stockDto.name + "', ";
             sql += stockDto.quantity + ", ";
             sql += stockDto.itemTypeId + ", ";

@@ -16,7 +16,8 @@ namespace DataAccessLayer
             String sql;
             List<List<String>> reader;
 
-            sql = "SELECT * FROM donation WHERE id = " + id;
+            sql = "SELECT d.*, SUM(CASE WHEN s.quantity IS NULL THEN 0 ELSE s.quantity END) stocked FROM donation d LEFT JOIN stock s ON s.donationId = d.id WHERE d.id = " + id;
+            sql += " GROUP BY d.id, d.items, d.arrival, d.statusId, d.donorId, d.comment, d.volunteerId";
             reader = dbsql.executeReader(sql);
 
             if (reader.Count > 0)
@@ -34,7 +35,7 @@ namespace DataAccessLayer
             List<List<String>> reader;
             List<DonationDTO> result = new List<DonationDTO>();
 
-            sql = "SELECT * FROM donation";
+            sql = "SELECT d.*, SUM(CASE WHEN s.quantity IS NULL THEN 0 ELSE s.quantity END) stocked FROM donation d LEFT JOIN stock s ON s.donationId = d.id GROUP BY d.id, d.items, d.arrival, d.statusId, d.donorId, d.comment, d.volunteerId";
             reader = dbsql.executeReader(sql);
 
             if (reader.Count > 0)
@@ -57,7 +58,11 @@ namespace DataAccessLayer
             List<List<String>> reader;
             List<DonationDTO> result = new List<DonationDTO>();
 
-            sql = "SELECT * FROM donation";
+            sql = "SELECT d.*, SUM(CASE WHEN s.quantity IS NULL THEN 0 ELSE s.quantity END) stocked ";
+            sql += "FROM donation d LEFT JOIN stock s ON s.donationId = d.id ";
+            sql += "GROUP BY d.id, d.items, d.arrival, d.statusId, d.donorId, d.comment, d.volunteerId ";
+            //sql += "HAVING SUM(CASE WHEN s.quantity IS NULL THEN 0 ELSE s.quantity END) < items";
+
             reader = dbsql.executeReader(sql);
 
             if (reader.Count > 0)
@@ -112,6 +117,9 @@ namespace DataAccessLayer
             result.donorId = int.Parse(item[4]);
             result.comment = item[5];
             result.volunteerId = int.Parse(item[6].Length == 0 ? "0" : item[6]);
+
+            //No forma parte del modelo de datos per sé
+            result.stocked = int.Parse(item[7]);
             return result;
         }
     }

@@ -60,6 +60,7 @@ namespace BusinessLogicLayer
             }
         }
 
+        //debería filtrar por: stocked != 0 o por status != stocked (si es que existe ese valor)
         public ResultBM GetAvaliableDonations()
         {
             try {
@@ -81,7 +82,7 @@ namespace BusinessLogicLayer
                 DonationDTO donationDto;
                 ResultBM validationResult = IsValid(donationBm);
 
-                if (validationResult.IsValid()) return validationResult;
+                if (!validationResult.IsValid()) return validationResult;
                 donationDto = new DonationDTO(donationBm.Items, donationBm.Arrival, donationBm.donationStatus.id, donationBm.donorId, donationBm.Comment, 0);
                 donationDal.SaveDonation(donationDto);
                 donationBm.id = donationDto.id;

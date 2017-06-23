@@ -1,5 +1,5 @@
 ::: COSAS QUE SÍ HAY QUE CORREGIR :::
-- Al momento de agregar stock, se debe computar la cantidad de ítems que pueden darse de alta + cambiar el estado de la donación una vez cubierto el cupo
+- Al momento de agregar stock cambiar el estado de la donación una vez cubierto el cupo
 - Las donaciones deben contener el estado y el responsable
 - Las eliminaciones deben ser lógicas
 - Edición de los permisos (funciona?... pasa algo raro con el nombre de los permisos).

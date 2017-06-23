@@ -107,6 +107,13 @@ namespace ViewLayer
         public const string LBL_OTHER = "LBL_OTHER";
         public const string LBL_PERISHABLE = "LBL_PERISHABLE";
 
+        public const string LBL_DEPOT = "LBL_DEPOT";
+        public const string LBL_ITEM_TYPE = "LBL_ITEM_TYPE";
+        public const string LBL_QUANTITY = "LBL_QUANTITY";
+        public const string LBL_DUEDATE = "LBL_DUEDATE";
+        public const string LBL_LOCATION = "LBL_LOCATION";
+
+
         public const string MNU_GE001 = "MNU_GE001"; //Menú herramientas
             public const string MNU_OP001 = "MNU_OP001"; //Cambiar idioma
                 public const string MNU_OP001_LBL_LANGUAGE = "MNU_OP001_LBL_LANGUAGE"; //Frase de cambiar idioma

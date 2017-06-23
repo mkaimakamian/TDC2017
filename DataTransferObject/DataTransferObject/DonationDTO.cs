@@ -15,6 +15,7 @@ namespace DataTransferObject
         public int donorId;
         public string comment;
         public int volunteerId;
+        public int stocked; //indica cuantos de los ítems están stockeados
 
         public DonationDTO() { }
 

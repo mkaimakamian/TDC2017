@@ -18,7 +18,7 @@ namespace ViewLayer
 
         private StockBM entity;
         private bool isUpdate = false;
-
+        private int availableStock = 0;
         public StockBM Entity
         {
             get { return this.entity; }
@@ -43,22 +43,35 @@ namespace ViewLayer
                 SessionHelper.RegisterForTranslation(cmdAccept, Codes.BTN_ACCEPT);
                 SessionHelper.RegisterForTranslation(cmdClose, Codes.BTN_CLOSE);
 
+                SessionHelper.RegisterForTranslation(lblLot, Codes.LBL_LOT);
+                SessionHelper.RegisterForTranslation(lblDepot, Codes.LBL_DEPOT);
+                SessionHelper.RegisterForTranslation(lblDescription, Codes.LBL_DESCRIPTION);
+                SessionHelper.RegisterForTranslation(lblType, Codes.LBL_ITEM_TYPE);                
+                SessionHelper.RegisterForTranslation(lblItemQuantity, Codes.LBL_QUANTITY);
+                SessionHelper.RegisterForTranslation(lblDuedate, Codes.LBL_DUEDATE);
+                SessionHelper.RegisterForTranslation(lblLocation, Codes.LBL_LOCATION);
+                
                 LoadDonations();
                 LoadDepots();
                 LoadItemTypes();
-
+                
                 if (this.IsUpdate)
                 {
+                    cmbDonation.Enabled = false;
                     StockBLL stockBll = new StockBLL();
                     ResultBM stockResult = stockBll.GetStock(this.Entity.id);
 
                     if (!stockResult.IsValid()) MessageBox.Show(stockResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     this.Entity = stockResult.GetValue<StockBM>();
-
-                    txtName.Text = this.Entity.Name;
+                    
+                    this.availableStock = this.Entity.GetAmountItemsToStockWithoutThis();
+                    numericQuantity.Maximum = this.availableStock;
                     numericQuantity.Value = this.Entity.Quantity;
+                    
+                    txtName.Text = this.Entity.Name;
                     dtDueDate.Value = this.Entity.DueDate;
                     txtLocation.Text = this.Entity.Location;
+                    
 
                     //Posicionar donador
                     bool found = false;
@@ -87,11 +100,12 @@ namespace ViewLayer
                         if (found) cmbDepot.SelectedIndex = i;
 
                     }
-                }
+                                    }
                 else
                 {
                     this.Entity = new StockBM();
                 }
+                CalculateMaxStockLeft((DonationBM)cmbDonation.SelectedItem, (int)numericQuantity.Value);
 
             }
             catch (Exception exception) {
@@ -101,6 +115,8 @@ namespace ViewLayer
 
         private void LoadDonations()
         {
+            cmbDonation.SelectedIndexChanged -= cmbDonation_SelectedIndexChanged;
+
             DonationBLL donationBll = new DonationBLL();
             ResultBM donationResult = donationBll.GetAvaliableDonations();
 
@@ -113,6 +129,7 @@ namespace ViewLayer
                 cmbDonation.DataSource = donationResult.GetValue<List<DonationBM>>();
                 cmbDonation.DisplayMember = "Lot";
             }
+            cmbDonation.SelectedIndexChanged += cmbDonation_SelectedIndexChanged;
         }
 
         private void LoadDepots()
@@ -120,10 +137,7 @@ namespace ViewLayer
             DepotBLL depotBll = new DepotBLL();
             ResultBM depotResult = depotBll.GetDepots();
 
-            if (!depotResult.IsValid())
-            {
-                MessageBox.Show(depotResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            if (!depotResult.IsValid()) MessageBox.Show(depotResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             else
             {
                 cmbDepot.DataSource = depotResult.GetValue<List<DepotBM>>();
@@ -136,10 +150,7 @@ namespace ViewLayer
             ItemTypeBLL itemTypeBll = new ItemTypeBLL();
             ResultBM itemTypeResult = itemTypeBll.GetItemTypes();
 
-            if (!itemTypeResult.IsValid())
-            {
-                MessageBox.Show(itemTypeResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            if (!itemTypeResult.IsValid()) MessageBox.Show(itemTypeResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             else
             {
                 cmbItemType.DataSource = itemTypeResult.GetValue<List<ItemTypeBM>>();
@@ -156,6 +167,28 @@ namespace ViewLayer
         {
             ItemTypeBM itemType = (ItemTypeBM) ((ComboBox)sender).SelectedItem;
             dtDueDate.Enabled = itemType.Perishable;
+        }
+
+        private void cmbDonation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //No debería accederse en edición puesto que la edición no admite cambio de lote.
+            DonationBM donation = (DonationBM)((ComboBox)sender).SelectedItem;
+            this.availableStock = donation.Items - donation.stocked;
+            numericQuantity.Maximum = this.availableStock;
+            numericQuantity.Value = this.availableStock;
+            CalculateMaxStockLeft((DonationBM)((ComboBox)sender).SelectedItem, this.availableStock);
+        }
+
+        private void numericQuantity_ValueChanged(object sender, EventArgs e)
+        {
+            CalculateMaxStockLeft((DonationBM) cmbDonation.SelectedItem, (int) ((NumericUpDown)sender).Value);
+        }
+
+        private void CalculateMaxStockLeft(DonationBM donation, int toStock)
+        {
+            
+            int left = this.availableStock - toStock;
+            lblLeft.Text = "(" + left + ")";
         }
 
         private void cmdAdd_Click(object sender, EventArgs e)
@@ -197,5 +230,6 @@ namespace ViewLayer
                 MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+               
     }
 }

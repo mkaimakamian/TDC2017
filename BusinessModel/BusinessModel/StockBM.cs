@@ -32,6 +32,11 @@ namespace BusinessModel
             this.location = stockDto.loaction;
         }
 
+        //public string Lot
+        //{
+        //    get { return "#" + this.donation.Lot; }
+        //}
+
         public string Name
         {
             get { return this.name; }
@@ -54,6 +59,12 @@ namespace BusinessModel
         {
             get { return this.location; }
             set { this.location = value; }
+        }
+
+        //Devuelve la cantidad de ítems que faltan stockear, descontando del ya stockeado la cantidad informada en Quantity.
+        public int GetAmountItemsToStockWithoutThis()
+        {
+            return this.donation.Items - (this.donation.stocked - this.Quantity);
         }
     }
 }
