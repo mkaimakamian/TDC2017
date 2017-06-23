@@ -121,9 +121,28 @@ namespace BusinessLogicLayer
             List<DonationBM> result = new List<DonationBM>();
             foreach (DonationDTO donation in donations)
             {
-                result.Add(new DonationBM(donation));
+                result.Add(new DonationBM(donation, GetStatus(donation), GetVolunteer(donation)));
             }
             return result;
+        }
+
+        //No está bueno esto, pero me permite recuperar el voluntario. Poco performante... pero no hay tiempo.
+        private VolunteerBM GetVolunteer(DonationDTO donationDto)
+        {
+            if (donationDto.volunteerId > 0)
+            {
+                ResultBM volunteerResult = new VolunteerBLL().GetVolunteer(donationDto.volunteerId);
+                return volunteerResult.GetValue<VolunteerBM>();
+            }
+            else
+                return null;
+        }
+
+        //No está bueno esto, pero me permite recuperar el voluntario. Poco performante... pero no hay tiempo.
+        private DonationStatusBM GetStatus(DonationDTO donationDto)
+        {
+            ResultBM statusResult = new DonationStatusBLL().GetDonationStatus(donationDto.statusId);
+            return statusResult.GetValue<DonationStatusBM>();
         }
 
         private ResultBM IsValid(DonationBM donationBm)
