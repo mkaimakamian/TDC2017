@@ -160,10 +160,18 @@ namespace BusinessLogicLayer
             List<DonorBM> result = new List<DonorBM>();
             foreach (DonorDTO donor in donors)
             {
-                result.Add(new DonorBM(donor));
+                result.Add(new DonorBM(donor, GetAddress(donor)));
             }
             return result;
         }
+
+        //No está bueno esto, pero me permite recuperar las direcciones. Poco performante... pero no hay tiempo.
+        private AddressBM GetAddress(DonorDTO donorDto)
+        {
+            ResultBM addressResult = new AddressBLL().GetAddress(donorDto.addressId);
+            return addressResult.GetValue<AddressBM>();
+        }
+
 
         public ResultBM IsValid(DonorBM donorBm)
         {
