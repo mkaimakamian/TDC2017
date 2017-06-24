@@ -54,6 +54,7 @@
     <Compile Include="PermissionDTO.cs" />
     <Compile Include="PersonDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScheduleDTO.cs" />
     <Compile Include="StockDTO.cs" />
     <Compile Include="TranslationDTO.cs" />
     <Compile Include="UserDTO.cs" />

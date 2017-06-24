@@ -38,14 +38,16 @@ namespace ViewLayer
         private void DonationFrm_Load(object sender, EventArgs e)
         {
             try {
-               
+                dateArrival.CustomFormat = "dd/MM/yyyy hh:mm";
+                ChangeSize();
+
                 if (this.Entity != null && this.Entity.IsStored())
                 {
                     MessageBox.Show("Está intentando editar una donación ya almacenada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     groupBox1.Enabled = false;
                     cmdAccept.Enabled = false;
                 }
-                
+
                 //Traducciones
                 SessionHelper.RegisterForTranslation(cmdAccept, Codes.BTN_ACCEPT);
                 SessionHelper.RegisterForTranslation(cmdClose, Codes.BTN_CLOSE);
@@ -56,6 +58,7 @@ namespace ViewLayer
                 SessionHelper.RegisterForTranslation(lblDonor, Codes.LBL_DONOR);
                 SessionHelper.RegisterForTranslation(lblItems, Codes.LBL_ITEMS);
                 SessionHelper.RegisterForTranslation(lblComment, Codes.LBL_OBSERVATION);
+                SessionHelper.RegisterForTranslation(lblContact, Codes.LBL_CONTACT_INFO);
 
                 DonorBLL donorBll = new DonorBLL();
                 ResultBM donorResult = donorBll.GetDonors();
@@ -64,8 +67,10 @@ namespace ViewLayer
 
                 if (donorResult.IsValid())
                 {
+                    cmbDonor.SelectedIndexChanged -= cmbDonor_SelectedIndexChanged;
                     cmbDonor.DataSource = donorResult.GetValue<List<DonorBM>>();
                     cmbDonor.DisplayMember = "Name";
+                    cmbDonor.SelectedIndexChanged += cmbDonor_SelectedIndexChanged;
                     
                 }
                 else
@@ -97,15 +102,17 @@ namespace ViewLayer
 
                         lblLotId.Text = this.Entity.Lot.ToString();
                         dateArrival.Value = this.Entity.Arrival;
+                        chkPickup.Checked = this.Entity.IsToBeRetrieved();
                         numericItems.Value = this.Entity.Items;
                         txtComment.Text = this.Entity.Comment;
+                        txtContact.Text = this.Entity.donor.GetContectInfo();
 
                         //Posicionar donador
                         bool found = false;
 
                         for (int i = 0; i < cmbDonor.Items.Count && !found; ++i)
                         {
-                            found = ((DonorBM)cmbDonor.Items[i]).donorId == this.Entity.donorId;
+                            found = ((DonorBM)cmbDonor.Items[i]).donorId == this.Entity.donor.donorId;
                             if (found) cmbDonor.SelectedIndex = i;
                             
                         }
@@ -148,14 +155,14 @@ namespace ViewLayer
                 this.Entity.Arrival = dateArrival.Value;
                 this.Entity.Items = int.Parse(numericItems.Value.ToString());
                 this.Entity.Comment = txtComment.Text;
-                this.Entity.donorId = ((DonorBM)cmbDonor.SelectedItem).donorId;
+                this.Entity.donor = (DonorBM)cmbDonor.SelectedItem;
                 this.Entity.volunteer = (VolunteerBM) cmbVolunteer.SelectedItem;
-                //Hack para evitar recuperar los estados de la base
+                
+                //Si se seleccionó fecha manual, entonces se quiere retirar y el estado debe ser a retirar
                 DonationStatusBM status = new DonationStatusBM();
-                status.id = (int) DonationStatusBM.Status.RECEIVED;
+                status.id = chkPickup.Enabled ? (int)DonationStatusBM.Status.TO_BE_RETRIEVED : (int)DonationStatusBM.Status.RECEIVED;
                 this.Entity.donationStatus = status;
-
-
+                
                 if (isUpdate) donationResult = donationBll.UpdateDonation(this.Entity);
                 else donationResult = donationBll.SaveDonation(this.Entity);
 
@@ -171,6 +178,22 @@ namespace ViewLayer
             {
                 MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void chkPickup_CheckedChanged(object sender, EventArgs e)
+        {
+            dateArrival.Enabled = ((CheckBox)sender).Checked;
+            ChangeSize();
+        }
+
+        private void ChangeSize()
+        {
+            this.Width = chkPickup.Checked? 500 : 262;
+        }
+
+        private void cmbDonor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtContact.Text = ((DonorBM) ((ComboBox) sender).SelectedItem).GetContectInfo();
         }
     }
 }

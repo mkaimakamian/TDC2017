@@ -55,6 +55,7 @@
     <Compile Include="OrganizationDAL.cs" />
     <Compile Include="PersonDAL.cs" />
     <Compile Include="ProfileDAL.cs" />
+    <Compile Include="ScheduleDAL.cs" />
     <Compile Include="StockDAL.cs" />
     <Compile Include="UserDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

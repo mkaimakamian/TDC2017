@@ -1,5 +1,6 @@
 ::: COSAS QUE SÍ HAY QUE CORREGIR :::
-- Ens tock, para los productos que no vencen, no deben mostrarse las fechas
+- agregar permisos para que el que no pueda agendar, no agende :D
+- En stock, para los productos que no vencen, no deben mostrarse las fechas
 - Las eliminaciones deben ser lógicas
 - Edición de los permisos (funciona?... pasa algo raro con el nombre de los permisos).
 - Terminar filtro del form genérico
@@ -7,6 +8,7 @@
 - Agregar confirmaciones antes de gurdar o actualizar
 - Controlar en FrmDonor que al recuperar el país, debería contemplarse el éxito o fallo
 - Similar con los donadores y voluntarios en Frmdonation
+- Eliminar las clases schedule
 
 ::: FUNCIONALIDADES QUE DEBERÍAN INCLUIRSE :::
 - Completar la actualización del donador

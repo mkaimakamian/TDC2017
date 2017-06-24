@@ -186,7 +186,9 @@ namespace ViewLayer
                 if (column.GetType() == typeof(DataGridViewTextBoxColumn)) {
                     Control control = null;
                     if (column.ValueType == typeof(String)) {
-                        control = new TextBox();                    
+                        control = new TextBox();
+                        control.Tag = column.Name;
+                        lstControls.Add(control);
                     }
 
                     if (column.ValueType == typeof(DateTime))
@@ -211,14 +213,50 @@ namespace ViewLayer
             }
         }
 
+        List<Control> lstControls = new List<Control>();
+
         private void cmdFilter_Click(object sender, EventArgs e)
         {
-            
-            //bindingsource bs = (bindingsource) dgview.datasource;
-            //datatable table = (datatable) bs.datasource;
-            //datatable filtered = table.defaultview.totable();
 
-            dgView.Refresh();
+            object businessLogic = Activator.CreateInstance(this.entity);
+            //try
+            //{
+            //    ResultBM result = ((BLEntity)businessLogic).GetCollection();
+            //    if (result.IsValid())
+            //    {
+                    
+
+            //        List<object> lstObjects = result.GetValue() as List<T>;
+            //        foreach (object obj in lstObjects)
+            //        {                        
+            //            bool match = true;
+            //            foreach (Control ctrl in lstControls)
+            //            {
+            //                //match = match && Label existencia
+
+            //                System.Reflection.PropertyInfo propertyToFilter = ctrl.GetType().GetProperty("Tag");
+            //                //propertyToFilter.GetValue()
+            //                System.Reflection.PropertyInfo propertyText = obj.GetType().GetProperty("Text");
+
+            //            }
+
+            //            //if (!match) remover de la lista
+            //        }
+
+            //        //dgView.DataSource = result.GetValue();
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    }
+            //}
+            //catch (Exception exception)
+            //{
+            //    MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //} 
+
+
+            //dgView.Refresh();
         }
 
     }

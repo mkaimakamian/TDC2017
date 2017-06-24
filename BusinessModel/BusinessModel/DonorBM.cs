@@ -66,5 +66,25 @@ namespace BusinessModel
             get { return this.canBeContacted; }
             set { this.canBeContacted = value; }
         }
+
+        public string GetContectInfo()
+        {
+            string contactInfo = "";
+            contactInfo += this.Name + " " + this.LastName + Environment.NewLine;
+            contactInfo += this.dni + Environment.NewLine;
+            contactInfo += this.Email + Environment.NewLine;
+            contactInfo += this.phone + Environment.NewLine;
+            contactInfo += "-------------------" + Environment.NewLine;
+
+            if (this.address != null)
+            {
+                contactInfo += this.address.street + " " + this.address.number + Environment.NewLine;
+                contactInfo += this.address.apartment + Environment.NewLine;
+                contactInfo += this.address.neighborhood + Environment.NewLine;
+                contactInfo += "-------------------" + Environment.NewLine;
+                contactInfo += this.address.comment;
+            }
+            return contactInfo;
+        }
     }
 }

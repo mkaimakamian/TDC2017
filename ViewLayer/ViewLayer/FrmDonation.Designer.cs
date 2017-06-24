@@ -43,8 +43,13 @@
             this.lblDonor = new System.Windows.Forms.Label();
             this.lblItems = new System.Windows.Forms.Label();
             this.numericItems = new System.Windows.Forms.NumericUpDown();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblContact = new System.Windows.Forms.Label();
+            this.txtContact = new System.Windows.Forms.TextBox();
+            this.chkPickup = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericItems)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmdClose
@@ -69,6 +74,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkPickup);
             this.groupBox1.Controls.Add(this.cmbVolunteer);
             this.groupBox1.Controls.Add(this.lblResponsible);
             this.groupBox1.Controls.Add(this.dateArrival);
@@ -107,10 +113,10 @@
             // 
             // dateArrival
             // 
-            this.dateArrival.Enabled = false;
+            this.dateArrival.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateArrival.Location = new System.Drawing.Point(6, 62);
             this.dateArrival.Name = "dateArrival";
-            this.dateArrival.Size = new System.Drawing.Size(200, 20);
+            this.dateArrival.Size = new System.Drawing.Size(125, 20);
             this.dateArrival.TabIndex = 51;
             // 
             // lblArrival
@@ -166,6 +172,7 @@
             this.cmbDonor.Name = "cmbDonor";
             this.cmbDonor.Size = new System.Drawing.Size(200, 21);
             this.cmbDonor.TabIndex = 45;
+            this.cmbDonor.SelectedIndexChanged += new System.EventHandler(this.cmbDonor_SelectedIndexChanged);
             // 
             // lblDonor
             // 
@@ -192,11 +199,51 @@
             this.numericItems.Size = new System.Drawing.Size(200, 20);
             this.numericItems.TabIndex = 42;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtContact);
+            this.groupBox2.Controls.Add(this.lblContact);
+            this.groupBox2.Location = new System.Drawing.Point(249, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(221, 304);
+            this.groupBox2.TabIndex = 42;
+            this.groupBox2.TabStop = false;
+            // 
+            // lblContact
+            // 
+            this.lblContact.AutoSize = true;
+            this.lblContact.Location = new System.Drawing.Point(7, 16);
+            this.lblContact.Name = "lblContact";
+            this.lblContact.Size = new System.Drawing.Size(43, 13);
+            this.lblContact.TabIndex = 0;
+            this.lblContact.Text = "contact";
+            // 
+            // txtContact
+            // 
+            this.txtContact.Enabled = false;
+            this.txtContact.Location = new System.Drawing.Point(7, 33);
+            this.txtContact.Multiline = true;
+            this.txtContact.Name = "txtContact";
+            this.txtContact.Size = new System.Drawing.Size(200, 265);
+            this.txtContact.TabIndex = 1;
+            // 
+            // chkPickup
+            // 
+            this.chkPickup.AutoSize = true;
+            this.chkPickup.Location = new System.Drawing.Point(137, 65);
+            this.chkPickup.Name = "chkPickup";
+            this.chkPickup.Size = new System.Drawing.Size(80, 17);
+            this.chkPickup.TabIndex = 54;
+            this.chkPickup.Text = "checkBox1";
+            this.chkPickup.UseVisualStyleBackColor = true;
+            this.chkPickup.CheckedChanged += new System.EventHandler(this.chkPickup_CheckedChanged);
+            // 
             // FrmDonation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(248, 373);
+            this.ClientSize = new System.Drawing.Size(484, 373);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.cmdAccept);
@@ -209,6 +256,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericItems)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -230,5 +279,9 @@
         private System.Windows.Forms.Label lblArrival;
         private System.Windows.Forms.ComboBox cmbVolunteer;
         private System.Windows.Forms.Label lblResponsible;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txtContact;
+        private System.Windows.Forms.Label lblContact;
+        private System.Windows.Forms.CheckBox chkPickup;
     }
 }

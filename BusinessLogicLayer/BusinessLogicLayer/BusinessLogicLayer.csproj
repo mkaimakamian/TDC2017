@@ -57,6 +57,7 @@
     <Compile Include="PersonBLL.cs" />
     <Compile Include="ProfileBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScheduleBLL.cs" />
     <Compile Include="StockBLL.cs" />
     <Compile Include="TranslationBLL.cs" />
     <Compile Include="UserBLL.cs" />
