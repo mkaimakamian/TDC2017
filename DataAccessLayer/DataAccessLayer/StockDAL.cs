@@ -33,7 +33,7 @@ namespace DataAccessLayer
             List<List<String>> reader;
             List<StockDTO> result = new List<StockDTO>();
 
-            sql = "SELECT * FROM stock";
+            sql = "SELECT * FROM stock order by donationId desc";
             reader = dbsql.executeReader(sql);
 
             if (reader.Count > 0)
@@ -62,6 +62,24 @@ namespace DataAccessLayer
             sql += "'" + stockDto.loaction + "'";
             sql += ");SELECT @@IDENTITY";
             stockDto.id = dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
+
+        public bool UpdateStock(StockDTO stockDto)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "UPDATE stock SET ";
+            sql += "name = '" + stockDto.name + "',  ";
+            sql += "quantity = " + stockDto.quantity + ", ";
+            sql += "itemTypeId = " + stockDto.itemTypeId + ",  ";
+            sql += "donationId = " + stockDto.donationId + ",  ";
+            sql += "depotId = " + stockDto.depotId + ", ";
+            sql += "dueDate = CONVERT(datetime, '" + stockDto.dueDate + "', 103), ";
+            sql += "location = '" + stockDto.loaction  + "' ";
+            sql += "WHERE id = " + stockDto.id;
+            dbsql.ExecuteNonQuery(sql);
             return true;
         }
 

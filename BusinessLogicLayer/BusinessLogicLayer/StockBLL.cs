@@ -59,7 +59,7 @@ namespace BusinessLogicLayer
                 ResultBM validationResult = IsValid(stockBm);
 
                 if (!validationResult.IsValid()) return validationResult;
-                stockDto = new StockDTO(stockBm.Name, stockBm.Quantity, stockBm.itemType.id, stockBm.donation.id, stockBm.depot.id, stockBm.DueDate, stockBm.Location);
+                stockDto = new StockDTO(stockBm.id, stockBm.Name, stockBm.Quantity, stockBm.itemType.id, stockBm.donation.id, stockBm.depot.id, stockBm.DueDate, stockBm.Location);
 
                 stockDal.SaveStock(stockDto);
                 stockBm.id = stockDto.id;
@@ -70,14 +70,31 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear la donación.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear el stock.", exception);
             }
         }
         
         public ResultBM UpdateStock(StockBM stockBm)
         {
-            //TODO
-            return null;
+            try
+            {
+                StockDAL stockDal = new StockDAL();
+                StockDTO stockDto = null;
+                ResultBM validationResult = IsValid(stockBm);
+
+                if (!validationResult.IsValid()) return validationResult;
+                stockDto = new StockDTO(stockBm.id, stockBm.Name, stockBm.Quantity, stockBm.itemType.id, stockBm.donation.id, stockBm.depot.id, stockBm.DueDate, stockBm.Location);
+
+                stockDal.UpdateStock(stockDto);
+
+                new DonationBLL().UpdateToStoredStatusIfApply(stockBm.donation.id);
+
+                return new ResultBM(ResultBM.Type.OK, "Se ha creado el stock.", stockBm);
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al actualizar el stock.", exception);
+            }
         }
 
 
@@ -118,8 +135,7 @@ namespace BusinessLogicLayer
             if (stockBm.Quantity == 0)
                 return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "La cantidad de ítems debe ser mayor a cero.");
             
-
-            if (stockBm.donation.Items - stockBm.donation.stocked < stockBm.Quantity)
+            if (!(stockBm.GetAmountItemsToStockWithoutThis() <= stockBm.donation.Items * 2 && stockBm.GetAmountItemsToStockWithoutThis() > 1))
                 return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Se han ingresado más bultos de los que deberían.");
 
             if (stockBm.itemType.Perishable && stockBm.DueDate == null)

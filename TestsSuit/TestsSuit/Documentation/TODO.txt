@@ -12,8 +12,6 @@
 
 ::: FUNCIONALIDADES QUE DEBERÍAN INCLUIRSE :::
 - Completar la actualización del donador
-- Completar la actualización del tipos de ítems
-- Completar la actualización del stock
 - Eliminar donador
 - Eliminar donaciones
 - eliminar tipos de ítems

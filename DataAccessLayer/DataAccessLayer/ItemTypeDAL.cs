@@ -42,6 +42,22 @@ namespace DataAccessLayer
             return true;
         }
 
+        public bool UpdateItemType(ItemTypeDTO itemTypeDto)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "UPDATE item_type SET ";
+            sql += "name = '" + itemTypeDto.name + "',  ";
+            sql += "category = '" + itemTypeDto.category + "', ";
+            sql += "comment = '" + itemTypeDto.comment + "',  ";
+            sql += "perishable = '" + itemTypeDto.perishable + "' ";
+            sql += "WHERE id = " + itemTypeDto.id;
+            dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
+
+
         public List<ItemTypeDTO> GetItemTypes()
         {
             DBSql dbsql = new DBSql();

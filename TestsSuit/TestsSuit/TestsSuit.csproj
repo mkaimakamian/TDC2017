@@ -79,7 +79,7 @@
     <None Include="Documentation\donaciones 4V.docx" />
     <None Include="Documentation\Microsoft.TeamFoundation.Git.Provider.msi" />
     <None Include="Documentation\rhoddion20.eap" />
-    <None Include="Documentation\rhoddion_201745231645.bkp" />
+    <None Include="Documentation\rhoddion_201748251248.bkp" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documentation\TODO.txt" />

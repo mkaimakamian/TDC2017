@@ -19,8 +19,9 @@ namespace DataTransferObject
 
         public StockDTO() { }
 
-        public StockDTO(string name, int quantity, int itemTypeId, int donationId, int depotId, DateTime dueDate, string location)
+        public StockDTO(int id, string name, int quantity, int itemTypeId, int donationId, int depotId, DateTime dueDate, string location)
         {
+            this.id = id;
             this.name = name;
             this.quantity = quantity;
             this.itemTypeId = itemTypeId;

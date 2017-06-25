@@ -104,12 +104,6 @@ namespace ViewLayer
 
         private void cmdAccept_Click(object sender, EventArgs e)
         {
-            if (isUpdate)
-            {
-                MessageBox.Show("Función no implementada");
-                return;
-            }
-
             try
             {
                 ItemTypeBLL itemTypeBll = new ItemTypeBLL();

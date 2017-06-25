@@ -56,7 +56,7 @@ namespace BusinessLogicLayer
                 ResultBM validationResult = IsValid(itemTypeBm);
                 if (!validationResult.IsValid()) return validationResult;
 
-                itemTypeDto = new ItemTypeDTO(itemTypeBm.Name, itemTypeBm.category, itemTypeBm.Comment, itemTypeBm.Perishable);
+                itemTypeDto = new ItemTypeDTO(itemTypeBm.id, itemTypeBm.Name, itemTypeBm.category, itemTypeBm.Comment, itemTypeBm.Perishable);
                 itemTypeDal.SaveItemType(itemTypeDto);
                 itemTypeBm.id = itemTypeDto.id;
 
@@ -71,8 +71,24 @@ namespace BusinessLogicLayer
 
         public ResultBM UpdateItemType(ItemTypeBM itemTypeBm)
         {
-            //todo implementar
-            return null;
+            try
+            {
+                ItemTypeDAL itemTypeDal = new ItemTypeDAL();
+                ItemTypeDTO itemTypeDto = null;
+
+                ResultBM validationResult = IsValid(itemTypeBm);
+                if (!validationResult.IsValid()) return validationResult;
+
+                itemTypeDto = new ItemTypeDTO(itemTypeBm.id, itemTypeBm.Name, itemTypeBm.category, itemTypeBm.Comment, itemTypeBm.Perishable);
+                itemTypeDal.UpdateItemType(itemTypeDto);
+
+                return new ResultBM(ResultBM.Type.OK, "Se ha creado el ítem " + itemTypeBm.Name + ".", itemTypeBm);
+
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear el tipo de artículo.", exception);
+            }
         }
 
         private ResultBM IsValid(ItemTypeBM itemTypeBm)

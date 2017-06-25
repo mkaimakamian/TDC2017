@@ -16,8 +16,9 @@ namespace DataTransferObject
 
         public ItemTypeDTO() { }
 
-        public ItemTypeDTO(string name, string category, string comment, bool perishable)
+        public ItemTypeDTO(int id, string name, string category, string comment, bool perishable)
         {
+            this.id = id;
             this.name = name;
             this.category = category;
             this.comment = comment;

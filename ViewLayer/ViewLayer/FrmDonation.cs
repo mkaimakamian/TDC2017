@@ -160,7 +160,7 @@ namespace ViewLayer
                 
                 //Si se seleccionó fecha manual, entonces se quiere retirar y el estado debe ser a retirar
                 DonationStatusBM status = new DonationStatusBM();
-                status.id = chkPickup.Enabled ? (int)DonationStatusBM.Status.TO_BE_RETRIEVED : (int)DonationStatusBM.Status.RECEIVED;
+                status.id = chkPickup.Checked ? (int)DonationStatusBM.Status.TO_BE_RETRIEVED : (int)DonationStatusBM.Status.RECEIVED;
                 this.Entity.donationStatus = status;
                 
                 if (isUpdate) donationResult = donationBll.UpdateDonation(this.Entity);
