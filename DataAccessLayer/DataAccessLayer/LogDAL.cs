@@ -9,14 +9,27 @@ namespace DataAccessLayer
 {
     public class LogDAL
     {
-        public List<LogDTO> GetLogs()
+        public List<LogDTO> GetLogs(LogDTO filter = null)
         {
             DBSql dbsql = new DBSql();
             String sql;
             List<List<String>> reader;
             List<LogDTO> result = new List<LogDTO>();
+            string whereClause = "";
 
-            sql = "SELECT * FROM logs ORDER BY created desc";
+            if (filter != null)
+            {
+                whereClause = "WHERE ";
+                whereClause += "loglevel >= " + (int) filter.logLevel + " AND "; //siempre se incluye
+                whereClause += filter.action != null ? " action LIKE '%" + filter.action + "%' AND" : "";
+                whereClause += filter.description != null ? " description LIKE '%" + filter.description + "%' AND " : "";
+                whereClause += filter.entity != null ? " entity LIKE '%" + filter.entity +"%' AND ": "";
+                if (filter.created.Year != 1900) whereClause += "created > CONVERT(datetime, '" + filter.created + "', 103)";
+
+                if(whereClause.EndsWith(" AND ")) whereClause.Remove(whereClause.Length - 4);
+            }
+
+            sql = "SELECT * FROM logs "+ whereClause + " ORDER BY created desc";
             reader = dbsql.executeReader(sql);
 
             if (reader.Count > 0)

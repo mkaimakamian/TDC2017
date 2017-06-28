@@ -180,15 +180,14 @@ namespace BusinessLogicLayer
             return new ResultBM(ResultBM.Type.OK);
         }
 
-
-        public ResultBM GetCollection()
-        {
-            return GetDonations();
-        }
-
         public ResultBM Delete(object entity)
         {
             throw new NotImplementedException();
+        }
+
+        public ResultBM GetCollection(Dictionary<string, string> filter = null)
+        {
+            return GetDonations();
         }
     }
 }

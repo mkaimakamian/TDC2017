@@ -11,12 +11,12 @@ namespace BusinessLogicLayer
 {
     public class LogBLL : BLEntity
     {
-        public ResultBM GetLogs()
+        public ResultBM GetLogs(LogDTO filter)
         {
             ResultBM result;
             try {
                 LogDAL logDal = new LogDAL();
-                List<LogDTO> logDtos = logDal.GetLogs();
+                List<LogDTO> logDtos = logDal.GetLogs(filter);
                 List<LogBM> logBms = ConvertIntoBusinessModel(logDtos);                
                 result = new ResultBM(ResultBM.Type.OK, "Recuperación de registros exitosa.", logBms);
             }
@@ -86,9 +86,21 @@ namespace BusinessLogicLayer
             return result;
         }
 
-        public ResultBM GetCollection()
+        public ResultBM GetCollection(Dictionary<string, string> filter = null)
         {
-            return this.GetLogs();
+            //El filtro se modela utilizando el DTO que es la representación del modelo en base
+            LogDTO logFilter = null;
+            if (filter != null && filter.Count > 0) {
+                logFilter = new LogDTO();
+                logFilter.logLevel = filter.ContainsKey("LogLevel") ? (LogDTO.Level) int.Parse(filter["LogLevel"])  : LogDTO.Level.DEBUG;
+                logFilter.action = filter.ContainsKey("Action") ? filter["Action"] : null;
+                logFilter.description = filter.ContainsKey("Description") ? filter["Description"] : null;
+                logFilter.entity = filter.ContainsKey("Entity") ? filter["Entity"] : null;
+                logFilter.created = filter.ContainsKey("Created") ? DateTime.Parse(filter["Created"]) : new DateTime(1900, 1, 1);
+            }
+
+            return GetLogs(logFilter);
+
         }
 
 

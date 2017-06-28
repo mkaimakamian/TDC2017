@@ -236,7 +236,7 @@ namespace BusinessLogicLayer
             return new ResultBM(ResultBM.Type.OK);
         }
 
-        public ResultBM GetCollection()
+        public ResultBM GetCollection(Dictionary<string, string> filter = null)
         {
             return GetUsers();
         }

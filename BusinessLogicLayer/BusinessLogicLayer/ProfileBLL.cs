@@ -301,7 +301,7 @@ namespace BusinessLogicLayer
             }
         }
 
-        public ResultBM GetCollection()
+        public ResultBM GetCollection(Dictionary<string, string> filter = null)
         {
             return this.GetProfiles();
         }

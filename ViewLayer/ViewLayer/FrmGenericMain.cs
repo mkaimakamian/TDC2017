@@ -83,15 +83,8 @@ namespace ViewLayer
             try
             {
                 ResultBM result = ((BLEntity)businessLogic).GetCollection();
-                if (result.IsValid())
-                {
-                   
-                    dgView.DataSource = result.GetValue();                    
-                }
-                else
-                {
-                    MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                if (result.IsValid()) dgView.DataSource = result.GetValue();                    
+                else MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception exception)
             {
@@ -133,15 +126,9 @@ namespace ViewLayer
                 {
                     object businessLogic = Activator.CreateInstance(this.entity);
                     ResultBM result = ((BLEntity)businessLogic).Delete(dgView.SelectedRows[0].DataBoundItem);
-                    if (result.IsValid())
-                    {
-                        LoadDatagrid();
-                    }
-                    else
-                    {
-                        MessageBox.Show(result.description, "Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
+                    
+                    if (result.IsValid()) LoadDatagrid();
+                    else MessageBox.Show(result.description, "Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception exception)
@@ -185,19 +172,15 @@ namespace ViewLayer
             {
                 if (column.GetType() == typeof(DataGridViewTextBoxColumn)) {
                     Control control = null;
-                    if (column.ValueType == typeof(String)) {
-                        control = new TextBox();
-                        control.Tag = column.Name;
-                        lstControls.Add(control);
-                    }
-
-                    if (column.ValueType == typeof(DateTime))
-                    {
-                        control = new DateTimePicker();
-                    }
+                    if (column.ValueType == typeof(String))  control = new TextBox();
+                    if (column.ValueType == typeof(DateTime)) control = new DateTimePicker();
 
                     if (control != null)
                     {
+                        control.Tag = column.Name;
+                        //Se agregan las referencia a la lista para obtener mayor control al momento del filtrado.
+                        lstControls.Add(control);
+
                         //Se crea un grupo para poder etiquetar el componente
                         GroupBox group = new GroupBox();
                         group.Controls.Add(control);
@@ -217,46 +200,20 @@ namespace ViewLayer
 
         private void cmdFilter_Click(object sender, EventArgs e)
         {
+            // la estrategia consiste en tomar todos los campos de los filtros y pasárselos a la BLL
+
+            // Meter todo en un try
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            
+            foreach (Control control in lstControls) 
+                if (control.Text.Length > 0) parameters.Add(control.Tag.ToString(), control.Text);
 
             object businessLogic = Activator.CreateInstance(this.entity);
-            //try
-            //{
-            //    ResultBM result = ((BLEntity)businessLogic).GetCollection();
-            //    if (result.IsValid())
-            //    {
-                    
+            ResultBM result = ((BLEntity)businessLogic).GetCollection(parameters);
 
-            //        List<object> lstObjects = result.GetValue() as List<T>;
-            //        foreach (object obj in lstObjects)
-            //        {                        
-            //            bool match = true;
-            //            foreach (Control ctrl in lstControls)
-            //            {
-            //                //match = match && Label existencia
-
-            //                System.Reflection.PropertyInfo propertyToFilter = ctrl.GetType().GetProperty("Tag");
-            //                //propertyToFilter.GetValue()
-            //                System.Reflection.PropertyInfo propertyText = obj.GetType().GetProperty("Text");
-
-            //            }
-
-            //            //if (!match) remover de la lista
-            //        }
-
-            //        //dgView.DataSource = result.GetValue();
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    }
-            //}
-            //catch (Exception exception)
-            //{
-            //    MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //} 
-
-
-            //dgView.Refresh();
+            if (result.IsValid()) dgView.DataSource = result.GetValue();
+            else MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            dgView.Refresh();
         }
 
     }

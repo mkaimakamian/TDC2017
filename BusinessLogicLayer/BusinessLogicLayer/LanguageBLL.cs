@@ -80,7 +80,7 @@ namespace BusinessLogicLayer
             return result;
         }
 
-        public ResultBM GetCollection()
+        public ResultBM GetCollection(Dictionary<string, string> filter = null)
         {
             return this.GetLanguages();
         }

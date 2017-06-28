@@ -10,7 +10,7 @@ namespace BusinessLogicLayer
     //Interface para poder ser utilizada por el formulario - grilla genérico.
     public interface BLEntity
     {
-        ResultBM GetCollection();
+        ResultBM GetCollection(Dictionary<string, string> filter = null);
         ResultBM Delete(object entity);
     }
 }
