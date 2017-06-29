@@ -21,13 +21,14 @@ namespace ViewLayer
         private bool canCreate;
         private bool canEdit;
         private bool canDelete;
+        private bool showFilter;
 
         public FrmGenericMain()
         {
             InitializeComponent();
         }
 
-        public FrmGenericMain(Type entity, Type viewer, bool canCreate=false, bool canEdit=false, bool canDelete=false)
+        public FrmGenericMain(Type entity, Type viewer=null, bool canCreate=false, bool canEdit=false, bool canDelete=false, bool showFilter=false)
         {
             InitializeComponent();
             // Entidad sobre la que se opera
@@ -39,17 +40,18 @@ namespace ViewLayer
             this.canCreate = canCreate;
             this.canEdit = canEdit;
             this.canDelete = canDelete;
+            this.showFilter = showFilter;
         }
 
         /// <summary>
         /// Instancia un formulario / grilla y muestra los datos provistos por el tipo de entidad de negocio pasado por parámetro.
         /// </summary>
         /// <param name="entity"></param>
-        public FrmGenericMain(Type entity)
-        {
-            InitializeComponent();
-            this.entity = entity;
-        }
+        //public FrmGenericMain(Type entity)
+        //{
+        //    InitializeComponent();
+        //    this.entity = entity;
+        //}
 
         private void FrmGenericMain_Load(object sender, EventArgs e)
         {
@@ -61,7 +63,8 @@ namespace ViewLayer
             cmdNew.Enabled = canCreate;
             cmdEdit.Enabled = canEdit;
             cmdDelete.Enabled = canDelete;
-
+            flowLayout.Visible = this.showFilter;
+            cmdFilter.Visible = this.showFilter;
             LoadDatagrid();
             CreateFilters(dgView);
             AdjustSizes();
@@ -144,10 +147,15 @@ namespace ViewLayer
 
         private void AdjustSizes()
         {
-            flowLayout.Width = this.Width - 115;
+            
+            int deltaH = this.showFilter? flowLayout.Height : 0;
 
-            dgView.Height = this.Height - flowLayout.Height - 50;
-            dgView.Width = this.Width - 115;
+            container.Height = this.Height;
+            container.Width = this.Width - 115;
+
+            flowLayout.Width = container.Width - 15;
+            dgView.Width = container.Width - 15;
+            dgView.Height = container.Height - deltaH - 50;
 
             cmdClose.Left = this.Width - cmdClose.Width - 30;
             cmdClose.Top = this.Height - cmdClose.Height - 45;
@@ -160,6 +168,9 @@ namespace ViewLayer
 
             cmdNew.Left = this.Width - cmdNew.Width - 30;
             cmdNew.Top = cmdEdit.Top - cmdNew.Height - 5;
+
+            cmdFilter.Left = this.Width - cmdFilter.Width - 30;
+            cmdFilter.Top = cmdNew.Top - cmdFilter.Height - 5;
         }
 
         /// <summary>

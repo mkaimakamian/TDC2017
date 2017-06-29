@@ -3,7 +3,6 @@
 - En stock, para los productos que no vencen, no deben mostrarse las fechas
 - Las eliminaciones deben ser lógicas
 - Edición de los permisos (funciona?... pasa algo raro con el nombre de los permisos).
-- Terminar filtro del form genérico
 - Mejorar las excepciones: enviar la descripción de la misma (?)
 - Agregar confirmaciones antes de gurdar o actualizar
 - Controlar en FrmDonor que al recuperar el país, debería contemplarse el éxito o fallo

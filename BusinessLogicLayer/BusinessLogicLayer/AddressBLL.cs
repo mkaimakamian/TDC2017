@@ -64,6 +64,27 @@ namespace BusinessLogicLayer
                 return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al guardar la dirección.", exception);
             }
         }
+        
+        public ResultBM UpdateAddress(AddressBM addressBm)
+        {
+            try
+            {
+                AddressDAL addressDal = new AddressDAL();
+                AddressDTO addressDto = null;
+                ResultBM validResult = IsValid(addressBm);
+
+                if (!validResult.IsValid()) return validResult;
+                addressDto = new AddressDTO(addressBm.id, addressBm.street, addressBm.number, addressBm.apartment, addressBm.neighborhood, addressBm.comment, addressBm.country.iso2);
+                addressDal.UpdateAddress(addressDto);
+
+                return new ResultBM(ResultBM.Type.OK, "Dirección actualizada.", addressBm);
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al guardar la dirección.", exception);
+            }
+        }
+
 
         private ResultBM IsValid(AddressBM addressBm)
         {

@@ -32,7 +32,7 @@ namespace BusinessLogicLayer
         }
 
 
-        public ResultBM SaveOrganization(OrganizationBM organizationBm)
+        public ResultBM UpdateOrganization(OrganizationBM organizationBm)
         {
             try
             {
@@ -48,8 +48,32 @@ namespace BusinessLogicLayer
                 organizationDal.SaveOrganization(organizationDto);
                 organizationBm.id = organizationDto.id;
 
-                return new ResultBM(ResultBM.Type.OK, "organización guardada.", organizationBm);
+                return new ResultBM(ResultBM.Type.OK, "Organización guardada.", organizationBm);
                 
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear la organización " + organizationBm.name + ".", exception);
+            }
+        }
+
+        public ResultBM SaveOrganization(OrganizationBM organizationBm)
+        {
+            try
+            {
+                if (organizationBm == null) return new ResultBM(ResultBM.Type.NULL, "El objeto organization es null.");
+
+                OrganizationDAL organizationDal = new OrganizationDAL();
+                OrganizationDTO organizationDto;
+                ResultBM resultValidation = IsValid(organizationBm);
+
+                if (!resultValidation.IsValid()) return resultValidation;
+
+                organizationDto = new OrganizationDTO(organizationBm.name, organizationBm.category, organizationBm.comment, organizationBm.phone, organizationBm.email);
+                organizationDal.UpdateOrganization(organizationDto);
+
+                return new ResultBM(ResultBM.Type.OK, "Organización actualizada.", organizationBm);
+
             }
             catch (Exception exception)
             {

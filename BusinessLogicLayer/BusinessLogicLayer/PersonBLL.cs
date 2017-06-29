@@ -53,11 +53,11 @@ namespace BusinessLogicLayer
             try
             {
                 AddressBLL addressBll = new AddressBLL();
+                ResultBM addressResult;
                 PersonDAL personDal = new PersonDAL();
                 PersonDTO personDto;
                 ResultBM validationResult;
-                ResultBM addressResult;
-
+                
                 validationResult = IsValid(personBm);
                 if (!validationResult.IsValid()) return validationResult;
                 
@@ -76,6 +76,34 @@ namespace BusinessLogicLayer
                 return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear al donador.", exception);
             }
         }
+
+
+        public ResultBM UpdatePerson(PersonBM personBm)
+        {
+            try {
+                AddressBLL addressBll = new AddressBLL();
+                ResultBM addressResult;
+                PersonDAL personDal = new PersonDAL();
+                PersonDTO personDto;
+                ResultBM validationResult;
+
+                validationResult = IsValid(personBm);
+                if (!validationResult.IsValid()) return validationResult;
+
+                addressResult = addressBll.UpdateAddress(personBm.address);
+                if (!addressResult.IsValid()) return addressResult;
+
+                personDto = new PersonDTO(personBm.Name, personBm.LastName, personBm.Birthdate, personBm.Email, personBm.phone, personBm.gender, personBm.dni, personBm.address.id);
+                personDal.UpdatePerson(personDto);
+
+                return new ResultBM(ResultBM.Type.OK, "Se ha actualizado la persona con el nombre " + personBm.Name + " " + personBm.LastName + ".", personBm);
+
+            }
+            catch (Exception exception) {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al actualizar al donador.", exception);
+            }
+        }
+
 
         private ResultBM IsValid(PersonBM personBm)
         {

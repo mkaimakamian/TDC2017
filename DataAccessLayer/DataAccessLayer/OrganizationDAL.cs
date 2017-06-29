@@ -43,6 +43,21 @@ namespace DataAccessLayer
             return true;
         }
 
+        public bool UpdateOrganization(OrganizationDTO organizationDto)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "UPDATE organization SET ";
+            sql += "name = '" + organizationDto.name + "',  ";
+            sql += "category = '" + organizationDto.category + "', ";
+            sql += "comment = '" + organizationDto.comment + "',  ";
+            sql += "phone = '" + organizationDto.phone + "', ";
+            sql += "email = '" + organizationDto.email + "', ";
+            sql += "WHERE id = " + organizationDto.id;
+            dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
 
         private OrganizationDTO Resolve(List<String> item)
         {

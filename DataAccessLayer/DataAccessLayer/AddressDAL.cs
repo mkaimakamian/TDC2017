@@ -65,6 +65,23 @@ namespace DataAccessLayer
             return result;
         }
 
+        public bool UpdateAddress(AddressDTO addressDto)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "UPDATE address SET ";
+            sql += "street = '" + addressDto.street + "',  ";
+            sql += "number = " + addressDto.number + ", ";
+            sql += "apartment = '" + addressDto.apartment + "',  ";
+            sql += "neighborhood = '" + addressDto.neighborhood + "', ";
+            sql += "comment = '" + addressDto.comment + "', ";
+            sql += "countryIso = '" + addressDto.countryIso + "' ";
+            sql += "WHERE id = " + addressDto.id;
+            dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
+
         private AddressDTO Resolve(List<String> item)
         {
             AddressDTO result = new AddressDTO();

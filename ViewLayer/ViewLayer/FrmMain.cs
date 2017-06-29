@@ -108,7 +108,7 @@ namespace ViewLayer
 
         private void bitácoraToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new FrmGenericMain(typeof(LogBLL)).ShowDialog();
+            new FrmGenericMain(typeof(LogBLL), null, false, false, false, true).ShowDialog();
         }
 
         private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)

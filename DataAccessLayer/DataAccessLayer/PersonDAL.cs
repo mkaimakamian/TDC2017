@@ -44,6 +44,25 @@ namespace DataAccessLayer
             personDto.id = dbsql.ExecuteNonQuery(sql);
             return true;
         }
+
+        public bool UpdatePerson(PersonDTO personDto)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "UPDATE person SET ";
+            sql += "name = '" + personDto.name + "',  ";
+            sql += "lastName = '" + personDto.lastName + "', ";
+            sql += "birthdate =  CONVERT(datetime, '" + personDto.birthdate + "', 103), ";
+            sql += "email = '" + personDto.email + "', ";
+            sql += "phone = '" + personDto.phone + "', ";
+            sql += "gender = '" + personDto.gender + "', ";
+            sql += "dni = " + personDto.dni + ", ";
+            sql += "addressId = '" + personDto.addressId + ", ";
+            sql += "WHERE id = " + personDto.id;
+            dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
         
         private PersonDTO Resolve(List<String> item)
         {

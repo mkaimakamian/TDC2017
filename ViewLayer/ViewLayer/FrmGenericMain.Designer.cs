@@ -35,7 +35,9 @@
             this.cmdClose = new System.Windows.Forms.Button();
             this.flowLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.cmdFilter = new System.Windows.Forms.Button();
+            this.container = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dgView)).BeginInit();
+            this.container.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgView
@@ -46,10 +48,10 @@
             this.dgView.AllowUserToResizeRows = false;
             this.dgView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgView.Location = new System.Drawing.Point(2, 69);
+            this.dgView.Location = new System.Drawing.Point(3, 109);
             this.dgView.Name = "dgView";
             this.dgView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgView.Size = new System.Drawing.Size(507, 358);
+            this.dgView.Size = new System.Drawing.Size(507, 257);
             this.dgView.TabIndex = 0;
             // 
             // cmdNew
@@ -94,14 +96,15 @@
             // 
             // flowLayout
             // 
-            this.flowLayout.Location = new System.Drawing.Point(2, 2);
+            this.flowLayout.BackColor = System.Drawing.SystemColors.Control;
+            this.flowLayout.Location = new System.Drawing.Point(3, 3);
             this.flowLayout.Name = "flowLayout";
-            this.flowLayout.Size = new System.Drawing.Size(507, 61);
+            this.flowLayout.Size = new System.Drawing.Size(507, 100);
             this.flowLayout.TabIndex = 5;
             // 
             // cmdFilter
             // 
-            this.cmdFilter.Location = new System.Drawing.Point(515, 174);
+            this.cmdFilter.Location = new System.Drawing.Point(515, 264);
             this.cmdFilter.Name = "cmdFilter";
             this.cmdFilter.Size = new System.Drawing.Size(75, 23);
             this.cmdFilter.TabIndex = 6;
@@ -109,24 +112,33 @@
             this.cmdFilter.UseVisualStyleBackColor = true;
             this.cmdFilter.Click += new System.EventHandler(this.cmdFilter_Click);
             // 
+            // container
+            // 
+            this.container.Controls.Add(this.flowLayout);
+            this.container.Controls.Add(this.dgView);
+            this.container.Location = new System.Drawing.Point(1, 1);
+            this.container.Name = "container";
+            this.container.Size = new System.Drawing.Size(516, 426);
+            this.container.TabIndex = 7;
+            // 
             // FrmGenericMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(598, 433);
+            this.ClientSize = new System.Drawing.Size(607, 437);
             this.Controls.Add(this.cmdFilter);
-            this.Controls.Add(this.flowLayout);
+            this.Controls.Add(this.container);
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.cmdDelete);
             this.Controls.Add(this.cmdEdit);
             this.Controls.Add(this.cmdNew);
-            this.Controls.Add(this.dgView);
             this.Name = "FrmGenericMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmGenericMain";
             this.Load += new System.EventHandler(this.FrmGenericMain_Load);
             this.Resize += new System.EventHandler(this.FrmGenericMain_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dgView)).EndInit();
+            this.container.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -140,6 +152,7 @@
         private System.Windows.Forms.Button cmdClose;
         private System.Windows.Forms.FlowLayoutPanel flowLayout;
         private System.Windows.Forms.Button cmdFilter;
+        private System.Windows.Forms.FlowLayoutPanel container;
 
 
     }

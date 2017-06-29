@@ -129,29 +129,43 @@ namespace BusinessLogicLayer
         {
             try
             {
+                OrganizationBLL organizationBll = new OrganizationBLL();
+                ResultBM resultOrganization = null;
+                OrganizationBM organizationBm = null;
                 DonorDAL donorDal = new DonorDAL();
-                DonorDTO donorDto = null;
-                ResultBM validationResult = IsValid(donorBm);
+                PersonBLL personBll = new PersonBLL();
+                PersonBM personBm = null;
+                ResultBM validationResult;
+                ResultBM personResult;
+                DonorDTO donorDto;
 
-                if (validationResult.IsValid())
+                // El validador no es necesario porque el donador es una combinación de otras entidades que ya poseen validadores.
+                validationResult = IsValid(donorBm);
+                if (!validationResult.IsValid()) return validationResult;
+
+                personResult = personBll.UpdatePerson(donorBm);
+                if (!personResult.IsValid()) return personResult;
+
+                if (donorBm.organization != null)
                 {
-                    //TODO COMPLETAR:
-                    //1. actualizar usuario
-                    //2. actualizar donador
-                    //donorDto = new DonorDTO(donationBm.items, donationBm.arrival, donationBm.donationStatus.id, donationBm.donorId, donationBm.comment, donationBm.volunteer == null ? 0 : donationBm.volunteer.volunteerId, donationBm.id);
-                    //donationDal.UpdateDonation(donationDto);
-
-                    return new ResultBM(ResultBM.Type.OK, "Se ha actualizado la donación.", donorBm);
-
+                    resultOrganization = organizationBll.UpdateOrganization(donorBm.organization);
+                    if (!resultOrganization.IsValid()) return resultOrganization;
+                    if (resultOrganization.GetValue() == null) return new ResultBM(ResultBM.Type.FAIL, "Se ha producido un error al guardar la organización del donador.", resultOrganization);
+                    organizationBm = resultOrganization.GetValue<OrganizationBM>();
                 }
-                else
-                {
-                    return validationResult;
-                }
+
+                personBm = personResult.GetValue() as PersonBM;
+                donorDto = new DonorDTO(personBm.id, organizationBm == null ? 0 : organizationBm.id, donorBm.CanBeContacted);
+                donorDal.UpdateDonor(donorDto);
+                donorBm.donorId = donorDto.donorId;
+
+                return new ResultBM(ResultBM.Type.OK, "Se ha creado el donador " + donorBm.Name + " " + donorBm.LastName + ".", donorBm);
+
+
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al actualizar la donación.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear al donador.", exception);
             }
         }
 

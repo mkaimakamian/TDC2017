@@ -61,6 +61,20 @@ namespace DataAccessLayer
             return true;
         }
 
+        public bool UpdateDonor(DonorDTO donorDto)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "UPDATE donor SET ";
+            sql += "personId = " + donorDto.id + ", ";
+            sql += "organizationId = " + donorDto.organizationId + ", ";
+            sql += "canBeContacted = " + donorDto.canBeContacted + " ";
+            sql += "WHERE id = " + donorDto.donorId;
+            dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
+
         private DonorDTO Resolve(List<String> item)
         {
             DonorDTO result = new DonorDTO();
