@@ -68,8 +68,8 @@ namespace DataAccessLayer
 
             sql = "UPDATE donor SET ";
             sql += "personId = " + donorDto.id + ", ";
-            sql += "organizationId = " + donorDto.organizationId + ", ";
-            sql += "canBeContacted = " + donorDto.canBeContacted + " ";
+            sql += "organizationId = " + (donorDto.organizationId == 0 ? "null" : donorDto.organizationId.ToString()) + ", ";
+            sql += "canBeContacted = '" + donorDto.canBeContacted + "' ";
             sql += "WHERE id = " + donorDto.donorId;
             dbsql.ExecuteNonQuery(sql);
             return true;

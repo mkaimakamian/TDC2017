@@ -64,7 +64,7 @@ namespace BusinessLogicLayer
                 addressResult = addressBll.SaveAddress(personBm.address);
                 if (!addressResult.IsValid()) return addressResult;
 
-                personDto = new PersonDTO(personBm.Name, personBm.LastName, personBm.Birthdate, personBm.Email, personBm.phone, personBm.gender, personBm.dni, personBm.address.id);
+                personDto = new PersonDTO(personBm.id, personBm.Name, personBm.LastName, personBm.Birthdate, personBm.Email, personBm.phone, personBm.gender, personBm.dni, personBm.address.id);
                 personDal.SavePerson(personDto);
                 personBm.id = personDto.id;
 
@@ -93,7 +93,7 @@ namespace BusinessLogicLayer
                 addressResult = addressBll.UpdateAddress(personBm.address);
                 if (!addressResult.IsValid()) return addressResult;
 
-                personDto = new PersonDTO(personBm.Name, personBm.LastName, personBm.Birthdate, personBm.Email, personBm.phone, personBm.gender, personBm.dni, personBm.address.id);
+                personDto = new PersonDTO(personBm.id, personBm.Name, personBm.LastName, personBm.Birthdate, personBm.Email, personBm.phone, personBm.gender, personBm.dni, personBm.address.id);
                 personDal.UpdatePerson(personDto);
 
                 return new ResultBM(ResultBM.Type.OK, "Se ha actualizado la persona con el nombre " + personBm.Name + " " + personBm.LastName + ".", personBm);

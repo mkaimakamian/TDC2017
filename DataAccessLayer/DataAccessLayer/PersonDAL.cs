@@ -58,7 +58,7 @@ namespace DataAccessLayer
             sql += "phone = '" + personDto.phone + "', ";
             sql += "gender = '" + personDto.gender + "', ";
             sql += "dni = " + personDto.dni + ", ";
-            sql += "addressId = '" + personDto.addressId + ", ";
+            sql += "addressId = " + personDto.addressId + " ";
             sql += "WHERE id = " + personDto.id;
             dbsql.ExecuteNonQuery(sql);
             return true;

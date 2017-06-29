@@ -19,8 +19,9 @@ namespace DataTransferObject
         public int addressId;
 
         public PersonDTO() { }
-        public PersonDTO(string name, string lastName, DateTime birthdate, string email, string phone, char gender, int dni, int addressId)
+        public PersonDTO(int id, string name, string lastName, DateTime birthdate, string email, string phone, char gender, int dni, int addressId)
         {
+            this.id = id;
             this.name = name;
             this.lastName = lastName;
             this.birthdate = birthdate;
