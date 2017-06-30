@@ -31,6 +31,7 @@
             this.cmdClose = new System.Windows.Forms.Button();
             this.cmdAccept = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkPickup = new System.Windows.Forms.CheckBox();
             this.cmbVolunteer = new System.Windows.Forms.ComboBox();
             this.lblResponsible = new System.Windows.Forms.Label();
             this.dateArrival = new System.Windows.Forms.DateTimePicker();
@@ -44,9 +45,8 @@
             this.lblItems = new System.Windows.Forms.Label();
             this.numericItems = new System.Windows.Forms.NumericUpDown();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lblContact = new System.Windows.Forms.Label();
             this.txtContact = new System.Windows.Forms.TextBox();
-            this.chkPickup = new System.Windows.Forms.CheckBox();
+            this.lblContact = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericItems)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -92,6 +92,17 @@
             this.groupBox1.Size = new System.Drawing.Size(221, 304);
             this.groupBox1.TabIndex = 41;
             this.groupBox1.TabStop = false;
+            // 
+            // chkPickup
+            // 
+            this.chkPickup.AutoSize = true;
+            this.chkPickup.Location = new System.Drawing.Point(137, 65);
+            this.chkPickup.Name = "chkPickup";
+            this.chkPickup.Size = new System.Drawing.Size(58, 17);
+            this.chkPickup.TabIndex = 54;
+            this.chkPickup.Text = "pickup";
+            this.chkPickup.UseVisualStyleBackColor = true;
+            this.chkPickup.CheckedChanged += new System.EventHandler(this.chkPickup_CheckedChanged);
             // 
             // cmbVolunteer
             // 
@@ -209,15 +220,6 @@
             this.groupBox2.TabIndex = 42;
             this.groupBox2.TabStop = false;
             // 
-            // lblContact
-            // 
-            this.lblContact.AutoSize = true;
-            this.lblContact.Location = new System.Drawing.Point(7, 16);
-            this.lblContact.Name = "lblContact";
-            this.lblContact.Size = new System.Drawing.Size(43, 13);
-            this.lblContact.TabIndex = 0;
-            this.lblContact.Text = "contact";
-            // 
             // txtContact
             // 
             this.txtContact.Enabled = false;
@@ -227,16 +229,14 @@
             this.txtContact.Size = new System.Drawing.Size(200, 265);
             this.txtContact.TabIndex = 1;
             // 
-            // chkPickup
+            // lblContact
             // 
-            this.chkPickup.AutoSize = true;
-            this.chkPickup.Location = new System.Drawing.Point(137, 65);
-            this.chkPickup.Name = "chkPickup";
-            this.chkPickup.Size = new System.Drawing.Size(80, 17);
-            this.chkPickup.TabIndex = 54;
-            this.chkPickup.Text = "checkBox1";
-            this.chkPickup.UseVisualStyleBackColor = true;
-            this.chkPickup.CheckedChanged += new System.EventHandler(this.chkPickup_CheckedChanged);
+            this.lblContact.AutoSize = true;
+            this.lblContact.Location = new System.Drawing.Point(7, 16);
+            this.lblContact.Name = "lblContact";
+            this.lblContact.Size = new System.Drawing.Size(43, 13);
+            this.lblContact.TabIndex = 0;
+            this.lblContact.Text = "contact";
             // 
             // FrmDonation
             // 

@@ -179,7 +179,7 @@ namespace ViewLayer
         private void cmbItemType_SelectedIndexChanged(object sender, EventArgs e)
         {
             ItemTypeBM itemType = (ItemTypeBM) ((ComboBox)sender).SelectedItem;
-            dtDueDate.Enabled = itemType.Perishable;
+            dtDueDate.Visible = itemType.Perishable;
         }
 
         private void cmbDonation_SelectedIndexChanged(object sender, EventArgs e)

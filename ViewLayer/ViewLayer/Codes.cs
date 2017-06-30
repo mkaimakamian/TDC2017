@@ -94,6 +94,7 @@ namespace ViewLayer
         public const string LBL_ITEMS = "LBL_ITEMS";
         public const string LBL_LOT = "LBL_LOT";
         public const string LBL_CONTACT_INFO = "LBL_CONTACT_INFO";
+        public const string LBL_PICKUP = "LBL_PICKUP";
         
         public const string LBL_PASSWORD = "LBL_PASSWORD";
         public const string LBL_PASSWORD_CHECK = "LBL_PASSWORD_CHECK";

@@ -59,7 +59,8 @@ namespace ViewLayer
                 SessionHelper.RegisterForTranslation(lblItems, Codes.LBL_ITEMS);
                 SessionHelper.RegisterForTranslation(lblComment, Codes.LBL_OBSERVATION);
                 SessionHelper.RegisterForTranslation(lblContact, Codes.LBL_CONTACT_INFO);
-
+                SessionHelper.RegisterForTranslation(chkPickup, Codes.LBL_PICKUP);
+                
                 DonorBLL donorBll = new DonorBLL();
                 ResultBM donorResult = donorBll.GetDonors();
                 VolunteerBLL volunteerBll = new VolunteerBLL();

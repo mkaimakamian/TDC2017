@@ -1,6 +1,4 @@
 ::: COSAS QUE SÍ HAY QUE CORREGIR :::
-- agregar permisos para que el que no pueda agendar, no agende :D
-- En stock, para los productos que no vencen, no deben mostrarse las fechas
 - Las eliminaciones deben ser lógicas
 - Edición de los permisos (funciona?... pasa algo raro con el nombre de los permisos).
 - Mejorar las excepciones: enviar la descripción de la misma (?)
@@ -10,7 +8,6 @@
 - Eliminar las clases schedule
 
 ::: FUNCIONALIDADES QUE DEBERÍAN INCLUIRSE :::
-- Completar la actualización del donador
 - Eliminar donador
 - Eliminar donaciones
 - eliminar tipos de ítems

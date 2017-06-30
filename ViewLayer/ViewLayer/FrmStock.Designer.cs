@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblLeft = new System.Windows.Forms.Label();
             this.lblDepot = new System.Windows.Forms.Label();
             this.lblLot = new System.Windows.Forms.Label();
             this.lblLocation = new System.Windows.Forms.Label();
@@ -45,7 +46,8 @@
             this.cmbItemType = new System.Windows.Forms.ComboBox();
             this.cmdClose = new System.Windows.Forms.Button();
             this.cmdAccept = new System.Windows.Forms.Button();
-            this.lblLeft = new System.Windows.Forms.Label();
+            this.lineNoDuedate = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.shapeContainer2 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericQuantity)).BeginInit();
             this.SuspendLayout();
@@ -67,11 +69,22 @@
             this.groupBox1.Controls.Add(this.dtDueDate);
             this.groupBox1.Controls.Add(this.numericQuantity);
             this.groupBox1.Controls.Add(this.cmbItemType);
+            this.groupBox1.Controls.Add(this.shapeContainer2);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(221, 304);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // lblLeft
+            // 
+            this.lblLeft.AutoSize = true;
+            this.lblLeft.Location = new System.Drawing.Point(171, 175);
+            this.lblLeft.Name = "lblLeft";
+            this.lblLeft.Size = new System.Drawing.Size(35, 13);
+            this.lblLeft.TabIndex = 11;
+            this.lblLeft.Text = "label1";
+            this.lblLeft.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblDepot
             // 
@@ -214,15 +227,24 @@
             this.cmdAccept.UseVisualStyleBackColor = true;
             this.cmdAccept.Click += new System.EventHandler(this.cmdAccept_Click);
             // 
-            // lblLeft
+            // lineNoDuedate
             // 
-            this.lblLeft.AutoSize = true;
-            this.lblLeft.Location = new System.Drawing.Point(171, 175);
-            this.lblLeft.Name = "lblLeft";
-            this.lblLeft.Size = new System.Drawing.Size(35, 13);
-            this.lblLeft.TabIndex = 11;
-            this.lblLeft.Text = "label1";
-            this.lblLeft.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lineNoDuedate.Name = "lineNoDuedate";
+            this.lineNoDuedate.X1 = 9;
+            this.lineNoDuedate.X2 = 194;
+            this.lineNoDuedate.Y1 = 225;
+            this.lineNoDuedate.Y2 = 225;
+            // 
+            // shapeContainer2
+            // 
+            this.shapeContainer2.Location = new System.Drawing.Point(3, 16);
+            this.shapeContainer2.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeContainer2.Name = "shapeContainer2";
+            this.shapeContainer2.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.lineNoDuedate});
+            this.shapeContainer2.Size = new System.Drawing.Size(215, 285);
+            this.shapeContainer2.TabIndex = 12;
+            this.shapeContainer2.TabStop = false;
             // 
             // FrmStock
             // 
@@ -264,5 +286,7 @@
         private System.Windows.Forms.Button cmdClose;
         private System.Windows.Forms.Button cmdAccept;
         private System.Windows.Forms.Label lblLeft;
+        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer2;
+        private Microsoft.VisualBasic.PowerPacks.LineShape lineNoDuedate;
     }
 }
