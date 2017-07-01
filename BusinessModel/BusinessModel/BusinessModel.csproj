@@ -54,6 +54,8 @@
     <Compile Include="OrganizationBM.cs" />
     <Compile Include="PersonBM.cs" />
     <Compile Include="ProfileBM.cs" />
+    <Compile Include="ReleaseOrderBM.cs" />
+    <Compile Include="ReleaseOrderDetailBM.cs" />
     <Compile Include="ResultBM.cs" />
     <Compile Include="StockBM.cs" />
     <Compile Include="TranslationBM.cs" />
