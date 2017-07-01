@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="AddressDAL.cs" />
     <Compile Include="BackupDAL.cs" />
+    <Compile Include="BeneficiaryDAL.cs" />
     <Compile Include="BranchDAL.cs" />
     <Compile Include="CountryDAL.cs" />
     <Compile Include="DBSql.cs" />
@@ -55,7 +56,6 @@
     <Compile Include="OrganizationDAL.cs" />
     <Compile Include="PersonDAL.cs" />
     <Compile Include="ProfileDAL.cs" />
-    <Compile Include="ScheduleDAL.cs" />
     <Compile Include="StockDAL.cs" />
     <Compile Include="UserDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

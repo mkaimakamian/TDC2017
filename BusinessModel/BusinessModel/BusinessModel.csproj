@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressBM.cs" />
+    <Compile Include="BeneficiaryBM.cs" />
     <Compile Include="BranchBM.cs" />
     <Compile Include="CountryBM.cs" />
     <Compile Include="DepotBM.cs" />
@@ -54,7 +55,6 @@
     <Compile Include="PersonBM.cs" />
     <Compile Include="ProfileBM.cs" />
     <Compile Include="ResultBM.cs" />
-    <Compile Include="ScheduleBM.cs" />
     <Compile Include="StockBM.cs" />
     <Compile Include="TranslationBM.cs" />
     <Compile Include="UserBM.cs" />

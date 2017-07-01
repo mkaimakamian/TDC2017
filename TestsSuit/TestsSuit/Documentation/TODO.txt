@@ -5,13 +5,10 @@
 - Agregar confirmaciones antes de gurdar o actualizar
 - Controlar en FrmDonor que al recuperar el país, debería contemplarse el éxito o fallo
 - Similar con los donadores y voluntarios en Frmdonation
-- Eliminar las clases schedule
 
 ::: FUNCIONALIDADES QUE DEBERÍAN INCLUIRSE :::
-- Eliminar donador
-- Eliminar donaciones
-- eliminar tipos de ítems
-- Eliminar stock
+- Eliminar las entidades
+- Mensajes de error en el idioma adecuado
 
 :::DESEABLES :::
 - En el caso de una donación almacenada, podría mostrarse en la grilla en vez de meterse y mostrar un dialog box

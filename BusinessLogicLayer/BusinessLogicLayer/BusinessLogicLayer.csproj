@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="AddressBLL.cs" />
     <Compile Include="BackupBLL.cs" />
+    <Compile Include="BeneficiaryBLL.cs" />
     <Compile Include="BLEntity.cs" />
     <Compile Include="BranchBLL.cs" />
     <Compile Include="CountryBLL.cs" />
@@ -57,7 +58,6 @@
     <Compile Include="PersonBLL.cs" />
     <Compile Include="ProfileBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScheduleBLL.cs" />
     <Compile Include="StockBLL.cs" />
     <Compile Include="TranslationBLL.cs" />
     <Compile Include="UserBLL.cs" />
