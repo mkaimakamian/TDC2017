@@ -16,5 +16,18 @@ namespace BusinessModel
         public DateTime received;
         public string status;
         public List<ReleaseOrderDetailBM> detail;
+
+        public ReleaseOrderBM() { }
+        
+        public ReleaseOrderBM(ReleaseOrderDTO releaseorderDto, BeneficiaryBM beneficiaryBm = null, List<ReleaseOrderDetailBM> releaseOrderDetailBms = null)
+        {
+            this.id = releaseorderDto.id;
+            this.beneficiary = beneficiaryBm;
+            this.comment = releaseorderDto.comment;
+            this.released = releaseorderDto.released;
+            this.received = releaseorderDto.released;
+            this.status = releaseorderDto.status;
+            this.detail = releaseOrderDetailBms;
+        }
     }
 }

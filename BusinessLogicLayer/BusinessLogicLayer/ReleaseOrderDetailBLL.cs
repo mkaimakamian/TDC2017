@@ -18,8 +18,8 @@ namespace BusinessLogicLayer
 
                 ReleaseOrderDetailDAL detailDAL = new ReleaseOrderDetailDAL();
                 List<ReleaseOrderDetailDTO> detailDto = detailDAL.GetReleaseOrderDetail(releaseOrderId);
-                List<ReleaseOrderDetailBM> countriesBm = ConvertIntoBusinessModel(detailDto);
-                return new ResultBM(ResultBM.Type.OK, "Recuperación de registros exitosa.", countriesBm);
+                List<ReleaseOrderDetailBM> detailBms = ConvertIntoBusinessModel(detailDto);
+                return new ResultBM(ResultBM.Type.OK, "Recuperación de registros exitosa.", detailBms);
             }
             catch (Exception exception)
             {
@@ -45,7 +45,7 @@ namespace BusinessLogicLayer
                 }
                 detailDal.SaveReleaseOrderDetail(listDetail);
 
-                return new ResultBM(ResultBM.Type.OK, "Detalle actualizado para la orden " + releaseOrderBm.id + ".", releaseOrderBm.detail);
+                return new ResultBM(ResultBM.Type.OK, "Detalle guardado para la orden " + releaseOrderBm.id + ".", releaseOrderBm.detail);
             }
             catch (Exception exception)
             {

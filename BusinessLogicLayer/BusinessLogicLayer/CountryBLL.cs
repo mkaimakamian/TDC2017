@@ -23,8 +23,7 @@ namespace BusinessLogicLayer
                 CountryDTO countryDto = countryDal.GetCountry(iso2);
                 CountryBM countryBm = null;
 
-                if (countryDto != null)
-                    countryBm = new CountryBM(countryDto);
+                if (countryDto != null) countryBm = new CountryBM(countryDto);
 
                 return new ResultBM(ResultBM.Type.OK, "Operación exitosa.", countryBm);
             }
