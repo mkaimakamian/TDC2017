@@ -31,6 +31,7 @@
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.stockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.donacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stockToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.articulosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.personasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.donadoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,7 +44,9 @@
             this.bitácoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.respaldoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.integridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stockToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.beneficiariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logisticaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ordenesDeSalidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +55,7 @@
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.stockToolStripMenuItem,
             this.personasToolStripMenuItem,
+            this.logisticaToolStripMenuItem,
             this.herramientasToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -73,21 +77,29 @@
             // donacionesToolStripMenuItem
             // 
             this.donacionesToolStripMenuItem.Name = "donacionesToolStripMenuItem";
-            this.donacionesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.donacionesToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.donacionesToolStripMenuItem.Text = "Donaciones";
             this.donacionesToolStripMenuItem.Click += new System.EventHandler(this.donacionesToolStripMenuItem_Click);
+            // 
+            // stockToolStripMenuItem1
+            // 
+            this.stockToolStripMenuItem1.Name = "stockToolStripMenuItem1";
+            this.stockToolStripMenuItem1.Size = new System.Drawing.Size(136, 22);
+            this.stockToolStripMenuItem1.Text = "Stock";
+            this.stockToolStripMenuItem1.Click += new System.EventHandler(this.stockToolStripMenuItem1_Click);
             // 
             // articulosToolStripMenuItem
             // 
             this.articulosToolStripMenuItem.Name = "articulosToolStripMenuItem";
-            this.articulosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.articulosToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.articulosToolStripMenuItem.Text = "Articulos";
             this.articulosToolStripMenuItem.Click += new System.EventHandler(this.articulosToolStripMenuItem_Click);
             // 
             // personasToolStripMenuItem
             // 
             this.personasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.donadoresToolStripMenuItem});
+            this.donadoresToolStripMenuItem,
+            this.beneficiariosToolStripMenuItem});
             this.personasToolStripMenuItem.Name = "personasToolStripMenuItem";
             this.personasToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.personasToolStripMenuItem.Text = "Personas";
@@ -95,7 +107,7 @@
             // donadoresToolStripMenuItem
             // 
             this.donadoresToolStripMenuItem.Name = "donadoresToolStripMenuItem";
-            this.donadoresToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.donadoresToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.donadoresToolStripMenuItem.Text = "Donadores";
             this.donadoresToolStripMenuItem.Click += new System.EventHandler(this.donadoresToolStripMenuItem_Click);
             // 
@@ -172,12 +184,27 @@
             this.integridadToolStripMenuItem.Text = "Integridad";
             this.integridadToolStripMenuItem.Click += new System.EventHandler(this.integridadToolStripMenuItem_Click);
             // 
-            // stockToolStripMenuItem1
+            // beneficiariosToolStripMenuItem
             // 
-            this.stockToolStripMenuItem1.Name = "stockToolStripMenuItem1";
-            this.stockToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.stockToolStripMenuItem1.Text = "Stock";
-            this.stockToolStripMenuItem1.Click += new System.EventHandler(this.stockToolStripMenuItem1_Click);
+            this.beneficiariosToolStripMenuItem.Name = "beneficiariosToolStripMenuItem";
+            this.beneficiariosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.beneficiariosToolStripMenuItem.Text = "Beneficiarios";
+            this.beneficiariosToolStripMenuItem.Click += new System.EventHandler(this.beneficiariosToolStripMenuItem_Click);
+            // 
+            // logisticaToolStripMenuItem
+            // 
+            this.logisticaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ordenesDeSalidaToolStripMenuItem});
+            this.logisticaToolStripMenuItem.Name = "logisticaToolStripMenuItem";
+            this.logisticaToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.logisticaToolStripMenuItem.Text = "Logistica";
+            // 
+            // ordenesDeSalidaToolStripMenuItem
+            // 
+            this.ordenesDeSalidaToolStripMenuItem.Name = "ordenesDeSalidaToolStripMenuItem";
+            this.ordenesDeSalidaToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.ordenesDeSalidaToolStripMenuItem.Text = "Ordenes de salida";
+            this.ordenesDeSalidaToolStripMenuItem.Click += new System.EventHandler(this.ordenesDeSalidaToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
@@ -217,5 +244,8 @@
         private System.Windows.Forms.ToolStripMenuItem donacionesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem articulosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stockToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem beneficiariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem logisticaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ordenesDeSalidaToolStripMenuItem;
     }
 }

@@ -66,6 +66,10 @@ namespace ViewLayer
             donadoresToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE009);
             SessionHelper.RegisterForTranslation(donadoresToolStripMenuItem, Codes.MNU_GE009);
 
+            //Personas > Beneficiarios
+            beneficiariosToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE014);
+            SessionHelper.RegisterForTranslation(beneficiariosToolStripMenuItem, Codes.MNU_GE014);
+
             //STOCK
             stockToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE010);
             SessionHelper.RegisterForTranslation(stockToolStripMenuItem, Codes.MNU_GE010);
@@ -81,6 +85,14 @@ namespace ViewLayer
             //Stock > Tipo de artículos
             articulosToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE012);
             SessionHelper.RegisterForTranslation(articulosToolStripMenuItem, Codes.MNU_GE012);
+
+            //LOGÍSTICA
+            logisticaToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE015);
+            SessionHelper.RegisterForTranslation(logisticaToolStripMenuItem, Codes.MNU_GE015);
+
+            //Logística > Órdenes de salida
+            ordenesDeSalidaToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE016);
+            SessionHelper.RegisterForTranslation(ordenesDeSalidaToolStripMenuItem, Codes.MNU_GE016);
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
@@ -195,6 +207,27 @@ namespace ViewLayer
                 SessionHelper.HasPermission(Codes.OP027),
                 SessionHelper.HasPermission(Codes.OP028)
                 ).ShowDialog();
+        }
+
+        private void beneficiariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new FrmGenericMain(
+               typeof(BeneficiaryBLL),
+               typeof(FrmBeneficiary),
+               SessionHelper.HasPermission(Codes.OP030),
+               SessionHelper.HasPermission(Codes.OP031),
+               SessionHelper.HasPermission(Codes.OP032)
+               ).ShowDialog();
+        }
+
+        private void ordenesDeSalidaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new FrmGenericMain(
+              typeof(ReleaseOrderBLL),
+              typeof(FrmReleaseOrder),
+              SessionHelper.HasPermission(Codes.OP034),
+              SessionHelper.HasPermission(Codes.OP035)
+              ).ShowDialog();
         }
     }
 }

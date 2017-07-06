@@ -36,6 +36,10 @@ namespace ViewLayer
                 public const string OP014 = "OP014"; // Crear donador
                 public const string OP015 = "OP015"; // Editar donador
                 public const string OP016 = "OP016"; // Eliminar donador
+            public const string GE014 = "GE014"; //Beneficiarios
+                public const string OP030 = "OP030"; // Crear beneficiario
+                public const string OP031 = "OP031"; // Editar beneficiario
+                public const string OP032 = "OP032"; // Eliminar beneficiario
 
             public const string GE010 = "GE010"; //Stock
                 public const string GE011 = "GE011"; //Donaciones
@@ -50,11 +54,14 @@ namespace ViewLayer
                     public const string OP026 = "OP026"; // Crear stock
                     public const string OP027 = "OP027"; // Editar stock
                     public const string OP028 = "OP028"; // Eliminar stock
+                  
 
-
-        public const string GE014 = "GE014"; //Hojas de ruta
-        public const string GE015 = "GE015"; //Retiros
-        public const string GE016 = "GE016"; //Órdenes de salida
+        
+        public const string GE015 = "GE015"; //Logística
+            public const string GE016 = "GE016"; //Órdenes de salida
+                public const string OP034 = "OP034"; // Crear beneficiario
+                public const string OP035 = "OP035"; // Editar beneficiario
+                public const string OP036 = "OP036"; // Eliminar beneficiario
         
         
 
@@ -135,15 +142,16 @@ namespace ViewLayer
 
         public const string MNU_GE008 = "MNU_GE008"; //Personas   
             public const string MNU_GE009 = "MNU_GE009"; //Donadores
+            public const string MNU_GE014 = "MNU_GE014"; //Beneficiarios
 
         public const string MNU_GE010 = "MNU_GE010"; //Stock
             public const string MNU_GE011 = "MNU_GE011"; //Donaciones
             public const string MNU_GE012 = "MNU_GE012"; //tipo de artículos
             public const string MNU_GE013 = "MNU_GE013"; //Stock (gestión)
 
-        public const string MNU_GE014 = "MNU_GE014"; //Hojas de ruta
-        public const string MNU_GE015 = "MNU_GE015"; //Retiros
-        public const string MNU_GE016 = "MNU_GE016"; //Órdenes de salida        
+       
+        public const string MNU_GE015 = "MNU_GE015"; //Logística
+            public const string MNU_GE016 = "MNU_GE016"; //Órdenes de salida        
         
                 
 

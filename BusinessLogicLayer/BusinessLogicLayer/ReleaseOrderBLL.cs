@@ -9,7 +9,7 @@ using BusinessModel;
 
 namespace BusinessLogicLayer
 {
-    public class ReleaseOrderBLL
+    public class ReleaseOrderBLL : BLEntity
     {
 
         public ResultBM GetReleaseOrder(int releaseOrderId)
@@ -125,6 +125,16 @@ namespace BusinessLogicLayer
             //    return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse la dirección");
             
             return new ResultBM(ResultBM.Type.OK);
+        }
+
+        public ResultBM GetCollection(Dictionary<string, string> filter = null)
+        {
+            return GetReleaseOrders();
+        }
+
+        public ResultBM Delete(object entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Codes.cs" />
+    <Compile Include="FrmBeneficiary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBeneficiary.Designer.cs">
+      <DependentUpon>FrmBeneficiary.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmDonation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +119,12 @@
     <Compile Include="FrmProfile.Designer.cs">
       <DependentUpon>FrmProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmReleaseOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmReleaseOrder.Designer.cs">
+      <DependentUpon>FrmReleaseOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmSchedule.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +145,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmBeneficiary.resx">
+      <DependentUpon>FrmBeneficiary.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmDonation.resx">
       <DependentUpon>FrmDonation.cs</DependentUpon>
     </EmbeddedResource>
@@ -162,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmProfile.resx">
       <DependentUpon>FrmProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmReleaseOrder.resx">
+      <DependentUpon>FrmReleaseOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSchedule.resx">
       <DependentUpon>FrmSchedule.cs</DependentUpon>
