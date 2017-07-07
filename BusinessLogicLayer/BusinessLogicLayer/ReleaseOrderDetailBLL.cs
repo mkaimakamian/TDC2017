@@ -71,9 +71,16 @@ namespace BusinessLogicLayer
             List<ReleaseOrderDetailBM> result = new List<ReleaseOrderDetailBM>();
             foreach (ReleaseOrderDetailDTO detail in details)
             {
-                result.Add(new ReleaseOrderDetailBM(detail));
+                result.Add(new ReleaseOrderDetailBM(detail, GetStock(detail)));
             }
             return result;
+        }
+
+        //No está bueno esto, pero me permite recuperar las direcciones. Poco performante... pero no hay tiempo.
+        private StockBM GetStock(ReleaseOrderDetailDTO detail)
+        {
+            ResultBM stockResult = new StockBLL().GetStock(detail.stockId);
+            return stockResult.GetValue<StockBM>();
         }
 
         private ResultBM IsValid(List<ReleaseOrderDetailBM> releaseOrderDetail)

@@ -11,17 +11,28 @@ namespace BusinessModel
     {
         public int id;
         public int releaseorderId;
-        public int stockId;
-        public int quantity;
+        public StockBM stock;
+        private int quantity;
 
         public ReleaseOrderDetailBM() { }
 
-        public ReleaseOrderDetailBM(ReleaseOrderDetailDTO releaseOrderDtail)
+        public ReleaseOrderDetailBM(ReleaseOrderDetailDTO releaseOrderDtail, StockBM stockBm)
         {
             this.id = releaseOrderDtail.id;
             this.releaseorderId = releaseOrderDtail.releaseOrderId;
-            this.stockId = releaseOrderDtail.stockId;
+            this.stock = stockBm;
             this.quantity = releaseOrderDtail.quantity;
+        }
+
+        public int Quantity
+        {
+            get { return this.quantity; }
+            set { this.quantity = value; }
+        }
+
+        public string Name
+        {
+            get { return this.stock.Name; }
         }
     }
 }
