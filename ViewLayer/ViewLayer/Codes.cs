@@ -122,6 +122,18 @@ namespace ViewLayer
         public const string LBL_DUEDATE = "LBL_DUEDATE";
         public const string LBL_LOCATION = "LBL_LOCATION";
 
+        public const string LBL_DESTINATARY = "LBL_DESTINATARY";
+        public const string LBL_AGE_RANGE = "LBL_AGE_RANGE";
+        public const string LBL_ACCESSIBILITY = "LBL_ACCESSIBILITY";
+        public const string LBL_SALUBRITY = "LBL_SALUBRITY";
+        public const string LBL_MAJOR_PROBLEM = "LBL_MAJOR_PROBLEM";
+
+        public const string LBL_DESC_DESTINATARY = "LBL_DESC_DESTINATARY";
+        public const string LBL_DESC_AGE_RANGE = "LBL_DESC_AGE_RANGE";
+        public const string LBL_DESC_SALUBRITY = "LBL_DESC_SALUBRITY";
+        public const string LBL_DESC_ACCESSIBILITY = "LBL_DESC_ACCESSIBILITY";
+        public const string LBL_DESC_MAJOR_PROBLEM = "LBL_DESC_MAJOR_PROBLEM";
+
 
         public const string MNU_GE001 = "MNU_GE001"; //Menú herramientas
             public const string MNU_OP001 = "MNU_OP001"; //Cambiar idioma

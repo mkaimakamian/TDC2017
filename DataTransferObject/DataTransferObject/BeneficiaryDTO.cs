@@ -20,7 +20,7 @@ namespace DataTransferObject
 
         public BeneficiaryDTO(int personId, int beneficiaryId, int destination, int ages, int health, int accessibility, int majorProblem)
         {
-            this.id = id;
+            this.id = personId;
             this.beneficiaryId = beneficiaryId;
             this.destination = destination;
             this.ages = ages;

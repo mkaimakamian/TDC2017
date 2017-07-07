@@ -18,8 +18,7 @@ namespace BusinessModel
 
         public BeneficiaryBM() { }
 
-        public BeneficiaryBM(BeneficiaryDTO beneficiaryDto, AddressBM address = null) {
-            this.id = beneficiaryDto.id;
+        public BeneficiaryBM(BeneficiaryDTO beneficiaryDto, AddressBM address = null) : base(beneficiaryDto, address) {
             this.beneficiaryId = beneficiaryDto.beneficiaryId;
             this.destination = beneficiaryDto.destination;
             this.ages = beneficiaryDto.ages;

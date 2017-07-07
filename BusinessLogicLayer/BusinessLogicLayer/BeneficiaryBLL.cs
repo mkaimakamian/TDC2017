@@ -77,7 +77,7 @@ namespace BusinessLogicLayer
                 BeneficiaryDAL beneficiaryDal = new BeneficiaryDAL();
                 PersonBLL personBll = new PersonBLL();
                 PersonBM personBm = null;
-                ResultBM validationResult;
+                ResultBM validationResult; //agregar validación
                 ResultBM personResult;
                 BeneficiaryDTO beneficiaryDto;
 
@@ -97,7 +97,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear al donador.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear al beneficiario.", exception);
             }
         }
 

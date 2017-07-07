@@ -43,7 +43,6 @@
             this.lblName = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblLastName = new System.Windows.Forms.Label();
-            this.chkBoxContact = new System.Windows.Forms.CheckBox();
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.lblBirthday = new System.Windows.Forms.Label();
             this.dateBirthday = new System.Windows.Forms.DateTimePicker();
@@ -58,8 +57,29 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cmdClose = new System.Windows.Forms.Button();
             this.cmdAccept = new System.Windows.Forms.Button();
+            this.trkDestination = new System.Windows.Forms.TrackBar();
+            this.trkAges = new System.Windows.Forms.TrackBar();
+            this.trkHealth = new System.Windows.Forms.TrackBar();
+            this.trkAccessibility = new System.Windows.Forms.TrackBar();
+            this.trkMajor = new System.Windows.Forms.TrackBar();
+            this.lblDestination = new System.Windows.Forms.Label();
+            this.lblAges = new System.Windows.Forms.Label();
+            this.lblHealth = new System.Windows.Forms.Label();
+            this.lblAccesibility = new System.Windows.Forms.Label();
+            this.lblMajor = new System.Windows.Forms.Label();
+            this.lblDescDestinatary = new System.Windows.Forms.Label();
+            this.lblDescAges = new System.Windows.Forms.Label();
+            this.lblDescHealth = new System.Windows.Forms.Label();
+            this.lblDescAccessibility = new System.Windows.Forms.Label();
+            this.lblDescMajor = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trkDestination)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkAges)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkHealth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkAccessibility)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkMajor)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -86,6 +106,7 @@
             this.txtNumber.Name = "txtNumber";
             this.txtNumber.Size = new System.Drawing.Size(200, 20);
             this.txtNumber.TabIndex = 17;
+            this.txtNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumber_KeyPress);
             // 
             // lblStreet
             // 
@@ -168,7 +189,6 @@
             this.groupBox1.Controls.Add(this.lblName);
             this.groupBox1.Controls.Add(this.txtName);
             this.groupBox1.Controls.Add(this.lblLastName);
-            this.groupBox1.Controls.Add(this.chkBoxContact);
             this.groupBox1.Controls.Add(this.txtLastName);
             this.groupBox1.Controls.Add(this.lblBirthday);
             this.groupBox1.Controls.Add(this.dateBirthday);
@@ -210,16 +230,6 @@
             this.lblLastName.Size = new System.Drawing.Size(49, 13);
             this.lblLastName.TabIndex = 2;
             this.lblLastName.Text = "lastname";
-            // 
-            // chkBoxContact
-            // 
-            this.chkBoxContact.AutoSize = true;
-            this.chkBoxContact.Location = new System.Drawing.Point(82, 251);
-            this.chkBoxContact.Name = "chkBoxContact";
-            this.chkBoxContact.Size = new System.Drawing.Size(104, 17);
-            this.chkBoxContact.TabIndex = 36;
-            this.chkBoxContact.Text = "canbecontacted";
-            this.chkBoxContact.UseVisualStyleBackColor = true;
             // 
             // txtLastName
             // 
@@ -313,15 +323,30 @@
             this.txtDocument.Name = "txtDocument";
             this.txtDocument.Size = new System.Drawing.Size(200, 20);
             this.txtDocument.TabIndex = 13;
+            this.txtDocument.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDocument_KeyPress);
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.lblDescMajor);
+            this.groupBox3.Controls.Add(this.lblDescAccessibility);
+            this.groupBox3.Controls.Add(this.lblDescHealth);
+            this.groupBox3.Controls.Add(this.lblDescAges);
+            this.groupBox3.Controls.Add(this.lblDescDestinatary);
+            this.groupBox3.Controls.Add(this.lblMajor);
+            this.groupBox3.Controls.Add(this.lblAccesibility);
+            this.groupBox3.Controls.Add(this.lblHealth);
+            this.groupBox3.Controls.Add(this.lblAges);
+            this.groupBox3.Controls.Add(this.lblDestination);
+            this.groupBox3.Controls.Add(this.trkMajor);
+            this.groupBox3.Controls.Add(this.trkAccessibility);
+            this.groupBox3.Controls.Add(this.trkHealth);
+            this.groupBox3.Controls.Add(this.trkAges);
+            this.groupBox3.Controls.Add(this.trkDestination);
             this.groupBox3.Location = new System.Drawing.Point(468, 12);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(223, 304);
             this.groupBox3.TabIndex = 43;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "groupBox3";
             // 
             // cmdClose
             // 
@@ -331,6 +356,7 @@
             this.cmdClose.TabIndex = 45;
             this.cmdClose.Text = "close";
             this.cmdClose.UseVisualStyleBackColor = true;
+            this.cmdClose.Click += new System.EventHandler(this.cmdClose_Click);
             // 
             // cmdAccept
             // 
@@ -340,6 +366,142 @@
             this.cmdAccept.TabIndex = 44;
             this.cmdAccept.Text = "accept";
             this.cmdAccept.UseVisualStyleBackColor = true;
+            this.cmdAccept.Click += new System.EventHandler(this.cmdAccept_Click);
+            // 
+            // trkDestination
+            // 
+            this.trkDestination.Location = new System.Drawing.Point(6, 32);
+            this.trkDestination.Maximum = 3;
+            this.trkDestination.Minimum = 1;
+            this.trkDestination.Name = "trkDestination";
+            this.trkDestination.Size = new System.Drawing.Size(89, 45);
+            this.trkDestination.TabIndex = 0;
+            this.trkDestination.Value = 2;
+            // 
+            // trkAges
+            // 
+            this.trkAges.Location = new System.Drawing.Point(6, 84);
+            this.trkAges.Maximum = 3;
+            this.trkAges.Minimum = 1;
+            this.trkAges.Name = "trkAges";
+            this.trkAges.Size = new System.Drawing.Size(89, 45);
+            this.trkAges.TabIndex = 1;
+            this.trkAges.Value = 2;
+            // 
+            // trkHealth
+            // 
+            this.trkHealth.Location = new System.Drawing.Point(6, 135);
+            this.trkHealth.Maximum = 2;
+            this.trkHealth.Minimum = 1;
+            this.trkHealth.Name = "trkHealth";
+            this.trkHealth.Size = new System.Drawing.Size(89, 45);
+            this.trkHealth.TabIndex = 2;
+            this.trkHealth.Value = 1;
+            // 
+            // trkAccessibility
+            // 
+            this.trkAccessibility.Location = new System.Drawing.Point(6, 187);
+            this.trkAccessibility.Maximum = 3;
+            this.trkAccessibility.Minimum = 1;
+            this.trkAccessibility.Name = "trkAccessibility";
+            this.trkAccessibility.Size = new System.Drawing.Size(89, 45);
+            this.trkAccessibility.TabIndex = 3;
+            this.trkAccessibility.Value = 2;
+            // 
+            // trkMajor
+            // 
+            this.trkMajor.Location = new System.Drawing.Point(6, 238);
+            this.trkMajor.Maximum = 4;
+            this.trkMajor.Minimum = 1;
+            this.trkMajor.Name = "trkMajor";
+            this.trkMajor.Size = new System.Drawing.Size(89, 45);
+            this.trkMajor.TabIndex = 4;
+            this.trkMajor.Value = 2;
+            // 
+            // lblDestination
+            // 
+            this.lblDestination.AutoSize = true;
+            this.lblDestination.Location = new System.Drawing.Point(6, 16);
+            this.lblDestination.Name = "lblDestination";
+            this.lblDestination.Size = new System.Drawing.Size(66, 13);
+            this.lblDestination.TabIndex = 5;
+            this.lblDestination.Text = "destinataries";
+            // 
+            // lblAges
+            // 
+            this.lblAges.AutoSize = true;
+            this.lblAges.Location = new System.Drawing.Point(6, 68);
+            this.lblAges.Name = "lblAges";
+            this.lblAges.Size = new System.Drawing.Size(30, 13);
+            this.lblAges.TabIndex = 6;
+            this.lblAges.Text = "ages";
+            // 
+            // lblHealth
+            // 
+            this.lblHealth.AutoSize = true;
+            this.lblHealth.Location = new System.Drawing.Point(6, 119);
+            this.lblHealth.Name = "lblHealth";
+            this.lblHealth.Size = new System.Drawing.Size(36, 13);
+            this.lblHealth.TabIndex = 7;
+            this.lblHealth.Text = "health";
+            // 
+            // lblAccesibility
+            // 
+            this.lblAccesibility.AutoSize = true;
+            this.lblAccesibility.Location = new System.Drawing.Point(6, 170);
+            this.lblAccesibility.Name = "lblAccesibility";
+            this.lblAccesibility.Size = new System.Drawing.Size(63, 13);
+            this.lblAccesibility.TabIndex = 8;
+            this.lblAccesibility.Text = "accessibility";
+            // 
+            // lblMajor
+            // 
+            this.lblMajor.AutoSize = true;
+            this.lblMajor.Location = new System.Drawing.Point(6, 222);
+            this.lblMajor.Name = "lblMajor";
+            this.lblMajor.Size = new System.Drawing.Size(32, 13);
+            this.lblMajor.TabIndex = 9;
+            this.lblMajor.Text = "major";
+            // 
+            // lblDescDestinatary
+            // 
+            this.lblDescDestinatary.Location = new System.Drawing.Point(91, 32);
+            this.lblDescDestinatary.Name = "lblDescDestinatary";
+            this.lblDescDestinatary.Size = new System.Drawing.Size(126, 36);
+            this.lblDescDestinatary.TabIndex = 10;
+            this.lblDescDestinatary.Text = "1. Re mal 2. mejorando 3. bastante bien";
+            // 
+            // lblDescAges
+            // 
+            this.lblDescAges.Location = new System.Drawing.Point(94, 84);
+            this.lblDescAges.Name = "lblDescAges";
+            this.lblDescAges.Size = new System.Drawing.Size(123, 36);
+            this.lblDescAges.TabIndex = 11;
+            this.lblDescAges.Text = "1. Re mal 2. mejorando 3. bastante bien";
+            // 
+            // lblDescHealth
+            // 
+            this.lblDescHealth.Location = new System.Drawing.Point(94, 135);
+            this.lblDescHealth.Name = "lblDescHealth";
+            this.lblDescHealth.Size = new System.Drawing.Size(123, 36);
+            this.lblDescHealth.TabIndex = 12;
+            this.lblDescHealth.Text = "1. Re mal 2. mejorando";
+            // 
+            // lblDescAccessibility
+            // 
+            this.lblDescAccessibility.Location = new System.Drawing.Point(94, 187);
+            this.lblDescAccessibility.Name = "lblDescAccessibility";
+            this.lblDescAccessibility.Size = new System.Drawing.Size(123, 36);
+            this.lblDescAccessibility.TabIndex = 13;
+            this.lblDescAccessibility.Text = "1. Re mal 2. mejorando";
+            // 
+            // lblDescMajor
+            // 
+            this.lblDescMajor.Location = new System.Drawing.Point(94, 232);
+            this.lblDescMajor.Name = "lblDescMajor";
+            this.lblDescMajor.Size = new System.Drawing.Size(123, 36);
+            this.lblDescMajor.TabIndex = 14;
+            this.lblDescMajor.Text = "1. Re mal 2. mejorando";
             // 
             // FrmBeneficiary
             // 
@@ -355,10 +517,18 @@
             this.Name = "FrmBeneficiary";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmBeneficiary";
+            this.Load += new System.EventHandler(this.FrmBeneficiary_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trkDestination)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkAges)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkHealth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkAccessibility)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkMajor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -380,7 +550,6 @@
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label lblLastName;
-        private System.Windows.Forms.CheckBox chkBoxContact;
         private System.Windows.Forms.TextBox txtLastName;
         private System.Windows.Forms.Label lblBirthday;
         private System.Windows.Forms.DateTimePicker dateBirthday;
@@ -395,5 +564,20 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button cmdClose;
         private System.Windows.Forms.Button cmdAccept;
+        private System.Windows.Forms.Label lblMajor;
+        private System.Windows.Forms.Label lblAccesibility;
+        private System.Windows.Forms.Label lblHealth;
+        private System.Windows.Forms.Label lblAges;
+        private System.Windows.Forms.Label lblDestination;
+        private System.Windows.Forms.TrackBar trkMajor;
+        private System.Windows.Forms.TrackBar trkAccessibility;
+        private System.Windows.Forms.TrackBar trkHealth;
+        private System.Windows.Forms.TrackBar trkAges;
+        private System.Windows.Forms.TrackBar trkDestination;
+        private System.Windows.Forms.Label lblDescDestinatary;
+        private System.Windows.Forms.Label lblDescMajor;
+        private System.Windows.Forms.Label lblDescAccessibility;
+        private System.Windows.Forms.Label lblDescHealth;
+        private System.Windows.Forms.Label lblDescAges;
     }
 }

@@ -123,10 +123,7 @@ namespace ViewLayer
             for (int i = 0; i < cmbCountry.Items.Count && !found; ++i)
             {
                 found = ((CountryBM) cmbCountry.Items[i]).iso2 == donor.address.country.iso2;
-                if (found)
-                {
-                    cmbCountry.SelectedIndex = i;
-                }
+                if (found) cmbCountry.SelectedIndex = i;
             }
 
         }
