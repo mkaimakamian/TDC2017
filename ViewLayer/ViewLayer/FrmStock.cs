@@ -47,6 +47,7 @@ namespace ViewLayer
                 }
 
                 //Traducciones
+                SessionHelper.RegisterForTranslation(this, Codes.MNU_GE013);
                 SessionHelper.RegisterForTranslation(cmdAccept, Codes.BTN_ACCEPT);
                 SessionHelper.RegisterForTranslation(cmdClose, Codes.BTN_CLOSE);
 
@@ -114,9 +115,12 @@ namespace ViewLayer
                     //Cuando es nuevo, se toma el valor del elemento seleccionado del combo de donación como valores inicializadores.
                     //En dicho caso, el máximo disponible es el máximo asignable y el número que se sugiere stockear
                     DonationBM donationBm = (DonationBM)cmbDonation.SelectedItem;
-                    this.availableStock = donationBm.Items - donationBm.stocked;
-                    numericQuantity.Maximum = this.availableStock;
-                    numericQuantity.Value = this.availableStock;
+                    if (donationBm != null)
+                    {
+                        this.availableStock = donationBm.Items - donationBm.stocked;
+                        numericQuantity.Maximum = this.availableStock;
+                        numericQuantity.Value = this.availableStock;
+                    }
                 }
                 CalculateMaxStockLeft((DonationBM)cmbDonation.SelectedItem, (int)numericQuantity.Value);
 
@@ -139,8 +143,15 @@ namespace ViewLayer
             }
             else
             {
-                cmbDonation.DataSource = donationResult.GetValue<List<DonationBM>>();
+                List<DonationBM> lstDonation = donationResult.GetValue<List<DonationBM>>();
+                cmbDonation.DataSource = lstDonation;
                 cmbDonation.DisplayMember = "Lot";
+
+                if (lstDonation.Count == 0)
+                {
+                    MessageBox.Show("No existen donaciones que puedan ser procesadas para su loteo.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Close();
+                }
             }
             cmbDonation.SelectedIndexChanged += cmbDonation_SelectedIndexChanged;
         }
@@ -214,6 +225,8 @@ namespace ViewLayer
 
         private void cmdAccept_Click(object sender, EventArgs e)
         {
+            DialogResult pressed = MessageBox.Show("¿Desea guardar los cambios?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (pressed == DialogResult.No) return;
             try
             {
                 StockBLL stockBll = new StockBLL();

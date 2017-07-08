@@ -45,6 +45,7 @@ namespace ViewLayer
         private void FrmReleaseOrder_Load(object sender, EventArgs e)
         {
             //Traducciones
+            SessionHelper.RegisterForTranslation(this, Codes.MNU_GE016);
             SessionHelper.RegisterForTranslation(cmdAccept, Codes.BTN_ACCEPT);
             SessionHelper.RegisterForTranslation(cmdClose, Codes.BTN_CLOSE);
 
@@ -151,11 +152,11 @@ namespace ViewLayer
             dgRelease.DataSource = lstAdded;
         }
 
-
-
-
         private void cmdAccept_Click(object sender, EventArgs e)
         {
+            DialogResult pressed = MessageBox.Show("¿Desea guardar los cambios?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (pressed == DialogResult.No) return;
+
             try
             {
                 ReleaseOrderBLL releaseOrderBll = new ReleaseOrderBLL();

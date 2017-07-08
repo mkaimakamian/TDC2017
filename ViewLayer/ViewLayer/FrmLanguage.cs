@@ -18,15 +18,17 @@ namespace ViewLayer
         public FrmLanguage()
         {
             InitializeComponent();
-            SessionHelper.RegisterForTranslation(lblLanguage, Codes.MNU_OP001_LBL_LANGUAGE);
-            SessionHelper.RegisterForTranslation(cmdAccept, Codes.BTN_ACCEPT);
-            SessionHelper.RegisterForTranslation(cmdCancel, Codes.BTN_CLOSE);
         }
 
         private void FrmLanguage_Load(object sender, EventArgs e)
         {
             try
             {
+                SessionHelper.RegisterForTranslation(this, Codes.MNU_OP001);
+                SessionHelper.RegisterForTranslation(lblLanguage, Codes.MNU_OP001_LBL_LANGUAGE);
+                SessionHelper.RegisterForTranslation(cmdAccept, Codes.BTN_ACCEPT);
+                SessionHelper.RegisterForTranslation(cmdCancel, Codes.BTN_CLOSE);
+
                 //Carga los idiomas
                 LanguageBLL languageBll = new LanguageBLL();
                 ResultBM language = languageBll.GetLanguages();

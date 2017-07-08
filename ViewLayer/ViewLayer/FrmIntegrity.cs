@@ -43,6 +43,7 @@ namespace ViewLayer
 
         private void FrmIntegrity_Load(object sender, EventArgs e)
         {
+            SessionHelper.RegisterForTranslation(this, Codes.MNU_GE007);
             SessionHelper.RegisterForTranslation(lblIntegrity, Codes.MNU_GE007_LBL_INTEGRITY);
             SessionHelper.RegisterForTranslation(cmdIntegrity, Codes.BTN_CHECK_INTEGRITY);
             SessionHelper.RegisterForTranslation(cmdClose, Codes.BTN_CLOSE);

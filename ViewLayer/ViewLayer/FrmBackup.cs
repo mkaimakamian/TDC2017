@@ -30,14 +30,13 @@ namespace ViewLayer
             {
                 BackupBLL backupBll = new BackupBLL();
                 ResultBM bkpResult;
-
                 dlgSave.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
                 dlgSave.FileName = "rhoddion_" + DateTime.Now.ToString("yyyymmddHHmm");
                 dlgSave.Filter = "Rhoddion Backup | *.bkp";
                 dlgSave.Title = "Backup";
-                dlgSave.ShowDialog();
+                DialogResult pressed = dlgSave.ShowDialog();
 
-                if (dlgSave.FileName != "")
+                if (pressed == DialogResult.OK && dlgSave.FileName != "")
                 {
                     Cursor.Current = Cursors.WaitCursor;
                     lblBackup.Text = dlgSave.FileName;
@@ -69,7 +68,9 @@ namespace ViewLayer
                 dlgOpen.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
                 dlgOpen.Filter = "Rhoddion Backup | *.bkp";
                 dlgOpen.Title = "Restore";
-                dlgOpen.ShowDialog();
+                DialogResult pressed = dlgOpen.ShowDialog();
+
+                if (pressed != DialogResult.OK) return;
 
                 DialogResult answer = MessageBox.Show("¿Está seguro de querer restaurar la base de datos? \n tenga en mente finalizará la sesión actual una vez que la operación haya terminado.", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
 
@@ -117,6 +118,8 @@ namespace ViewLayer
 
         private void FrmBackup_Load(object sender, EventArgs e)
         {
+            SessionHelper.RegisterForTranslation(this, Codes.MNU_GE006);
+
             cmdBackup.Enabled = SessionHelper.HasPermission(Codes.OP011);
             SessionHelper.RegisterForTranslation(cmdBackup, Codes.BTN_BACKUP);
             cmdrestore.Enabled =  SessionHelper.HasPermission(Codes.OP012);

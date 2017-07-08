@@ -44,6 +44,7 @@ namespace ViewLayer
             try
             {
                 //Traducciones
+                SessionHelper.RegisterForTranslation(this, Codes.MNU_GE004);
                 SessionHelper.RegisterForTranslation(cmdAccept, Codes.BTN_ACCEPT);
                 SessionHelper.RegisterForTranslation(cmdClose, Codes.BTN_CLOSE);
                 SessionHelper.RegisterForTranslation(lblPermission, Codes.LBL_PERMISSIONS);
@@ -212,7 +213,7 @@ namespace ViewLayer
 
         private void txtDescription_TextChanged(object sender, EventArgs e)
         {
-
+            if (treeProfile.HasChildren) treeProfile.TopNode.Text = txtDescription.Text;
         }
 
         /// <summary>

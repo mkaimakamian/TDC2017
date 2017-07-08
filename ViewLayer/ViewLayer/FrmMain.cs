@@ -37,7 +37,6 @@ namespace ViewLayer
             usuariosToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE003);
             SessionHelper.RegisterForTranslation(usuariosToolStripMenuItem, Codes.MNU_GE003);
 
-
             //Seguridad > Perfiles
             perfilesToolStripMenuItem.Visible = SessionHelper.HasPermission(Codes.GE004);
             SessionHelper.RegisterForTranslation(perfilesToolStripMenuItem, Codes.MNU_GE004);

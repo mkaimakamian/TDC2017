@@ -138,8 +138,8 @@ namespace BusinessLogicLayer
 
         private ResultBM IsValid(ReleaseOrderBM releaseOrder)
         {
-            //if (addressBm.street == null || addressBm.street.Length == 0)
-            //    return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse la dirección");
+            if (releaseOrder.detail == null || releaseOrder.detail.Count == 0)
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "No puede darse de alta una orden de salida sin elementos.");
             
             return new ResultBM(ResultBM.Type.OK);
         }

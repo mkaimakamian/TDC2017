@@ -55,7 +55,8 @@ namespace DataAccessLayer
             sql += "s.donationId, s.depotId, s.dueDate, s.location ";
             sql += "FROM stock s INNER JOIN donation d ON d.id = s.donationId LEFT JOIN release_order_detail r ON r.stockId = s.id ";
             sql += "WHERE d.statusId = 2 GROUP BY s.id, s.name, s.quantity, s.itemTypeId, s.donationId, s.depotId, s.dueDate, s.location ";
-            sql += "HAVING SUM(s.quantity) > SUM(CASE WHEN r.quantity IS NULL THEN 0 ELSE r.quantity END)";
+            sql += "HAVING SUM(s.quantity) > SUM(CASE WHEN r.quantity IS NULL THEN 0 ELSE r.quantity END) ";
+            sql += "ORDER BY s.itemTypeId ASC, s.dueDate ASC";
             
             reader = dbsql.executeReader(sql);
 

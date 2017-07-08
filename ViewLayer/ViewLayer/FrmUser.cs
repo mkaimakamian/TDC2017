@@ -40,6 +40,7 @@ namespace ViewLayer
             try
             {
                 //Traducciones
+                SessionHelper.RegisterForTranslation(this, Codes.MNU_GE003);
                 SessionHelper.RegisterForTranslation(cmdAccept, Codes.BTN_ACCEPT);
                 SessionHelper.RegisterForTranslation(cmdClose, Codes.BTN_CLOSE);
 

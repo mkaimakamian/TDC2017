@@ -458,6 +458,7 @@
             this.Controls.Add(this.cmdAccept);
             this.MaximizeBox = false;
             this.Name = "FrmDonor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmDonor";
             this.Load += new System.EventHandler(this.FrmDonor_Load);
             this.groupBox1.ResumeLayout(false);

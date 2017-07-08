@@ -118,7 +118,7 @@
             this.lblProfile.Name = "lblProfile";
             this.lblProfile.Size = new System.Drawing.Size(35, 13);
             this.lblProfile.TabIndex = 9;
-            this.lblProfile.Text = "label3";
+            this.lblProfile.Text = "profile";
             // 
             // FrmProfile
             // 

@@ -39,8 +39,8 @@ namespace ViewLayer
         {
             try
             {
-
                 //Traducciones
+                SessionHelper.RegisterForTranslation(this, Codes.MNU_GE009);
                 SessionHelper.RegisterForTranslation(cmdAccept, Codes.BTN_ACCEPT);
                 SessionHelper.RegisterForTranslation(cmdClose, Codes.BTN_CLOSE);
 
@@ -147,6 +147,9 @@ namespace ViewLayer
 
         private void cmdAccept_Click(object sender, EventArgs e)
         {
+            DialogResult pressed = MessageBox.Show("¿Desea guardar los cambios?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (pressed == DialogResult.No) return;
+
             try
             {
                 DonorBLL donorBll = new DonorBLL();
