@@ -113,6 +113,22 @@ namespace BusinessLogicLayer
             }
         }
 
+        // TODO - modificar para que solo traiga lo asignable
+        public ResultBM GetAvailableStocks()
+        {
+            try
+            {
+                StockDAL stockDal = new StockDAL();
+                List<StockDTO> stocksDto = stockDal.GetStocks();
+                List<StockBM> stocksBm = ConvertIntoBusinessModel(stocksDto);
+                return new ResultBM(ResultBM.Type.OK, "Recuperación de registros exitosa.", stocksBm);
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar las donaciones.", exception);
+            }
+        }
+
         private List<StockBM> ConvertIntoBusinessModel(List<StockDTO> stocks)
         {
             List<StockBM> result = new List<StockBM>();

@@ -33,10 +33,10 @@ namespace DataAccessLayer
             String sql;
 
             sql = "INSERT INTO release_order (beneficiaryId, comment, released, received, status) VALUES (";
-            sql += "'" + releaseOrderDto.beneficiaryId + "', ";
-            sql += releaseOrderDto.comment + ", ";
-            sql += "CONVERT(datetime, '" + releaseOrderDto.released + "', 103), ";
-            sql += "CONVERT(datetime, '" + releaseOrderDto.received + "', 103), ";
+            sql += releaseOrderDto.beneficiaryId + ", ";
+            sql += "'" + releaseOrderDto.comment + "', ";
+            sql += "null,";
+            sql += "null,";
             sql += "'" + releaseOrderDto.status + "' ";
             sql += ");SELECT @@IDENTITY";
             releaseOrderDto.id = dbsql.ExecuteNonQuery(sql);
@@ -72,8 +72,6 @@ namespace DataAccessLayer
             sql = "UPDATE address SET ";
             sql += "beneficiaryId = " + releaseOrderDto.beneficiaryId + ", ";
             sql += "comment = '" + releaseOrderDto.comment + "', ";
-            sql += "released = CONVERT(datetime, '" + releaseOrderDto.released + "', 103), ";
-            sql += "received = CONVERT(datetime, '" + releaseOrderDto.received + "', 103), ";
             sql += "status = '" + releaseOrderDto.status + "' ";
             sql += "WHERE id = " + releaseOrderDto.id;
             dbsql.ExecuteNonQuery(sql);
@@ -87,8 +85,8 @@ namespace DataAccessLayer
             result.id = int.Parse(item[0]);
             result.beneficiaryId = int.Parse(item[1]);
             result.comment = item[2];
-            result.released = DateTime.Parse(item[3]);
-            result.received = DateTime.Parse(item[4]);
+            if (item[3] != null && item[3].Length > 0) result.released = DateTime.Parse(item[3]);
+            if (item[4] != null && item[4].Length > 0) result.received = DateTime.Parse(item[4]);
             result.status = item[5];
             return result;
         }

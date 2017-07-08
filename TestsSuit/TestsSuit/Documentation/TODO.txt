@@ -1,15 +1,17 @@
 ::: COSAS QUE SÍ HAY QUE CORREGIR :::
-- Las eliminaciones deben ser lógicas
+- Crear instalador & manual
+- Crear documentación adecuada
+- Depurar la base de datos
 - Edición de los permisos (funciona?... pasa algo raro con el nombre de los permisos).
-- Mejorar las excepciones: enviar la descripción de la misma (?)
 - Agregar confirmaciones antes de gurdar o actualizar
-- Controlar en FrmDonor que al recuperar el país, debería contemplarse el éxito o fallo
 - Similar con los donadores y voluntarios en Frmdonation
 - Cambiar los nombres de los forms
 
 ::: FUNCIONALIDADES QUE DEBERÍAN INCLUIRSE :::
-- Eliminar las entidades
+- Eliminar las entidades lógicamente
+- Mejorar las excepciones: enviar la descripción de la misma (?)
 - Mensajes de error en el idioma adecuado
+- Controlar en FrmDonor que al recuperar el país, debería contemplarse el éxito o fallo
 
 :::DESEABLES :::
 - En el caso de una donación almacenada, podría mostrarse en la grilla en vez de meterse y mostrar un dialog box

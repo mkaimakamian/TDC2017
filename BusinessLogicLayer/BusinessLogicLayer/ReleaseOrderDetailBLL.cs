@@ -41,6 +41,9 @@ namespace BusinessLogicLayer
                 foreach (ReleaseOrderDetailBM detail in releaseOrderBm.detail)
                 {
                     detailDto = new ReleaseOrderDetailDTO();
+                    detailDto.releaseOrderId = releaseOrderBm.id;
+                    detailDto.quantity = detail.Quantity;
+                    detailDto.stockId = detail.stock.id;
                     listDetail.Add(detailDto);
                 }
                 detailDal.SaveReleaseOrderDetail(listDetail);

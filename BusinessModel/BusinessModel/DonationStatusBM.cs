@@ -12,16 +12,7 @@ namespace BusinessModel
         public int id;
         public string name;
         public string description;
-
-        //public enum status
-        //{
-        //    received,
-        //    stocked,
-        //    delivering,
-        //    recovering,
-        //    to_be_pickup
-        //};
-
+                
         public enum Status
         {
             RECEIVED = 1,

@@ -11,13 +11,22 @@ namespace BusinessModel
     {
         public int id;
         public BeneficiaryBM beneficiary;
-        public string comment;
+        private string comment;
         public DateTime released;
         public DateTime received;
-        public string status;
+        private string status;
         public List<ReleaseOrderDetailBM> detail;
 
-        public ReleaseOrderBM() { }
+        public enum Status
+        {
+            PENDING,
+            REJECTED,
+            APPROVED
+        };
+
+        public ReleaseOrderBM() {
+            this.status = Status.PENDING.ToString();
+        }
         
         public ReleaseOrderBM(ReleaseOrderDTO releaseorderDto, BeneficiaryBM beneficiaryBm = null, List<ReleaseOrderDetailBM> releaseOrderDetailBms = null)
         {
@@ -28,6 +37,33 @@ namespace BusinessModel
             this.received = releaseorderDto.released;
             this.status = releaseorderDto.status;
             this.detail = releaseOrderDetailBms;
+        }
+
+        public string BeneficiaryName
+        {
+            get { return this.beneficiary.Name + " " + this.beneficiary.LastName; }
+        }
+
+        public string Comment
+        {
+            get { return this.comment; }
+            set { this.comment = value; }
+        }
+
+        public string OrderStatus
+        {
+            get { return this.status; }
+            set { this.status = value; }
+        }
+
+        public int Items
+        {
+            get {
+                int totalItems = 0;
+
+                foreach (ReleaseOrderDetailBM detail in this.detail) totalItems += detail.Quantity;
+                return totalItems; 
+            }
         }
     }
 }

@@ -49,14 +49,19 @@ namespace BusinessLogicLayer
         {
             try
             {
+                ReleaseOrderDetailBLL releaseOrderDetailBll = new ReleaseOrderDetailBLL();
+                ResultBM detailResult = null;
                 ReleaseOrderDAL releaseOrderDal = new ReleaseOrderDAL();
                 ReleaseOrderDTO releaseOrderDto = null;
                 ResultBM validResult = IsValid(releaseOrderBm);
 
                 if (!validResult.IsValid()) return validResult;
-                releaseOrderDto = new ReleaseOrderDTO(releaseOrderBm.id, releaseOrderBm.beneficiary.id, releaseOrderBm.comment, releaseOrderBm.released, releaseOrderBm.received, releaseOrderBm.status);
+                releaseOrderDto = new ReleaseOrderDTO(releaseOrderBm.id, releaseOrderBm.beneficiary.beneficiaryId, releaseOrderBm.Comment, releaseOrderBm.released, releaseOrderBm.received, releaseOrderBm.OrderStatus);
                 releaseOrderDal.SaveReleaseOrder(releaseOrderDto);
                 releaseOrderBm.id = releaseOrderDto.id;
+
+                detailResult = releaseOrderDetailBll.SaveReleaseOrderDetail(releaseOrderBm);
+                if (!detailResult.IsValid()) return detailResult;
 
                 return new ResultBM(ResultBM.Type.OK, "Orden de salida guardada.", releaseOrderBm);
             }
@@ -75,7 +80,7 @@ namespace BusinessLogicLayer
                 ResultBM validResult = IsValid(releaseOrderBm);
 
                 if (!validResult.IsValid()) return validResult;
-                releaseOrderDto = new ReleaseOrderDTO(releaseOrderBm.id, releaseOrderBm.beneficiary.id, releaseOrderBm.comment, releaseOrderBm.released, releaseOrderBm.received, releaseOrderBm.status);
+                releaseOrderDto = new ReleaseOrderDTO(releaseOrderBm.id, releaseOrderBm.beneficiary.id, releaseOrderBm.Comment, releaseOrderBm.released, releaseOrderBm.received, releaseOrderBm.OrderStatus);
                 releaseOrderDal.UpdateReleaseOrder(releaseOrderDto);
 
                 return new ResultBM(ResultBM.Type.OK, "Orden de salida actualizada.", releaseOrderBm);
@@ -98,7 +103,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar los países.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar las órdenes de salida.", exception);
             }
         }
 
@@ -107,7 +112,7 @@ namespace BusinessLogicLayer
             List<ReleaseOrderBM> result = new List<ReleaseOrderBM>();
             foreach (ReleaseOrderDTO order in orders)
             {
-                result.Add(new ReleaseOrderBM(order, GetBeneficiary(order)));
+                result.Add(new ReleaseOrderBM(order, GetBeneficiary(order), GetDetail(order)));
             }
             return result;
         }
@@ -117,6 +122,12 @@ namespace BusinessLogicLayer
         {
             ResultBM beneficiaryResult = new BeneficiaryBLL().GetBeneficiary(releaseOrderDto.beneficiaryId);
             return beneficiaryResult.GetValue<BeneficiaryBM>();
+        }
+
+        private List<ReleaseOrderDetailBM> GetDetail(ReleaseOrderDTO releaseOrderDto)
+        {
+            ResultBM detailResult = new ReleaseOrderDetailBLL().GetReleaseOrderDetail(releaseOrderDto.id);
+            return detailResult.GetValue<List<ReleaseOrderDetailBM>>();
         }
 
         private ResultBM IsValid(ReleaseOrderBM releaseOrder)

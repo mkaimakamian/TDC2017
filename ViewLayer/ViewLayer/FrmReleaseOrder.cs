@@ -56,7 +56,7 @@ namespace ViewLayer
                 cmbBeneficiary.DisplayMember = "Name";
 
                 StockBLL stockBll = new StockBLL();
-                ResultBM stockResult = stockBll.GetStocks(); //debería filtrar por disponible :D
+                ResultBM stockResult = stockBll.GetAvailableStocks();
                 lstStock.DataSource = stockResult.GetValue<List<StockBM>>();
                 lstStock.DisplayMember = "Name";
 
@@ -86,8 +86,7 @@ namespace ViewLayer
         {
             StockBM selection = (StockBM)((ListBox)sender).SelectedItem;
             nbrQuantity.Maximum = selection.Quantity;
-            nbrQuantity.Value = selection.Quantity;
-                
+            nbrQuantity.Value = selection.Quantity; // esto debe ser disponible :D
         }
 
         private void cmdAdd_Click(object sender, EventArgs e)
@@ -97,7 +96,30 @@ namespace ViewLayer
             detailBm.Quantity = int.Parse(nbrQuantity.Value.ToString());
             lstAdded.Add(detailBm);
             dgRelease.DataSource = lstAdded;
-            dgRelease.Refresh();
+        }
+
+        private void cmdAccept_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ReleaseOrderBLL releaseOrderBll = new ReleaseOrderBLL();
+                ResultBM releaseResult = null;
+
+                this.Entity.beneficiary = (BeneficiaryBM)cmbBeneficiary.SelectedItem;
+                this.Entity.Comment = txtComment.Text;
+                this.Entity.detail = lstAdded;
+
+                if (isUpdate) releaseResult = releaseOrderBll.UpdateReleaseOrder(this.Entity);
+                else releaseResult = releaseOrderBll.SaveReleaseOrder(this.Entity);
+
+                if (releaseResult.IsValid()) Close();
+                else MessageBox.Show("Se ha producido el siguiente error: " + releaseResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }
