@@ -38,10 +38,30 @@ namespace DataAccessLayer
 
             if (reader.Count > 0)
             {
-                for (int i = 0; i < reader.Count; ++i)
-                {
-                    result.Add(Resolve(reader[i]));
-                }
+                for (int i = 0; i < reader.Count; ++i) result.Add(Resolve(reader[i]));
+            }
+
+            return result;
+        }
+
+        public List<StockDTO> GetAvailableStock()
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+            List<List<String>> reader;
+            List<StockDTO> result = new List<StockDTO>();
+
+            sql = "SELECT s.id, s.name, SUM(s.quantity) -  SUM(CASE WHEN r.quantity IS NULL THEN 0 ELSE r.quantity END) quantity, s.itemTypeId, ";
+            sql += "s.donationId, s.depotId, s.dueDate, s.location ";
+            sql += "FROM stock s INNER JOIN donation d ON d.id = s.donationId LEFT JOIN release_order_detail r ON r.stockId = s.id ";
+            sql += "WHERE d.statusId = 2 GROUP BY s.id, s.name, s.quantity, s.itemTypeId, s.donationId, s.depotId, s.dueDate, s.location ";
+            sql += "HAVING SUM(s.quantity) > SUM(CASE WHEN r.quantity IS NULL THEN 0 ELSE r.quantity END)";
+            
+            reader = dbsql.executeReader(sql);
+
+            if (reader.Count > 0)
+            {
+                for (int i = 0; i < reader.Count; ++i) result.Add(Resolve(reader[i]));
             }
 
             return result;

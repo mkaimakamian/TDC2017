@@ -119,7 +119,7 @@ namespace BusinessLogicLayer
             try
             {
                 StockDAL stockDal = new StockDAL();
-                List<StockDTO> stocksDto = stockDal.GetStocks();
+                List<StockDTO> stocksDto = stockDal.GetAvailableStock();
                 List<StockBM> stocksBm = ConvertIntoBusinessModel(stocksDto);
                 return new ResultBM(ResultBM.Type.OK, "Recuperación de registros exitosa.", stocksBm);
             }
