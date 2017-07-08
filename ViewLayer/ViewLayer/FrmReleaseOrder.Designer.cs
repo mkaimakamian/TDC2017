@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtComment = new System.Windows.Forms.TextBox();
+            this.lblComment = new System.Windows.Forms.Label();
             this.nbrQuantity = new System.Windows.Forms.NumericUpDown();
             this.lstStock = new System.Windows.Forms.ListBox();
             this.lblStock = new System.Windows.Forms.Label();
@@ -41,8 +43,6 @@
             this.cmdRemove = new System.Windows.Forms.Button();
             this.cmdClose = new System.Windows.Forms.Button();
             this.cmdAccept = new System.Windows.Forms.Button();
-            this.lblComment = new System.Windows.Forms.Label();
-            this.txtComment = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nbrQuantity)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -64,6 +64,23 @@
             this.groupBox1.Size = new System.Drawing.Size(221, 304);
             this.groupBox1.TabIndex = 42;
             this.groupBox1.TabStop = false;
+            // 
+            // txtComment
+            // 
+            this.txtComment.Location = new System.Drawing.Point(6, 251);
+            this.txtComment.Multiline = true;
+            this.txtComment.Name = "txtComment";
+            this.txtComment.Size = new System.Drawing.Size(200, 47);
+            this.txtComment.TabIndex = 26;
+            // 
+            // lblComment
+            // 
+            this.lblComment.AutoSize = true;
+            this.lblComment.Location = new System.Drawing.Point(6, 235);
+            this.lblComment.Name = "lblComment";
+            this.lblComment.Size = new System.Drawing.Size(50, 13);
+            this.lblComment.TabIndex = 25;
+            this.lblComment.Text = "comment";
             // 
             // nbrQuantity
             // 
@@ -139,8 +156,10 @@
             // dgRelease
             // 
             this.dgRelease.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgRelease.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgRelease.Location = new System.Drawing.Point(6, 16);
             this.dgRelease.Name = "dgRelease";
+            this.dgRelease.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgRelease.Size = new System.Drawing.Size(357, 282);
             this.dgRelease.TabIndex = 0;
             // 
@@ -162,6 +181,7 @@
             this.cmdRemove.TabIndex = 45;
             this.cmdRemove.Text = "<<";
             this.cmdRemove.UseVisualStyleBackColor = true;
+            this.cmdRemove.Click += new System.EventHandler(this.cmdRemove_Click);
             // 
             // cmdClose
             // 
@@ -182,23 +202,6 @@
             this.cmdAccept.Text = "accept";
             this.cmdAccept.UseVisualStyleBackColor = true;
             this.cmdAccept.Click += new System.EventHandler(this.cmdAccept_Click);
-            // 
-            // lblComment
-            // 
-            this.lblComment.AutoSize = true;
-            this.lblComment.Location = new System.Drawing.Point(6, 235);
-            this.lblComment.Name = "lblComment";
-            this.lblComment.Size = new System.Drawing.Size(50, 13);
-            this.lblComment.TabIndex = 25;
-            this.lblComment.Text = "comment";
-            // 
-            // txtComment
-            // 
-            this.txtComment.Location = new System.Drawing.Point(6, 251);
-            this.txtComment.Multiline = true;
-            this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(200, 47);
-            this.txtComment.TabIndex = 26;
             // 
             // FrmReleaseOrder
             // 

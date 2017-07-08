@@ -69,7 +69,7 @@ namespace DataAccessLayer
             DBSql dbsql = new DBSql();
             String sql;
 
-            sql = "UPDATE address SET ";
+            sql = "UPDATE release_order SET ";
             sql += "beneficiaryId = " + releaseOrderDto.beneficiaryId + ", ";
             sql += "comment = '" + releaseOrderDto.comment + "', ";
             sql += "status = '" + releaseOrderDto.status + "' ";

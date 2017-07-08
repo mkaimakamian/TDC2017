@@ -62,15 +62,18 @@ namespace ViewLayer
 
                 if (IsUpdate)
                 {
+                    bool found = false;
 
-                    //if (resultBeneficiary.IsValid())
-                    //{
-                        
-                    //}
-                    //else
-                    //{
-                    //    MessageBox.Show(resultBeneficiary.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    //}
+                    for (int i = 0; i < cmbBeneficiary.Items.Count && !found; ++i)
+                    {
+                        found = ((BeneficiaryBM)cmbBeneficiary.Items[i]).id == this.Entity.beneficiary.id;
+                        if (found) cmbBeneficiary.SelectedIndex = i;
+
+                    }
+                    lstAdded = this.Entity.detail;
+                    dgRelease.DataSource = lstAdded;
+                    txtComment.Text = this.Entity.Comment;
+
                 }
                 else
                 {
@@ -91,12 +94,65 @@ namespace ViewLayer
 
         private void cmdAdd_Click(object sender, EventArgs e)
         {
-            ReleaseOrderDetailBM detailBm = new ReleaseOrderDetailBM();
-            detailBm.stock = (StockBM)lstStock.SelectedItem;
-            detailBm.Quantity = int.Parse(nbrQuantity.Value.ToString());
-            lstAdded.Add(detailBm);
+            UpdateGrid(true);
+        }
+
+        private void cmdRemove_Click(object sender, EventArgs e)
+        {
+            if (dgRelease.SelectedRows.Count == 0) return;
+            UpdateGrid(false);
+        }
+
+        private void UpdateGrid(bool isAdding)
+        {
+            ReleaseOrderDetailBM detailToAdd = null;
+            StockBM stockToAdd = (StockBM)lstStock.SelectedItem;
+          
+            if (isAdding)
+            {
+                bool found = false;
+                //si existe, es necesario que se controle que no se puedan agregar más unidades que las que especifica el stock disponible
+                for (int i = 0; i < lstAdded.Count && !found; ++i)
+                {
+                    found = stockToAdd.id == lstAdded[i].stock.id;
+                    if (found)
+                    {
+                        int total = lstAdded[i].Quantity + int.Parse(nbrQuantity.Value.ToString());
+
+                        if (total <= stockToAdd.Quantity) lstAdded[i].Quantity = total;
+                        else lstAdded[i].Quantity = stockToAdd.Quantity;
+                        
+                    }
+                }
+
+                // Si el stock a agregar no existe en la lista de agregados, entonces se incorpora.
+                if (!found)
+                {
+                    detailToAdd = new ReleaseOrderDetailBM();
+                    detailToAdd.stock = stockToAdd;
+                    detailToAdd.Quantity = int.Parse(nbrQuantity.Value.ToString());
+                    lstAdded.Add(detailToAdd);
+                }
+                
+            }
+            else
+            {
+                ReleaseOrderDetailBM toRemove = (ReleaseOrderDetailBM) dgRelease.SelectedRows[0].DataBoundItem;
+
+                bool found = false;
+                //si existe, es necesario que se controle que no se puedan agregar más unidades que las que especifica el stock disponible
+                for (int i = 0; i < lstAdded.Count && !found; ++i)
+                {
+                    found = toRemove.stock.id == lstAdded[i].stock.id;
+                    if (found) lstAdded.RemoveAt(i);
+                }                
+            }
+            dgRelease.DataSource = null;
             dgRelease.DataSource = lstAdded;
         }
+
+
+
 
         private void cmdAccept_Click(object sender, EventArgs e)
         {
@@ -121,5 +177,7 @@ namespace ViewLayer
                 MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        
     }
 }

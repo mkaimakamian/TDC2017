@@ -75,13 +75,19 @@ namespace BusinessLogicLayer
         {
             try
             {
+                ReleaseOrderDetailBLL releaseOrderDetailBll = new ReleaseOrderDetailBLL();
+                ResultBM detailResult = null;
                 ReleaseOrderDAL releaseOrderDal = new ReleaseOrderDAL();
                 ReleaseOrderDTO releaseOrderDto = null;
                 ResultBM validResult = IsValid(releaseOrderBm);
 
                 if (!validResult.IsValid()) return validResult;
-                releaseOrderDto = new ReleaseOrderDTO(releaseOrderBm.id, releaseOrderBm.beneficiary.id, releaseOrderBm.Comment, releaseOrderBm.released, releaseOrderBm.received, releaseOrderBm.OrderStatus);
+                releaseOrderDto = new ReleaseOrderDTO(releaseOrderBm.id, releaseOrderBm.beneficiary.beneficiaryId, releaseOrderBm.Comment, releaseOrderBm.released, releaseOrderBm.received, releaseOrderBm.OrderStatus);
                 releaseOrderDal.UpdateReleaseOrder(releaseOrderDto);
+
+                detailResult = releaseOrderDetailBll.UpdateReleaseOrderDetail(releaseOrderBm);
+                if (!detailResult.IsValid()) return detailResult;
+
 
                 return new ResultBM(ResultBM.Type.OK, "Orden de salida actualizada.", releaseOrderBm);
             }
