@@ -43,10 +43,9 @@ namespace BusinessModel
         //    this.volunteer = volunteerBm;
         //}
 
-        public int Lot
+        public string Lot
         {
-            get { return this.id; }
-            set { this.id = value; }
+            get { return "# " + this.id; }
         }
 
         public string Status
@@ -57,16 +56,16 @@ namespace BusinessModel
             }
         }
 
-        public string Donor
-        {
-            get { return this.donor.Name + " " +this.donor.LastName; }
-        }
+        //public string Donor
+        //{
+        //    get { return this.donor.Name + " " +this.donor.LastName; }
+        //}
 
         public string Responsible
         {
             get
             {
-                if (this.volunteer != null) return this.volunteer.Name + ", " + this.volunteer.LastName;
+                if (this.volunteer != null) return this.volunteer.FullName;
                 else return "";
             }
         }

@@ -91,7 +91,7 @@ namespace BusinessLogicLayer
                 beneficiaryDal.SaveBeneficiary(beneficiaryDto);
                 beneficieryBm.beneficiaryId = beneficiaryDto.beneficiaryId;
 
-                return new ResultBM(ResultBM.Type.OK, "Se ha creado el beneficiario " + beneficieryBm.Name + " " + beneficieryBm.LastName + ".", beneficieryBm);
+                return new ResultBM(ResultBM.Type.OK, "Se ha creado el beneficiario " + beneficieryBm.name + " " + beneficieryBm.lastName + ".", beneficieryBm);
 
 
             }
@@ -121,7 +121,7 @@ namespace BusinessLogicLayer
 
                 beneficiaryDal.UpdateDonor(beneficiaryDto);
 
-                return new ResultBM(ResultBM.Type.OK, "Se ha actualizado el beneficiario " + beneficieryBm.Name + " " + beneficieryBm.LastName + ".", beneficieryBm);
+                return new ResultBM(ResultBM.Type.OK, "Se ha actualizado el beneficiario " + beneficieryBm.name + " " + beneficieryBm.lastName + ".", beneficieryBm);
             }
             catch (Exception exception)
             {

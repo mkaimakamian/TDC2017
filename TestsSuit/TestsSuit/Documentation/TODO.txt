@@ -3,6 +3,7 @@
 - Crear documentación adecuada
 - Depurar la base de datos
 - En el alta de donación, el voluntario no se guarda
+- Agregar traducciones que faltan en orden de salida
 - En el alta de orden de salida, debería mostrarse más información sobre los productos (como el vencimiento)
 
 ::: FUNCIONALIDADES QUE DEBERÍAN INCLUIRSE :::

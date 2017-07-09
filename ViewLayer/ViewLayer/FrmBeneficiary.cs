@@ -105,8 +105,8 @@ namespace ViewLayer
 
         private void CompletePersonData(BeneficiaryBM beneficiaryBm)
         {
-            txtName.Text = beneficiaryBm.Name;
-            txtLastName.Text = beneficiaryBm.LastName;
+            txtName.Text = beneficiaryBm.name;
+            txtLastName.Text = beneficiaryBm.lastName;
             dateBirthday.Value = beneficiaryBm.Birthdate;
             txtMail.Text = beneficiaryBm.Email;
             txtPhone.Text = beneficiaryBm.phone;
@@ -187,8 +187,8 @@ namespace ViewLayer
         private void FillPersonData(BeneficiaryBM beneficiaryBm)
         {
             //Completa los datos básicos del beneficiario
-            beneficiaryBm.Name = txtName.Text;
-            beneficiaryBm.LastName = txtLastName.Text;
+            beneficiaryBm.name = txtName.Text;
+            beneficiaryBm.lastName = txtLastName.Text;
             beneficiaryBm.Birthdate = dateBirthday.Value;
             beneficiaryBm.Email = txtMail.Text;
             beneficiaryBm.phone = txtPhone.Text;

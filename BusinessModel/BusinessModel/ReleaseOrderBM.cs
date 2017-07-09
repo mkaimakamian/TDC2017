@@ -39,15 +39,9 @@ namespace BusinessModel
             this.detail = releaseOrderDetailBms;
         }
 
-        public string BeneficiaryName
+        public string OrderNumber
         {
-            get { return this.beneficiary.Name + " " + this.beneficiary.LastName; }
-        }
-
-        public string Comment
-        {
-            get { return this.comment; }
-            set { this.comment = value; }
+            get { return "# " + this.id; }
         }
 
         public string OrderStatus
@@ -64,6 +58,17 @@ namespace BusinessModel
                 foreach (ReleaseOrderDetailBM detail in this.detail) totalItems += detail.Quantity;
                 return totalItems; 
             }
+        }
+
+        public string Beneficiary
+        {
+            get { return this.beneficiary.FullName; }
+        }
+
+        public string Comment
+        {
+            get { return this.comment; }
+            set { this.comment = value; }
         }
     }
 }

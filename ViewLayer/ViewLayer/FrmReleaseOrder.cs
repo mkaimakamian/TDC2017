@@ -54,7 +54,7 @@ namespace ViewLayer
                 BeneficiaryBLL beneficiaryBll = new BeneficiaryBLL();
                 ResultBM beneficiaryResult = beneficiaryBll.GetBeneficiaries();
                 cmbBeneficiary.DataSource = beneficiaryResult.GetValue<List<BeneficiaryBM>>();
-                cmbBeneficiary.DisplayMember = "Name";
+                cmbBeneficiary.DisplayMember = "FullName";
 
                 StockBLL stockBll = new StockBLL();
                 ResultBM stockResult = stockBll.GetAvailableStocks();
@@ -138,15 +138,44 @@ namespace ViewLayer
             }
             else
             {
+                // Proceso inverso: se elimina de la lista de agregados y se debe buscar en el listado de los " a agergar"
                 ReleaseOrderDetailBM toRemove = (ReleaseOrderDetailBM) dgRelease.SelectedRows[0].DataBoundItem;
 
                 bool found = false;
-                //si existe, es necesario que se controle que no se puedan agregar más unidades que las que especifica el stock disponible
+                
                 for (int i = 0; i < lstAdded.Count && !found; ++i)
                 {
                     found = toRemove.stock.id == lstAdded[i].stock.id;
                     if (found) lstAdded.RemoveAt(i);
-                }                
+                }
+
+                // Al quitar, hay que cjhequear si existe el stock en la lista para incrementar el total disponible asignable
+                found = false;
+                List<StockBM>  listOfStock = (List<StockBM>) lstStock.DataSource;
+                for (int i = 0; i < listOfStock.Count && !found; ++i)
+                {
+                    found = toRemove.stock.id == listOfStock[i].id;
+                    if (found)
+                    {
+
+                        //int total = lstAdded[i].Quantity + int.Parse(nbrQuantity.Value.ToString());
+
+                        //if (total <= stockToAdd.Quantity) lstAdded[i].Quantity = total;
+                        //else lstAdded[i].Quantity = stockToAdd.Quantity;
+
+                        listOfStock[i].Quantity += listOfStock[i].Quantity + toRemove.Quantity;
+                    }
+                }
+
+                if (!found)
+                {
+                    if (listOfStock == null) listOfStock = new List<StockBM>();
+                    listOfStock.Add(toRemove.stock);                    
+                    lstStock.DataSource = null;
+                    lstStock.DataSource = listOfStock;
+                    lstStock.DisplayMember = "Name";
+                }
+
             }
             dgRelease.DataSource = null;
             dgRelease.DataSource = lstAdded;

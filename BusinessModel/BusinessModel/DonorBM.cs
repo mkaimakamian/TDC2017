@@ -32,7 +32,7 @@ namespace BusinessModel
         public string GetContectInfo()
         {
             string contactInfo = "";
-            contactInfo += this.Name + " " + this.LastName + Environment.NewLine;
+            contactInfo += this.FullName+ Environment.NewLine;
             contactInfo += this.dni + Environment.NewLine;
             contactInfo += this.Email + Environment.NewLine;
             contactInfo += this.phone + Environment.NewLine;

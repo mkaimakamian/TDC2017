@@ -83,7 +83,7 @@ namespace ViewLayer
                     //Se debe agregar un voluntario "Sin voluntario".
                     List<VolunteerBM> volunteers = new List<VolunteerBM>();
                     VolunteerBM noVolunteer = new VolunteerBM();
-                    noVolunteer.Name = "-------------";
+                    noVolunteer.name = "-------------";
                     volunteers.Add(noVolunteer);
                     volunteers.AddRange(volunteerResult.GetValue<List<VolunteerBM>>());                   
                     cmbVolunteer.DataSource = volunteers;
@@ -173,7 +173,7 @@ namespace ViewLayer
 
                 if (donationResult.IsValid())
                 {
-                    if (!this.IsUpdate) MessageBox.Show("Lote creado #" + this.Entity.Lot, "Lote creado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (!this.IsUpdate) MessageBox.Show("Lote creado " + this.Entity.Lot, "Lote creado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
                 }
                 else MessageBox.Show("Se ha producido el siguiente error: " + donationResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);

@@ -64,11 +64,11 @@ namespace BusinessLogicLayer
                 addressResult = addressBll.SaveAddress(personBm.address);
                 if (!addressResult.IsValid()) return addressResult;
 
-                personDto = new PersonDTO(personBm.id, personBm.Name, personBm.LastName, personBm.Birthdate, personBm.Email, personBm.phone, personBm.gender, personBm.dni, personBm.address.id);
+                personDto = new PersonDTO(personBm.id, personBm.name, personBm.lastName, personBm.Birthdate, personBm.Email, personBm.phone, personBm.gender, personBm.dni, personBm.address.id);
                 personDal.SavePerson(personDto);
                 personBm.id = personDto.id;
 
-                return new ResultBM(ResultBM.Type.OK, "Se ha creado la persona con el nombre " + personBm.Name + " " + personBm.LastName + ".", personBm);
+                return new ResultBM(ResultBM.Type.OK, "Se ha creado la persona con el nombre " + personBm.name + " " + personBm.lastName+ ".", personBm);
                
             }
             catch (Exception exception)
@@ -93,10 +93,10 @@ namespace BusinessLogicLayer
                 addressResult = addressBll.UpdateAddress(personBm.address);
                 if (!addressResult.IsValid()) return addressResult;
 
-                personDto = new PersonDTO(personBm.id, personBm.Name, personBm.LastName, personBm.Birthdate, personBm.Email, personBm.phone, personBm.gender, personBm.dni, personBm.address.id);
+                personDto = new PersonDTO(personBm.id, personBm.name, personBm.lastName, personBm.Birthdate, personBm.Email, personBm.phone, personBm.gender, personBm.dni, personBm.address.id);
                 personDal.UpdatePerson(personDto);
 
-                return new ResultBM(ResultBM.Type.OK, "Se ha actualizado la persona con el nombre " + personBm.Name + " " + personBm.LastName + ".", personBm);
+                return new ResultBM(ResultBM.Type.OK, "Se ha actualizado la persona con el nombre " + personBm.name + " " + personBm.lastName + ".", personBm);
 
             }
             catch (Exception exception) {
@@ -107,10 +107,10 @@ namespace BusinessLogicLayer
 
         private ResultBM IsValid(PersonBM personBm)
         {
-            if (personBm.Name == null || personBm.Name.Length == 0)
+            if (personBm.name == null || personBm.name.Length == 0)
                 return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el nombre.");
 
-            if (personBm.LastName == null || personBm.LastName.Length == 0)
+            if (personBm.lastName == null || personBm.lastName.Length == 0)
                 return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el apellido.");
 
             if (personBm.dni < 1 || personBm.dni.ToString().Length < 8)

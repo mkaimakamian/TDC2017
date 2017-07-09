@@ -10,8 +10,8 @@ namespace BusinessModel
     public class PersonBM
     {
         public int id;
-        private string name;
-        private string lastName;
+        public string name;
+        public string lastName;
         private DateTime birthdate;
         private string email;
         public string phone;
@@ -46,17 +46,22 @@ namespace BusinessModel
             this.address = address;
         }
 
-        public string Name
+        public string FullName
         {
-            get { return this.name; }
-            set { this.name = value; }
+            get { return this.name + " " + this.lastName; }
         }
 
-        public string LastName
-        {
-            get { return this.lastName; }
-            set { this.lastName = value; }
-        }
+        //public string Name
+        //{
+        //    get { return this.name; }
+        //    set { this.name = value; }
+        //}
+
+        //public string LastName
+        //{
+        //    get { return this.lastName; }
+        //    set { this.lastName = value; }
+        //}
 
         public DateTime Birthdate
         {

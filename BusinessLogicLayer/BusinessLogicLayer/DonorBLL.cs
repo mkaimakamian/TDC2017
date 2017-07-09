@@ -115,7 +115,7 @@ namespace BusinessLogicLayer
                 donorDal.SaveDonor(donorDto);
                 donorBm.donorId = donorDto.donorId;
 
-                return new ResultBM(ResultBM.Type.OK, "Se ha creado el donador " + donorBm.Name + " " + donorBm.LastName + ".", donorBm);
+                return new ResultBM(ResultBM.Type.OK, "Se ha creado el donador " + donorBm.name + " " + donorBm.lastName + ".", donorBm);
                    
                
             }
@@ -158,7 +158,7 @@ namespace BusinessLogicLayer
                 donorDto = new DonorDTO(personBm.id, donorBm.donorId, organizationBm == null ? 0 : organizationBm.id, donorBm.CanBeContacted);
                 donorDal.UpdateDonor(donorDto);
 
-                return new ResultBM(ResultBM.Type.OK, "Se ha creado el donador " + donorBm.Name + " " + donorBm.LastName + ".", donorBm);
+                return new ResultBM(ResultBM.Type.OK, "Se ha creado el donador " + donorBm.name + " " + donorBm.lastName + ".", donorBm);
 
 
             }

@@ -32,7 +32,7 @@ namespace BusinessModel
             this.location = stockDto.loaction;
         }
 
-        public int Lot
+        public string Lot
         {
             get { return this.donation.Lot; }
         }
@@ -42,17 +42,17 @@ namespace BusinessModel
             get { return  this.donation.Status; }
         }
 
-        public string Name
-        {
-            get { return this.name; }
-            set { this.name = value; }
-        }
-
         public int Quantity
         {
             get { return this.quantity; }
             set { this.quantity = value; }
         }
+
+        public string Name
+        {
+            get { return this.name; }
+            set { this.name = value; }
+        }           
 
         public DateTime DueDate
         {

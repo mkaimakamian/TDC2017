@@ -100,8 +100,8 @@ namespace ViewLayer
 
         private void CompletePersonData(DonorBM donor)
         {
-            txtName.Text = donor.Name;
-            txtLastName.Text = donor.LastName;
+            txtName.Text = donor.name;
+            txtLastName.Text = donor.lastName;
             dateBirthday.Value = donor.Birthdate;
             txtMail.Text = donor.Email;
             txtPhone.Text = donor.phone;
@@ -176,8 +176,8 @@ namespace ViewLayer
         private void FillPersonData(DonorBM donor)
         {
             //Completa los datos básicos del donador
-            donor.Name = txtName.Text;
-            donor.LastName = txtLastName.Text;
+            donor.name = txtName.Text;
+            donor.lastName = txtLastName.Text;
             donor.Birthdate = dateBirthday.Value;
             donor.Email = txtMail.Text;
             donor.phone = txtPhone.Text;

@@ -18,8 +18,8 @@ namespace BusinessModel
         public VolunteerBM(VolunteerDTO volunteerDto)
         {
             this.id = volunteerDto.id;
-            this.Name = volunteerDto.name;
-            this.LastName = volunteerDto.lastName;
+            this.name = volunteerDto.name;
+            this.lastName = volunteerDto.lastName;
             this.Birthdate = volunteerDto.birthdate;
             this.Email = volunteerDto.email;
             this.phone = volunteerDto.phone;
@@ -31,8 +31,8 @@ namespace BusinessModel
         public VolunteerBM(VolunteerDTO volunteerDto, AddressBM addressBm, BranchBM branchBm, UserBM userBm = null)
         {
             this.id = volunteerDto.id;
-            this.Name = volunteerDto.name;
-            this.LastName = volunteerDto.lastName;
+            this.name = volunteerDto.name;
+            this.lastName = volunteerDto.lastName;
             this.Birthdate = volunteerDto.birthdate;
             this.Email = volunteerDto.email;
             this.phone = volunteerDto.phone;
@@ -48,8 +48,8 @@ namespace BusinessModel
         public VolunteerBM(PersonBM personBm, BranchBM branchBm, UserBM userBm = null)
         {
             this.id = personBm.id;
-            this.Name = personBm.Name;
-            this.LastName = personBm.LastName;
+            this.name = personBm.name;
+            this.lastName = personBm.lastName;
             this.Birthdate = personBm.Birthdate;
             this.Email = personBm.Email;
             this.phone = personBm.phone;
