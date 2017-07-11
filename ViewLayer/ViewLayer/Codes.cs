@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ViewLayer
 {
     public class Codes
-    {
+    { 
         public const string GE001 = "GE001"; //Herramientas
             public const string OP001 = "OP001"; //Cambiar idioma
             public const string GE002 = "GE002"; //Seguridad
