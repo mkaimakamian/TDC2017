@@ -11,23 +11,7 @@ namespace BusinessLogicLayer
 {
     public class LanguageBLL: BLEntity
     {
-        //private LanguageDTO languageDto;
-        //private List<TranslationBLL> translationBll;
-
-        /// <summary>
-        /// Inicializa esta instancia con el idioma.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        //public LanguageBLL GetLanguage(int id) {
-        //    LanguageDAL languageDal = new LanguageDAL();
-        //    languageDto = languageDal.GetLanguage(id);
-        //    return this;
-
-        //    //DEBEERÍA DEVOLVER UN BUSINESSMODEL!
-        //}
-
-        public ResultBM GetLanguages()
+       public ResultBM GetLanguages()
         {
             LanguageDAL languageDal = new LanguageDAL();
             List<LanguageDTO> languages  = languageDal.GetLanguages();
