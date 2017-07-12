@@ -49,6 +49,11 @@ namespace ViewLayer
             SessionHelper.RegisterForTranslation(cmdAccept, Codes.BTN_ACCEPT);
             SessionHelper.RegisterForTranslation(cmdClose, Codes.BTN_CLOSE);
 
+            SessionHelper.RegisterForTranslation(lblBeneficiary, Codes.LBL_BENEFICIARY);
+            SessionHelper.RegisterForTranslation(lblStock, Codes.LBL_STOCK);
+            SessionHelper.RegisterForTranslation(lblQuantity, Codes.LBL_QUANTITY);
+            SessionHelper.RegisterForTranslation(lblComment, Codes.LBL_OBSERVATION);
+
             try 
             {
                 BeneficiaryBLL beneficiaryBll = new BeneficiaryBLL();

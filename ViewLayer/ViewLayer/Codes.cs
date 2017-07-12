@@ -134,7 +134,9 @@ namespace ViewLayer
         public const string LBL_DESC_ACCESSIBILITY = "LBL_DESC_ACCESSIBILITY";
         public const string LBL_DESC_MAJOR_PROBLEM = "LBL_DESC_MAJOR_PROBLEM";
 
-
+        public const string LBL_BENEFICIARY = "LBL_BENEFICIARY";
+        public const string LBL_STOCK = "LBL_STOCK";
+        
         public const string MNU_GE001 = "MNU_GE001"; //Menú herramientas
             public const string MNU_OP001 = "MNU_OP001"; //Cambiar idioma
                 public const string MNU_OP001_LBL_LANGUAGE = "MNU_OP001_LBL_LANGUAGE"; //Frase de cambiar idioma
