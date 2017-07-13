@@ -134,7 +134,6 @@
             this.Controls.Add(this.cmdNew);
             this.Name = "FrmGenericMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "FrmGenericMain";
             this.Load += new System.EventHandler(this.FrmGenericMain_Load);
             this.Resize += new System.EventHandler(this.FrmGenericMain_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dgView)).EndInit();
