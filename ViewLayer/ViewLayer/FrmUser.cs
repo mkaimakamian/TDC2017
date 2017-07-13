@@ -117,20 +117,23 @@ namespace ViewLayer
 
         private void cmdAccept_Click(object sender, EventArgs e)
         {
-            UserBLL userBll = new UserBLL();
-            LanguageBM language = (LanguageBM)cmbLanguage.SelectedValue;
-            PermissionMDL profile = (PermissionMDL)cmbProfile.SelectedValue;
-            ResultBM saveResult;
-            UserBM userBm;
-
-            if (txtPassword.Text != txtPasswordCheck.Text)
-            {
-                MessageBox.Show("El password asignado no coincide con el de verificación.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
+            DialogResult pressed = MessageBox.Show("¿Desea guardar los cambios?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (pressed == DialogResult.No) return;
+                       
             try
             {
+                UserBLL userBll = new UserBLL();
+                LanguageBM language = (LanguageBM)cmbLanguage.SelectedValue;
+                PermissionMDL profile = (PermissionMDL)cmbProfile.SelectedValue;
+                ResultBM saveResult;
+                UserBM userBm;
+
+                if (txtPassword.Text != txtPasswordCheck.Text)
+                {
+                    MessageBox.Show("El password asignado no coincide con el de verificación.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
                 if (isUpdate)
                 {
                  

@@ -71,7 +71,7 @@ namespace ViewLayer
                 {
                     cmbDonor.SelectedIndexChanged -= cmbDonor_SelectedIndexChanged;
                     cmbDonor.DataSource = donorResult.GetValue<List<DonorBM>>();
-                    cmbDonor.DisplayMember = "Name";
+                    cmbDonor.DisplayMember = "FullName";
                     cmbDonor.SelectedIndexChanged += cmbDonor_SelectedIndexChanged;
                     
                 }
@@ -87,7 +87,7 @@ namespace ViewLayer
                     volunteers.Add(noVolunteer);
                     volunteers.AddRange(volunteerResult.GetValue<List<VolunteerBM>>());                   
                     cmbVolunteer.DataSource = volunteers;
-                    cmbVolunteer.DisplayMember = "Name";
+                    cmbVolunteer.DisplayMember = "FullName";
                 }
                 else
                     MessageBox.Show(volunteerResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);

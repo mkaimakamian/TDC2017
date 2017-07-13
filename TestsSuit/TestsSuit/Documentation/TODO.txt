@@ -5,6 +5,8 @@
 - En el alta de donación, el voluntario no se guarda
 - Agregar traducciones que faltan en orden de salida
 - En el alta de orden de salida, debería mostrarse más información sobre los productos (como el vencimiento)
+- Si no se posee voluntario asociaado, no deberia poder stokearse
+- Probar que el nombre de usuario no exista para evitar duplicados
 
 ::: FUNCIONALIDADES QUE DEBERÍAN INCLUIRSE :::
 - Eliminar las entidades lógicamente
