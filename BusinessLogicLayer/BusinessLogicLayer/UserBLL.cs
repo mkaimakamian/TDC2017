@@ -233,6 +233,15 @@ namespace BusinessLogicLayer
             if (userBM.Name.Length == 0 || userBM.Password.Length == 0) {
                 return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Todos los campos deben ser completados.");
             }
+
+            UserDAL userDal = new UserDAL();
+            UserDTO userDto = userDal.GetUser(userBM.Name);
+
+            if (userDto != null)
+            {
+                return new ResultBM(ResultBM.Type.FAIL, "El nombre de usuario ya existe.");
+            }
+
             return new ResultBM(ResultBM.Type.OK);
         }
 

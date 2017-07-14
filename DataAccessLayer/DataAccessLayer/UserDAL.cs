@@ -42,6 +42,23 @@ namespace DataAccessLayer
             return null;
         }
 
+        public UserDTO GetUser(string userName)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+            List<List<String>> reader;
+
+            sql = "SELECT * FROM users WHERE name = '" + userName +"'";
+            reader = dbsql.executeReader(sql);
+
+            if (reader.Count > 0)
+            {
+                return Resolve(reader.First());
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// Devuelve la lista de todos los usuarios.
         /// </summary>

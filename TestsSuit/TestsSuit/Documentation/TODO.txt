@@ -1,16 +1,13 @@
 ::: COSAS QUE SÍ HAY QUE CORREGIR :::
 - Crear instalador & manual
-- Crear documentación adecuada
 - Depurar la base de datos
 - En el alta de orden de salida, debería mostrarse más información sobre los productos (como el vencimiento)
 - Si no se posee voluntario asociaado, no deberia poder stokearse
-- Probar que el nombre de usuario no exista para evitar duplicados
 - Al editar un perfil, e sposible seguir agregando permisos existentes
 - en el campo usuario mostrar el idioma y no el id 
 - si un perfil está siendo utilizado, no debería poder borrarse
 
 ::: FUNCIONALIDADES QUE DEBERÍAN INCLUIRSE :::
-- Eliminar las entidades lógicamente
 - Mejorar las excepciones: enviar la descripción de la misma (?)
 - Mensajes de error en el idioma adecuado
 - Controlar en FrmDonor que al recuperar el país, debería contemplarse el éxito o fallo

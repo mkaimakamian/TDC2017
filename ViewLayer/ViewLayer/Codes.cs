@@ -59,9 +59,9 @@ namespace ViewLayer
         
         public const string GE015 = "GE015"; //Logística
             public const string GE016 = "GE016"; //Órdenes de salida
-                public const string OP034 = "OP034"; // Crear beneficiario
-                public const string OP035 = "OP035"; // Editar beneficiario
-                public const string OP036 = "OP036"; // Eliminar beneficiario
+                public const string OP034 = "OP034"; // Crear Órdenes de salida
+                public const string OP035 = "OP035"; // Editar Órdenes de salida
+                public const string OP036 = "OP036"; // Eliminar Órdenes de salida
         
         
 

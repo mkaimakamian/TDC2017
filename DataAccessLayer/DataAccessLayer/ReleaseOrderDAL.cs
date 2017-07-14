@@ -78,6 +78,16 @@ namespace DataAccessLayer
             return true;
         }
 
+        public bool DeleteReleaseOrder(int id)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "DELETE FROM release_order_detail WHERE releaseOrderId = " + id + "; DELETE FROM release_order WHERE id = " + id;
+            dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
+
         private ReleaseOrderDTO Resolve(List<String> item)
         {
             ReleaseOrderDTO result = new ReleaseOrderDTO();

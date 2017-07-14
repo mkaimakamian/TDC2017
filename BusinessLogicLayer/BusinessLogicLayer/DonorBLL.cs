@@ -199,7 +199,17 @@ namespace BusinessLogicLayer
 
         public ResultBM Delete(object entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DonorDAL donodrDal = new DonorDAL();
+                DonorBM donodrBm = entity as DonorBM;
+                donodrDal.DeleteDonor(donodrBm.donorId);
+                return new ResultBM(ResultBM.Type.OK, "Se ha eliminado el registro.", donodrBm);
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al eliminar el registro.", exception);
+            }
         }
     }
 }

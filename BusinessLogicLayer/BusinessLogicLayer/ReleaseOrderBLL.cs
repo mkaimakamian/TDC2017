@@ -151,7 +151,26 @@ namespace BusinessLogicLayer
 
         public ResultBM Delete(object entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                ReleaseOrderDAL releaseOrderDal = new ReleaseOrderDAL();
+                ReleaseOrderBM releaseOrderBm = entity as ReleaseOrderBM;
+
+                if (releaseOrderBm.OrderStatus == ReleaseOrderBM.Status.PENDING.ToString())
+                {
+                    releaseOrderDal.DeleteReleaseOrder(releaseOrderBm.id);
+                    return new ResultBM(ResultBM.Type.OK, "Se ha eliminado el registro.", releaseOrderBm);
+                }
+                else
+                {
+                    return new ResultBM(ResultBM.Type.FAIL, "No se puede eliminar la orden de salida porque su estado no lo permite.", releaseOrderBm);
+                }
+
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al eliminar el registro.", exception);
+            }
         }
     }
 }

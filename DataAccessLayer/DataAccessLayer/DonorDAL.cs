@@ -33,7 +33,7 @@ namespace DataAccessLayer
             List<List<String>> reader;
             List<DonorDTO> result = new List<DonorDTO>();
 
-            sql = "SELECT p.*, d.id donorId, d.organizationId, d.CanBeContacted FROM donor d INNER JOIN person p ON p.id = d.personId";
+            sql = "SELECT p.*, d.id donorId, d.organizationId, d.CanBeContacted FROM donor d INNER JOIN person p ON p.id = d.personId WHERE d.deleted = 0";
             reader = dbsql.executeReader(sql);
 
             if (reader.Count > 0)
@@ -71,6 +71,16 @@ namespace DataAccessLayer
             sql += "organizationId = " + (donorDto.organizationId == 0 ? "null" : donorDto.organizationId.ToString()) + ", ";
             sql += "canBeContacted = '" + donorDto.canBeContacted + "' ";
             sql += "WHERE id = " + donorDto.donorId;
+            dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
+
+        public bool DeleteDonor(int id)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "UPDATE donor SET deleted = 1 WHERE id = " + id;
             dbsql.ExecuteNonQuery(sql);
             return true;
         }

@@ -225,7 +225,8 @@ namespace ViewLayer
               typeof(ReleaseOrderBLL),
               typeof(FrmReleaseOrder),
               SessionHelper.HasPermission(Codes.OP034),
-              SessionHelper.HasPermission(Codes.OP035)
+              SessionHelper.HasPermission(Codes.OP035),
+              SessionHelper.HasPermission(Codes.OP036)
               ).ShowDialog();
         }
 
