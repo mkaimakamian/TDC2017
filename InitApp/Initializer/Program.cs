@@ -12,13 +12,27 @@ namespace Initializer
     {
         static void Main(string[] args)
         {
+
+            try
+            {
+                case2();
+            }
+            catch (Exception ex)
+            {
+                case1();
+            }
+
+        }
+
+        private static void case1()
+        {
             string bkpName = Directory.GetCurrentDirectory() + "\\rhoddion.bkp";
-            string serverInstance = Directory.GetCurrentDirectory()  + "\\dbconfig.txt";
+            string serverInstance = Directory.GetCurrentDirectory() + "\\dbconfig.txt";
             string srvInstance = System.IO.File.ReadAllText(serverInstance);
 
             string database = "CAMPOII";
-            string connStr = "Data Source=.\\"+srvInstance+"; Initial Catalog=master; Integrated Security=True";
-                        
+            string connStr = "Data Source=.\\" + srvInstance + "; Initial Catalog=master; Integrated Security=True";
+
             string sql = "";
             sql = "CREATE DATABASE " + database + "  ; USE MASTER ALTER DATABASE " + database + " SET SINGLE_USER WITH ROLLBACK IMMEDIATE RESTORE DATABASE " + database + " FROM DISK = '" + bkpName + "' WITH REPLACE";
 
@@ -35,7 +49,33 @@ namespace Initializer
                 result = int.Parse(row.ToString());
             }
             connection.Close();
+        }
 
+        private static void case2()
+        {
+            string bkpName = Directory.GetCurrentDirectory() + "\\rhoddion.bkp";
+
+            string srvInstance = "SQL_14UAI";
+
+            string database = "CAMPOII";
+            string connStr = "Data Source=.\\" + srvInstance + "; Initial Catalog=master; Integrated Security=True";
+
+            string sql = "";
+            sql = "CREATE DATABASE " + database + "  ; USE MASTER ALTER DATABASE " + database + " SET SINGLE_USER WITH ROLLBACK IMMEDIATE RESTORE DATABASE " + database + " FROM DISK = '" + bkpName + "' WITH REPLACE";
+
+
+            SqlConnection connection = new SqlConnection(connStr);
+            SqlCommand command = new SqlCommand(sql, connection);
+            int result = -1;
+
+            connection.Open();
+            object row = command.ExecuteScalar();
+
+            if (row != null)
+            {
+                result = int.Parse(row.ToString());
+            }
+            connection.Close();
         }
 
     }
