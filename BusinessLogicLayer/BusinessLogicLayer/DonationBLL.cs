@@ -195,8 +195,16 @@ namespace BusinessLogicLayer
 
                 if (donationBm.IsReceived())
                 {
-                    donationDal.DeleteDonation(donationBm.id);
-                    return new ResultBM(ResultBM.Type.OK, "Se ha eliminado el registro.", donationBm);
+                    if (!donationDal.IsInUse(donationBm.id))
+                    {
+                        donationDal.DeleteDonation(donationBm.id);
+                        return new ResultBM(ResultBM.Type.OK, "Se ha eliminado el registro.", donationBm);
+                    }
+                    else
+                    {
+                        return new ResultBM(ResultBM.Type.FAIL, "No se puede eliminar la donación porque algunos ítems ya fueron almacenados.", donationBm);
+                    }
+
                 }
                 else
                 {

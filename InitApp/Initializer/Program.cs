@@ -18,8 +18,7 @@ namespace Initializer
 
             string database = "CAMPOII";
             string connStr = "Data Source=.\\"+srvInstance+"; Initial Catalog=master; Integrated Security=True";
-
-            
+                        
             string sql = "";
             sql = "CREATE DATABASE " + database + "  ; USE MASTER ALTER DATABASE " + database + " SET SINGLE_USER WITH ROLLBACK IMMEDIATE RESTORE DATABASE " + database + " FROM DISK = '" + bkpName + "' WITH REPLACE";
 

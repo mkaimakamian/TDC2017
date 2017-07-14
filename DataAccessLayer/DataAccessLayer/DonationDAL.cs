@@ -145,6 +145,18 @@ namespace DataAccessLayer
             return true;
         }
 
+        public bool IsInUse(int id)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+            List<List<String>> reader;
+
+            sql = "SELECT count(1) FROM stock WHERE donationId = " + id;
+            reader = dbsql.executeReader(sql);
+            List<String> item = reader.First();
+            return int.Parse(item[0]) > 0;
+        }
+
         private DonationDTO Resolve(List<String> item)
         {
             DonationDTO result = new DonationDTO();
