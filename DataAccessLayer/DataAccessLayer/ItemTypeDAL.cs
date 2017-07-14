@@ -27,6 +27,19 @@ namespace DataAccessLayer
             return null;
         }
 
+        public bool IsInUse(int id)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+            List<List<String>> reader;
+
+            sql = "SELECT count(1) FROM stock WHERE itemTypeId = " + id;
+            reader = dbsql.executeReader(sql);
+            List<String> item = reader.First();
+            return int.Parse(item[0]) > 0;
+        }
+        
+
         public bool SaveItemType(ItemTypeDTO itemTypeDto)
         {
             DBSql dbsql = new DBSql();
@@ -77,6 +90,16 @@ namespace DataAccessLayer
             }
 
             return result;
+        }
+
+        public bool DeleteItemType(int id)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "DELETE FROM item_type WHERE id = " + id;
+            dbsql.ExecuteNonQuery(sql);
+            return true;
         }
 
         private ItemTypeDTO Resolve(List<String> item)

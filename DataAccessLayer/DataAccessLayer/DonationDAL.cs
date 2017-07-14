@@ -110,6 +110,17 @@ namespace DataAccessLayer
             return true;
         }
 
+        public bool UpdateToStatus(int id, int statusId)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "UPDATE donation SET statusId = " + statusId + " WHERE id = " + id;
+            dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
+
+
         public bool UpdateStatusToStored(int id, int statusId)
         {
             DBSql dbsql = new DBSql();

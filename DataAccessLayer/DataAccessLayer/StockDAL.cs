@@ -104,6 +104,28 @@ namespace DataAccessLayer
             return true;
         }
 
+        public bool IsInUse(int id)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+            List<List<String>> reader;
+
+            sql = "SELECT count(1) FROM release_order_detail WHERE stockId = " + id;
+            reader = dbsql.executeReader(sql);
+            List<String> item = reader.First();
+            return int.Parse(item[0]) > 0;
+        }
+
+        public bool DeleteStock(int id)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "DELETE FROM stock WHERE id = " + id;
+            dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
+
         private StockDTO Resolve(List<String> item)
         {
             StockDTO result = new StockDTO();

@@ -130,6 +130,12 @@ namespace BusinessLogicLayer
             donationDal.UpdateStatusToStored(id, (int) DonationStatusBM.Status.STORED);
         }
 
+        public void UpdateToReceivedStatus(int id)
+        {
+            DonationDAL donationDal = new DonationDAL();
+            donationDal.UpdateToStatus(id, (int)DonationStatusBM.Status.RECEIVED);
+        }
+
         private List<DonationBM> ConvertIntoBusinessModel(List<DonationDTO> donations)
         {
             List<DonationBM> result = new List<DonationBM>();

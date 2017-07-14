@@ -171,7 +171,28 @@ namespace BusinessLogicLayer
 
         public ResultBM Delete(object entity)
         {
-            throw new NotImplementedException();           
+            try
+            {
+                StockDAL stockDal = new StockDAL();
+                DonationBLL donationBll = new DonationBLL();
+                StockBM stockBm = entity as StockBM;
+
+                if (!stockDal.IsInUse(stockBm.id))
+                {
+                    stockDal.DeleteStock(stockBm.id);
+                    donationBll.UpdateToReceivedStatus(stockBm.donation.id);
+                    return new ResultBM(ResultBM.Type.OK, "Se ha eliminado el registro.", stockBm);
+                }
+                else
+                {
+                    return new ResultBM(ResultBM.Type.FAIL, "No se puede eliminar el stock porque forma parte de una orden de salida.", stockBm);
+                }
+
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al eliminar el registro.", exception);
+            }           
         }
     }
 }

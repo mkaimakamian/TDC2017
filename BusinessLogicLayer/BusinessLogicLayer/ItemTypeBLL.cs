@@ -119,7 +119,25 @@ namespace BusinessLogicLayer
 
         public ResultBM Delete(object entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                ItemTypeDAL itemTypeDal = new ItemTypeDAL();
+                ItemTypeBM itemTypeBm = entity as ItemTypeBM;
+
+                if (!itemTypeDal.IsInUse(itemTypeBm.id))
+                {
+                    itemTypeDal.DeleteItemType(itemTypeBm.id);
+                    return new ResultBM(ResultBM.Type.OK, "Se ha eliminado el registro.", itemTypeBm);
+                } else
+                {
+                    return new ResultBM(ResultBM.Type.FAIL, "No se puede eliminar el tipo de artículo porque está en uso.", itemTypeBm);
+                }
+
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al eliminar el registro.", exception);
+            }
         }
     }
 }
