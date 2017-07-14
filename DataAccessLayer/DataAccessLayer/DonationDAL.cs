@@ -75,6 +75,7 @@ namespace DataAccessLayer
 
             return result;
         }
+
         public bool SaveDonation(DonationDTO donationDto)
         {
             DBSql dbsql = new DBSql();
@@ -86,7 +87,8 @@ namespace DataAccessLayer
             sql += donationDto.statusId + ", ";
             sql += donationDto.donorId + ", ";
             sql += "'" + donationDto.comment + "', ";
-            sql += "null";
+            if (donationDto.volunteerId != 0) sql += donationDto.volunteerId;
+            else sql += "null";
             sql += ");SELECT @@IDENTITY";
             donationDto.id = dbsql.ExecuteNonQuery(sql);
             return true;
@@ -121,6 +123,17 @@ namespace DataAccessLayer
             dbsql.ExecuteNonQuery(sql);
             return true;
         }
+
+        public bool DeleteDonation(int id)
+        {
+            DBSql dbsql = new DBSql();
+            String sql;
+
+            sql = "DELETE FROM donation WHERE id = " + id;
+            dbsql.ExecuteNonQuery(sql);
+            return true;
+        }
+
         private DonationDTO Resolve(List<String> item)
         {
             DonationDTO result = new DonationDTO();

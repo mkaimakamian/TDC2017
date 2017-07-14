@@ -97,5 +97,10 @@ namespace BusinessModel
         {
             return donationStatus.id == (int)DonationStatusBM.Status.TO_BE_RETRIEVED;
         }
+
+        public bool IsReceived()
+        {
+            return donationStatus.id == (int)DonationStatusBM.Status.RECEIVED;
+        }
     }
 }

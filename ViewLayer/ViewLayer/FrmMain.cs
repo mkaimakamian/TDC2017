@@ -228,5 +228,15 @@ namespace ViewLayer
               SessionHelper.HasPermission(Codes.OP035)
               ).ShowDialog();
         }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            
+            string file_name = "manual_usuario.pdf";
+            if (System.IO.File.Exists(file_name)) System.Diagnostics.Process.Start(file_name);
+            else MessageBox.Show("Ayuda no encontrada.");
+
+
+        }
     }
 }

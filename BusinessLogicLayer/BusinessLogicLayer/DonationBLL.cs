@@ -23,7 +23,7 @@ namespace BusinessLogicLayer
                 DonorBLL donorBll = new DonorBLL();
                 ResultBM donorResult = null;
 
-                DonationDAL donationDal = new DonationDAL();                
+                DonationDAL donationDal = new DonationDAL();
                 DonationBM donationBm = null;
                 DonationDTO donationDto = donationDal.GetDonation(donationId);
 
@@ -91,7 +91,7 @@ namespace BusinessLogicLayer
                 ResultBM validationResult = IsValid(donationBm);
 
                 if (!validationResult.IsValid()) return validationResult;
-                donationDto = new DonationDTO(donationBm.Items, donationBm.Arrival, donationBm.donationStatus.id, donationBm.donor.donorId, donationBm.Comment, 0);
+                donationDto = new DonationDTO(donationBm.Items, donationBm.Arrival, donationBm.donationStatus.id, donationBm.donor.donorId, donationBm.Comment, donationBm.volunteer.volunteerId);
                 donationDal.SaveDonation(donationDto);
                 donationBm.id = donationDto.id;
 
@@ -182,7 +182,26 @@ namespace BusinessLogicLayer
 
         public ResultBM Delete(object entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DonationDAL donationDal = new DonationDAL();
+                DonationBM donationBm = entity as DonationBM;
+
+                if (donationBm.IsReceived())
+                {
+                    donationDal.DeleteDonation(donationBm.id);
+                    return new ResultBM(ResultBM.Type.OK, "Se ha eliminado el registro.", donationBm);
+                }
+                else
+                {
+                    return new ResultBM(ResultBM.Type.FAIL, "No se puede eliminar la donación porque su estado no lo permite.", donationBm);
+                }
+                
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al eliminar el registro.", exception);
+            }
         }
 
         public ResultBM GetCollection(Dictionary<string, string> filter = null)

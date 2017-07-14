@@ -171,7 +171,7 @@ namespace BusinessLogicLayer
 
         public ResultBM Delete(object entity)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException();           
         }
     }
 }
