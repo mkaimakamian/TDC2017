@@ -12,12 +12,16 @@ namespace Initializer
     {
         static void Main(string[] args)
         {
-            string database = "CAMPOII";
-            string connStr = "Data Source=.\\UAI_EXPRESS; Initial Catalog=master; Integrated Security=True";
+            string bkpName = Directory.GetCurrentDirectory() + "\\rhoddion.bkp";
+            string serverInstance = Directory.GetCurrentDirectory()  + "\\dbconfig.txt";
+            string srvInstance = System.IO.File.ReadAllText(serverInstance);
 
-            string name = Directory.GetCurrentDirectory() + "\\rhoddion_201726062126.bkp";
+            string database = "CAMPOII";
+            string connStr = "Data Source=.\\"+srvInstance+"; Initial Catalog=master; Integrated Security=True";
+
+            
             string sql = "";
-            sql = "CREATE DATABASE " + database + "  ; USE MASTER ALTER DATABASE " + database + " SET SINGLE_USER WITH ROLLBACK IMMEDIATE RESTORE DATABASE " + database + " FROM DISK = '" + name + "' WITH REPLACE";
+            sql = "CREATE DATABASE " + database + "  ; USE MASTER ALTER DATABASE " + database + " SET SINGLE_USER WITH ROLLBACK IMMEDIATE RESTORE DATABASE " + database + " FROM DISK = '" + bkpName + "' WITH REPLACE";
 
 
             SqlConnection connection = new SqlConnection(connStr);
