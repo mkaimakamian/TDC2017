@@ -196,10 +196,7 @@ namespace BusinessModel
             {
                 foreach (ProfileBM profile in permissions)
                 {
-                    if (profile.HasPermission(toFind))
-                    {
-                        return true;
-                    }
+                    if (profile.HasPermission(toFind)) return true;
                 }
             }
             return false;

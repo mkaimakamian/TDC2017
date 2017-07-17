@@ -64,7 +64,7 @@ namespace ViewLayer
                     MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 
-                //En case de ser nuevo, se requiere contar con un permiso "nodo" que facilita su muestra por pantalla y al momento de guardarlo.
+                //En caso de ser nuevo, se requiere contar con un permiso "nodo" que facilita su muestra por pantalla y al momento de guardarlo.
                 //Si se trata de una actualización, se debe recuperar el listado con los permisos y sus exclusiones.
                 if (!this.isUpdate)
                 {
@@ -74,10 +74,18 @@ namespace ViewLayer
                 else
                 {
                     txtDescription.Text = this.entity.Description;
-                    //ProfileBM profile =  GetPermissionHierarchy(this.Entity);
                     this.Entity = GetPermissionHierarchy(this.Entity);
                     PopulateTree(treeProfile, this.Entity);
                     treeProfile.ExpandAll();
+
+                    //No es performante, pero funciona.
+                    //Recorre todos los permisos que se listan en la lista de profile y en caso de que el usuario tenga dicho privilegio, los checkea
+                    chkListProfile.ItemCheck -= chkListProfile_ItemCheck;
+                    for (int i = 0; i < chkListProfile.Items.Count; ++i)
+                    {
+                        if (this.entity.HasPermission(((PermissionMDL) chkListProfile.Items[i]).code)) chkListProfile.SetItemCheckState(i, CheckState.Checked);
+                    }
+                    chkListProfile.ItemCheck += chkListProfile_ItemCheck;
                 }
             }
             catch (Exception exception)

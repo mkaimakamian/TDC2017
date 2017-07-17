@@ -151,14 +151,10 @@ namespace BusinessLogicLayer
         private ResultBM IsValid(ProfileBM profile)
         {
             if (profile.Description.Length == 0)
-            {
                 return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "El perfil debe contar con un nombre.");
-            }
 
             if (profile.GetChildren().Count == 0)
-            {
                 return new ResultBM(ResultBM.Type.EMPTY_PROFILE, "No se han asignado permisos.");
-            }
 
             return new ResultBM(ResultBM.Type.OK);
         }

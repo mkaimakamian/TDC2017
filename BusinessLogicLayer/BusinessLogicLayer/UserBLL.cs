@@ -129,7 +129,7 @@ namespace BusinessLogicLayer
 
             try
             {
-                validation = IsValid(userBm);
+                validation = IsValid(userBm, true);
                 if (validation.IsValid())
                 {
                     userBm.Password = SecurityHelper.Encrypt(userBm.Password);
@@ -229,7 +229,7 @@ namespace BusinessLogicLayer
         /// Controla que se cumplan las condiciones para poder operar.
         /// </summary>
         /// <param name="userBM"></param>
-        private ResultBM IsValid(UserBM userBM) {
+        private ResultBM IsValid(UserBM userBM, bool validateUser=false) {
             if (userBM.Name.Length == 0 || userBM.Password.Length == 0) {
                 return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Todos los campos deben ser completados.");
             }
@@ -237,7 +237,7 @@ namespace BusinessLogicLayer
             UserDAL userDal = new UserDAL();
             UserDTO userDto = userDal.GetUser(userBM.Name);
 
-            if (userDto != null)
+            if (validateUser && userDto != null)
             {
                 return new ResultBM(ResultBM.Type.FAIL, "El nombre de usuario ya existe.");
             }
