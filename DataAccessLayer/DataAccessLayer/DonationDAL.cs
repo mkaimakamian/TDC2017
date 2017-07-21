@@ -59,7 +59,7 @@ namespace DataAccessLayer
 
             sql = "SELECT d.*, SUM(CASE WHEN s.quantity IS NULL THEN 0 ELSE s.quantity END) stocked ";
             sql += "FROM donation d LEFT JOIN stock s ON s.donationId = d.id ";
-            sql += "WHERE d.statusId = 1 ";            
+            sql += "WHERE d.statusId = 1 AND d.volunteerId is not null ";            
             sql += "GROUP BY d.id, d.items, d.arrival, d.statusId, d.donorId, d.comment, d.volunteerId ";
             //sql += "HAVING SUM(CASE WHEN s.quantity IS NULL THEN 0 ELSE s.quantity END) < items";
 

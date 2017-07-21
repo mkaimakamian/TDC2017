@@ -4,15 +4,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace DataAccessLayer
 {
     public class DBSql
     {
 
-        public string database = "CAMPOII";
-        private string connStr = "Data Source=.\\UAI_EXPRESS; Initial Catalog=CAMPOII; Integrated Security=True";
-        
+        public static string DATABASE = String.Empty;
+        private static string connStr = String.Empty;
+
+        public DBSql()
+        {
+            if (String.IsNullOrEmpty(connStr))
+            {
+                string serverInstance = String.Empty;
+                try
+                {
+
+                    StreamReader st = new StreamReader(Directory.GetCurrentDirectory() + "\\dbconfig.txt");
+                    serverInstance = st.ReadLine();
+                    DATABASE = st.ReadLine();                    
+                }
+                catch
+                {
+                    DATABASE = "CAMPOII";
+                    serverInstance = "UAI_EXPRESS";
+                }
+                
+                connStr = "Data Source=.\\" + serverInstance + "; Initial Catalog=" + DATABASE + "; Integrated Security=True";
+            }
+            
+        }
+
         public int ExecuteNonQuery(string sql)
         {
             SqlConnection connection = new SqlConnection(connStr);
