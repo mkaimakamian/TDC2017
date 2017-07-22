@@ -1,17 +1,17 @@
 ::: COSAS QUE SÍ HAY QUE CORREGIR :::
+- Mejorar el funcionamiento: si bien al agregar todo un stock a una OS se mantiene consistente, el número del number picker es choto-
 - En el alta de orden de salida, debería mostrarse más información sobre los productos (como el vencimiento)
 - en el campo usuario mostrar el idioma y no el id 
 - ver qué pasa cuando explota generic form
-
-::: FUNCIONALIDADES QUE DEBERÍAN INCLUIRSE :::
+- Mostrar los mensajes en el idioma adecuado
 - Mejorar las excepciones: enviar la descripción de la misma (?)
-- Mensajes de error en el idioma adecuado
-- Controlar en FrmDonor que al recuperar el país, debería contemplarse el éxito o fallo
+- Limitar los campos de texto para que no se ingresen cantidades que no puedan ser manejadas por la base
+- Terminar los diagramas de los casos de uso y revisar los DER (por las dudas)
+- Terminar el instalador considerando el archivo de configuración
 
 :::DESEABLES :::
 - Agregar un link desde los formularios en los que se necesiten definir tipos de productos (en stock, por ejemplo), etc
 - En el caso de una donación almacenada, podría mostrarse en la grilla en vez de meterse y mostrar un dialog box
 - El estado de la donación podría ser un enumerado (inner class)
 - Template para evitar el trycatch
-- En el form de user, el UserBM sigue manejando id y no objetos
 - Descargar de la memoria los objetos traducidos

@@ -94,12 +94,15 @@ namespace ViewLayer
         private void lstStock_SelectedIndexChanged(object sender, EventArgs e)
         {
             StockBM selection = (StockBM)((ListBox)sender).SelectedItem;
+            if (selection == null) return;
+
             nbrQuantity.Maximum = selection.Quantity;
             nbrQuantity.Value = selection.Quantity; // esto debe ser disponible :D
         }
 
         private void cmdAdd_Click(object sender, EventArgs e)
         {
+            if (lstStock.SelectedItem == null) return;
             UpdateGrid(true);
         }
 
@@ -125,8 +128,14 @@ namespace ViewLayer
                     {
                         int total = lstAdded[i].Quantity + int.Parse(nbrQuantity.Value.ToString());
 
-                        if (total <= stockToAdd.Quantity) lstAdded[i].Quantity = total;
-                        else lstAdded[i].Quantity = stockToAdd.Quantity;
+                        if (total < stockToAdd.Quantity) lstAdded[i].Quantity = total;
+                        else
+                        {
+                            lstAdded[i].Quantity = stockToAdd.Quantity;
+                            //Si se asigna el máximo disponible, entonces ya no debe formar parte de la lista de stock disponible.
+                            //Negrada... no hay tiempo: borra el elemento del listbox
+                            UpdateAvailableItemsWhenRemoving(stockToAdd);
+                        }
                         
                     }
                 }
@@ -138,52 +147,82 @@ namespace ViewLayer
                     detailToAdd.stock = stockToAdd;
                     detailToAdd.Quantity = int.Parse(nbrQuantity.Value.ToString());
                     lstAdded.Add(detailToAdd);
+
+                    //Si se agrega lo máximo, entonces se elimia de los disponibles
+                    if (stockToAdd.Quantity == detailToAdd.Quantity) UpdateAvailableItemsWhenRemoving(stockToAdd);
                 }
                 
             }
             else
             {
-                // Proceso inverso: se elimina de la lista de agregados y se debe buscar en el listado de los " a agergar"
+                // La estrategia consiste en ver si existe el elemento que quiero devolver, en la lista de disponibles para incrementar el valor de disponibilidad
+                // o agregar el item directamente si es que no existe.                
                 ReleaseOrderDetailBM toRemove = (ReleaseOrderDetailBM) dgRelease.SelectedRows[0].DataBoundItem;
 
                 bool found = false;
                 
+                // Como la grilla se alimenta de una lista llamada lstAdded, se debe identificar el elemento para eliminarlo de allí.
                 for (int i = 0; i < lstAdded.Count && !found; ++i)
                 {
                     found = toRemove.stock.id == lstAdded[i].stock.id;
                     if (found) lstAdded.RemoveAt(i);
                 }
 
-                // Al quitar, hay que cjhequear si existe el stock en la lista para incrementar el total disponible asignable
-                found = false;
-                List<StockBM>  listOfStock = (List<StockBM>) lstStock.DataSource;
-                for (int i = 0; i < listOfStock.Count && !found; ++i)
-                {
-                    found = toRemove.stock.id == listOfStock[i].id;
-                    if (found)
-                    {
-
-                        //int total = lstAdded[i].Quantity + int.Parse(nbrQuantity.Value.ToString());
-
-                        //if (total <= stockToAdd.Quantity) lstAdded[i].Quantity = total;
-                        //else lstAdded[i].Quantity = stockToAdd.Quantity;
-
-                        listOfStock[i].Quantity += listOfStock[i].Quantity + toRemove.Quantity;
-                    }
-                }
-
-                if (!found)
-                {
-                    if (listOfStock == null) listOfStock = new List<StockBM>();
-                    listOfStock.Add(toRemove.stock);                    
-                    lstStock.DataSource = null;
-                    lstStock.DataSource = listOfStock;
-                    lstStock.DisplayMember = "Name";
-                }
-
+                UpdateAvailableItemsWhenAdding(toRemove);
             }
             dgRelease.DataSource = null;
             dgRelease.DataSource = lstAdded;
+        }
+
+        private void UpdateAvailableItemsWhenRemoving(StockBM stockToAdd)
+        {
+            //Cuando se agrega de lo disponible a la grilla
+            List<StockBM> lstAux = new List<StockBM>();
+            for (int e = lstStock.Items.Count - 1; e > -1; --e)
+            {
+
+                if (((StockBM)lstStock.Items[e]).id != stockToAdd.id) lstAux.Insert(0, lstStock.Items[e] as StockBM);
+
+            }
+            lstStock.DataSource = null;
+            lstStock.DataSource = lstAux;
+            lstStock.DisplayMember = "Name";
+        }
+
+        private void UpdateAvailableItemsWhenAdding(ReleaseOrderDetailBM toRemove)
+        {
+            //Cuando se devuelve de la grilla a lo disponible
+
+            // Luego, hay que constatar si el elemento que se devuelve existe en la lista de disponible.
+            //Si existe, se incrementan las unidades devueltas; caso contrario, directamente se agrega el elemento a la lista
+
+            bool found = false;
+            List<StockBM> listOfStock = (List<StockBM>)lstStock.DataSource;
+            for (int i = 0; i < listOfStock.Count && !found; ++i)
+            {
+                found = toRemove.stock.id == listOfStock[i].id;
+                if (found)
+                {
+
+                    //int total = lstAdded[i].Quantity + int.Parse(nbrQuantity.Value.ToString());
+
+                    //if (total <= stockToAdd.Quantity) lstAdded[i].Quantity = total;
+                    //else lstAdded[i].Quantity = stockToAdd.Quantity;
+
+                    listOfStock[i].Quantity += listOfStock[i].Quantity + toRemove.Quantity;
+                }
+            }
+
+            if (!found)
+            {
+                if (listOfStock == null) listOfStock = new List<StockBM>();
+                // Acá se pone picante: como no existe, el máximo de stock es el mimso que lo devuelto
+                toRemove.stock.Quantity = toRemove.Quantity;
+                listOfStock.Add(toRemove.stock);
+                lstStock.DataSource = null;
+                lstStock.DataSource = listOfStock;
+                lstStock.DisplayMember = "Name";
+            }
         }
 
         private void cmdAccept_Click(object sender, EventArgs e)
