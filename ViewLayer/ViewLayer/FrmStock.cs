@@ -148,10 +148,7 @@ namespace ViewLayer
                 cmbDonation.DisplayMember = "Lot";
 
                 if (lstDonation.Count == 0)
-                {
                     MessageBox.Show("No existen donaciones que puedan ser procesadas para su loteo.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Close();
-                }
             }
             cmbDonation.SelectedIndexChanged += cmbDonation_SelectedIndexChanged;
         }

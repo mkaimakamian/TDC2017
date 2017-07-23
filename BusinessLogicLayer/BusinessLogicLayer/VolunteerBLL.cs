@@ -71,7 +71,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar los donadores.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar los voluntarios.", exception);
             }
         }
 
@@ -111,7 +111,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al guardar la dirección.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al guardar el volunatio.", exception);
             }
         }
         

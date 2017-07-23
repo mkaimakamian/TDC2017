@@ -113,7 +113,7 @@ namespace Helper
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        private static string GetTranslation(string code)
+        public static string GetTranslation(string code)
         {
             string value;
             instance.translations.TryGetValue(code, out value);

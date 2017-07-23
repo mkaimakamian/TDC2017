@@ -166,8 +166,13 @@ namespace ViewLayer
        
         public const string MNU_GE015 = "MNU_GE015"; //Logística
             public const string MNU_GE016 = "MNU_GE016"; //Órdenes de salida        
-        
-                
 
+            public const string OK_OPERATION = "OK_OPERATION";
+            public const string SAVING_ERROR = "SAVING_ERROR";
+            public const string UPDATING_ERROR = "UPDATING_ERROR";
+            public const string DELETING_ERROR = "DELETING_ERROR";
+            public const string RETRIEVING_ERROR = "RETRIEVING_ERROR";
+            public const string PROPERTY_ERROR = "PROPERTY_ERROR"; // cuando no se puede guardar una propiedad o algo
+            public const string SAVE_CHANGES_QUESTION = "SAVE_CHANGES_QUESTION";
     }
 }

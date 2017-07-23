@@ -20,16 +20,23 @@ namespace BusinessLogicLayer
         /// <param name="password"></param>
         public ResultBM GetUser(string user, string password)
         {
-            UserDAL userDal = new UserDAL();
-            UserDTO userDto = userDal.LogIn(user, SecurityHelper.Encrypt(password));            
-
-            if (userDto == null)
+            try
             {
-                //throw new Exception("Las credenciales ingresadas son inválidas.");
-                return new ResultBM(ResultBM.Type.INVALID_CREDENTIAL, "Las credenciales ingresadas son inválidas.");
-            }
+                UserDAL userDal = new UserDAL();
+                UserDTO userDto = userDal.LogIn(user, SecurityHelper.Encrypt(password));
 
-            return new ResultBM(ResultBM.Type.OK, "Usuario encontrado: " + userDto.name, new UserBM(userDto)); 
+                if (userDto == null)
+                {
+                    //throw new Exception("Las credenciales ingresadas son inválidas.");
+                    return new ResultBM(ResultBM.Type.INVALID_CREDENTIAL, SessionHelper.GetTranslation("CREDENTIAL_ERROR"));
+                }
+
+                return new ResultBM(ResultBM.Type.OK, "Usuario encontrado: " + userDto.name, new UserBM(userDto));
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
+            }
         }
 
         public ResultBM GetUser(int id)
@@ -47,7 +54,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar el usuario " + id + ".", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -57,16 +64,24 @@ namespace BusinessLogicLayer
         /// <returns></returns>
         public ResultBM GetUsers()
         {
-            UserDAL userDal = new UserDAL();
-            List<UserDTO> userDtos = userDal.GetUsers();
-            List<UserBM> userBms = new List<UserBM>();
-
-            foreach (UserDTO user in userDtos)
+            try
             {
-                userBms.Add(new UserBM(user));
+                UserDAL userDal = new UserDAL();
+                List<UserDTO> userDtos = userDal.GetUsers();
+                List<UserBM> userBms = new List<UserBM>();
+
+                foreach (UserDTO user in userDtos)
+                {
+                    userBms.Add(new UserBM(user));
+                }
+
+                return new ResultBM(ResultBM.Type.OK, "Recuperación de los usuarios exitosa.", userBms);
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
 
-            return new ResultBM(ResultBM.Type.OK, "Recuperación de los usuarios exitosa.", userBms);
         }
 
         public ResultBM UpdateUser(UserBM userBm, bool updatePassword=false)
@@ -95,13 +110,9 @@ namespace BusinessLogicLayer
                     digitUpdated = dvBll.UpdateVerticallDigit();
 
                     if (digitUpdated.IsValid())
-                    {
                         return new ResultBM(ResultBM.Type.OK, "Usuario con id " + userBm.Id + " actualizado correctamente.");
-                    }
                     else
-                    {
                         return digitUpdated;
-                    }
                 }
                 else
                 {
@@ -110,7 +121,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al actualizar los datos del usuario con id " + userBm.Id + ".", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("UPDATING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -128,7 +139,7 @@ namespace BusinessLogicLayer
             ResultBM validation;
 
             try
-            {
+            {                
                 validation = IsValid(userBm, true);
                 if (validation.IsValid())
                 {
@@ -140,13 +151,9 @@ namespace BusinessLogicLayer
                     digitUpdated = dvBll.UpdateVerticallDigit();
 
                     if (digitUpdated.IsValid())
-                    {
                         return new ResultBM(ResultBM.Type.OK, "Usuario creado: " + userDto.name, new UserBM(userDto));
-                    }
                     else
-                    {
                         return digitUpdated;
-                    }
 
                 }
                 else
@@ -156,7 +163,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear el usuario con " + userBm.Name + ".", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("SAVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -197,7 +204,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al actualizar el idioma.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("UPDATING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -216,12 +223,12 @@ namespace BusinessLogicLayer
                 }
                 else
                 {
-                    return new ResultBM(ResultBM.Type.FAIL, "Error al generar el registro de integridad para la entidad users.");
+                    return new ResultBM(ResultBM.Type.FAIL, SessionHelper.GetTranslation("UPDATING_ERROR") + " (INTEGRITY)");
                 }              
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido una excepción al intentar borrar al usuario con id " + userId + ". " + exception.Message);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("DELETING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -231,7 +238,7 @@ namespace BusinessLogicLayer
         /// <param name="userBM"></param>
         private ResultBM IsValid(UserBM userBM, bool validateUser=false) {
             if (userBM.Name.Length == 0 || userBM.Password.Length == 0) {
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Todos los campos deben ser completados.");
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("EMPTY_FIELD_ERROR") + " (ALL)");
             }
 
             UserDAL userDal = new UserDAL();
@@ -239,7 +246,7 @@ namespace BusinessLogicLayer
 
             if (validateUser && userDto != null)
             {
-                return new ResultBM(ResultBM.Type.FAIL, "El nombre de usuario ya existe.");
+                return new ResultBM(ResultBM.Type.FAIL, SessionHelper.GetTranslation("USER_EXISTS_ERROR"));
             }
 
             return new ResultBM(ResultBM.Type.OK);

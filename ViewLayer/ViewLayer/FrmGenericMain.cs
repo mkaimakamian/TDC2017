@@ -81,10 +81,10 @@ namespace ViewLayer
         }
 
         private void LoadDatagrid()
-        {            
-            object businessLogic = Activator.CreateInstance(this.entity);
+        {                        
             try
             {
+                object businessLogic = Activator.CreateInstance(this.entity);
                 ResultBM result = ((BLEntity)businessLogic).GetCollection();
                 if (result.IsValid()) dgView.DataSource = result.GetValue();                    
                 else MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -179,31 +179,39 @@ namespace ViewLayer
         /// <param name="grid"></param>
         private void CreateFilters(DataGridView grid)
         {
-            foreach (DataGridViewColumn column in grid.Columns)
+            try
             {
-                if (column.GetType() == typeof(DataGridViewTextBoxColumn)) {
-                    Control control = null;
-                    if (column.ValueType == typeof(String))  control = new TextBox();
-                    if (column.ValueType == typeof(DateTime)) control = new DateTimePicker();
-
-                    if (control != null)
+                foreach (DataGridViewColumn column in grid.Columns)
+                {
+                    if (column.GetType() == typeof(DataGridViewTextBoxColumn))
                     {
-                        control.Tag = column.Name;
-                        //Se agregan las referencia a la lista para obtener mayor control al momento del filtrado.
-                        lstControls.Add(control);
+                        Control control = null;
+                        if (column.ValueType == typeof(String)) control = new TextBox();
+                        if (column.ValueType == typeof(DateTime)) control = new DateTimePicker();
 
-                        //Se crea un grupo para poder etiquetar el componente
-                        GroupBox group = new GroupBox();
-                        group.Controls.Add(control);
-                        group.Text = column.HeaderText;
-                        group.Width = control.Width + 15;
-                        group.Height = control.Height + 20;
-                        control.Top = 15;
-                        control.Left = 5;
+                        if (control != null)
+                        {
+                            control.Tag = column.Name;
+                            //Se agregan las referencia a la lista para obtener mayor control al momento del filtrado.
+                            lstControls.Add(control);
 
-                        flowLayout.Controls.Add(group);
+                            //Se crea un grupo para poder etiquetar el componente
+                            GroupBox group = new GroupBox();
+                            group.Controls.Add(control);
+                            group.Text = column.HeaderText;
+                            group.Width = control.Width + 15;
+                            group.Height = control.Height + 20;
+                            control.Top = 15;
+                            control.Left = 5;
+
+                            flowLayout.Controls.Add(group);
+                        }
                     }
                 }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -213,18 +221,24 @@ namespace ViewLayer
         {
             // la estrategia consiste en tomar todos los campos de los filtros y pasárselos a la BLL
 
-            // Meter todo en un try
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
-            
-            foreach (Control control in lstControls) 
-                if (control.Text.Length > 0) parameters.Add(control.Tag.ToString(), control.Text);
+            try
+            {
+                Dictionary<string, string> parameters = new Dictionary<string, string>();
 
-            object businessLogic = Activator.CreateInstance(this.entity);
-            ResultBM result = ((BLEntity)businessLogic).GetCollection(parameters);
+                foreach (Control control in lstControls)
+                    if (control.Text.Length > 0) parameters.Add(control.Tag.ToString(), control.Text);
 
-            if (result.IsValid()) dgView.DataSource = result.GetValue();
-            else MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            dgView.Refresh();
+                object businessLogic = Activator.CreateInstance(this.entity);
+                ResultBM result = ((BLEntity)businessLogic).GetCollection(parameters);
+
+                if (result.IsValid()) dgView.DataSource = result.GetValue();
+                else MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dgView.Refresh();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
     }

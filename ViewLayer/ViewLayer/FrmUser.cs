@@ -65,9 +65,7 @@ namespace ViewLayer
                     cmbLanguage.DisplayMember = "Name";
                 }
                 else
-                {
                     MessageBox.Show(language.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
 
 
                 if (profile.IsValid())
@@ -76,9 +74,7 @@ namespace ViewLayer
                     cmbProfile.DisplayMember = "Description";
                 }
                 else
-                {
-                    MessageBox.Show(language.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                    MessageBox.Show(profile.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 //Si se está actualizando, entonces se completan los campos
                 if (isUpdate)
@@ -111,13 +107,13 @@ namespace ViewLayer
             }
             catch (Exception exception)
             {
-                MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "EXCEPCIÓN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
         private void cmdAccept_Click(object sender, EventArgs e)
         {
-            DialogResult pressed = MessageBox.Show("¿Desea guardar los cambios?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult pressed = MessageBox.Show(SessionHelper.GetTranslation("SAVE_CHANGES_QUESTION"), "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (pressed == DialogResult.No) return;
                        
             try
@@ -152,34 +148,22 @@ namespace ViewLayer
                     saveResult = userBll.UpdateUser(this.Entity, updatePassword);
 
                     if (saveResult.IsValid())
-                    {
                         this.Close();
-                    }
                     else
-                    {
-                        MessageBox.Show("Los cambios no fueron guardados: " + saveResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                        MessageBox.Show(saveResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
                     userBm = new UserBM(txtName.Text, chkIsActive.Checked, language.Id, profile.code, txtPassword.Text);
                     saveResult = userBll.SaveUser(userBm);
 
-                    if (saveResult.IsValid())
-                    {
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Los cambios no fueron guardados: " + saveResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
-
+                    if (saveResult.IsValid()) this.Close();
+                    else MessageBox.Show(saveResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception exception)
             {
-                MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "EXCEPCIÓN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }            
         }
 
