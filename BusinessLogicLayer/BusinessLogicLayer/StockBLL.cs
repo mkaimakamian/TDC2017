@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BusinessModel;
 using DataTransferObject;
 using DataAccessLayer;
+using Helper;
 
 namespace BusinessLogicLayer
 {
@@ -30,15 +31,15 @@ namespace BusinessLogicLayer
                 {
                     donationResult = donationBll.GetDonation(stockDto.donationId);
                     if (!donationResult.IsValid()) return donationResult;
-                    if (donationResult.GetValue() == null) throw new Exception("La donación " + stockDto.donationId + " para el stock " + stockId + " no existe.");
+                    if (donationResult.GetValue() == null) throw new Exception(SessionHelper.GetTranslation("RETRIEVING_ERROR") + " donationId " + stockDto.donationId);
 
                     depotResult = depotBll.GetDepot(stockDto.depotId);
                     if (!depotResult.IsValid()) return depotResult;
-                    if (depotResult.GetValue() == null) throw new Exception("El depósito " + stockDto.depotId + " para el stock " + stockId + " no existe.");
+                    if (depotResult.GetValue() == null) throw new Exception(SessionHelper.GetTranslation("RETRIEVING_ERROR") + " depotId " + stockDto.depotId);
 
                     itemTypeResult = itemTypeBll.GetItemType(stockDto.itemTypeId);
                     if (!itemTypeResult.IsValid()) return itemTypeResult;
-                    if (itemTypeResult.GetValue() == null) throw new Exception("El tipo de artículo " + stockDto.itemTypeId + " para el stock " + stockId + " no existe.");
+                    if (itemTypeResult.GetValue() == null) throw new Exception(SessionHelper.GetTranslation("RETRIEVING_ERROR") + " itemTypeId " + stockDto.itemTypeId);
 
                     stockBm = new StockBM(stockDto, donationResult.GetValue<DonationBM>(), depotResult.GetValue<DepotBM>(), itemTypeResult.GetValue<ItemTypeBM>());
                 }
@@ -46,7 +47,7 @@ namespace BusinessLogicLayer
                 return new ResultBM(ResultBM.Type.OK, "Operación exitosa.", stockBm);
             }
             catch (Exception exception) {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar el stock " + stockId + ".", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -70,7 +71,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear el stock.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("SAVING_ERROR") + " " + exception.Message, exception);
             }
         }
         
@@ -93,7 +94,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al actualizar el stock.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("UPDATING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -109,7 +110,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar las donaciones.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -125,7 +126,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar las donaciones.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -146,19 +147,19 @@ namespace BusinessLogicLayer
         private ResultBM IsValid(StockBM stockBm)
         {
             if (stockBm.Name == null || stockBm.Name.Length == 0)
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el nombre.");
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("EMPTY_FIELD_ERROR") + " (NAME)");
 
             if (stockBm.Quantity == 0)
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "La cantidad de ítems debe ser mayor a cero.");
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("EMPTY_FIELD_ERROR") + " (ITEMS < 1)");
             
             if (!(stockBm.GetAmountItemsToStockWithoutThis() <= stockBm.donation.Items * 2 && stockBm.GetAmountItemsToStockWithoutThis() > 1))
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Se han ingresado más bultos de los que deberían.");
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("EMPTY_FIELD_ERROR") + " (TOO MUCH ITEMS)");
 
             if (stockBm.itemType.Perishable && stockBm.DueDate == null)
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse la fecha.");
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("EMPTY_FIELD_ERROR") + " (DATE)");
 
             if (stockBm.Location == null || stockBm.Location.Length == 0)
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse la locación.");
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("EMPTY_FIELD_ERROR") + " (LOCATION)");
 
 
             return new ResultBM(ResultBM.Type.OK);
@@ -185,13 +186,13 @@ namespace BusinessLogicLayer
                 }
                 else
                 {
-                    return new ResultBM(ResultBM.Type.FAIL, "No se puede eliminar el stock porque forma parte de una orden de salida.", stockBm);
+                    return new ResultBM(ResultBM.Type.FAIL, SessionHelper.GetTranslation("STOCK_UNDELETEABLE_ERROR"), stockBm);
                 }
 
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al eliminar el registro.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("DELETING_ERROR") + " " + exception.Message, exception);
             }           
         }
     }

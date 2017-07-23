@@ -126,7 +126,7 @@ namespace ViewLayer
 
             }
             catch (Exception exception) {
-                MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "EXCEPCIÓN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -222,7 +222,7 @@ namespace ViewLayer
 
         private void cmdAccept_Click(object sender, EventArgs e)
         {
-            DialogResult pressed = MessageBox.Show("¿Desea guardar los cambios?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult pressed = MessageBox.Show(SessionHelper.GetTranslation("SAVE_CHANGES_QUESTION"), "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (pressed == DialogResult.No) return;
             try
             {
@@ -242,7 +242,7 @@ namespace ViewLayer
                 else stockResult = stockBll.SaveStock(this.Entity);
 
                 if (stockResult.IsValid()) Close();
-                else MessageBox.Show("Se ha producido el siguiente error: " + stockResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else MessageBox.Show(stockResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             catch (Exception exception)

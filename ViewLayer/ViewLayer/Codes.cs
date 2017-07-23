@@ -174,5 +174,7 @@ namespace ViewLayer
             public const string RETRIEVING_ERROR = "RETRIEVING_ERROR";
             public const string PROPERTY_ERROR = "PROPERTY_ERROR"; // cuando no se puede guardar una propiedad o algo
             public const string SAVE_CHANGES_QUESTION = "SAVE_CHANGES_QUESTION";
+            public const string STOCK_UNDELETEABLE_ERROR = "STOCK_UNDELETEABLE_ERROR";
+        
     }
 }

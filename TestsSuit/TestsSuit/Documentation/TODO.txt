@@ -8,6 +8,7 @@
 - Limitar los campos de texto para que no se ingresen cantidades que no puedan ser manejadas por la base
 - Terminar los diagramas de los casos de uso y revisar los DER (por las dudas)
 - Terminar el instalador considerando el archivo de configuración
+- Errores específicos sin traducir.
 
 :::DESEABLES :::
 - Agregar un link desde los formularios en los que se necesiten definir tipos de productos (en stock, por ejemplo), etc
