@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataTransferObject;
 using DataAccessLayer;
 using BusinessModel;
+using Helper;
 
 namespace BusinessLogicLayer
 {
@@ -38,7 +39,7 @@ namespace BusinessLogicLayer
 
                 if (permissions == null)
                 {
-                    throw new Exception("No se han encontrado permisos para el usuario.");
+                    throw new Exception(SessionHelper.GetTranslation("NO_PERMISSION_FOUND_ERROR"));
                 }
                 else if (permissions.Count == 1)
                 {
@@ -86,7 +87,7 @@ namespace BusinessLogicLayer
             catch (Exception exception)
             {
                 log.AddLogCritical("Recuperando perfil", exception.Message, this);
-                return new ResultBM(ResultBM.Type.EXCEPTION, exception.Message, exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
             
         }
@@ -115,9 +116,8 @@ namespace BusinessLogicLayer
             catch (Exception exception)
             {
                 log.AddLogCritical("Recuperando perfil", exception.Message, this);
-                return new ResultBM(ResultBM.Type.EXCEPTION, exception.Message, exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
-
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace BusinessLogicLayer
             catch (Exception exception)
             {
                 log.AddLogCritical("Recuperando perfil", exception.Message, this);
-                return new ResultBM(ResultBM.Type.EXCEPTION, exception.Message, exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
             
         }
@@ -151,10 +151,10 @@ namespace BusinessLogicLayer
         private ResultBM IsValid(ProfileBM profile)
         {
             if (profile.Description.Length == 0)
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "El perfil debe contar con un nombre.");
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("EMPTY_FIELD_ERROR") + " (PROFILE NAME)");
 
             if (profile.GetChildren().Count == 0)
-                return new ResultBM(ResultBM.Type.EMPTY_PROFILE, "No se han asignado permisos.");
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("NO_PERMISSION_ASSIGNED_ERROR"));
 
             return new ResultBM(ResultBM.Type.OK);
         }
@@ -172,26 +172,21 @@ namespace BusinessLogicLayer
                 ProfileDAL profileDal = new ProfileDAL();
                 ResultBM isValidResult = IsValid(profile);
 
-                if (isValidResult.IsValid())
-                {
-                    //Se agrega el root
-                    PermissionDTO root = new PermissionDTO(profile.fatherCode, profile.code, profile.Description);
-                    profileDal.SaveProfile(root);
-                    CreateRelation(profile);
-
-                    log.AddLogInfo("Creando perfil", "El perfil se ha creado exitosamente.", this);
-                    return new ResultBM(ResultBM.Type.OK, "Perfil creado: " + profile.Description);
-                }
-                else
-                {
-                    return isValidResult;
-                }
+                if (!isValidResult.IsValid()) return isValidResult;
                 
+                //Se agrega el root
+                PermissionDTO root = new PermissionDTO(profile.fatherCode, profile.code, profile.Description);
+                profileDal.SaveProfile(root);
+                CreateRelation(profile);
+
+                log.AddLogInfo("Creando perfil", "El perfil se ha creado exitosamente.", this);
+                return new ResultBM(ResultBM.Type.OK, "Perfil creado: " + profile.Description);
+                                
             }
             catch (Exception exception)
             {
                 log.AddLogCritical("Recuperando perfil", exception.Message, this);
-                return new ResultBM(ResultBM.Type.EXCEPTION, exception.Message, exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("SAVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -204,24 +199,17 @@ namespace BusinessLogicLayer
                 ProfileDAL profileDal = new ProfileDAL();
                 ResultBM isValidResult = IsValid(profile);
 
-                if (isValidResult.IsValid())
-                {
-                    profileDal.DeleteRelation(profile.code);
-                    CreateRelation(profile);
+                if (!isValidResult.IsValid()) return isValidResult;
+                profileDal.DeleteRelation(profile.code);
+                CreateRelation(profile);
 
-                    log.AddLogInfo("Actualizando perfil", "El perfil se ha actualizado exitosamente.", this);
-                    return new ResultBM(ResultBM.Type.OK, "Perfil actualizado.");
-                }
-                else
-                {
-                    return isValidResult;
-                }
-                
+                log.AddLogInfo("Actualizando perfil", "El perfil se ha actualizado exitosamente.", this);
+                return new ResultBM(ResultBM.Type.OK, "Perfil actualizado.");
             }
             catch (Exception exception)
             {
                 log.AddLogCritical("Recuperando perfil", exception.Message, this);
-                return new ResultBM(ResultBM.Type.EXCEPTION, exception.Message, exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("UPDATING_ERROR") + " " + exception.Message, exception);
             }
             
         }
@@ -287,13 +275,13 @@ namespace BusinessLogicLayer
                 else
                 {
                     log.AddLogWarn("Borrando perfil", "No se puede eliminar el permiso " + code + " porque está asignado a al menos un usuario.", this);
-                    return new ResultBM(ResultBM.Type.FAIL, "No se puede eliminar el permiso porque está asignado a al menos un usuario.");
+                    return new ResultBM(ResultBM.Type.FAIL, SessionHelper.GetTranslation("PERMISSION_UNDELETEABLE_ERROR"));
                 }
             }
             catch (Exception exception)
             {
                 log.AddLogCritical("Recuperando perfil", exception.Message, this);
-                return new ResultBM(ResultBM.Type.EXCEPTION, exception.Message, exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 

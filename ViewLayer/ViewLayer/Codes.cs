@@ -175,6 +175,11 @@ namespace ViewLayer
             public const string PROPERTY_ERROR = "PROPERTY_ERROR"; // cuando no se puede guardar una propiedad o algo
             public const string SAVE_CHANGES_QUESTION = "SAVE_CHANGES_QUESTION";
             public const string STOCK_UNDELETEABLE_ERROR = "STOCK_UNDELETEABLE_ERROR";
+            public const string RO_UNDELETEABLE_ERROR = "RO_UNDELETEABLE_ERROR";
+            public const string NO_PERMISSION_FOUND_ERROR = "NO_PERMISSION_FOUND_ERROR";
+            public const string NO_PERMISSION_ASSIGNED_ERROR = "NO_PERMISSION_ASSIGNED_ERROR";
+            public const string PERMISSION_UNDELETEABLE_ERROR = "PERMISSION_UNDELETEABLE_ERROR";
+            public const string INVALID_VALUE_ERROR = "INVALID_VALUE_ERROR";
         
     }
 }

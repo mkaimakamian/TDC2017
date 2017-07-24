@@ -203,12 +203,6 @@ namespace ViewLayer
                 found = toRemove.stock.id == listOfStock[i].id;
                 if (found)
                 {
-
-                    //int total = lstAdded[i].Quantity + int.Parse(nbrQuantity.Value.ToString());
-
-                    //if (total <= stockToAdd.Quantity) lstAdded[i].Quantity = total;
-                    //else lstAdded[i].Quantity = stockToAdd.Quantity;
-
                     listOfStock[i].Quantity += listOfStock[i].Quantity + toRemove.Quantity;
                 }
             }
@@ -227,7 +221,7 @@ namespace ViewLayer
 
         private void cmdAccept_Click(object sender, EventArgs e)
         {
-            DialogResult pressed = MessageBox.Show("¿Desea guardar los cambios?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult pressed = MessageBox.Show(SessionHelper.GetTranslation("SAVE_CHANGES_QUESTION"), "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (pressed == DialogResult.No) return;
 
             try
@@ -243,7 +237,7 @@ namespace ViewLayer
                 else releaseResult = releaseOrderBll.SaveReleaseOrder(this.Entity);
 
                 if (releaseResult.IsValid()) Close();
-                else MessageBox.Show("Se ha producido el siguiente error: " + releaseResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else MessageBox.Show(releaseResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             catch (Exception exception)

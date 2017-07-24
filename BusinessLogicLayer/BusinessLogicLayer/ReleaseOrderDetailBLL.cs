@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BusinessModel;
 using DataTransferObject;
 using DataAccessLayer;
+using Helper;
 
 namespace BusinessLogicLayer
 {
@@ -23,7 +24,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar los países.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -52,7 +53,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al guardar el detalle.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("SAVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -64,7 +65,7 @@ namespace BusinessLogicLayer
                 return SaveReleaseOrderDetail(releaseOrderBm);
             }
             catch (Exception exception) {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al actualizar el detalle.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("UPDATING_ERROR") + " " + exception.Message, exception);
             }
             
         }
@@ -88,15 +89,6 @@ namespace BusinessLogicLayer
 
         private ResultBM IsValid(List<ReleaseOrderDetailBM> releaseOrderDetail)
         {
-            //if (addressBm.street == null || addressBm.street.Length == 0)
-            //    return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse la dirección");
-
-            //if (addressBm.number < 0)
-            //    return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el número de calle");
-
-            //if (addressBm.country == null)
-            //    return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el país");
-
             return new ResultBM(ResultBM.Type.OK);
         }
     }

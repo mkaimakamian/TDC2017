@@ -197,18 +197,14 @@ namespace ViewLayer
                 if (isUpdate)
                 {
                     result = profileBll.UpdateProfile(this.Entity);
-                    if (result.IsValid()) 
-                        Close();
-                    else
-                        MessageBox.Show("Se ha producido el siguiente error: " + result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (result.IsValid())  Close();
+                    else MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
                     result = profileBll.CreateProfile(this.Entity);
-                    if (result.IsValid()) 
-                        Close();
-                    else
-                        MessageBox.Show("Se ha producido el siguiente error: " + result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (result.IsValid()) Close();
+                    else MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 
             }

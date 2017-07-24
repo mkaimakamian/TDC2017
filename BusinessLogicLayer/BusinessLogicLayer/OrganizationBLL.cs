@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataAccessLayer;
 using DataTransferObject;
 using BusinessModel;
+using Helper;
 
 namespace BusinessLogicLayer
 {
@@ -27,7 +28,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar la organización " + organizationId + ".", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -36,8 +37,6 @@ namespace BusinessLogicLayer
         {
             try
             {
-                if (organizationBm == null) return new ResultBM(ResultBM.Type.NULL, "El objeto organization es null.");
-
                 OrganizationDAL organizationDal = new OrganizationDAL();                
                 OrganizationDTO organizationDto;
                 ResultBM resultValidation = IsValid(organizationBm);
@@ -53,7 +52,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear la organización " + organizationBm.name + ".", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("UPDATING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -61,8 +60,6 @@ namespace BusinessLogicLayer
         {
             try
             {
-                if (organizationBm == null) return new ResultBM(ResultBM.Type.NULL, "El objeto organization es null.");
-
                 OrganizationDAL organizationDal = new OrganizationDAL();
                 OrganizationDTO organizationDto;
                 ResultBM resultValidation = IsValid(organizationBm);
@@ -83,8 +80,11 @@ namespace BusinessLogicLayer
 
         private ResultBM IsValid(OrganizationBM organization)
         {
+            if (organization == null)
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("INVALID_VALUE_ERROR") + " (ALL)");
+
             if (organization.name == null || organization.name.Length == 0)
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el nombre");
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("EMPTY_FIELD_ERROR") + " (NAME)");
 
             return new ResultBM(ResultBM.Type.OK);
         }

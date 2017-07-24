@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataAccessLayer;
 using DataTransferObject;
 using BusinessModel;
+using Helper;
 
 namespace BusinessLogicLayer
 {
@@ -31,15 +32,14 @@ namespace BusinessLogicLayer
                     if (resultAddress.GetValue() != null)
                         personBm = new PersonBM(personDto, resultAddress.GetValue<AddressBM>());
                     else
-                        throw new Exception("La dirección " + personDto.addressId + "para la persona " + personId + " no existe.");
-                        
+                        throw new Exception(SessionHelper.GetTranslation("RETRIEVING_ERROR") + " addressId " + personDto.addressId);
                 }
 
                 return new ResultBM(ResultBM.Type.OK, "Operación exitosa.", personBm);
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar la persona " + personId + ".", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -73,10 +73,9 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear al donador.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("SAVING_ERROR") + " " + exception.Message, exception);
             }
         }
-
 
         public ResultBM UpdatePerson(PersonBM personBm)
         {
@@ -100,7 +99,7 @@ namespace BusinessLogicLayer
 
             }
             catch (Exception exception) {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al actualizar al donador.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("UPDATING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -108,14 +107,14 @@ namespace BusinessLogicLayer
         private ResultBM IsValid(PersonBM personBm)
         {
             if (personBm.name == null || personBm.name.Length == 0)
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el nombre.");
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("EMPTY_FIELD_ERROR") + " (NAME)");
 
             if (personBm.lastName == null || personBm.lastName.Length == 0)
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el apellido.");
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("EMPTY_FIELD_ERROR") + " (LASTNAME)");
 
             if (personBm.dni < 1 || personBm.dni.ToString().Length < 8)
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el dni con un número válido.");
-
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("INVALID_VALUE_ERROR") + " (DNI)");
+            
             return new ResultBM(ResultBM.Type.OK);
         }
     }

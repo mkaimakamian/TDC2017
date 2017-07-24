@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataTransferObject;
 using DataAccessLayer;
 using BusinessModel;
+using Helper;
 
 namespace BusinessLogicLayer
 {
@@ -29,11 +30,11 @@ namespace BusinessLogicLayer
                 {
                     beneficiaryResult = beneficiaryBll.GetBeneficiary(releaseOrderDto.beneficiaryId);
                     if (!beneficiaryResult.IsValid()) return beneficiaryResult;
-                    if (beneficiaryResult.GetValue() == null)  throw new Exception("El beneficiario " + releaseOrderDto.beneficiaryId + " para la order de salida " + releaseOrderId + " no existe.");
+                    if (beneficiaryResult.GetValue() == null) throw new Exception(SessionHelper.GetTranslation("RETRIEVING_ERROR") + " beneficiaryId " + releaseOrderDto.beneficiaryId);
 
                     releaseOrderDetailResult = releaseOrderDetailBll.GetReleaseOrderDetail(releaseOrderId);
                     if (!releaseOrderDetailResult.IsValid()) return releaseOrderDetailResult;
-                    if (releaseOrderDetailResult.GetValue() == null) throw new Exception("El detalle para la order de salida " + releaseOrderId + " no existe.");
+                    if (releaseOrderDetailResult.GetValue() == null) throw new Exception(SessionHelper.GetTranslation("RETRIEVING_ERROR") + " releaseOrderId " + releaseOrderId);
                 }
 
                 releaseOrderBm = new ReleaseOrderBM(releaseOrderDto, beneficiaryResult.GetValue<BeneficiaryBM>(), releaseOrderDetailResult.GetValue<List<ReleaseOrderDetailBM>>());
@@ -41,7 +42,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar los países.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -67,7 +68,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al guardar la orden de salida.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("SAVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -88,12 +89,11 @@ namespace BusinessLogicLayer
                 detailResult = releaseOrderDetailBll.UpdateReleaseOrderDetail(releaseOrderBm);
                 if (!detailResult.IsValid()) return detailResult;
 
-
                 return new ResultBM(ResultBM.Type.OK, "Orden de salida actualizada.", releaseOrderBm);
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al actualizar la orden de salida.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("UPDATING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -109,7 +109,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar las órdenes de salida.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -139,8 +139,8 @@ namespace BusinessLogicLayer
         private ResultBM IsValid(ReleaseOrderBM releaseOrder)
         {
             if (releaseOrder.detail == null || releaseOrder.detail.Count == 0)
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "No puede darse de alta una orden de salida sin elementos.");
-            
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("EMPTY_FIELD_ERROR") + " (NO ITEMS)");
+
             return new ResultBM(ResultBM.Type.OK);
         }
 
@@ -163,13 +163,13 @@ namespace BusinessLogicLayer
                 }
                 else
                 {
-                    return new ResultBM(ResultBM.Type.FAIL, "No se puede eliminar la orden de salida porque su estado no lo permite.", releaseOrderBm);
+                    return new ResultBM(ResultBM.Type.FAIL, SessionHelper.GetTranslation("RO_UNDELETEABLE_ERROR"), releaseOrderBm);
                 }
 
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al eliminar el registro.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("DELETING_ERROR") + " " + exception.Message, exception);
             }
         }
     }
