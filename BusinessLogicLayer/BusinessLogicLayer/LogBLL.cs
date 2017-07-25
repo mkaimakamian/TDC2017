@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataTransferObject;
 using DataAccessLayer;
 using BusinessModel;
+using Helper;
 
 namespace BusinessLogicLayer
 {
@@ -22,7 +23,8 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                result = new ResultBM(ResultBM.Type.EXCEPTION, exception.Message);
+                result = new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
+
             }
 
             return result;

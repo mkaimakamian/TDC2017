@@ -180,6 +180,11 @@ namespace ViewLayer
             public const string NO_PERMISSION_ASSIGNED_ERROR = "NO_PERMISSION_ASSIGNED_ERROR";
             public const string PERMISSION_UNDELETEABLE_ERROR = "PERMISSION_UNDELETEABLE_ERROR";
             public const string INVALID_VALUE_ERROR = "INVALID_VALUE_ERROR";
+            public const string ARTICLE_TYPE_UNDELETEABLE_ERROR = "ARTICLE_TYPE_UNDELETEABLE_ERROR";
+            public const string CORRUPTED_DATABASE_ERROR = "CORRUPTED_DATABASE_ERROR";
+            public const string DONATION_ASSIG_UNDELETEABLE_ERROR = "DONATION_ASSIG_UNDELETEABLE_ERROR";
+            public const string DONATION_STATUS_UNDELETEABLE_ERROR = "DONATION_STATUS_UNDELETEABLE_ERROR";
+            public const string DELETE_QUESTION = "DELETE_QUESTION";
         
     }
 }

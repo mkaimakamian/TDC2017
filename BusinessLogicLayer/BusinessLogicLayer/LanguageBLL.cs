@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataTransferObject;
 using DataAccessLayer;
 using BusinessModel;
+using Helper;
 
 namespace BusinessLogicLayer
 {
@@ -13,11 +14,18 @@ namespace BusinessLogicLayer
     {
        public ResultBM GetLanguages()
         {
-            LanguageDAL languageDal = new LanguageDAL();
-            List<LanguageDTO> languages  = languageDal.GetLanguages();
-            List<LanguageBM> languageBms = ConvertIntoBusinessModel(languages);
-            ResultBM result = new ResultBM(ResultBM.Type.OK, "Recuperación de los idiomas exitoso.", languageBms);
-            return result;
+            try
+            {
+                LanguageDAL languageDal = new LanguageDAL();
+                List<LanguageDTO> languages = languageDal.GetLanguages();
+                List<LanguageBM> languageBms = ConvertIntoBusinessModel(languages);
+                ResultBM result = new ResultBM(ResultBM.Type.OK, "Recuperación de los idiomas exitoso.", languageBms);
+                return result;
+            }
+            catch (Exception exception)
+            {
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
+            }
         }
 
         /// <summary>
@@ -29,7 +37,7 @@ namespace BusinessLogicLayer
         {
             TranslationBLL translationBll = new TranslationBLL();
             List<TranslationBM> translations = translationBll.GetTranslations(languageId);
-            LanguageDAL languageDal = new LanguageDAL();            
+            LanguageDAL languageDal = new LanguageDAL();
             LanguageDTO language = languageDal.GetLanguage(languageId);
             LanguageBM result = ConvertIntoBusinessModel(language, translations);
             return result;

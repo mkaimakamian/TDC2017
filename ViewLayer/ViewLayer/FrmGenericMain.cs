@@ -121,7 +121,7 @@ namespace ViewLayer
             try
             {
                 DialogResult answer = MessageBox.Show(
-                    "¿Está seguro de querer eliminar el registro seleccionado?", "Eliminar", 
+                    SessionHelper.GetTranslation("DELETE_QUESTION"), "Eliminar", 
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question
                     );
 

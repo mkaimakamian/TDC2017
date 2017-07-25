@@ -129,7 +129,7 @@ namespace ViewLayer
                     }
                     else
                         MessageBox.Show(donationResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                    }
+                }
                 else
                 {
                     this.Entity = new DonationBM();
@@ -149,7 +149,7 @@ namespace ViewLayer
 
         private void cmdAccept_Click(object sender, EventArgs e)
         {
-            DialogResult pressed = MessageBox.Show("¿Desea guardar los cambios?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult pressed = MessageBox.Show(SessionHelper.GetTranslation("SAVE_CHANGES_QUESTION"), "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (pressed == DialogResult.No) return;
 
             try
@@ -176,7 +176,7 @@ namespace ViewLayer
                     if (!this.IsUpdate) MessageBox.Show("Lote creado " + this.Entity.Lot, "Lote creado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
                 }
-                else MessageBox.Show("Se ha producido el siguiente error: " + donationResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else MessageBox.Show(donationResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             catch (Exception exception)

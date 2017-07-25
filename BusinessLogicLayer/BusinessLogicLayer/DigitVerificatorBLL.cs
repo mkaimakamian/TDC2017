@@ -7,6 +7,7 @@ using BusinessModel;
 using Helper;
 using DataAccessLayer;
 using DataTransferObject;
+using Helper;
 
 namespace BusinessLogicLayer
 {
@@ -16,25 +17,26 @@ namespace BusinessLogicLayer
 
         public ResultBM UpdateVerticallDigit()
         {
-            //TODO - debería soportar varias entidades
-            DigitVerificatorDAL dvDal = new DigitVerificatorDAL();
-            UserBLL userBll = new UserBLL();
-
-            ResultBM usersBms = userBll.GetUsers();
-            List<DigitVeryficator> users = usersBms.GetValue<List<UserBM>>().Cast<DigitVeryficator>().ToList();
-
-            string digit = SecurityHelper.Encrypt(GetStringToCheck(users));
-
-            DigitVerificatorDTO digitDto = new DigitVerificatorDTO(USER_TABLE, digit);
-            bool result = dvDal.UpdateEntityDigit(digitDto);
-
-            if (result)
+            try
             {
-                return new ResultBM(ResultBM.Type.OK, "Dígito verificador vertical actualizado."); 
+                //TODO - debería soportar varias entidades
+                DigitVerificatorDAL dvDal = new DigitVerificatorDAL();
+                UserBLL userBll = new UserBLL();
+
+                ResultBM usersBms = userBll.GetUsers();
+                List<DigitVeryficator> users = usersBms.GetValue<List<UserBM>>().Cast<DigitVeryficator>().ToList();
+
+                string digit = SecurityHelper.Encrypt(GetStringToCheck(users));
+
+                DigitVerificatorDTO digitDto = new DigitVerificatorDTO(USER_TABLE, digit);
+                bool result = dvDal.UpdateEntityDigit(digitDto);
+
+                if (result) return new ResultBM(ResultBM.Type.OK, "Dígito verificador vertical actualizado.");
+                else return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("UPDATING_ERROR"));
             }
-            else
+            catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "No se pudo actualizar el dígito verificador vertical.");
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("UPDATING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -48,14 +50,8 @@ namespace BusinessLogicLayer
         {
             bool result = SecurityHelper.IsEquivalent(entity.GetSeed(), entity.GetDigit());
 
-            if (result)
-            {
-                return new ResultBM(ResultBM.Type.OK, "Dígito horizontal correcto.");
-            }
-            else
-            {
-                return new ResultBM(ResultBM.Type.CORRUPTED_DATABASE, "Debido a cambios no autorizados en el sistema, el acceso será restringido momentáneamente. Comuníquese con el administrador.");
-            }
+            if (result) return new ResultBM(ResultBM.Type.OK, "Dígito horizontal correcto.");
+            else return new ResultBM(ResultBM.Type.CORRUPTED_DATABASE, SessionHelper.GetTranslation("CORRUPTED_DATABASE_ERROR"));
         }
 
         /// <summary>
@@ -85,7 +81,7 @@ namespace BusinessLogicLayer
             {
                 if (!SecurityHelper.IsEquivalent(entityToCheck[entityVDV.entity], entityVDV.vdv))
                 {
-                    return new ResultBM(ResultBM.Type.CORRUPTED_DATABASE, "Dígito vertical incorrecto para " + entityVDV.entity);
+                    return new ResultBM(ResultBM.Type.CORRUPTED_DATABASE, SessionHelper.GetTranslation("CORRUPTED_DATABASE_ERROR") + " (VERTICAL - " + entityVDV.entity+")");
                 }
             }
 

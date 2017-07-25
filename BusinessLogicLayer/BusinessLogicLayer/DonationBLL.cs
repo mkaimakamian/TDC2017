@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataTransferObject;
 using DataAccessLayer;
 using BusinessModel;
+using Helper;
 
 namespace BusinessLogicLayer
 {
@@ -32,12 +33,11 @@ namespace BusinessLogicLayer
                 {
                     statusResult = donationStatusBll.GetDonationStatus(donationDto.statusId);
                     if (!statusResult.IsValid()) return statusResult;
-                    if (statusResult.GetValue() == null) throw new Exception("El estado con id " + donationDto.statusId + " para la donación " + donationId + " no existe.");
+                    if (statusResult.GetValue() == null) throw new Exception(SessionHelper.GetTranslation("RETRIEVING_ERROR") + " statusId " + donationDto.statusId);
 
                     donorResult = donorBll.GetDonor(donationDto.donorId);
                     if (!donorResult.IsValid()) return donorResult;
-                    if (donorResult.GetValue() == null) throw new Exception("El donador con id " + donationDto.donorId + " para la donación " + donationId + " no existe.");
-
+                    if (donorResult.GetValue() == null) throw new Exception(SessionHelper.GetTranslation("RETRIEVING_ERROR") + " donorId " + donationDto.donorId);
 
                     //Podría no existir voluntario, sobre todo si se consulta una donación recién creada
                     volunteerResult = volunteerBll.GetVolunteer(donationDto.volunteerId);
@@ -51,7 +51,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar la donación " + donationId + ".", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -64,11 +64,10 @@ namespace BusinessLogicLayer
                 return new ResultBM(ResultBM.Type.OK, "Recuperación de registros exitosa.", donationsBm);
             }
             catch (Exception exception) {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar las donaciones.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
-        //debería filtrar por: stocked != 0 o por status != stocked (si es que existe ese valor)
         public ResultBM GetAvaliableDonations()
         {
             try {
@@ -78,7 +77,7 @@ namespace BusinessLogicLayer
                 return new ResultBM(ResultBM.Type.OK, "Recuperación de registros exitosa.", donationsBm);
             }
             catch (Exception exception) {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar las donaciones.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -99,7 +98,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear la donación.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("SAVING_ERROR") + " " + exception.Message, exception);
             }
         }
                 
@@ -120,7 +119,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al actualizar la donación.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("UPDATING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -175,13 +174,13 @@ namespace BusinessLogicLayer
         private ResultBM IsValid(DonationBM donationBm)
         {
             if (donationBm.Items < 1)
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "La cantidad de bultos debe ser de al menos una unidad.");
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("INVALID_VALUE_ERROR") + " (<1)");
 
             if (donationBm.donationStatus == null)
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe selecionar un estado válido para el lote.");
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("EMPTY_FIELD_ERROR") + " (STATUS)");
 
             if (donationBm.donor == null || donationBm.donor.donorId == 0)
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe asignarse donador.");
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("EMPTY_FIELD_ERROR") + " (DONOR)");
             
             return new ResultBM(ResultBM.Type.OK);
         }
@@ -202,19 +201,19 @@ namespace BusinessLogicLayer
                     }
                     else
                     {
-                        return new ResultBM(ResultBM.Type.FAIL, "No se puede eliminar la donación porque algunos ítems ya fueron almacenados.", donationBm);
+                        return new ResultBM(ResultBM.Type.FAIL, SessionHelper.GetTranslation("DONATION_ASSIG_UNDELETEABLE_ERROR"), donationBm);
                     }
 
                 }
                 else
                 {
-                    return new ResultBM(ResultBM.Type.FAIL, "No se puede eliminar la donación porque su estado no lo permite.", donationBm);
+                    return new ResultBM(ResultBM.Type.FAIL, SessionHelper.GetTranslation("DONATION_STATUS_UNDELETEABLE_ERROR"), donationBm);
                 }
                 
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al eliminar el registro.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("DELETING_ERROR") + " " + exception.Message, exception);
             }
         }
 

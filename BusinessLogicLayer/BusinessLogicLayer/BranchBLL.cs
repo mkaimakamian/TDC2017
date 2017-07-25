@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataTransferObject;
 using DataAccessLayer;
 using BusinessModel;
+using Helper;
 
 namespace BusinessLogicLayer
 {
@@ -31,7 +32,7 @@ namespace BusinessLogicLayer
                         if (addressResult.GetValue() != null)
                             branchBm = new BranchBM(branchDto, addressResult.GetValue<AddressBM>());
                         else
-                            throw new Exception("La dirección con id " + branchBm.address.id + "para la sede " + branchId + " no existe.");
+                            return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR"));
                     }
                     else
                         return addressResult;
@@ -41,7 +42,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar la sede " + branchId + ".", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
     }

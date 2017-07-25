@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataTransferObject;
 using DataAccessLayer;
 using BusinessModel;
+using Helper;
 
 namespace BusinessLogicLayer
 {
@@ -27,7 +28,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar el tipo de ítem " + itemTypeId + ".", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -42,7 +43,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar los tipos de ítems.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -65,7 +66,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear el tipo de artículo.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("SAVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -87,18 +88,18 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear el tipo de artículo.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("UPDATING_ERROR") + " " + exception.Message, exception);
             }
         }
 
         private ResultBM IsValid(ItemTypeBM itemTypeBm)
         {
             if (itemTypeBm.Name == null || itemTypeBm.Name.Length == 0)
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el nombre.");
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("EMPTY_FIELD_ERROR") + " (NAME)");
 
             if (itemTypeBm.category == null || itemTypeBm.category.Length == 0)
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse la categoría.");
-
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("EMPTY_FIELD_ERROR") + " (CATEGORY)");
+            
             return new ResultBM(ResultBM.Type.OK);
         }
 
@@ -130,13 +131,13 @@ namespace BusinessLogicLayer
                     return new ResultBM(ResultBM.Type.OK, "Se ha eliminado el registro.", itemTypeBm);
                 } else
                 {
-                    return new ResultBM(ResultBM.Type.FAIL, "No se puede eliminar el tipo de artículo porque está en uso.", itemTypeBm);
+                    return new ResultBM(ResultBM.Type.FAIL, SessionHelper.GetTranslation("ARTICLE_TYPE_UNDELETEABLE_ERROR"), itemTypeBm);
                 }
 
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al eliminar el registro.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("DELETING_ERROR") + " " + exception.Message, exception);
             }
         }
     }

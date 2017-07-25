@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataAccessLayer;
 using DataTransferObject;
 using BusinessModel;
+using Helper;
 
 namespace BusinessLogicLayer
 {
@@ -34,7 +35,7 @@ namespace BusinessLogicLayer
 
                     //Si hubo algún problema o la dirección no existe, entonces hay que devolver el resultado o lanzar una excepción (debería eixstir)
                     if (!addressResult.IsValid()) return addressResult;
-                    if(addressResult.GetValue() == null) throw new Exception("La persona " + donorDto.donorId + " para el donador " + donorId + " no existe.");
+                    if (addressResult.GetValue() == null) throw new Exception(SessionHelper.GetTranslation("RETRIEVING_ERROR") + " addressId " + donorDto.addressId);
 
                     // Podría no pertenecer a una organización, de modo tal que si no posee relación, está bien
                     if (donorDto.organizationId != 0)
@@ -42,8 +43,8 @@ namespace BusinessLogicLayer
                         resultOrganization = organizationBll.GetOrganization(donorDto.organizationId);
 
                         if (!resultOrganization.IsValid()) return resultOrganization;
-                        if (resultOrganization.GetValue() == null) throw new Exception("La persona " + donorDto.donorId + " para el donador " + donorId + " no existe.");
-                        
+                        if (resultOrganization.GetValue() == null) throw new Exception(SessionHelper.GetTranslation("RETRIEVING_ERROR") + " organizationId " + donorDto.organizationId);
+
                         organizationBm = resultOrganization.GetValue<OrganizationBM>();
                     }
 
@@ -54,7 +55,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar el donador " + donorId + ".", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -72,7 +73,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar los donadores.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -106,7 +107,8 @@ namespace BusinessLogicLayer
                 {
                     resultOrganization = organizationBll.SaveOrganization(donorBm.organization);
                     if (!resultOrganization.IsValid()) return resultOrganization;
-                    if (resultOrganization.GetValue() == null) return new ResultBM(ResultBM.Type.FAIL, "Se ha producido un error al guardar la organización del donador.", resultOrganization);
+                    //if (resultOrganization.GetValue() == null) return new ResultBM(ResultBM.Type.FAIL, SessionHelper.GetTranslation("SAVING_ERROR"), resultOrganization);
+
                     organizationBm = resultOrganization.GetValue<OrganizationBM>();
                 }
 
@@ -116,12 +118,10 @@ namespace BusinessLogicLayer
                 donorBm.donorId = donorDto.donorId;
 
                 return new ResultBM(ResultBM.Type.OK, "Se ha creado el donador " + donorBm.name + " " + donorBm.lastName + ".", donorBm);
-                   
-               
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear al donador.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("SAVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -150,7 +150,7 @@ namespace BusinessLogicLayer
                 {
                     resultOrganization = organizationBll.UpdateOrganization(donorBm.organization);
                     if (!resultOrganization.IsValid()) return resultOrganization;
-                    if (resultOrganization.GetValue() == null) return new ResultBM(ResultBM.Type.FAIL, "Se ha producido un error al guardar la organización del donador.", resultOrganization);
+                    //if (resultOrganization.GetValue() == null) return new ResultBM(ResultBM.Type.FAIL, "Se ha producido un error al guardar la organización del donador.", resultOrganization);
                     organizationBm = resultOrganization.GetValue<OrganizationBM>();
                 }
 
@@ -159,12 +159,10 @@ namespace BusinessLogicLayer
                 donorDal.UpdateDonor(donorDto);
 
                 return new ResultBM(ResultBM.Type.OK, "Se ha creado el donador " + donorBm.name + " " + donorBm.lastName + ".", donorBm);
-
-
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear al donador.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("UPDATING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -208,7 +206,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al eliminar el registro.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("DELETING_ERROR") + " " + exception.Message, exception);
             }
         }
     }

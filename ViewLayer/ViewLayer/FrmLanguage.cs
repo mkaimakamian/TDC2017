@@ -68,20 +68,16 @@ namespace ViewLayer
 
         private void cmdAccept_Click(object sender, EventArgs e)
         {
-            LanguageBM language = (LanguageBM) cmbLanguage.SelectedValue;
-            UserBLL userBll = new UserBLL();
-
-            ResultBM result = userBll.ChangeCurrentLanguage(language.Id);
             try
             {
-                if (result.IsValid())
-                {
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                LanguageBM language = (LanguageBM)cmbLanguage.SelectedValue;
+                UserBLL userBll = new UserBLL();
+
+                ResultBM result = userBll.ChangeCurrentLanguage(language.Id);
+
+                if (result.IsValid()) this.Close();
+                else MessageBox.Show(result.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
             } catch (Exception excpetion) {
                 MessageBox.Show("Se ha producido el siguiente error: " + excpetion.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }            

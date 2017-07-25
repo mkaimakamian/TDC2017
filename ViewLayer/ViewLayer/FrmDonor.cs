@@ -147,7 +147,7 @@ namespace ViewLayer
 
         private void cmdAccept_Click(object sender, EventArgs e)
         {
-            DialogResult pressed = MessageBox.Show("¿Desea guardar los cambios?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult pressed = MessageBox.Show(SessionHelper.GetTranslation("SAVE_CHANGES_QUESTION"), "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (pressed == DialogResult.No) return;
 
             try
@@ -164,7 +164,7 @@ namespace ViewLayer
                 else donorResult = donorBll.SaveDonor(this.Entity);
 
                 if (donorResult.IsValid()) Close();
-                else MessageBox.Show("Se ha producido el siguiente error: " + donorResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else MessageBox.Show(donorResult.description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             catch (Exception exception)

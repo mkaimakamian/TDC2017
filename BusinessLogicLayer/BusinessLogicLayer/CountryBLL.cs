@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataAccessLayer;
 using DataTransferObject;
 using BusinessModel;
+using Helper;
 
 namespace BusinessLogicLayer
 {
@@ -28,7 +29,7 @@ namespace BusinessLogicLayer
                 return new ResultBM(ResultBM.Type.OK, "Operación exitosa.", countryBm);
             }
             catch (Exception exception) {
-                    return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar el país " + iso2 + ".", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -43,7 +44,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar los países.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
