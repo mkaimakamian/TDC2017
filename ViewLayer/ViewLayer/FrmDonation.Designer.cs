@@ -161,6 +161,7 @@
             // txtComment
             // 
             this.txtComment.Location = new System.Drawing.Point(6, 220);
+            this.txtComment.MaxLength = 200;
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
             this.txtComment.Size = new System.Drawing.Size(200, 78);

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataTransferObject;
 using DataAccessLayer;
 using BusinessModel;
+using Helper;
 
 namespace BusinessLogicLayer
 {
@@ -33,7 +34,7 @@ namespace BusinessLogicLayer
 
                     //Si hubo algún problema o la dirección no existe, entonces hay que devolver el resultado o lanzar una excepción (debería eixstir)
                     if (!addressResult.IsValid()) return addressResult;
-                    if (addressResult.GetValue() == null) throw new Exception("La dirección " + beneficiaryDto.addressId + " para el beneficiario " + beneficiaryId + " no existe.");
+                    if (addressResult.GetValue() == null) throw new Exception(SessionHelper.GetTranslation("RETRIEVING_ERROR") + " addressId " + beneficiaryDto.addressId);
 
                     beneficiaryBm = new BeneficiaryBM(beneficiaryDto, addressResult.GetValue<AddressBM>());
                 }
@@ -42,7 +43,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar el beneficiario " + beneficiaryId + ".", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -61,7 +62,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar los donadores.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -97,7 +98,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear al beneficiario.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("SAVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -125,7 +126,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al crear al donador.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("UPDATING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -162,7 +163,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al eliminar el registro.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("DELETING_ERROR") + " " + exception.Message, exception);
             }
         }
     }

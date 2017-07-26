@@ -185,6 +185,9 @@ namespace ViewLayer
             public const string DONATION_ASSIG_UNDELETEABLE_ERROR = "DONATION_ASSIG_UNDELETEABLE_ERROR";
             public const string DONATION_STATUS_UNDELETEABLE_ERROR = "DONATION_STATUS_UNDELETEABLE_ERROR";
             public const string DELETE_QUESTION = "DELETE_QUESTION";
-        
+            public const string BACKUP_ERROR = "BACKUP_ERROR";
+            public const string RESTORE_ERROR = "RESTORE_ERROR";
+            public const string RESTORE_WARN1 = "RESTORE_WARN1";
+            public const string RESTORE_WARN2 = "RESTORE_WARN2";
     }
 }

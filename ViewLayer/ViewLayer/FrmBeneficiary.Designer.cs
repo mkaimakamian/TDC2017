@@ -55,31 +55,31 @@
             this.lblDocument = new System.Windows.Forms.Label();
             this.txtDocument = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblDescMajor = new System.Windows.Forms.Label();
+            this.lblDescAccessibility = new System.Windows.Forms.Label();
+            this.lblDescHealth = new System.Windows.Forms.Label();
+            this.lblDescAges = new System.Windows.Forms.Label();
+            this.lblDescDestinatary = new System.Windows.Forms.Label();
+            this.lblMajor = new System.Windows.Forms.Label();
+            this.lblAccesibility = new System.Windows.Forms.Label();
+            this.lblHealth = new System.Windows.Forms.Label();
+            this.lblAges = new System.Windows.Forms.Label();
+            this.lblDestination = new System.Windows.Forms.Label();
+            this.trkMajor = new System.Windows.Forms.TrackBar();
+            this.trkAccessibility = new System.Windows.Forms.TrackBar();
+            this.trkHealth = new System.Windows.Forms.TrackBar();
+            this.trkAges = new System.Windows.Forms.TrackBar();
+            this.trkDestination = new System.Windows.Forms.TrackBar();
             this.cmdClose = new System.Windows.Forms.Button();
             this.cmdAccept = new System.Windows.Forms.Button();
-            this.trkDestination = new System.Windows.Forms.TrackBar();
-            this.trkAges = new System.Windows.Forms.TrackBar();
-            this.trkHealth = new System.Windows.Forms.TrackBar();
-            this.trkAccessibility = new System.Windows.Forms.TrackBar();
-            this.trkMajor = new System.Windows.Forms.TrackBar();
-            this.lblDestination = new System.Windows.Forms.Label();
-            this.lblAges = new System.Windows.Forms.Label();
-            this.lblHealth = new System.Windows.Forms.Label();
-            this.lblAccesibility = new System.Windows.Forms.Label();
-            this.lblMajor = new System.Windows.Forms.Label();
-            this.lblDescDestinatary = new System.Windows.Forms.Label();
-            this.lblDescAges = new System.Windows.Forms.Label();
-            this.lblDescHealth = new System.Windows.Forms.Label();
-            this.lblDescAccessibility = new System.Windows.Forms.Label();
-            this.lblDescMajor = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trkDestination)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trkAges)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trkHealth)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trkAccessibility)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkMajor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkAccessibility)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkHealth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkAges)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkDestination)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -103,6 +103,7 @@
             // txtNumber
             // 
             this.txtNumber.Location = new System.Drawing.Point(6, 71);
+            this.txtNumber.MaxLength = 50;
             this.txtNumber.Name = "txtNumber";
             this.txtNumber.Size = new System.Drawing.Size(200, 20);
             this.txtNumber.TabIndex = 17;
@@ -120,6 +121,7 @@
             // txtStreet
             // 
             this.txtStreet.Location = new System.Drawing.Point(6, 32);
+            this.txtStreet.MaxLength = 50;
             this.txtStreet.Name = "txtStreet";
             this.txtStreet.Size = new System.Drawing.Size(200, 20);
             this.txtStreet.TabIndex = 15;
@@ -145,6 +147,7 @@
             // txtApartment
             // 
             this.txtApartment.Location = new System.Drawing.Point(6, 110);
+            this.txtApartment.MaxLength = 50;
             this.txtApartment.Name = "txtApartment";
             this.txtApartment.Size = new System.Drawing.Size(200, 20);
             this.txtApartment.TabIndex = 19;
@@ -161,6 +164,7 @@
             // txtComment
             // 
             this.txtComment.Location = new System.Drawing.Point(9, 188);
+            this.txtComment.MaxLength = 200;
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
             this.txtComment.Size = new System.Drawing.Size(197, 100);
@@ -218,6 +222,7 @@
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(6, 32);
+            this.txtName.MaxLength = 50;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(200, 20);
             this.txtName.TabIndex = 1;
@@ -234,6 +239,7 @@
             // txtLastName
             // 
             this.txtLastName.Location = new System.Drawing.Point(6, 71);
+            this.txtLastName.MaxLength = 50;
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(200, 20);
             this.txtLastName.TabIndex = 3;
@@ -266,6 +272,7 @@
             // txtMail
             // 
             this.txtMail.Location = new System.Drawing.Point(6, 149);
+            this.txtMail.MaxLength = 50;
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(200, 20);
             this.txtMail.TabIndex = 7;
@@ -282,6 +289,7 @@
             // txtPhone
             // 
             this.txtPhone.Location = new System.Drawing.Point(6, 188);
+            this.txtPhone.MaxLength = 50;
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(200, 20);
             this.txtPhone.TabIndex = 9;
@@ -320,6 +328,7 @@
             // txtDocument
             // 
             this.txtDocument.Location = new System.Drawing.Point(6, 227);
+            this.txtDocument.MaxLength = 8;
             this.txtDocument.Name = "txtDocument";
             this.txtDocument.Size = new System.Drawing.Size(200, 20);
             this.txtDocument.TabIndex = 13;
@@ -348,6 +357,141 @@
             this.groupBox3.TabIndex = 43;
             this.groupBox3.TabStop = false;
             // 
+            // lblDescMajor
+            // 
+            this.lblDescMajor.Location = new System.Drawing.Point(94, 232);
+            this.lblDescMajor.Name = "lblDescMajor";
+            this.lblDescMajor.Size = new System.Drawing.Size(123, 36);
+            this.lblDescMajor.TabIndex = 14;
+            this.lblDescMajor.Text = "1. Re mal 2. mejorando";
+            // 
+            // lblDescAccessibility
+            // 
+            this.lblDescAccessibility.Location = new System.Drawing.Point(94, 187);
+            this.lblDescAccessibility.Name = "lblDescAccessibility";
+            this.lblDescAccessibility.Size = new System.Drawing.Size(123, 36);
+            this.lblDescAccessibility.TabIndex = 13;
+            this.lblDescAccessibility.Text = "1. Re mal 2. mejorando";
+            // 
+            // lblDescHealth
+            // 
+            this.lblDescHealth.Location = new System.Drawing.Point(94, 135);
+            this.lblDescHealth.Name = "lblDescHealth";
+            this.lblDescHealth.Size = new System.Drawing.Size(123, 36);
+            this.lblDescHealth.TabIndex = 12;
+            this.lblDescHealth.Text = "1. Re mal 2. mejorando";
+            // 
+            // lblDescAges
+            // 
+            this.lblDescAges.Location = new System.Drawing.Point(94, 84);
+            this.lblDescAges.Name = "lblDescAges";
+            this.lblDescAges.Size = new System.Drawing.Size(123, 36);
+            this.lblDescAges.TabIndex = 11;
+            this.lblDescAges.Text = "1. Re mal 2. mejorando 3. bastante bien";
+            // 
+            // lblDescDestinatary
+            // 
+            this.lblDescDestinatary.Location = new System.Drawing.Point(91, 32);
+            this.lblDescDestinatary.Name = "lblDescDestinatary";
+            this.lblDescDestinatary.Size = new System.Drawing.Size(126, 36);
+            this.lblDescDestinatary.TabIndex = 10;
+            this.lblDescDestinatary.Text = "1. Re mal 2. mejorando 3. bastante bien";
+            // 
+            // lblMajor
+            // 
+            this.lblMajor.AutoSize = true;
+            this.lblMajor.Location = new System.Drawing.Point(6, 222);
+            this.lblMajor.Name = "lblMajor";
+            this.lblMajor.Size = new System.Drawing.Size(32, 13);
+            this.lblMajor.TabIndex = 9;
+            this.lblMajor.Text = "major";
+            // 
+            // lblAccesibility
+            // 
+            this.lblAccesibility.AutoSize = true;
+            this.lblAccesibility.Location = new System.Drawing.Point(6, 170);
+            this.lblAccesibility.Name = "lblAccesibility";
+            this.lblAccesibility.Size = new System.Drawing.Size(63, 13);
+            this.lblAccesibility.TabIndex = 8;
+            this.lblAccesibility.Text = "accessibility";
+            // 
+            // lblHealth
+            // 
+            this.lblHealth.AutoSize = true;
+            this.lblHealth.Location = new System.Drawing.Point(6, 119);
+            this.lblHealth.Name = "lblHealth";
+            this.lblHealth.Size = new System.Drawing.Size(36, 13);
+            this.lblHealth.TabIndex = 7;
+            this.lblHealth.Text = "health";
+            // 
+            // lblAges
+            // 
+            this.lblAges.AutoSize = true;
+            this.lblAges.Location = new System.Drawing.Point(6, 68);
+            this.lblAges.Name = "lblAges";
+            this.lblAges.Size = new System.Drawing.Size(30, 13);
+            this.lblAges.TabIndex = 6;
+            this.lblAges.Text = "ages";
+            // 
+            // lblDestination
+            // 
+            this.lblDestination.AutoSize = true;
+            this.lblDestination.Location = new System.Drawing.Point(6, 16);
+            this.lblDestination.Name = "lblDestination";
+            this.lblDestination.Size = new System.Drawing.Size(66, 13);
+            this.lblDestination.TabIndex = 5;
+            this.lblDestination.Text = "destinataries";
+            // 
+            // trkMajor
+            // 
+            this.trkMajor.Location = new System.Drawing.Point(6, 238);
+            this.trkMajor.Maximum = 4;
+            this.trkMajor.Minimum = 1;
+            this.trkMajor.Name = "trkMajor";
+            this.trkMajor.Size = new System.Drawing.Size(89, 45);
+            this.trkMajor.TabIndex = 4;
+            this.trkMajor.Value = 2;
+            // 
+            // trkAccessibility
+            // 
+            this.trkAccessibility.Location = new System.Drawing.Point(6, 187);
+            this.trkAccessibility.Maximum = 3;
+            this.trkAccessibility.Minimum = 1;
+            this.trkAccessibility.Name = "trkAccessibility";
+            this.trkAccessibility.Size = new System.Drawing.Size(89, 45);
+            this.trkAccessibility.TabIndex = 3;
+            this.trkAccessibility.Value = 2;
+            // 
+            // trkHealth
+            // 
+            this.trkHealth.Location = new System.Drawing.Point(6, 135);
+            this.trkHealth.Maximum = 2;
+            this.trkHealth.Minimum = 1;
+            this.trkHealth.Name = "trkHealth";
+            this.trkHealth.Size = new System.Drawing.Size(89, 45);
+            this.trkHealth.TabIndex = 2;
+            this.trkHealth.Value = 1;
+            // 
+            // trkAges
+            // 
+            this.trkAges.Location = new System.Drawing.Point(6, 84);
+            this.trkAges.Maximum = 3;
+            this.trkAges.Minimum = 1;
+            this.trkAges.Name = "trkAges";
+            this.trkAges.Size = new System.Drawing.Size(89, 45);
+            this.trkAges.TabIndex = 1;
+            this.trkAges.Value = 2;
+            // 
+            // trkDestination
+            // 
+            this.trkDestination.Location = new System.Drawing.Point(6, 32);
+            this.trkDestination.Maximum = 3;
+            this.trkDestination.Minimum = 1;
+            this.trkDestination.Name = "trkDestination";
+            this.trkDestination.Size = new System.Drawing.Size(89, 45);
+            this.trkDestination.TabIndex = 0;
+            this.trkDestination.Value = 2;
+            // 
             // cmdClose
             // 
             this.cmdClose.Location = new System.Drawing.Point(12, 338);
@@ -367,141 +511,6 @@
             this.cmdAccept.Text = "accept";
             this.cmdAccept.UseVisualStyleBackColor = true;
             this.cmdAccept.Click += new System.EventHandler(this.cmdAccept_Click);
-            // 
-            // trkDestination
-            // 
-            this.trkDestination.Location = new System.Drawing.Point(6, 32);
-            this.trkDestination.Maximum = 3;
-            this.trkDestination.Minimum = 1;
-            this.trkDestination.Name = "trkDestination";
-            this.trkDestination.Size = new System.Drawing.Size(89, 45);
-            this.trkDestination.TabIndex = 0;
-            this.trkDestination.Value = 2;
-            // 
-            // trkAges
-            // 
-            this.trkAges.Location = new System.Drawing.Point(6, 84);
-            this.trkAges.Maximum = 3;
-            this.trkAges.Minimum = 1;
-            this.trkAges.Name = "trkAges";
-            this.trkAges.Size = new System.Drawing.Size(89, 45);
-            this.trkAges.TabIndex = 1;
-            this.trkAges.Value = 2;
-            // 
-            // trkHealth
-            // 
-            this.trkHealth.Location = new System.Drawing.Point(6, 135);
-            this.trkHealth.Maximum = 2;
-            this.trkHealth.Minimum = 1;
-            this.trkHealth.Name = "trkHealth";
-            this.trkHealth.Size = new System.Drawing.Size(89, 45);
-            this.trkHealth.TabIndex = 2;
-            this.trkHealth.Value = 1;
-            // 
-            // trkAccessibility
-            // 
-            this.trkAccessibility.Location = new System.Drawing.Point(6, 187);
-            this.trkAccessibility.Maximum = 3;
-            this.trkAccessibility.Minimum = 1;
-            this.trkAccessibility.Name = "trkAccessibility";
-            this.trkAccessibility.Size = new System.Drawing.Size(89, 45);
-            this.trkAccessibility.TabIndex = 3;
-            this.trkAccessibility.Value = 2;
-            // 
-            // trkMajor
-            // 
-            this.trkMajor.Location = new System.Drawing.Point(6, 238);
-            this.trkMajor.Maximum = 4;
-            this.trkMajor.Minimum = 1;
-            this.trkMajor.Name = "trkMajor";
-            this.trkMajor.Size = new System.Drawing.Size(89, 45);
-            this.trkMajor.TabIndex = 4;
-            this.trkMajor.Value = 2;
-            // 
-            // lblDestination
-            // 
-            this.lblDestination.AutoSize = true;
-            this.lblDestination.Location = new System.Drawing.Point(6, 16);
-            this.lblDestination.Name = "lblDestination";
-            this.lblDestination.Size = new System.Drawing.Size(66, 13);
-            this.lblDestination.TabIndex = 5;
-            this.lblDestination.Text = "destinataries";
-            // 
-            // lblAges
-            // 
-            this.lblAges.AutoSize = true;
-            this.lblAges.Location = new System.Drawing.Point(6, 68);
-            this.lblAges.Name = "lblAges";
-            this.lblAges.Size = new System.Drawing.Size(30, 13);
-            this.lblAges.TabIndex = 6;
-            this.lblAges.Text = "ages";
-            // 
-            // lblHealth
-            // 
-            this.lblHealth.AutoSize = true;
-            this.lblHealth.Location = new System.Drawing.Point(6, 119);
-            this.lblHealth.Name = "lblHealth";
-            this.lblHealth.Size = new System.Drawing.Size(36, 13);
-            this.lblHealth.TabIndex = 7;
-            this.lblHealth.Text = "health";
-            // 
-            // lblAccesibility
-            // 
-            this.lblAccesibility.AutoSize = true;
-            this.lblAccesibility.Location = new System.Drawing.Point(6, 170);
-            this.lblAccesibility.Name = "lblAccesibility";
-            this.lblAccesibility.Size = new System.Drawing.Size(63, 13);
-            this.lblAccesibility.TabIndex = 8;
-            this.lblAccesibility.Text = "accessibility";
-            // 
-            // lblMajor
-            // 
-            this.lblMajor.AutoSize = true;
-            this.lblMajor.Location = new System.Drawing.Point(6, 222);
-            this.lblMajor.Name = "lblMajor";
-            this.lblMajor.Size = new System.Drawing.Size(32, 13);
-            this.lblMajor.TabIndex = 9;
-            this.lblMajor.Text = "major";
-            // 
-            // lblDescDestinatary
-            // 
-            this.lblDescDestinatary.Location = new System.Drawing.Point(91, 32);
-            this.lblDescDestinatary.Name = "lblDescDestinatary";
-            this.lblDescDestinatary.Size = new System.Drawing.Size(126, 36);
-            this.lblDescDestinatary.TabIndex = 10;
-            this.lblDescDestinatary.Text = "1. Re mal 2. mejorando 3. bastante bien";
-            // 
-            // lblDescAges
-            // 
-            this.lblDescAges.Location = new System.Drawing.Point(94, 84);
-            this.lblDescAges.Name = "lblDescAges";
-            this.lblDescAges.Size = new System.Drawing.Size(123, 36);
-            this.lblDescAges.TabIndex = 11;
-            this.lblDescAges.Text = "1. Re mal 2. mejorando 3. bastante bien";
-            // 
-            // lblDescHealth
-            // 
-            this.lblDescHealth.Location = new System.Drawing.Point(94, 135);
-            this.lblDescHealth.Name = "lblDescHealth";
-            this.lblDescHealth.Size = new System.Drawing.Size(123, 36);
-            this.lblDescHealth.TabIndex = 12;
-            this.lblDescHealth.Text = "1. Re mal 2. mejorando";
-            // 
-            // lblDescAccessibility
-            // 
-            this.lblDescAccessibility.Location = new System.Drawing.Point(94, 187);
-            this.lblDescAccessibility.Name = "lblDescAccessibility";
-            this.lblDescAccessibility.Size = new System.Drawing.Size(123, 36);
-            this.lblDescAccessibility.TabIndex = 13;
-            this.lblDescAccessibility.Text = "1. Re mal 2. mejorando";
-            // 
-            // lblDescMajor
-            // 
-            this.lblDescMajor.Location = new System.Drawing.Point(94, 232);
-            this.lblDescMajor.Name = "lblDescMajor";
-            this.lblDescMajor.Size = new System.Drawing.Size(123, 36);
-            this.lblDescMajor.TabIndex = 14;
-            this.lblDescMajor.Text = "1. Re mal 2. mejorando";
             // 
             // FrmBeneficiary
             // 
@@ -524,11 +533,11 @@
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trkDestination)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trkAges)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trkHealth)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trkAccessibility)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkMajor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkAccessibility)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkHealth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkAges)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkDestination)).EndInit();
             this.ResumeLayout(false);
 
         }

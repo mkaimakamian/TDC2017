@@ -27,7 +27,7 @@ namespace BusinessLogicLayer
             catch (Exception exception)
             {
                 log.AddLogCritical("Creando copia de seguridad", "Excepción", this);
-                return new ResultBM(ResultBM.Type.EXCEPTION, exception.Message, exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("BACKUP_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -44,7 +44,7 @@ namespace BusinessLogicLayer
 
             } catch (Exception exception) {
                 log.AddLogCritical("Creando copia de seguridad", "Excepción", this);
-                return new ResultBM(ResultBM.Type.EXCEPTION, exception.Message, exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RESTORE_ERROR") + " " + exception.Message, exception);
             }            
 
         }

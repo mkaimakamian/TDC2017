@@ -44,10 +44,10 @@
             this.dtDueDate = new System.Windows.Forms.DateTimePicker();
             this.numericQuantity = new System.Windows.Forms.NumericUpDown();
             this.cmbItemType = new System.Windows.Forms.ComboBox();
+            this.shapeContainer2 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.lineNoDuedate = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.cmdClose = new System.Windows.Forms.Button();
             this.cmdAccept = new System.Windows.Forms.Button();
-            this.lineNoDuedate = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.shapeContainer2 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericQuantity)).BeginInit();
             this.SuspendLayout();
@@ -171,6 +171,7 @@
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(6, 112);
+            this.txtName.MaxLength = 50;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(200, 20);
             this.txtName.TabIndex = 0;
@@ -178,6 +179,7 @@
             // txtLocation
             // 
             this.txtLocation.Location = new System.Drawing.Point(9, 273);
+            this.txtLocation.MaxLength = 100;
             this.txtLocation.Name = "txtLocation";
             this.txtLocation.Size = new System.Drawing.Size(200, 20);
             this.txtLocation.TabIndex = 1;
@@ -207,6 +209,25 @@
             this.cmbItemType.TabIndex = 3;
             this.cmbItemType.SelectedIndexChanged += new System.EventHandler(this.cmbItemType_SelectedIndexChanged);
             // 
+            // shapeContainer2
+            // 
+            this.shapeContainer2.Location = new System.Drawing.Point(3, 16);
+            this.shapeContainer2.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeContainer2.Name = "shapeContainer2";
+            this.shapeContainer2.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.lineNoDuedate});
+            this.shapeContainer2.Size = new System.Drawing.Size(215, 285);
+            this.shapeContainer2.TabIndex = 12;
+            this.shapeContainer2.TabStop = false;
+            // 
+            // lineNoDuedate
+            // 
+            this.lineNoDuedate.Name = "lineNoDuedate";
+            this.lineNoDuedate.X1 = 9;
+            this.lineNoDuedate.X2 = 194;
+            this.lineNoDuedate.Y1 = 225;
+            this.lineNoDuedate.Y2 = 225;
+            // 
             // cmdClose
             // 
             this.cmdClose.Location = new System.Drawing.Point(12, 338);
@@ -226,25 +247,6 @@
             this.cmdAccept.Text = "accept";
             this.cmdAccept.UseVisualStyleBackColor = true;
             this.cmdAccept.Click += new System.EventHandler(this.cmdAccept_Click);
-            // 
-            // lineNoDuedate
-            // 
-            this.lineNoDuedate.Name = "lineNoDuedate";
-            this.lineNoDuedate.X1 = 9;
-            this.lineNoDuedate.X2 = 194;
-            this.lineNoDuedate.Y1 = 225;
-            this.lineNoDuedate.Y2 = 225;
-            // 
-            // shapeContainer2
-            // 
-            this.shapeContainer2.Location = new System.Drawing.Point(3, 16);
-            this.shapeContainer2.Margin = new System.Windows.Forms.Padding(0);
-            this.shapeContainer2.Name = "shapeContainer2";
-            this.shapeContainer2.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
-            this.lineNoDuedate});
-            this.shapeContainer2.Size = new System.Drawing.Size(215, 285);
-            this.shapeContainer2.TabIndex = 12;
-            this.shapeContainer2.TabStop = false;
             // 
             // FrmStock
             // 

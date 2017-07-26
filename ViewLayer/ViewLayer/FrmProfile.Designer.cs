@@ -78,6 +78,7 @@
             // txtDescription
             // 
             this.txtDescription.Location = new System.Drawing.Point(459, 26);
+            this.txtDescription.MaxLength = 50;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(256, 20);
             this.txtDescription.TabIndex = 5;

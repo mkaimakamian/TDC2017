@@ -44,9 +44,9 @@ namespace ViewLayer
                     Cursor.Current = Cursors.Default;
 
                     if (bkpResult.IsValid())
-                        MessageBox.Show("La operación se ha realizado exitosamente.", "Backup", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(SessionHelper.GetTranslation("OK_OPERATION"), "Backup", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     else
-                        MessageBox.Show("Se ha producido un error al generar la copia de respaldo: " + bkpResult.description, "Backup", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(bkpResult.description, "Backup", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception exception)
@@ -60,7 +60,7 @@ namespace ViewLayer
         {
             try
             {
-                MessageBox.Show("Restaurar la base de datos finalizará la sesión actual una vez que la operación haya terminado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(SessionHelper.GetTranslation("RESTORE_WARN1"), "Atención", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 
                 BackupBLL backupBll = new BackupBLL();
                 ResultBM bkpResult;
@@ -72,7 +72,7 @@ namespace ViewLayer
 
                 if (pressed != DialogResult.OK) return;
 
-                DialogResult answer = MessageBox.Show("¿Está seguro de querer restaurar la base de datos? \n tenga en mente finalizará la sesión actual una vez que la operación haya terminado.", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+                DialogResult answer = MessageBox.Show(SessionHelper.GetTranslation("RESTORE_WARN2"), "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
 
                 if (answer == DialogResult.No)
                     return;
@@ -86,7 +86,7 @@ namespace ViewLayer
 
                     if (bkpResult.IsValid())
                     {
-                        MessageBox.Show("La operación se ha realizado exitosamente.", "Restore", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(SessionHelper.GetTranslation("OK_OPERATION"), "Restore", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         
                         // Se recorren los formularios abiertos y se cierran todos, salvo el de login
                         List<Form> openForms = new List<Form>();
@@ -106,7 +106,7 @@ namespace ViewLayer
                     }
                     else
                     {
-                        MessageBox.Show("Se ha producido un error al restaurar la copia de respaldo: " + bkpResult.description, "Backup", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(bkpResult.description, "Backup", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }

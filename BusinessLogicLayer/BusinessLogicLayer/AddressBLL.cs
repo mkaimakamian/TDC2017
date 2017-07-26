@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataAccessLayer;
 using DataTransferObject;
 using BusinessModel;
+using Helper;
 
 namespace BusinessLogicLayer
 {
@@ -33,14 +34,14 @@ namespace BusinessLogicLayer
 
                     if (!resultCountry.IsValid()) return resultCountry;
                     if (resultCountry.GetValue() != null) addressBm = new AddressBM(addressDto, resultCountry.GetValue<CountryBM>());
-                    else throw new Exception("El país " + addressDto.countryIso + "para la dirección " + addressId + " no existe.");
+                    else throw new Exception(SessionHelper.GetTranslation("RETRIEVING_ERROR") + " countryIso " + addressDto.countryIso); 
                 }
 
                 return new ResultBM(ResultBM.Type.OK, "Operación exitosa.", addressBm);
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al recuperar la dirección " + addressId + ".", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("RETRIEVING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -61,7 +62,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al guardar la dirección.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("SAVING_ERROR") + " " + exception.Message, exception);
             }
         }
         
@@ -81,7 +82,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception exception)
             {
-                return new ResultBM(ResultBM.Type.EXCEPTION, "Se ha producido un error al guardar la dirección.", exception);
+                return new ResultBM(ResultBM.Type.EXCEPTION, SessionHelper.GetTranslation("UPDATING_ERROR") + " " + exception.Message, exception);
             }
         }
 
@@ -89,13 +90,13 @@ namespace BusinessLogicLayer
         private ResultBM IsValid(AddressBM addressBm)
         {
             if (addressBm.street == null || addressBm.street.Length == 0)
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse la dirección");
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("EMPTY_FIELD_ERROR") + " (STREET)");
 
             if (addressBm.number < 0)
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el número de calle");
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("INVALID_VALUE_ERROR") + " (NUMBER < 0)");
 
             if (addressBm.country == null)
-                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, "Debe completarse el país");
+                return new ResultBM(ResultBM.Type.INCOMPLETE_FIELDS, SessionHelper.GetTranslation("EMPTY_FIELD_ERROR") + " (COUNTRY)");
 
             return new ResultBM(ResultBM.Type.OK);
         }

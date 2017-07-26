@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cmdClose = new System.Windows.Forms.Button();
-            this.cmdAccept = new System.Windows.Forms.Button();
-            this.lblName = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.rbEdible = new System.Windows.Forms.RadioButton();
-            this.rbIndumentary = new System.Windows.Forms.RadioButton();
-            this.rbMedicine = new System.Windows.Forms.RadioButton();
-            this.rbConstruction = new System.Windows.Forms.RadioButton();
-            this.rbOther = new System.Windows.Forms.RadioButton();
+            this.txtComment = new System.Windows.Forms.TextBox();
+            this.lblComment = new System.Windows.Forms.Label();
             this.grpCategory = new System.Windows.Forms.GroupBox();
             this.checkPerishable = new System.Windows.Forms.CheckBox();
-            this.lblComment = new System.Windows.Forms.Label();
-            this.txtComment = new System.Windows.Forms.TextBox();
+            this.rbMedicine = new System.Windows.Forms.RadioButton();
+            this.rbOther = new System.Windows.Forms.RadioButton();
+            this.rbEdible = new System.Windows.Forms.RadioButton();
+            this.rbConstruction = new System.Windows.Forms.RadioButton();
+            this.rbIndumentary = new System.Windows.Forms.RadioButton();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.lblName = new System.Windows.Forms.Label();
+            this.cmdClose = new System.Windows.Forms.Button();
+            this.cmdAccept = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.grpCategory.SuspendLayout();
             this.SuspendLayout();
@@ -59,98 +59,23 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
-            // cmdClose
+            // txtComment
             // 
-            this.cmdClose.Location = new System.Drawing.Point(13, 338);
-            this.cmdClose.Name = "cmdClose";
-            this.cmdClose.Size = new System.Drawing.Size(75, 23);
-            this.cmdClose.TabIndex = 42;
-            this.cmdClose.Text = "close";
-            this.cmdClose.UseVisualStyleBackColor = true;
-            this.cmdClose.Click += new System.EventHandler(this.cmdClose_Click);
+            this.txtComment.Location = new System.Drawing.Point(6, 173);
+            this.txtComment.MaxLength = 200;
+            this.txtComment.Multiline = true;
+            this.txtComment.Name = "txtComment";
+            this.txtComment.Size = new System.Drawing.Size(200, 125);
+            this.txtComment.TabIndex = 9;
             // 
-            // cmdAccept
+            // lblComment
             // 
-            this.cmdAccept.Location = new System.Drawing.Point(158, 338);
-            this.cmdAccept.Name = "cmdAccept";
-            this.cmdAccept.Size = new System.Drawing.Size(75, 23);
-            this.cmdAccept.TabIndex = 41;
-            this.cmdAccept.Text = "accept";
-            this.cmdAccept.UseVisualStyleBackColor = true;
-            this.cmdAccept.Click += new System.EventHandler(this.cmdAccept_Click);
-            // 
-            // lblName
-            // 
-            this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(7, 20);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(33, 13);
-            this.lblName.TabIndex = 0;
-            this.lblName.Text = "name";
-            // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(6, 36);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(200, 20);
-            this.txtName.TabIndex = 1;
-            // 
-            // rbEdible
-            // 
-            this.rbEdible.AutoSize = true;
-            this.rbEdible.Location = new System.Drawing.Point(6, 19);
-            this.rbEdible.Name = "rbEdible";
-            this.rbEdible.Size = new System.Drawing.Size(85, 17);
-            this.rbEdible.TabIndex = 2;
-            this.rbEdible.TabStop = true;
-            this.rbEdible.Text = "radioButton1";
-            this.rbEdible.UseVisualStyleBackColor = true;
-            // 
-            // rbIndumentary
-            // 
-            this.rbIndumentary.AutoSize = true;
-            this.rbIndumentary.Location = new System.Drawing.Point(6, 42);
-            this.rbIndumentary.Name = "rbIndumentary";
-            this.rbIndumentary.Size = new System.Drawing.Size(85, 17);
-            this.rbIndumentary.TabIndex = 3;
-            this.rbIndumentary.TabStop = true;
-            this.rbIndumentary.Text = "radioButton2";
-            this.rbIndumentary.UseVisualStyleBackColor = true;
-            // 
-            // rbMedicine
-            // 
-            this.rbMedicine.AutoSize = true;
-            this.rbMedicine.Location = new System.Drawing.Point(6, 65);
-            this.rbMedicine.Name = "rbMedicine";
-            this.rbMedicine.Size = new System.Drawing.Size(85, 17);
-            this.rbMedicine.TabIndex = 4;
-            this.rbMedicine.TabStop = true;
-            this.rbMedicine.Text = "radioButton3";
-            this.rbMedicine.UseVisualStyleBackColor = true;
-            // 
-            // rbConstruction
-            // 
-            this.rbConstruction.AutoSize = true;
-            this.rbConstruction.Location = new System.Drawing.Point(109, 19);
-            this.rbConstruction.Name = "rbConstruction";
-            this.rbConstruction.Size = new System.Drawing.Size(85, 17);
-            this.rbConstruction.TabIndex = 5;
-            this.rbConstruction.TabStop = true;
-            this.rbConstruction.Text = "radioButton4";
-            this.rbConstruction.UseVisualStyleBackColor = true;
-            this.rbConstruction.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
-            // 
-            // rbOther
-            // 
-            this.rbOther.AutoSize = true;
-            this.rbOther.Checked = true;
-            this.rbOther.Location = new System.Drawing.Point(109, 42);
-            this.rbOther.Name = "rbOther";
-            this.rbOther.Size = new System.Drawing.Size(85, 17);
-            this.rbOther.TabIndex = 6;
-            this.rbOther.TabStop = true;
-            this.rbOther.Text = "radioButton5";
-            this.rbOther.UseVisualStyleBackColor = true;
+            this.lblComment.AutoSize = true;
+            this.lblComment.Location = new System.Drawing.Point(7, 157);
+            this.lblComment.Name = "lblComment";
+            this.lblComment.Size = new System.Drawing.Size(50, 13);
+            this.lblComment.TabIndex = 8;
+            this.lblComment.Text = "comment";
             // 
             // grpCategory
             // 
@@ -177,22 +102,99 @@
             this.checkPerishable.Text = "perishable";
             this.checkPerishable.UseVisualStyleBackColor = true;
             // 
-            // lblComment
+            // rbMedicine
             // 
-            this.lblComment.AutoSize = true;
-            this.lblComment.Location = new System.Drawing.Point(7, 157);
-            this.lblComment.Name = "lblComment";
-            this.lblComment.Size = new System.Drawing.Size(50, 13);
-            this.lblComment.TabIndex = 8;
-            this.lblComment.Text = "comment";
+            this.rbMedicine.AutoSize = true;
+            this.rbMedicine.Location = new System.Drawing.Point(6, 65);
+            this.rbMedicine.Name = "rbMedicine";
+            this.rbMedicine.Size = new System.Drawing.Size(85, 17);
+            this.rbMedicine.TabIndex = 4;
+            this.rbMedicine.TabStop = true;
+            this.rbMedicine.Text = "radioButton3";
+            this.rbMedicine.UseVisualStyleBackColor = true;
             // 
-            // txtComment
+            // rbOther
             // 
-            this.txtComment.Location = new System.Drawing.Point(6, 173);
-            this.txtComment.Multiline = true;
-            this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(200, 125);
-            this.txtComment.TabIndex = 9;
+            this.rbOther.AutoSize = true;
+            this.rbOther.Checked = true;
+            this.rbOther.Location = new System.Drawing.Point(109, 42);
+            this.rbOther.Name = "rbOther";
+            this.rbOther.Size = new System.Drawing.Size(85, 17);
+            this.rbOther.TabIndex = 6;
+            this.rbOther.TabStop = true;
+            this.rbOther.Text = "radioButton5";
+            this.rbOther.UseVisualStyleBackColor = true;
+            // 
+            // rbEdible
+            // 
+            this.rbEdible.AutoSize = true;
+            this.rbEdible.Location = new System.Drawing.Point(6, 19);
+            this.rbEdible.Name = "rbEdible";
+            this.rbEdible.Size = new System.Drawing.Size(85, 17);
+            this.rbEdible.TabIndex = 2;
+            this.rbEdible.TabStop = true;
+            this.rbEdible.Text = "radioButton1";
+            this.rbEdible.UseVisualStyleBackColor = true;
+            // 
+            // rbConstruction
+            // 
+            this.rbConstruction.AutoSize = true;
+            this.rbConstruction.Location = new System.Drawing.Point(109, 19);
+            this.rbConstruction.Name = "rbConstruction";
+            this.rbConstruction.Size = new System.Drawing.Size(85, 17);
+            this.rbConstruction.TabIndex = 5;
+            this.rbConstruction.TabStop = true;
+            this.rbConstruction.Text = "radioButton4";
+            this.rbConstruction.UseVisualStyleBackColor = true;
+            this.rbConstruction.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
+            // 
+            // rbIndumentary
+            // 
+            this.rbIndumentary.AutoSize = true;
+            this.rbIndumentary.Location = new System.Drawing.Point(6, 42);
+            this.rbIndumentary.Name = "rbIndumentary";
+            this.rbIndumentary.Size = new System.Drawing.Size(85, 17);
+            this.rbIndumentary.TabIndex = 3;
+            this.rbIndumentary.TabStop = true;
+            this.rbIndumentary.Text = "radioButton2";
+            this.rbIndumentary.UseVisualStyleBackColor = true;
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(6, 36);
+            this.txtName.MaxLength = 100;
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(200, 20);
+            this.txtName.TabIndex = 1;
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(7, 20);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(33, 13);
+            this.lblName.TabIndex = 0;
+            this.lblName.Text = "name";
+            // 
+            // cmdClose
+            // 
+            this.cmdClose.Location = new System.Drawing.Point(13, 338);
+            this.cmdClose.Name = "cmdClose";
+            this.cmdClose.Size = new System.Drawing.Size(75, 23);
+            this.cmdClose.TabIndex = 42;
+            this.cmdClose.Text = "close";
+            this.cmdClose.UseVisualStyleBackColor = true;
+            this.cmdClose.Click += new System.EventHandler(this.cmdClose_Click);
+            // 
+            // cmdAccept
+            // 
+            this.cmdAccept.Location = new System.Drawing.Point(158, 338);
+            this.cmdAccept.Name = "cmdAccept";
+            this.cmdAccept.Size = new System.Drawing.Size(75, 23);
+            this.cmdAccept.TabIndex = 41;
+            this.cmdAccept.Text = "accept";
+            this.cmdAccept.UseVisualStyleBackColor = true;
+            this.cmdAccept.Click += new System.EventHandler(this.cmdAccept_Click);
             // 
             // FrmItemType
             // 

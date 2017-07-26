@@ -2,14 +2,13 @@
 - Si se modifica un valor horizontal que no es el seed, la comprobación vertical funca como si nada.
 - Mejorar el funcionamiento: si bien al agregar todo un stock a una OS se mantiene consistente, el número del number picker es choto-
 - Filtro por nivel de log...
+- Beneficiary no tiene validacion al crear... beneficiarios O_o (ojo que quizá no es necesario)
 - En el alta de orden de salida, debería mostrarse más información sobre los productos (como el vencimiento)
 - en el campo usuario mostrar el idioma y no el id 
 - ver qué pasa cuando explota generic form
-- No debería poder ser posible editar un item type si ya se usó pra lotear.
-- Limitar los campos de texto para que no se ingresen cantidades que no puedan ser manejadas por la base
+- No debería poder ser posible editar un item type si ya se usó para lotear.
 - Ver qué pasa con el perfil que no se cambia el nombre on the fly.
 - Terminar los diagramas de los casos de uso y revisar los DER (por las dudas)
-- Terminar el instalador considerando el archivo de configuración
 - Errores específicos sin traducir.
 - Agregar loggeo de eventos importantes
 

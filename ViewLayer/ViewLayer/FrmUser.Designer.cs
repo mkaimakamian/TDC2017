@@ -55,6 +55,7 @@
             // txtPasswordCheck
             // 
             this.txtPasswordCheck.Location = new System.Drawing.Point(142, 71);
+            this.txtPasswordCheck.MaxLength = 50;
             this.txtPasswordCheck.Name = "txtPasswordCheck";
             this.txtPasswordCheck.Size = new System.Drawing.Size(100, 20);
             this.txtPasswordCheck.TabIndex = 16;
@@ -62,6 +63,7 @@
             // txtPassword
             // 
             this.txtPassword.Location = new System.Drawing.Point(12, 72);
+            this.txtPassword.MaxLength = 50;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(100, 20);
             this.txtPassword.TabIndex = 15;
@@ -69,6 +71,7 @@
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(12, 32);
+            this.txtName.MaxLength = 20;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(100, 20);
             this.txtName.TabIndex = 14;
