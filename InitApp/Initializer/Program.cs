@@ -12,17 +12,23 @@ namespace Initializer
     {
         static void Main(string[] args)
         {
-
+            System.IO.StreamWriter file = new System.IO.StreamWriter(args[1] + "\\error.txt");
             try
             {
+                file.WriteLine("Paramaetros: " + args[0] + " y " + args[1]);
+                file.WriteLine("Creando archivo de configuracion.");
                 CrearArchivo(args[0]);
+                file.WriteLine("Copiando base ...");
                 string destiny = CopiarBackup(args[1]);
+                file.WriteLine("Base copiada a " + destiny);
                 RestaurarBase(destiny);
             }
             catch (Exception ex)
             {
-                System.IO.StreamWriter file = new System.IO.StreamWriter(args[1] + "\\error.txt");
                 file.WriteLine(ex.Message);
+            }
+            finally
+            {
                 file.Close();
             }
 
@@ -50,7 +56,8 @@ namespace Initializer
         {
             //string bkpName = Directory.GetCurrentDirectory() + "\\rhoddion.bkp";
             string serverInstance = Directory.GetCurrentDirectory() + "\\dbconfig.txt";
-            string srvInstance = System.IO.File.ReadAllText(serverInstance);
+            StreamReader st = new StreamReader(serverInstance);
+            string srvInstance = st.ReadLine();
 
             string database = "CAMPOII";
             string connStr = "Data Source=.\\" + srvInstance + "; Initial Catalog=master; Integrated Security=True";
