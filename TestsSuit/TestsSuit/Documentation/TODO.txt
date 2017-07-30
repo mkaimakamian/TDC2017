@@ -2,7 +2,6 @@
 - Si se modifica un valor horizontal que no es el seed, la comprobación vertical funca como si nada.
 - Mejorar el funcionamiento: si bien al agregar todo un stock a una OS se mantiene consistente, el número del number picker es choto-
 - Filtro por nivel de log...
-- Beneficiary no tiene validacion al crear... beneficiarios O_o (ojo que quizá no es necesario)
 - En el alta de orden de salida, debería mostrarse más información sobre los productos (como el vencimiento)
 - en el campo usuario mostrar el idioma y no el id 
 - ver qué pasa cuando explota generic form
