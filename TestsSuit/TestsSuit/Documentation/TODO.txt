@@ -1,5 +1,4 @@
 ::: COSAS QUE SÍ HAY QUE CORREGIR :::
-- Si se modifica un valor horizontal que no es el seed, la comprobación vertical funca como si nada.
 - Mejorar el funcionamiento: si bien al agregar todo un stock a una OS se mantiene consistente, el número del number picker es choto-
 - Filtro por nivel de log...
 - En el alta de orden de salida, debería mostrarse más información sobre los productos (como el vencimiento)

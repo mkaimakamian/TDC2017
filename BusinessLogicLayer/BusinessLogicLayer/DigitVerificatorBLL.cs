@@ -110,7 +110,7 @@ namespace BusinessLogicLayer
             string toCheck = "";
             foreach (DigitVeryficator entity in entities)
             {
-                toCheck += entity.GetDigit();
+                toCheck += SecurityHelper.Encrypt(entity.GetSeed());
             }
 
             return toCheck;
