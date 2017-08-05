@@ -16,3 +16,4 @@
 - El estado de la donación podría ser un enumerado (inner class)
 - Template para evitar el trycatch
 - Descargar de la memoria los objetos traducidos
+- Número de código de permisos (doc)

@@ -61,7 +61,6 @@ namespace BusinessLogicLayer
 
                 if (!validationResult.IsValid()) return validationResult;
                 stockDto = new StockDTO(stockBm.id, stockBm.Name, stockBm.Quantity, stockBm.itemType.id, stockBm.donation.id, stockBm.depot.id, stockBm.DueDate, stockBm.Location);
-
                 stockDal.SaveStock(stockDto);
                 stockBm.id = stockDto.id;
 
