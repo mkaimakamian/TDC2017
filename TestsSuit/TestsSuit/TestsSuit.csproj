@@ -80,6 +80,7 @@
     <None Include="Documentation\donaciones 4V_02.docx" />
     <None Include="Documentation\donaciones 4V_03.docx" />
     <None Include="Documentation\donaciones 4V_04.docx" />
+    <None Include="Documentation\manual_instalacion.docx" />
     <None Include="Documentation\manual_usuario.docx" />
     <None Include="Documentation\Microsoft.TeamFoundation.Git.Provider.msi" />
     <None Include="Documentation\rhoddion20.eap" />

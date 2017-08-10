@@ -44,10 +44,9 @@
             this.dtDueDate = new System.Windows.Forms.DateTimePicker();
             this.numericQuantity = new System.Windows.Forms.NumericUpDown();
             this.cmbItemType = new System.Windows.Forms.ComboBox();
-            this.shapeContainer2 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.lineNoDuedate = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.cmdClose = new System.Windows.Forms.Button();
             this.cmdAccept = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericQuantity)).BeginInit();
             this.SuspendLayout();
@@ -66,10 +65,10 @@
             this.groupBox1.Controls.Add(this.lblType);
             this.groupBox1.Controls.Add(this.txtName);
             this.groupBox1.Controls.Add(this.txtLocation);
-            this.groupBox1.Controls.Add(this.dtDueDate);
             this.groupBox1.Controls.Add(this.numericQuantity);
             this.groupBox1.Controls.Add(this.cmbItemType);
-            this.groupBox1.Controls.Add(this.shapeContainer2);
+            this.groupBox1.Controls.Add(this.dtDueDate);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(221, 304);
@@ -209,25 +208,6 @@
             this.cmbItemType.TabIndex = 3;
             this.cmbItemType.SelectedIndexChanged += new System.EventHandler(this.cmbItemType_SelectedIndexChanged);
             // 
-            // shapeContainer2
-            // 
-            this.shapeContainer2.Location = new System.Drawing.Point(3, 16);
-            this.shapeContainer2.Margin = new System.Windows.Forms.Padding(0);
-            this.shapeContainer2.Name = "shapeContainer2";
-            this.shapeContainer2.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
-            this.lineNoDuedate});
-            this.shapeContainer2.Size = new System.Drawing.Size(215, 285);
-            this.shapeContainer2.TabIndex = 12;
-            this.shapeContainer2.TabStop = false;
-            // 
-            // lineNoDuedate
-            // 
-            this.lineNoDuedate.Name = "lineNoDuedate";
-            this.lineNoDuedate.X1 = 9;
-            this.lineNoDuedate.X2 = 194;
-            this.lineNoDuedate.Y1 = 225;
-            this.lineNoDuedate.Y2 = 225;
-            // 
             // cmdClose
             // 
             this.cmdClose.Location = new System.Drawing.Point(12, 338);
@@ -247,6 +227,15 @@
             this.cmdAccept.Text = "accept";
             this.cmdAccept.UseVisualStyleBackColor = true;
             this.cmdAccept.Click += new System.EventHandler(this.cmdAccept_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(36, 233);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(142, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "---------------------------------------------";
             // 
             // FrmStock
             // 
@@ -288,7 +277,6 @@
         private System.Windows.Forms.Button cmdClose;
         private System.Windows.Forms.Button cmdAccept;
         private System.Windows.Forms.Label lblLeft;
-        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer2;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineNoDuedate;
+        private System.Windows.Forms.Label label1;
     }
 }
