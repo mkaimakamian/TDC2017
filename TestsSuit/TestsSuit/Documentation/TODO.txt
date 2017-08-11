@@ -1,9 +1,7 @@
 ::: COSAS QUE SÍ HAY QUE CORREGIR :::
 - Mejorar el funcionamiento: si bien al agregar todo un stock a una OS se mantiene consistente, el número del number picker es choto-
-- Filtro por nivel de log...
 - En el alta de orden de salida, debería mostrarse más información sobre los productos (como el vencimiento)
 - en el campo usuario mostrar el idioma y no el id 
-- ver qué pasa cuando explota generic form
 - No debería poder ser posible editar un item type si ya se usó para lotear.
 - Ver qué pasa con el perfil que no se cambia el nombre on the fly.
 - Terminar los diagramas de los casos de uso y revisar los DER (por las dudas)

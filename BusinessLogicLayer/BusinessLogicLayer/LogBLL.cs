@@ -94,7 +94,8 @@ namespace BusinessLogicLayer
             LogDTO logFilter = null;
             if (filter != null && filter.Count > 0) {
                 logFilter = new LogDTO();
-                logFilter.logLevel = filter.ContainsKey("LogLevel") ? (LogDTO.Level) int.Parse(filter["LogLevel"])  : LogDTO.Level.DEBUG;
+                //logFilter.logLevel = filter.ContainsKey("LogLevel") ? (LogDTO.Level) int.Parse(filter["LogLevel"])  : LogDTO.Level.DEBUG;                
+                logFilter.logLevel = (LogDTO.Level) Enum.Parse(typeof(LogDTO.Level), filter["LogLevel"].ToString());
                 logFilter.action = filter.ContainsKey("Action") ? filter["Action"] : null;
                 logFilter.description = filter.ContainsKey("Description") ? filter["Description"] : null;
                 logFilter.entity = filter.ContainsKey("Entity") ? filter["Entity"] : null;

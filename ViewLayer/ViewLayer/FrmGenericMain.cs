@@ -76,8 +76,15 @@ namespace ViewLayer
 
         private void cmdNew_Click(object sender, EventArgs e)
         {
-            ((Form)Activator.CreateInstance(this.viewer)).ShowDialog();
-            LoadDatagrid();
+            try
+            {
+                ((Form)Activator.CreateInstance(this.viewer)).ShowDialog();
+                LoadDatagrid();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void LoadDatagrid()
@@ -103,16 +110,24 @@ namespace ViewLayer
 
         private void cmdEdit_Click(object sender, EventArgs e)
         {
-            if (dgView.SelectedRows.Count == 0) return;
+            try
+            {
+                if (dgView.SelectedRows.Count == 0) return;
 
-            //Se instancia el formulario, setteando la propiedad Entity y IsUpdate
-            Form viewForm = (Form)Activator.CreateInstance(this.viewer);
-            System.Reflection.PropertyInfo Entity = viewForm.GetType().GetProperty("Entity");
-            Entity.SetValue(viewForm, dgView.SelectedRows[0].DataBoundItem);
-            Entity = viewForm.GetType().GetProperty("IsUpdate");
-            Entity.SetValue(viewForm, true);
-            viewForm.ShowDialog();
-            LoadDatagrid();
+                //Se instancia el formulario, setteando la propiedad Entity y IsUpdate
+                Form viewForm = (Form)Activator.CreateInstance(this.viewer);
+                System.Reflection.PropertyInfo Entity = viewForm.GetType().GetProperty("Entity");
+                Entity.SetValue(viewForm, dgView.SelectedRows[0].DataBoundItem);
+                Entity = viewForm.GetType().GetProperty("IsUpdate");
+                Entity.SetValue(viewForm, true);
+                viewForm.ShowDialog();
+                LoadDatagrid();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Se ha producido el siguiente error: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
         }
 
         private void cmdDelete_Click(object sender, EventArgs e)
@@ -186,7 +201,27 @@ namespace ViewLayer
                     if (column.GetType() == typeof(DataGridViewTextBoxColumn))
                     {
                         Control control = null;
-                        if (column.ValueType == typeof(String)) control = new TextBox();
+                        if (column.ValueType == typeof(String))
+                        {
+                            // Hack feo
+                            if (this.entity == typeof(LogBLL) && column.Name == "LogLevel")
+                            {
+                                control = new ComboBox();
+                                Dictionary<string, int> fltLog = new Dictionary<string, int>();
+
+                                fltLog.Add("DEBUG", 1);
+                                fltLog.Add("WARNING", 2);
+                                fltLog.Add("CRITICAL", 3);
+                                fltLog.Add("INFO", 4);
+
+                                ((ComboBox) control).DataSource = new BindingSource(fltLog, null);
+                                ((ComboBox)control).DisplayMember = "Key";
+                                ((ComboBox)control).ValueMember = "Value";
+
+                            } else {
+                                control = new TextBox();
+                            }
+                        }
                         if (column.ValueType == typeof(DateTime)) control = new DateTimePicker();
 
                         if (control != null)
