@@ -85,6 +85,7 @@
     <None Include="Documentation\Microsoft.TeamFoundation.Git.Provider.msi" />
     <None Include="Documentation\rhoddion20.eap" />
     <None Include="Documentation\rhoddion20_original.eap" />
+    <None Include="Documentation\rhoddion_201716102216.bkp" />
     <None Include="Documentation\rhoddion_201733262033.bkp" />
   </ItemGroup>
   <ItemGroup>
